@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Meeting from './meeting';
+import Callpage from './scoreboard';
 
 let payload = {
   meetingNumber: '583614185',
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: '/meeting',
     element: <Meeting payload = {payload}/>
+  },
+  {
+    path: '/scoreboard',
+    element: <Callpage/>
   }
 ])
 
