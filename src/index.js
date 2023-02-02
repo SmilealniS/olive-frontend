@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Meeting from './meeting';
+import Callpage from './scoreboard';
 import MeetingComponent from './component';
 
 let payload = {
@@ -15,7 +16,7 @@ let payload = {
   sdkSecret: 'XRSfgcqn75DdVZ0P3Nkf0WXZQdsonas5I6nV',
   userName: 'NamTest',
   userEmail: '',
-  passWord: '180HYZ',
+  passWord: 'cLZ9c0',
   leaveUrl: 'https://localhost:3000'
 }
 
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: '/component',
     element: <MeetingComponent/>
+  },
+  {
+    path: '/scoreboard',
+    element: <Callpage/>
   }
 ])
 
