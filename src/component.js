@@ -4,7 +4,7 @@ import './App.css';
 import ZoomMtgEmbedded from '@zoomus/websdk/embedded';
 
 function MeetingComponent() {
-  var signatureEndpoint = ''
+  var signatureEndpoint = 'http://localhost:4000'
   var sdkKey = '6V8X5gwmS7lhH6EcVpCPXY0bBduD7Vnwx4QV'
 //   var sdkSecret = 'XRSfgcqn75DdVZ0P3Nkf0WXZQdsonas5I6nV'
   var meetingNumber = '4318372796'
@@ -69,8 +69,8 @@ function MeetingComponent() {
     	meetingNumber: meetingNumber,
     	password: passWord,
     	userName: userName,
-        userEmail: userEmail,
-        tk: registrantToken
+      userEmail: userEmail,
+      tk: registrantToken
     })
   }
 
