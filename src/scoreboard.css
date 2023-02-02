@@ -1,4 +1,4 @@
-body{ background-color: rgb(119, 255, 216);}
+/* body{ background-color: rgb(119, 255, 216);}
 .grid-1 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -64,4 +64,51 @@ body{ background-color: rgb(119, 255, 216);}
   
   
 
-  
+   */
+
+   * {
+    box-sizing: border-box;
+  }
+
+   .grid-container {
+    display: grid;
+   }
+
+   .grid-item {
+    /* display: grid; */
+   }
+
+   #below {
+    grid-template-columns: 70% 30%;
+    height: 30vh;
+   }
+
+   #display {
+    border: 2px solid red;
+    height: 70vh;
+   }
+
+   #chat {
+    border: 2px solid blue;
+    height: 30vh;
+    overflow: scroll;
+   }
+
+   #tools {
+    border: 2px solid magenta;
+    height: 25vh;
+    grid-template-columns: 80% 20%;
+   }
+
+   #l-tools {
+    border: 2px solid cyan;
+   }
+
+   #r-tools {
+    border: 2px solid teal;
+   }
+
+   #bottom {
+    border: 2px solid green;
+    height: 5vh;
+   }

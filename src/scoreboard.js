@@ -2,32 +2,44 @@ import './scoreboard.css';
 import React from 'react';
 
 const board=()=>{
-    return (
-        <html>
-       
-        <head>
-          <style>
-            
-          </style>
-        </head>
-        <body>
-          <div class="grid-1">
-            <div class="grid-display"></div>
-          </div>
-          <div class="grid-2">
-            <div class="grid-bottom">
-                <button onclick="">Leave</button>
-            </div>
-          </div>
 
-          <div class="grid-3">
-            <div class="grid-chat">
-            <button onclick="">say hi</button>
-            </div>
-          </div>
+  function chat() {
+    alert('Hi');
+  }
 
-        </body>
-      </html>
+  return (
+    <body>
+      <div class="grid-container">
+        <div class="grid-item" id='display'>
+          <div class="grid-display">Display</div>
+        </div>
+
+        {/* <div class="grid-item" id='bottom'>
+          <div class="grid-bottom">
+              <button onClick={''}>Leave</button>
+          </div>
+        </div> */}
+
+        {/* <div class="grid-item" id='chat'> 
+          <div class="grid-chat">
+          <button onClick={chat}>say hi</button>
+          </div>
+        </div> */}
+      </div>
+
+      <div class='grid-container' id='below'>
+        <div class='grid-item'>
+          <div class='grid-container' id='tools'>
+            <div class='grid-item' id='l-tools'>Nav</div>
+            <div class='grid-item' id='r-tools'>Stats</div>
+          </div>
+          <div class='grid-item' id='bottom'>Leave</div>
+        </div>
+
+        <div class='grid-item' id='chat'>Chat</div>
+      </div>
+      
+    </body>
     );
   }
 
