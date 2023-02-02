@@ -6,10 +6,11 @@ import reportWebVitals from './reportWebVitals';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Meeting from './meeting';
+import MeetingComponent from './component';
 
 let payload = {
   meetingNumber: '4318372796',
-  role: 0,
+  role: 1,
   sdkKey: '6V8X5gwmS7lhH6EcVpCPXY0bBduD7Vnwx4QV',
   sdkSecret: 'XRSfgcqn75DdVZ0P3Nkf0WXZQdsonas5I6nV',
   userName: 'NamTest',
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: '/meeting',
     element: <Meeting payload = {payload}/>
+  },
+  {
+    path: '/component',
+    element: <MeetingComponent/>
   }
 ])
 
