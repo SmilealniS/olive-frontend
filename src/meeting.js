@@ -57,6 +57,7 @@ const Meeting = ({payload}) => {
         <link type='text/css' rel='stylesheet' href='https://source.zoom.us/2.9.5/css/bootstrap.css' />
         <link type='text/css' rel='stylesheet' href='https://source.zoom.us/2.9.5/css/react-select.css' />
     </Fragment>);
+
 }
 
 export default Meeting;
