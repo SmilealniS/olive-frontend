@@ -9,6 +9,7 @@ import Meeting from './meeting';
 import MeetingComponent from './component';
 import Scoreboard from './scoreboard';
 import TeachingUI from './teachingUI';
+import StudentProfile from './studentProfile';
 
 let payload = {
   meetingNumber: '4318372796',
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: '/teachingUI',
     element: <TeachingUI payload = {payload}/>
+  },
+  {
+    path: '/studentProfile',
+    element: <StudentProfile payload = {payload}/>
   }
 ])
 
