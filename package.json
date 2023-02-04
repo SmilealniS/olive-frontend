@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@zoomus/websdk": "^2.9.5",
     "font-awesome": "^4.7.0",
+    "jsrsasign": "^10.6.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.6.2",
