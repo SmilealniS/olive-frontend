@@ -8,13 +8,32 @@ const board = () => {
   }
 
   return (
-
     <body>
+      <nav>
+        <h1 style={{'text-align': 'center'}}>Navigation bar</h1>
+      </nav>
+
       <div class="grid-container">
-        <div class="grid-item" id='display'>
-          <div class='grid-item' id='r-tools' >Leaderboard
+        <div class="grid-item" id='display'> 
+        <h1 style={{'text-align': 'center'}}>Leaderboard</h1>
+          
+          <div class='grid-item' style={{'padding-top': '50px'}}>
             <div class="center">
               <div class="top3">
+
+                <div class="one item">
+                  <div class="pos">
+                    1
+                  </div>
+                  <div class="pic" style={{}}></div>
+                  <div class="name">
+                    User top1
+                  </div>
+                  <div class="score">
+                    15
+                  </div>
+                </div>
+
                 <div class="two item">
                   <div class="pos">
                     2
@@ -27,18 +46,7 @@ const board = () => {
                     10
                   </div>
                 </div>
-                <div class="one item">
-                  <div class="pos">
-                    1
-                  </div>
-                  <div class="pic" style={{}}></div>
-                  <div class="name">
-                    User Top1
-                  </div>
-                  <div class="score">
-                    15
-                  </div>
-                </div>
+                
                 <div class="three item">
                   <div class="pos">
                     3
@@ -52,12 +60,11 @@ const board = () => {
                   </div>
                 </div>
               </div>
+
               <div class="list">
-                <div class="item">
-                  <div class="pos">
-                    4
-                  </div>
-                  <div class="pic" style={{}}></div>
+                <div class="flex-container item">
+                  <div class="pos">4</div>
+                  {/* <div class="pic" style={{}}></div> */}
                   <div class="name">
                     User top4
                   </div>
@@ -66,6 +73,7 @@ const board = () => {
                   </div>
                 </div>
               </div>
+
               <div class="list">
                 <div class="item">
                   <div class="pos">
@@ -80,81 +88,87 @@ const board = () => {
                   </div>
                 </div>
               </div>
+
+              <div class="list">
+                <div class="item">
+                  <div class="pos">
+                    6
+                  </div>
+                  <div class="pic" style={{}}></div>
+                  <div class="name">
+                    User top6
+                  </div>
+                  <div class="score">
+                    1
+                  </div>
+                </div>
+              </div>
+
+              <div class="list">
+                <div class="item">
+                  <div class="pos">
+                    7
+                  </div>
+                  <div class="pic" style={{}}></div>
+                  <div class="name">
+                    User top7
+                  </div>
+                  <div class="score">
+                    1
+                  </div>
+                </div>
+              </div>
+
+              <div class="list">
+                <div class="item">
+                  <div class="pos">
+                    8
+                  </div>
+                  <div class="pic" style={{}}></div>
+                  <div class="name">
+                    User top8
+                  </div>
+                  <div class="score">
+                    1
+                  </div>
+                </div>
+              </div>
+
+              <div class="list">
+                <div class="item">
+                  <div class="pos">
+                    9
+                  </div>
+                  <div class="pic" style={{}}></div>
+                  <div class="name">
+                    User top9
+                  </div>
+                  <div class="score">
+                    1
+                  </div>
+                </div>
+              </div>
+
+              <div class="list">
+                <div class="item">
+                  <div class="pos">
+                    10
+                  </div>
+                  <div class="pic" style={{}}></div>
+                  <div class="name">
+                    User top10
+                  </div>
+                  <div class="score">
+                    1
+                  </div>
+                </div>
+              </div>
+
             </div>
 
           </div>
         </div>
       </div>
-
-      <div class='grid-container' id='below'>
-        <div class='grid-item'>
-          <div class='grid-container' id='tools'>
-            <div class='grid-item' id='l-tools'>Nav</div>
-            <div class='grid-item' id='r-tools'>Stats
-              <div class='grid-item' id='r-tools'>Statsss</div>
-            </div>
-          </div>
-
-          <div class='grid-item' id='bottom'>
-            <button>
-              <i class="fa fa-microphone" area-hidden="true"></i>
-            </button>
-            <button>
-              <i class="fa fa-screen"></i>
-            </button>
-            <button>
-              <i class="fa fa-camera"></i>
-            </button>
-            <button>
-              Leave
-            </button>
-          </div>
-        </div>
-
-        <div class='grid-item' id='chat'>Chat
-
-          <div id="container">
-            <main>
-              <ul id="chat">
-                <li class="you">
-                  <div class="entete">
-                    <h2>mnct</h2>
-                    <h3>10:12AM, Today</h3>
-                  </div>
-                  <div class="message">
-                    Typing for test text
-                  </div>
-                </li>
-
-                <li class="me">
-                  <div class="entete">
-                    <h3>10:12AM, Today</h3>
-                    <h2>mnct</h2>
-                    <span class="status blue"></span>
-                  </div>
-                  <div class="message">
-                    OK
-                  </div>
-                </li>
-              </ul>
-              <footer>
-                <textarea placeholder="Type your message"></textarea>
-                <a href="#">Send</a>
-              </footer>
-            </main>
-          </div><br></br>
-          <button>
-            <i class="fa fa-user" area-hidden="true"></i>
-          </button>
-          <button>
-            <i class="fa fa-commenting-o" area-hidden="true"></i>
-          </button>
-          <button>
-            <i class="fa fa-smile-o" area-hidden="true"></i>
-          </button>
-        </div>
-      </div>
-
     </body>
   );
 }
