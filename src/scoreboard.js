@@ -8,7 +8,7 @@ const board = () => {
   }
 
   return (
-    <body>
+    <body id='scoreboard'>
       <nav>
         <h1 style={{'text-align': 'center'}}>Navigation bar</h1>
       </nav>

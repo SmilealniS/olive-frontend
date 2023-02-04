@@ -1,96 +1,172 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMicrophone } from '@fortawesome/free-solid-svg-icons';
+import { faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
+import { faVideoCamera } from '@fortawesome/free-solid-svg-icons';
+import { faDisplay } from '@fortawesome/free-solid-svg-icons';
+import './teachingUI.css';
 
-
-const board = () => {
+const teacherUI = () => {
   function chat() {
     alert('Hi');
   }
 
-  return (
-    <body>
-      <div class="grid-container">
-        <div class="grid-item" id='display'>
-          <div class='grid-item' id='r-tools' >
-            {/*  */}
-          </div>
-        </div>
-      </div>
+  function toggleMic() {
+    // 
+  }
 
-      <div class='grid-container' id='below'>
-        <div class='grid-item'>
+  return (
+    <body id='teachingUI'>
+      <div class="flex-container">
+        {/* display */}
+        <div class='' id='display'>
+          <div class='' id='screen'></div>
+
+          {/* <div class='grid-item' id='bottom'>
+            <button>
+              <FontAwesomeIcon icon={faMicrophone} size={32} onClick={toggleMic} />
+            </button>
+            <button>
+              <FontAwesomeIcon icon={faVideoCamera} size={32} onClick={toggleMic} />
+            </button>
+            <button>
+              <FontAwesomeIcon icon={faDisplay} size={32} onClick={toggleMic} />
+            </button>
+            <button>Leave</button>
+          </div> */}
+
           <div class='grid-container' id='tools'>
             <div class='grid-item' id='l-tools'>Nav</div>
-            <div class='grid-item' id='r-tools'>Stats
-              <div class='grid-item' id='r-tools'>Statsss</div>
+            <div class='grid-item' id='r-tools'>Stats</div>
+          </div>
+
+        </div>
+
+        {/* chat */}
+        <div id='chat'>
+          <div id="container">
+            <div class='chat-top'><h3>Chat</h3></div>
+
+            <ul class="chat">
+
+              <li class="you">
+                <div class="entete">
+                  <b>mnct &nbsp;</b>
+                  <p>10:12AM, Today &nbsp;</p>
+                </div>
+                <div class="message">
+                  Typing for test text
+                </div>
+              </li>
+
+              <li class="you">
+                <div class="entete">
+                  <b>mnct &nbsp;</b>
+                  <p>10:12AM, Today &nbsp;</p>
+                </div>
+                <div class="message">
+                  Typing for test text
+                </div>
+              </li>
+
+              <li class="you">
+                <div class="entete">
+                  <b>mnct &nbsp;</b>
+                  <p>10:12AM, Today &nbsp;</p>
+                </div>
+                <div class="message">
+                  Typing for test text
+                </div>
+              </li>
+
+              <li class="you">
+                <div class="entete">
+                  <b>mnct &nbsp;</b>
+                  <p>10:12AM, Today &nbsp;</p>
+                </div>
+                <div class="message">
+                  Typing for test text
+                </div>
+              </li>
+
+              <li class="you">
+                <div class="entete">
+                  <b>mnct &nbsp;</b>
+                  <p>10:12AM, Today &nbsp;</p>
+                </div>
+                <div class="message">
+                  Typing for test text
+                </div>
+              </li>
+
+              <li class="me">
+                <div class="entete">
+                  <p>10:12AM, Today</p>
+                  <b>&nbsp; mnct</b>
+                  <span class="status blue"></span>
+                </div>
+                <div class="message">
+                  OK
+                </div>
+              </li>
+
+              <li class="you">
+                <div class="entete">
+                  <b>mnct &nbsp;</b>
+                  <p>10:12AM, Today &nbsp;</p>
+                </div>
+                <div class="message">
+                  Typing for test text
+                </div>
+              </li>
+
+              <li class="you">
+                <div class="entete">
+                  <b>mnct &nbsp;</b>
+                  <p>10:12AM, Today &nbsp;</p>
+                </div>
+                <div class="message">
+                  Typing for test text
+                </div>
+              </li>
+
+              <li class="me">
+                <div class="entete">
+                  <p>10:12AM, Today</p>
+                  <b>&nbsp; mnct</b>
+                  <span class="status blue"></span>
+                </div>
+                <div class="message">
+                  OK
+                </div>
+              </li>
+
+            </ul>
+          </div>
+
+          <div class='chat-footer'>
+            {/* Send message */}
+            <div class='chat-message'>
+              <textarea placeholder="Type your message"></textarea>
+              <button>Send</button>
+            </div>
+
+            {/* Emoji */}
+            <div class='chat-emoji'>
+              <button>&#128512;</button>
+              <button>&#128512;</button>
+              <button>&#128512;</button>
+              <button>&#128512;</button>
+              <button>&#128512;</button>
             </div>
           </div>
-
-          <div class='grid-item' id='bottom'>
-            <button>
-              <i class="fa fa-microphone" area-hidden="true"></i>
-            </button>
-            <button>
-              <i class="fa fa-screen"></i>
-            </button>
-            <button>
-              <i class="fa fa-camera"></i>
-            </button>
-            <button>
-              Leave
-            </button>
-          </div>
         </div>
 
-        <div class='grid-item' id='chat'>Chat
-
-          <div id="container">
-            <main>
-              <ul id="chat">
-                <li class="you">
-                  <div class="entete">
-                    <h2>mnct</h2>
-                    <h3>10:12AM, Today</h3>
-                  </div>
-                  <div class="message">
-                    Typing for test text
-                  </div>
-                </li>
-
-                <li class="me">
-                  <div class="entete">
-                    <h3>10:12AM, Today</h3>
-                    <h2>mnct</h2>
-                    <span class="status blue"></span>
-                  </div>
-                  <div class="message">
-                    OK
-                  </div>
-                </li>
-              </ul>
-              <footer>
-                <textarea placeholder="Type your message"></textarea>
-                <a href="#">Send</a>
-              </footer>
-            </main>
-          </div><br></br>
-          <button>
-            <i class="fa fa-user" area-hidden="true"></i>
-          </button>
-          <button>
-            <i class="fa fa-commenting-o" area-hidden="true"></i>
-          </button>
-          <button>
-            <i class="fa fa-smile-o" area-hidden="true"></i>
-          </button>
-        </div>
       </div>
-
     </body>
   );
 }
 
-
-
-export default (board);
+export default (teacherUI);
 
 
