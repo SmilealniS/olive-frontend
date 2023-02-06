@@ -23,28 +23,39 @@ const teacherUI = () => {
           <div class='grid-container' id='tt-tools'>
             <div class='grid-item' id='top-tools'></div>
           </div>
-          <div class='grid-container' id='tools'>
-            <div class='grid-item' id='l-tools'>
+          <div class='flex-container' id='tools'>
+            <div class='' id='l-tools'>
               <div class="left-zone">
                 <div class="Bar-text">
-                <text class="l-text">Teching Quality</text>
-                  <text class="r-text">Class Status
-                  </text>
+                  <text class="l-text">Teaching Quality</text>
                 </div>
-                <div class="barRate">
-                  Survival Rating
-                  <button class="btn-reset">Reset</button>
-                  <div class="survbar">
-                    <div class="bar-1"></div>
+
+                <div class='bar-multi'>
+                  {/* Bar area */}
+                  <div class='bar-area'>
+                    {/* Bar 1 */}
+                    <div class="barRate">Survival Rating</div>
+                    <div class="survbar"><div class="bar-1"></div></div>
+                    <button class="btn-reset">Reset</button>
+                  </div>
+
+                  <div class='bar-area'>
+                    {/* Bar 2 */}
+                    <div class="barRate">Engagement</div>
+                    <div class="survbar"><div class="bar-1"></div></div>
+                    <button class="btn-reset">Reset</button>
                   </div>
                 </div>
-                <div class="barRate">
-                  Engagement
-                  <button class="btn-reset">Reset</button>
-                  <div class="survbar">
-                    <div class="bar-1"></div>
-                  </div>
+
+              </div>
+
+              <div class='divided-line'></div>
+
+              <div class="right-zone">
+                <div class="Bar-text">
+                  <text class="r-text">Class Status</text>
                 </div>
+
                 <div class='emoji-stack'>
                   <emo>&#128512;</emo>
                   <emo>&#128512;</emo>
@@ -52,18 +63,7 @@ const teacherUI = () => {
                   <emo>&#128512;</emo>
                   <emo>&#128512;</emo>
                 </div>
-                <div class="zone-line"></div>
-                
-                
               </div>
-
-
-              {/* <div class="right-zone">
-                <div class="l-text">
-                  Class status
-                </div>
-                
-              </div> */}
             </div>
 
           </div>
