@@ -56,14 +56,17 @@ const teacherUI = () => {
                   <text class="r-text">Class Status</text>
                 </div>
 
-                <div class='emoji-stack'>
-                  <p class='emoji-item'>&#128512;</p>
-                  <p class='emoji-item'>&#128512;</p>
-                  <p class='emoji-item'>&#128512;</p>
-                  <p class='emoji-item'>&#128512;</p>
-                  <p class='emoji-item'>&#128512;</p>
+                <div class='flex-container'>
+                  <div class='emoji-stack'>
+                    <p class='emoji-item'>&#128512;</p>
+                    <p class='emoji-item'>&#128512;</p>
+                    <p class='emoji-item'>&#128512;</p>
+                    <p class='emoji-item'>&#128512;</p>
+                    <p class='emoji-item'>&#128512;</p>
+                  </div>
+                  <button class="rbtn-reset">Reset</button>
                 </div>
-                <button class="rbtn-reset">Reset</button>
+
               </div>
             </div>
 
