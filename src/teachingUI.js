@@ -57,11 +57,11 @@ const teacherUI = () => {
                 </div>
 
                 <div class='emoji-stack'>
-                  <emo>&#128512;</emo>
-                  <emo>&#128512;</emo>
-                  <emo>&#128512;</emo>
-                  <emo>&#128512;</emo>
-                  <emo>&#128512;</emo>
+                  <p class='emoji-item'>&#128512;</p>
+                  <p class='emoji-item'>&#128512;</p>
+                  <p class='emoji-item'>&#128512;</p>
+                  <p class='emoji-item'>&#128512;</p>
+                  <p class='emoji-item'>&#128512;</p>
                 </div>
               </div>
             </div>

@@ -1,14 +1,13 @@
-import './studentProfile.css';
+import './adminReport.css';
 import React from 'react';
 
-
-const board = () => {
+const report = () => {
     function chat() {
         alert('Hi');
     }
 
     return (
-        <body id='studentProfile'>
+        <body id='adminReport'>
             <div class="wrapper">
                 <div class="left"></div>
                 <div class="right">
@@ -47,6 +46,6 @@ const board = () => {
 
 
 
-export default (board);
+export default (report);
 
 

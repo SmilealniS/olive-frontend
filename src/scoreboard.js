@@ -1,6 +1,8 @@
 import './scoreboard.css';
 import React from 'react';
-
+import Crown from './assets/golden-crown-heart.png';
+import Trophy from './assets/silver-trophy.png';
+import Medal from './assets/bronze-medal.png';
 
 const board = () => {
   function chat() {
@@ -10,12 +12,12 @@ const board = () => {
   return (
     <body id='scoreboard'>
       <nav>
-        <h1 style={{'text-align': 'center'}}>Navigation bar</h1>
+        <h1 style={{'text-align': 'center', 'font-size': '30px'}}>Navigation bar</h1>
       </nav>
 
       <div class="grid-container">
         <div class="grid-item" id='display'> 
-        <h1 style={{'text-align': 'center'}}>Leaderboard</h1>
+        <h1 style={{'text-align': 'center', 'font-size': '20px', 'padding-top': '20px'}}>Leaderboard</h1>
           
           <div class='grid-item' style={{'padding-top': '50px'}}>
             <div class="center">
@@ -25,7 +27,7 @@ const board = () => {
                   <div class="pos">
                     1
                   </div>
-                  <div class="pic" style={{}}></div>
+                  <img class='pic' src={Crown}></img>
                   <div class="name">
                     User top1
                   </div>
@@ -38,7 +40,7 @@ const board = () => {
                   <div class="pos">
                     2
                   </div>
-                  <div class="pic" style={{}}></div>
+                  <img class='pic' src={Trophy}></img>
                   <div class="name">
                     User top2
                   </div>
@@ -51,7 +53,7 @@ const board = () => {
                   <div class="pos">
                     3
                   </div>
-                  <div class="pic" style={{}}></div>
+                  <img class='pic' src={Medal}></img>
                   <div class="name">
                     User top3
                   </div>

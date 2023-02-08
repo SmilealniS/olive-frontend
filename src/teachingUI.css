@@ -51,11 +51,11 @@ body#teachingUI {
 }
 
 .divided-line {
-    flex-grow: 2;
+    /* flex-grow: 2; */
     border-left: 2px solid black;
     height: 15vh;
-    position: absolute;
-    left: 50%;
+    /* position: absolute; */
+    /* left: 60vh; */
     /* top: 0; */
 }
 
@@ -78,12 +78,16 @@ body#teachingUI {
 }
 
 .emoji-stack {
-
     margin-top: 1%;
     margin-left: 5%;
     color: #6fbced;
     vertical-align: top;
+    display: flex;
+    gap: 5px;
+}
 
+.emoji-item {
+    font-size: 50px;
 }
 
 .btn-reset {
@@ -103,7 +107,7 @@ body#teachingUI {
 
 .barRate {
     color: black;
-    font-size: 13px;
+    font-size: 15px;
     margin-left: 4vh;
     margin-top: 1vh;
     margin-right: 5px;
