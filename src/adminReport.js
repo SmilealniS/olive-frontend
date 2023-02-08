@@ -6,10 +6,16 @@ const report = () => {
         alert('Hi');
     }
 
+    var createPic = document.createElement("createPic");
+    createPic.src = "./studentProfilepic/create.png";
+
     return (
         <body id='adminReport'>
             <div class="wrapper">
-                <div class="left"></div>
+                <div class="left">
+                    <div class="create.Pic">
+                    </div>
+                </div>
                 <div class="right">
                     <div class="info">
                         <div>
@@ -31,7 +37,7 @@ const report = () => {
                             <div class="vertical"></div>
 
                             <div class="data">
-                                <div class="descrip" style={{ 'text-align': 'left', 'margin-left': '-70px' }}>Report description</div>
+                                <div class="descrip" style={{ 'text-align': 'left', 'margin-left': '-100px' }}>Report description</div>
                                 <textarea class="freeform" name="freeform" rows="4" cols="50"></textarea>
                             </div>
                         </div><h3></h3>
@@ -41,6 +47,7 @@ const report = () => {
                 </div>
             </div>
         </body>
+
     );
 }
 

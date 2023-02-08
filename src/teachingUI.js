@@ -63,6 +63,7 @@ const teacherUI = () => {
                   <p class='emoji-item'>&#128512;</p>
                   <p class='emoji-item'>&#128512;</p>
                 </div>
+                <button class="rbtn-reset">Reset</button>
               </div>
             </div>
 
@@ -176,7 +177,7 @@ const teacherUI = () => {
             {/* Send message */}
             <div class='chat-message'>
               <textarea placeholder="Type your message"></textarea>
-              <button>Send</button>
+              <button class="send">Send</button>
             </div>
 
             {/* Emoji */}
@@ -196,5 +197,4 @@ const teacherUI = () => {
 }
 
 export default (teacherUI);
-
 

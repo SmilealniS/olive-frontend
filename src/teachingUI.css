@@ -92,6 +92,14 @@ body#teachingUI {
 
 .btn-reset {
     margin-left: 5%;
+    margin-top: 1vh;
+    font-size: 12px;
+}
+
+.rbtn-reset {
+    margin-left: 80%;
+    margin-top: 2vh;
+    font-size: 17px;
 }
 
 .bar-area {
@@ -117,16 +125,18 @@ body#teachingUI {
 .survbar {
     box-sizing: border-box;
     width: 200px;
-    height: 16px;
+    height: 20px;
     padding: 5px;
     background: #ddd;
     border-radius: 5px;
     position: relative;
+    margin-top: 1vh;
+    
 }
 
 .bar-1 {
     width: 100%;
-    height: 8px;
+    height: 10px;
     position: relative;
     background: #c54;
     background-image: linear-gradient(to right, red, green);
@@ -182,7 +192,7 @@ body#teachingUI {
     margin: 0;
     list-style-type: none;
     overflow-y: scroll;
-    /* height: 535px; */
+    height: 83vh; 
     border-top: 2px solid #fff;
     border-bottom: 2px solid #fff;
     border-radius: 2px;
@@ -211,6 +221,7 @@ body#teachingUI {
     max-width: 90%;
     display: inline-block;
     text-align: left;
+    margin-bottom: -15vh;
     border-radius: 7px;
 }
 
@@ -220,10 +231,12 @@ body#teachingUI {
 
 .chat .you .message {
     background-color: #6fbced;
+    font-size: 15px;
 }
 
 .chat .me .message {
     background-color: #6fbced;
+    font-size: 15px;
 }
 
 
@@ -233,6 +246,7 @@ body#teachingUI {
     display: flex;
     flex-direction: column;
     height: 10vh;
+    margin-top: -2vh;
     background-color: #808280;
     /* padding: 20px 30px 10px 20px; */
 }
@@ -241,6 +255,8 @@ body#teachingUI {
     display: inline-flex;
     padding: 5px;
     /* justify-content: flex-end;  */
+    margin-bottom: -6vh;
+    margin-left: -4vh;
 }
 
 .chat-footer .chat-message textarea {
@@ -248,22 +264,31 @@ body#teachingUI {
     /* border: none; */
     display: block;
     width: 100%;
-    height: 100%;
+    height: 50%;
     /* overflow-y: scroll; */
     border-radius: 3px;
     /* padding: 20px; */
     /* font-size: 13px; */
-    /* margin-bottom: 16px; */
+    /* \margin-bottom: 16px; */
 }
 
 .chat-footer textarea::placeholder {
     color: #ddd;
 }
 
+.chat-footer .chat-message .send {
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 5px;
+
+    height: 4vh;
+}
 .chat-footer .chat-emoji {
     display: inline-flex;
     justify-content: space-between;
     padding: 5px;
+    margin-top: 2vh;
+    font-size: 8px;
 }
 
 .chat-footer .chat-emoji button {
@@ -273,6 +298,7 @@ body#teachingUI {
     color: #6fbced;
     vertical-align: top;
     font-size: 20px;
+
     /* margin-left: 333px; */
     /* margin-top: 5px; */
 }
