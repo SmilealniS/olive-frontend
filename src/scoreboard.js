@@ -3,6 +3,7 @@ import React from 'react';
 import Crown from './assets/golden-crown-heart.png';
 import Trophy from './assets/silver-trophy.png';
 import Medal from './assets/bronze-medal.png';
+import profile from './assets/profile.webp';
 
 const board = () => {
   function chat() {
@@ -27,9 +28,9 @@ const board = () => {
                   <div class="pos">
                     1
                   </div>
-                  <img class='pic' src={Crown}></img>
+                  <img class='pic' src={profile}></img>
                   <div class="name">
-                    User top1
+                    User1
                   </div>
                   <div class="score">
                     15
@@ -40,9 +41,9 @@ const board = () => {
                   <div class="pos">
                     2
                   </div>
-                  <img class='pic' src={Trophy}></img>
+                  <img class='pic' src={profile}></img>
                   <div class="name">
-                    User top2
+                    User2
                   </div>
                   <div class="score">
                     10
@@ -53,9 +54,9 @@ const board = () => {
                   <div class="pos">
                     3
                   </div>
-                  <img class='pic' src={Medal}></img>
+                  <img class='pic' src={profile}></img>
                   <div class="name">
-                    User top3
+                    User3
                   </div>
                   <div class="score">
                     5
@@ -68,7 +69,7 @@ const board = () => {
                   <div class="pos">4</div>
                   {/* <div class="pic" style={{}}></div> */}
                   <div class="name">
-                    User top4
+                    User4
                   </div>
                   <div class="score">
                     3
@@ -83,7 +84,7 @@ const board = () => {
                   </div>
                   <div class="pic" style={{}}></div>
                   <div class="name">
-                    User top5
+                    User5
                   </div>
                   <div class="score">
                     1
@@ -98,7 +99,7 @@ const board = () => {
                   </div>
                   <div class="pic" style={{}}></div>
                   <div class="name">
-                    User top6
+                    User6
                   </div>
                   <div class="score">
                     1
@@ -113,7 +114,7 @@ const board = () => {
                   </div>
                   <div class="pic" style={{}}></div>
                   <div class="name">
-                    User top7
+                    User7
                   </div>
                   <div class="score">
                     1
@@ -128,7 +129,7 @@ const board = () => {
                   </div>
                   <div class="pic" style={{}}></div>
                   <div class="name">
-                    User top8
+                    User8
                   </div>
                   <div class="score">
                     1
@@ -143,7 +144,7 @@ const board = () => {
                   </div>
                   <div class="pic" style={{}}></div>
                   <div class="name">
-                    User top9
+                    User9
                   </div>
                   <div class="score">
                     1
@@ -158,7 +159,7 @@ const board = () => {
                   </div>
                   <div class="pic" style={{}}></div>
                   <div class="name">
-                    User top10
+                    User10
                   </div>
                   <div class="score">
                     1

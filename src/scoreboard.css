@@ -10,7 +10,7 @@ body#scoreboard {
 
 nav {
   height: 10vh;
-  border: 2px solid purple;
+  border: 2px solid rgb(255, 255, 255);
 }
 
 .grid-container {
@@ -81,6 +81,7 @@ nav {
 
 .top3 .item .score {
   opacity: 0.5;
+  
 }
 
 .list {
@@ -138,6 +139,7 @@ nav {
 
 .list .item .score:after {
   margin-right: 1rem;
-  content: "points";
+  content: "Points";
   opacity: 0.5;
+  margin-left: 5px
 }
