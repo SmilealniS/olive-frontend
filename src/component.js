@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
 
 import './App.css';
+
 import ZoomMtgEmbedded from '@zoomus/websdk/embedded';
+const KJUR = require('jsrsasign')
 
 function MeetingComponent() {
   var signatureEndpoint = 'http://localhost:4000'

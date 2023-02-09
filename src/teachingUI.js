@@ -5,6 +5,9 @@ import { faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
 import { faVideoCamera } from '@fortawesome/free-solid-svg-icons';
 import { faDisplay } from '@fortawesome/free-solid-svg-icons';
 import './teachingUI.css';
+
+import ZoomMtgEmbedded from '@zoomus/websdk/embedded';
+
 const teacherUI = () => {
   function chat() {
     alert('Hi');
@@ -14,12 +17,92 @@ const teacherUI = () => {
     // 
   }
 
+  var signatureEndpoint = 'http://localhost:4000'
+  var sdkKey = '6V8X5gwmS7lhH6EcVpCPXY0bBduD7Vnwx4QV'
+  //   var sdkSecret = 'XRSfgcqn75DdVZ0P3Nkf0WXZQdsonas5I6nV'
+  var meetingNumber = '4318372796'
+  var role = 1
+  var userName = 'NamTestComponent'
+  var userEmail = ''
+  var passWord = '180HYZ'
+  var registrantToken = ''
+
+  const client = ZoomMtgEmbedded.createClient();
+
+  function getSignature(e) {
+    e.preventDefault();
+
+    fetch(signatureEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        meetingNumber: meetingNumber,
+        role: role
+      })
+    }).then(res => res.json())
+      .then(response => {
+        startMeeting(response.signature)
+      }).catch(error => {
+        console.error(error)
+      })
+  }
+
+  function startMeeting(signature) {
+
+    let meetingSDKElement = document.getElementById('meetingSDKElement');
+
+    client.init({
+      //   debug: true,
+      zoomAppRoot: meetingSDKElement,
+      language: 'en-US',
+      customize: {
+        video: {
+          isResizable: true,
+          viewSizes: {
+            default: {
+              width: 1000,
+              height: 300
+            }
+          },
+          popper: {
+            disableDraggable: true
+          }
+        }
+        // meetingInfo: ['topic', 'host', 'mn', 'pwd', 'telPwd', 'invite', 'participant', 'dc', 'enctype'],
+        // toolbar: {
+        //   buttons: [
+        //     {
+        //       text: 'Custom Button',
+        //       className: 'CustomButton',
+        //       onClick: () => {
+        //         console.log('custom button');
+        //       }
+        //     }
+        //   ]
+        // }
+      }
+    });
+
+    client.join({
+      sdkKey: sdkKey,
+      signature: signature,
+      meetingNumber: meetingNumber,
+      password: passWord,
+      userName: userName,
+      userEmail: userEmail,
+      tk: registrantToken
+    })
+  }
+
   return (
     <body id='teachingUI'>
+
+      <button onClick={getSignature}>Join Meeting</button>
+
       <div class="flex-container">
         {/* display */}
         <div class='' id='display'>
-          <div class='' id='screen'></div>
+          <div class='screen' id='meetingSDKElement'></div>
           <div class='grid-container' id='tt-tools'>
             <div class='grid-item' id='top-tools'></div>
           </div>
