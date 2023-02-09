@@ -1,20 +1,19 @@
 import './adminReport.css';
 import React from 'react';
+import Createclass from './studentProfilepic/create.png';
+import schedule from './studentProfilepic/schedule.png';
 
 const report = () => {
     function chat() {
         alert('Hi');
     }
 
-    var createPic = document.createElement("createPic");
-    createPic.src = "./studentProfilepic/create.png";
-
     return (
         <body id='adminReport'>
             <div class="wrapper">
                 <div class="left">
-                    <div class="create.Pic">
-                    </div>
+                    <img class="pic" src={Createclass}></img>
+                    <img class="pic" src={schedule}></img>
                 </div>
                 <div class="right">
                     <div class="info">

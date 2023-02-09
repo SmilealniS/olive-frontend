@@ -13,6 +13,11 @@ body {
   background-color: #f3f3f3;
 }
 
+.wrapper .left .pic{
+  width: 7vh;
+  height: 7vh;
+  margin-left: -15px;
+}
 .info_data .data .descrip{
   font-size: 13px;
 
