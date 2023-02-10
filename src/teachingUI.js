@@ -170,7 +170,7 @@ const teacherUI = () => {
 
               <li class="you">
                 <div class="entete">
-                  <b>mnct &nbsp;</b>
+                  <b>Student &nbsp;</b>
                   <p>10:12AM, Today &nbsp;</p>
                 </div>
                 <div class="message">
@@ -180,7 +180,7 @@ const teacherUI = () => {
 
               <li class="you">
                 <div class="entete">
-                  <b>mnct &nbsp;</b>
+                  <b>Student &nbsp;</b>
                   <p>10:12AM, Today &nbsp;</p>
                 </div>
                 <div class="message">
@@ -190,7 +190,7 @@ const teacherUI = () => {
 
               <li class="you">
                 <div class="entete">
-                  <b>mnct &nbsp;</b>
+                  <b>Student &nbsp;</b>
                   <p>10:12AM, Today &nbsp;</p>
                 </div>
                 <div class="message">
@@ -200,7 +200,7 @@ const teacherUI = () => {
 
               <li class="you">
                 <div class="entete">
-                  <b>mnct &nbsp;</b>
+                  <b>Student &nbsp;</b>
                   <p>10:12AM, Today &nbsp;</p>
                 </div>
                 <div class="message">
@@ -210,7 +210,7 @@ const teacherUI = () => {
 
               <li class="you">
                 <div class="entete">
-                  <b>mnct &nbsp;</b>
+                  <b>Student &nbsp;</b>
                   <p>10:12AM, Today &nbsp;</p>
                 </div>
                 <div class="message">
@@ -221,7 +221,7 @@ const teacherUI = () => {
               <li class="me">
                 <div class="entete">
                   <p>10:12AM, Today</p>
-                  <b>&nbsp; mnct</b>
+                  <b>&nbsp; Student</b>
                   <span class="status blue"></span>
                 </div>
                 <div class="message">
@@ -231,7 +231,7 @@ const teacherUI = () => {
 
               <li class="you">
                 <div class="entete">
-                  <b>mnct &nbsp;</b>
+                  <b>Student &nbsp;</b>
                   <p>10:12AM, Today &nbsp;</p>
                 </div>
                 <div class="message">
@@ -241,7 +241,7 @@ const teacherUI = () => {
 
               <li class="you">
                 <div class="entete">
-                  <b>mnct &nbsp;</b>
+                  <b>Student &nbsp;</b>
                   <p>10:12AM, Today &nbsp;</p>
                 </div>
                 <div class="message">
@@ -252,7 +252,7 @@ const teacherUI = () => {
               <li class="me">
                 <div class="entete">
                   <p>10:12AM, Today</p>
-                  <b>&nbsp; mnct</b>
+                  <b>&nbsp; Student</b>
                   <span class="status blue"></span>
                 </div>
                 <div class="message">

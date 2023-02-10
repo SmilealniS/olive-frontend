@@ -1,5 +1,5 @@
 body#adminReport {
-  background-color: rgb(119, 255, 216);
+  background-color: grey;
 }
 
 * {
@@ -13,6 +13,11 @@ body {
   background-color: #f3f3f3;
 }
 
+.wrapper .left .pic{
+  width: 7vh;
+  height: 7vh;
+  margin-left: -15px;
+}
 .info_data .data .descrip{
   font-size: 13px;
 
@@ -42,7 +47,7 @@ body {
 
 .wrapper .left {
   width: 3%;
-  background: linear-gradient(to right, #01a9ac, #01dbdf);
+  background-color: grey;
   padding: 20px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;

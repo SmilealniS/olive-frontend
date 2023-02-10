@@ -88,7 +88,7 @@ body#teachingUI {
 
 .emoji-stack {
     margin-top: 1%;
-    margin-left: 5%;
+    margin-left: 16%;
     color: #6fbced;
     vertical-align: top;
     display: flex;
@@ -97,16 +97,23 @@ body#teachingUI {
 
 .emoji-item {
     font-size: 50px;
+    margin-left: 1vh;
 }
 
 .btn-reset {
     margin-left: 5%;
 }
 
+.rbtn-reset{
+    height: 3vh;
+    margin-top: 8vh;
+}
+
 .bar-area {
     display: flex;
     flex-direction: row;
     justify-content: start;
+    margin-left: 10vh;
 }
 
 .bar-multi {
@@ -126,16 +133,17 @@ body#teachingUI {
 .survbar {
     box-sizing: border-box;
     width: 200px;
-    height: 16px;
+    height: 20px;
     padding: 5px;
     background: #ddd;
     border-radius: 5px;
     position: relative;
+    margin-top: 1vh;
 }
 
 .bar-1 {
     width: 100%;
-    height: 8px;
+    height: 10px;
     position: relative;
     background: #c54;
     background-image: linear-gradient(to right, red, green);
@@ -282,6 +290,7 @@ body#teachingUI {
     color: #6fbced;
     vertical-align: top;
     font-size: 20px;
+    margin-top: -1vh;
     /* margin-left: 333px; */
     /* margin-top: 5px; */
 }
