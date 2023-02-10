@@ -1,7 +1,7 @@
 import './adminReport.css';
 import React from 'react';
-import Createclass from './studentProfilepic/create.png';
-import schedule from './studentProfilepic/schedule.png';
+import Createclass from './assets/studentProfilepic/create.png';
+import schedule from './assets/studentProfilepic/schedule.png';
 
 const report = () => {
     function chat() {

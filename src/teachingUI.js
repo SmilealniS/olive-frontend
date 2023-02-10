@@ -9,8 +9,8 @@ import './teachingUI.css';
 import ZoomMtgEmbedded from '@zoomus/websdk/embedded';
 
 const teacherUI = () => {
-  function chat() {
-    alert('Hi');
+  function sendEmoji() {
+    alert('Send emoji');
   }
 
   function toggleMic() {
@@ -48,7 +48,7 @@ const teacherUI = () => {
   }
 
   function startMeeting(signature) {
-
+alert(signature);
     let meetingSDKElement = document.getElementById('meetingSDKElement');
 
     client.init({
@@ -62,7 +62,7 @@ const teacherUI = () => {
             default: {
               width: 1000,
               height: 600
-            }, 
+            },
             ribbon: {
               width: 300,
               height: 700
@@ -122,7 +122,8 @@ const teacherUI = () => {
                   <div class='bar-area'>
                     {/* Bar 1 */}
                     <div class="barRate">Survival Rating</div>
-                    <div class="survbar"><div class="bar-1"></div></div>
+                    {/* <div class="survbar"><div class="bar-1"></div></div> */}
+                    <div class='survpercent'>100%</div>
                     <button class="btn-reset">Reset</button>
                   </div>
 
@@ -145,11 +146,11 @@ const teacherUI = () => {
 
                 <div class='flex-container'>
                   <div class='emoji-stack'>
+                    <p class='emoji-item'>&#128513;</p>
                     <p class='emoji-item'>&#128512;</p>
-                    <p class='emoji-item'>&#128512;</p>
-                    <p class='emoji-item'>&#128512;</p>
-                    <p class='emoji-item'>&#128512;</p>
-                    <p class='emoji-item'>&#128512;</p>
+                    <p class='emoji-item'>&#128528;</p>
+                    <p class='emoji-item'>&#128533;</p>
+                    <p class='emoji-item'>&#128544;</p>
                   </div>
                   <button class="rbtn-reset">Reset</button>
                 </div>
@@ -272,11 +273,11 @@ const teacherUI = () => {
 
             {/* Emoji */}
             <div class='chat-emoji'>
-              <button>&#128512;</button>
-              <button>&#128512;</button>
-              <button>&#128512;</button>
-              <button>&#128512;</button>
-              <button>&#128512;</button>
+              <button class='emoji-button' onClick={sendEmoji}>&#128513;</button>
+              <button class='emoji-button' onClick={sendEmoji}>&#128512;</button>
+              <button class='emoji-button' onClick={sendEmoji}>&#128528;</button>
+              <button class='emoji-button' onClick={sendEmoji}>&#128533;</button>
+              <button class='emoji-button' onClick={sendEmoji}>&#128544;</button>
             </div>
           </div>
         </div>

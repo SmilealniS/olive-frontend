@@ -24,12 +24,12 @@ body#teachingUI {
 }
 
 #meetingSDKElement {
-    top: 59px !important;
+    /* top: 59px !important;
     left: 0 !important;
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 244px;
+    width: 244px; */
 }
 
 #tools {
@@ -111,14 +111,14 @@ body#teachingUI {
 
 .bar-area {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: start;
-    margin-left: 10vh;
+    /* margin-left: 5vh; */
 }
 
 .bar-multi {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .barRate {
@@ -281,6 +281,13 @@ body#teachingUI {
     display: inline-flex;
     justify-content: space-between;
     padding: 5px;
+    padding-top: 10px;
+}
+
+.emoji-button {
+    /* background-color: transparent; */
+    background: none;
+    border: none;
 }
 
 .chat-footer .chat-emoji button {
