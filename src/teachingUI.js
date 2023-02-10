@@ -61,7 +61,11 @@ const teacherUI = () => {
           viewSizes: {
             default: {
               width: 1000,
-              height: 300
+              height: 600
+            }, 
+            ribbon: {
+              width: 300,
+              height: 700
             }
           },
           popper: {
