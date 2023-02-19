@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicrophone } from '@fortawesome/free-solid-svg-icons';
 import { faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
@@ -48,7 +48,7 @@ const teacherUI = () => {
   }
 
   function startMeeting(signature) {
-alert(signature);
+    alert(signature);
     let meetingSDKElement = document.getElementById('meetingSDKElement');
 
     client.init({
@@ -121,17 +121,22 @@ alert(signature);
                   {/* Bar area */}
                   <div class='bar-area'>
                     {/* Bar 1 */}
-                    <div class="barRate">Survival Rating</div>
+                    <div class='surv-area'>
+                      <div class="barRate">Survival Rating</div>
+                      <button class="btn-reset">Reset</button>
+                    </div>
                     {/* <div class="survbar"><div class="bar-1"></div></div> */}
                     <div class='survpercent'>100%</div>
-                    <button class="btn-reset">Reset</button>
+
                   </div>
 
                   <div class='bar-area'>
                     {/* Bar 2 */}
-                    <div class="barRate">Engagement</div>
+                    <div class='surv-area'>
+                      <div class="barRate">Engagement</div>
+                      <button class="btn-reset">Reset</button>
+                    </div>
                     <div class="survbar"><div class="bar-1"></div></div>
-                    <button class="btn-reset">Reset</button>
                   </div>
                 </div>
 
@@ -142,6 +147,7 @@ alert(signature);
               <div class="right-zone">
                 <div class="Bar-text">
                   <text class="r-text">Class Status</text>
+                  <button class="rbtn-reset">Reset</button>
                 </div>
 
                 <div class='flex-container'>
@@ -152,7 +158,6 @@ alert(signature);
                     <p class='emoji-item'>&#128533;</p>
                     <p class='emoji-item'>&#128544;</p>
                   </div>
-                  <button class="rbtn-reset">Reset</button>
                 </div>
 
               </div>
@@ -171,93 +176,93 @@ alert(signature);
 
               <li class="you">
                 <div class="entete">
-                  <b>Student &nbsp;</b>
-                  <p>10:12AM, Today &nbsp;</p>
+                  <b>Cloud178 &nbsp;</b>
+                  <p>09:07AM, Today &nbsp;</p>
                 </div>
                 <div class="message">
-                  Typing for test text
+                  Good morning ka
                 </div>
               </li>
 
               <li class="you">
                 <div class="entete">
-                  <b>Student &nbsp;</b>
-                  <p>10:12AM, Today &nbsp;</p>
+                  <b>Anagram473 &nbsp;</b>
+                  <p>09:07AM, Today &nbsp;</p>
                 </div>
                 <div class="message">
-                  Typing for test text
+                  Good morning krub
                 </div>
               </li>
 
               <li class="you">
                 <div class="entete">
-                  <b>Student &nbsp;</b>
-                  <p>10:12AM, Today &nbsp;</p>
+                  <b>Cloud178 &nbsp;</b>
+                  <p>09:42AM, Today &nbsp;</p>
                 </div>
                 <div class="message">
-                  Typing for test text
+                  Teacher, can you speak slower?
                 </div>
               </li>
 
               <li class="you">
                 <div class="entete">
-                  <b>Student &nbsp;</b>
-                  <p>10:12AM, Today &nbsp;</p>
+                  <b>SxYuki982 &nbsp;</b>
+                  <p>09:57AM, Today &nbsp;</p>
                 </div>
                 <div class="message">
-                  Typing for test text
+                  I miss the last part
                 </div>
               </li>
 
               <li class="you">
                 <div class="entete">
-                  <b>Student &nbsp;</b>
+                  <b>Cheep729 &nbsp;</b>
+                  <p>10:02AM, Today &nbsp;</p>
+                </div>
+                <div class="message">
+                  ...
+                </div>
+              </li>
+
+              <li class="me">
+                <div class="entete">
+                  <p>10:07AM, Today</p>
+                  <b>&nbsp; Sharon117</b>
+                  <span class="status blue"></span>
+                </div>
+                <div class="message">
+                  I have the same question
+                </div>
+              </li>
+
+              <li class="you">
+                <div class="entete">
+                  <b>Scarret738 &nbsp;</b>
                   <p>10:12AM, Today &nbsp;</p>
                 </div>
                 <div class="message">
-                  Typing for test text
+                  Could you explain for us?
+                </div>
+              </li>
+
+              <li class="you">
+                <div class="entete">
+                  <b>Scarret738 &nbsp;</b>
+                  <p>10:12AM, Today &nbsp;</p>
+                </div>
+                <div class="message">
+                  I'm so lost..
                 </div>
               </li>
 
               <li class="me">
                 <div class="entete">
                   <p>10:12AM, Today</p>
-                  <b>&nbsp; Student</b>
+                  <b>&nbsp; Sharon117</b>
                   <span class="status blue"></span>
                 </div>
                 <div class="message">
-                  OK
-                </div>
-              </li>
-
-              <li class="you">
-                <div class="entete">
-                  <b>Student &nbsp;</b>
-                  <p>10:12AM, Today &nbsp;</p>
-                </div>
-                <div class="message">
-                  Typing for test text
-                </div>
-              </li>
-
-              <li class="you">
-                <div class="entete">
-                  <b>Student &nbsp;</b>
-                  <p>10:12AM, Today &nbsp;</p>
-                </div>
-                <div class="message">
-                  Typing for test text
-                </div>
-              </li>
-
-              <li class="me">
-                <div class="entete">
-                  <p>10:12AM, Today</p>
-                  <b>&nbsp; Student</b>
-                  <span class="status blue"></span>
-                </div>
-                <div class="message">
-                  OK
+                  +1
                 </div>
               </li>
 

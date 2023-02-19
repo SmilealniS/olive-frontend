@@ -23,21 +23,21 @@ const board = () => {
 
                 <div class="one item">
                   <div class="pos">1</div>
-                  <img class='pic' src={require('./assets/profile.webp')}></img>
+                  <img class='pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                   <div class="name">Cloud178</div>
                   <div class="score">15</div>
                 </div>
 
                 <div class="two item">
                   <div class="pos">2</div>
-                  <img class='pic' src={profile}></img>
+                  <img class='pic' src={require('./assets/studentProfilepic/shibainu.jpg')}></img>
                   <div class="name">Saidski248</div>
                   <div class="score">10</div>
                 </div>
 
                 <div class="three item">
                   <div class="pos">3</div>
-                  <img class='pic' src={profile}></img>
+                  <img class='pic' src={require('./assets/studentProfilepic/normalman.png')}></img>
                   <div class="name">Scarret738</div>
                   <div class="score">5</div>
                 </div>

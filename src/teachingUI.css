@@ -70,6 +70,8 @@ body#teachingUI {
 
 .Bar-text {
     padding-top: 1vh;
+    display: flex;
+    /* height: 3vh; */
 }
 
 .l-text {
@@ -105,20 +107,22 @@ body#teachingUI {
 }
 
 .rbtn-reset{
-    height: 3vh;
-    margin-top: 8vh;
+    /* height: 3vh;
+    margin-top: 8vh; */
+    margin-left: 5%;
 }
 
 .bar-area {
     display: flex;
     flex-direction: column;
     justify-content: start;
-    /* margin-left: 5vh; */
+    /* margin-left: 1vh; */
 }
 
 .bar-multi {
     display: flex;
     flex-direction: row;
+    gap: 20px;
 }
 
 .barRate {
@@ -128,6 +132,22 @@ body#teachingUI {
     margin-top: 1vh;
     margin-right: 5px;
     width: 15vh;
+}
+
+.surv-area {
+    display: flex;
+}
+
+.survpercent {
+    box-sizing: border-box;
+    width: 200px;
+    height: 40px;
+    text-align: center;
+    /* background: #ddd; */
+    font-size: 30px;
+    border-radius: 5px;
+    position: relative;
+    padding-top: 1vh;
 }
 
 .survbar {
