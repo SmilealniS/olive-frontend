@@ -15,7 +15,8 @@ body#teachingUI {
 #display {
     /* border: 2px solid red; */
     height: 100vh;
-    flex-grow: 9;
+    width: 1050px;
+    /* flex-grow: 9; */
 }
 
 .screen {
@@ -24,12 +25,19 @@ body#teachingUI {
 }
 
 #meetingSDKElement {
-    /* top: 59px !important;
-    left: 0 !important;
-    right: 0;
-    margin-left: auto;
+    top: 10px !important;
+    left: 10px !important;
+    /* right: 0; */
+    margin-left: 5px;
     margin-right: auto;
-    width: 244px; */
+    width: auto;
+    /* height: 500px; */
+}
+
+.lightbulb {
+    display: flex;
+    padding-top: 10px;
+    padding-left: 30px;
 }
 
 #tools {
@@ -38,7 +46,6 @@ body#teachingUI {
     /* grid-template-columns: 99%; */
     flex-direction: column;
     margin-left: 1vh;
-
 }
 
 #l-tools {
@@ -103,13 +110,17 @@ body#teachingUI {
 }
 
 .btn-reset {
+    margin-top: 6%;
     margin-left: 5%;
+    width: 40px;
+    height: 15px;
 }
 
 .rbtn-reset{
-    /* height: 3vh;
-    margin-top: 8vh; */
+    margin-top: 2%;
     margin-left: 5%;
+    width: 40px;
+    height: 15px;
 }
 
 .bar-area {

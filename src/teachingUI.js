@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMicrophone } from '@fortawesome/free-solid-svg-icons';
-import { faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
-import { faVideoCamera } from '@fortawesome/free-solid-svg-icons';
-import { faDisplay } from '@fortawesome/free-solid-svg-icons';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './teachingUI.css';
-
+import { BsLightbulbFill } from 'react-icons/bs';
+import { BsLightbulb } from 'react-icons/bs';
 import ZoomMtgEmbedded from '@zoomus/websdk/embedded';
 
 const teacherUI = () => {
@@ -48,7 +45,6 @@ const teacherUI = () => {
   }
 
   function startMeeting(signature) {
-    alert(signature);
     let meetingSDKElement = document.getElementById('meetingSDKElement');
 
     client.init({
@@ -57,33 +53,21 @@ const teacherUI = () => {
       language: 'en-US',
       customize: {
         video: {
-          isResizable: true,
+          isResizable: false,
           viewSizes: {
+            ribbon: {
+              width: 500,
+              height: 600
+            },
             default: {
               width: 1000,
               height: 600
-            },
-            ribbon: {
-              width: 300,
-              height: 700
             }
           },
           popper: {
             disableDraggable: true
           }
         }
-        // meetingInfo: ['topic', 'host', 'mn', 'pwd', 'telPwd', 'invite', 'participant', 'dc', 'enctype'],
-        // toolbar: {
-        //   buttons: [
-        //     {
-        //       text: 'Custom Button',
-        //       className: 'CustomButton',
-        //       onClick: () => {
-        //         console.log('custom button');
-        //       }
-        //     }
-        //   ]
-        // }
       }
     });
 
@@ -105,8 +89,8 @@ const teacherUI = () => {
 
       <div class="flex-container">
         {/* display */}
-        <div class='' id='display'>
-          <div class='screen' id='meetingSDKElement'></div>
+        <div class='' id='display' >
+          <div class='screen' id='meetingSDKElement' ></div>
           <div class='grid-container' id='tt-tools'>
             <div class='grid-item' id='top-tools'></div>
           </div>
@@ -122,7 +106,7 @@ const teacherUI = () => {
                   <div class='bar-area'>
                     {/* Bar 1 */}
                     <div class='surv-area'>
-                      <div class="barRate">Survival Rating</div>
+                      <div class="barRate">Engagement</div>
                       <button class="btn-reset">Reset</button>
                     </div>
                     {/* <div class="survbar"><div class="bar-1"></div></div> */}
@@ -133,10 +117,17 @@ const teacherUI = () => {
                   <div class='bar-area'>
                     {/* Bar 2 */}
                     <div class='surv-area'>
-                      <div class="barRate">Engagement</div>
+                      <div class="barRate">Survival rating</div>
                       <button class="btn-reset">Reset</button>
                     </div>
-                    <div class="survbar"><div class="bar-1"></div></div>
+                    {/* <div class="survbar"><div class="bar-1"></div></div> */}
+                    <div class='lightbulb'>
+                      <BsLightbulbFill size='3em' color='gold' />
+                      <BsLightbulbFill size='3em' color='gold' />
+                      <BsLightbulbFill size='3em' color='gold' />
+                      <BsLightbulbFill size='3em' color='gold' />
+                      <BsLightbulb size='3em' color='gold' />
+                    </div>
                   </div>
                 </div>
 
