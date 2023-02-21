@@ -1,4 +1,4 @@
-import './student_profile.css';
+import './teacher_profile.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import calandar from './assets/Infopage/calendar.png';
@@ -21,7 +21,7 @@ const board = () => {
   }
 
   return (
-    <body id='student_profile'>
+    <body id='teacher_profile'>
       <div class="grid-container">
         <div class="grid-item" id='display'>
           <div class='grid-item' style={{ 'padding-top': '120px' }}>
@@ -43,8 +43,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-
-                        Said Ski
+                        Adele Jackson
                       </div>
                     </div>
                   </div>
@@ -55,7 +54,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={email}></img>
                       <div class="info-text">
-                        kasidis.cho@student.mahidol.ac.edu
+                        adele.jac@mahidol.com
                       </div>
                     </div>
                   </div>
@@ -81,7 +80,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        Kasidis Chokphaiboon
+                        Adele Jackson
                       </div>
                     </div>
                   </div>
@@ -92,7 +91,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={calandar}></img>
                       <div class="info-text">
-                        30/03/2001
+                        16/08/1988
                       </div>
                     </div>
                   </div>
@@ -103,7 +102,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={department}></img>
                       <div class="info-text">
-                        ICT Student
+                        Doctor of Philosophy (Ph.D.)
                       </div>
                     </div>
                   </div>
@@ -130,7 +129,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={location}></img>
                       <div class="info-text">
-                        Bangkok, Thailand
+                        Nakhon Pathom, Thailand
                       </div>
                     </div>
                   </div>
@@ -141,7 +140,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={major}></img>
                       <div class="info-text">
-                        Management Information System (MIS)
+                        Computer Science (CS)
                       </div>
                     </div>
                   </div>
@@ -155,7 +154,7 @@ const board = () => {
             <div class="l-box">
               <div class="top-zone">
                 <div class="head-std"><br></br>
-                  OLIVE Student
+                  OLIVE Teacher
                 </div>
 
                 <div class="grid">
@@ -181,10 +180,10 @@ const board = () => {
               <div class="bottom-box"><br></br>
                 <img class='pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                 <div class="l-text1">
-                  Said Ski248
+                  Adele Jackson
                 </div>
                 <div class="l-text2">
-                  saidski248@gmail.com
+                  adele.jac@mahidol.com
                 </div>
                 <img class="l-icon-pic-bottom" src={logout}></img>
               </div>

@@ -12,14 +12,16 @@ const report = () => {
         <body id='adminReport'>
             <div class="wrapper">
                 <div class="left">
-                    <img class="pic" src={Createclass}></img>
-                    <img class="pic" src={schedule}></img>
+                    <img class="pic-create" src={Createclass}></img>
+                    <img class="pic-calendar" src={schedule}></img>
                 </div>
+                
                 <div class="right">
                     <div class="info">
                         <div>
                             <h7>Requestor</h7>
                         </div>
+                        <img class='' src={require('.')}></img>
                         <h5> ID : xxxxx</h5>
                         <h5> Name : Name Surname</h5>
                         <h5> Account : Teacher</h5>
@@ -29,6 +31,7 @@ const report = () => {
                                 <div>
                                     <h4>Report</h4>
                                 </div>
+                                <img class='' src={require('.')}></img>
                                 <h6> ID : xxxxx</h6>
                                 <h6> Name : Name Surname</h6>
                                 <h6> Account : Student</h6>

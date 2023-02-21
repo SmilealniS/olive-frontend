@@ -12,6 +12,8 @@ import TeachingUI from './teachingUI';
 import AdminReport from './adminReport';
 import Login from './login';
 import Student_profile from './student_profile';
+import Teacher_profile from './teacher_profile';
+import Admin_profile from './admin_profile';
 
 
 let payload = {
@@ -59,6 +61,14 @@ const router = createBrowserRouter([
   {
     path: '/student_profile',
     element: <Student_profile/>
+  },
+  {
+    path: '/teacher_profile',
+    element: <Teacher_profile/>
+  },
+  {
+    path: '/admin_profile',
+    element: <Admin_profile/>
   }
 ])
 

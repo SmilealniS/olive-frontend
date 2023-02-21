@@ -61,7 +61,7 @@ nav {
 .top3 .item .pic {
   position: absolute;
   top: -4rem;
-  left: 5vh;
+  left: 4vh;
   width: 10vh;
   height: 10vh;
   border-radius: 50%;
@@ -75,6 +75,7 @@ nav {
   font-weight: bold;
   font-size: 25px;
   margin-bottom: 0.5rem;
+  margin-top: -4vh;
 }
 
 .top3 .item .name {

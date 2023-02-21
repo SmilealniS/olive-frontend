@@ -98,7 +98,7 @@ const teacherUI = () => {
             <div class='' id='l-tools'>
               <div class="left-zone">
                 <div class="Bar-text">
-                  <text class="l-text">Teaching Quality</text>
+                  {/* <text class="l-text">Teaching Quality</text> */}
                 </div>
 
                 <div class='bar-multi'>
@@ -111,9 +111,9 @@ const teacherUI = () => {
                     </div>
                     {/* <div class="survbar"><div class="bar-1"></div></div> */}
                     <div class='survpercent'>100%</div>
-
+                    
                   </div>
-
+                  <div class='divided-line-2'></div>
                   <div class='bar-area'>
                     {/* Bar 2 */}
                     <div class='surv-area'>
