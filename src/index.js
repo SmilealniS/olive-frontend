@@ -10,6 +10,9 @@ import MeetingComponent from './component';
 import Scoreboard from './scoreboard';
 import TeachingUI from './teachingUI';
 import AdminReport from './adminReport';
+import Login from './login';
+import Student_profile from './student_profile';
+
 
 let payload = {
   meetingNumber: '4318372796',
@@ -48,6 +51,14 @@ const router = createBrowserRouter([
   {
     path: '/adminReport',
     element: <AdminReport/>
+  },
+  {
+    path: '/login',
+    element: <Login/>
+  },
+  {
+    path: '/student_profile',
+    element: <Student_profile/>
   }
 ])
 

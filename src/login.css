@@ -1,0 +1,90 @@
+body#login {
+    /* background-color: rgb(119, 255, 216); */
+    background-color: #1a1a1a1a;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("./assets/LoginPic/mahidolBG.jpg");
+    background-size: 1500px 700px;
+
+
+  }
+  
+
+  */ * {
+    box-sizing: border-box;
+  }
+
+  .text-sign{
+    font-weight: bold;
+    margin-top: -27%;
+    margin-left: 10%;
+    font-size: 28px;
+  }
+  .textl2{
+    font-weight: normal;
+    margin-top: -3%;
+    margin-left: 10%;
+    font-size: 20px;
+  }
+  .bgpic{
+    width: 30px;
+    height: 30px;
+  }
+  .logo-pic{
+    width: 330px;
+    height: 330px;
+    margin-top: -15%;
+    margin-left: 8%;
+  }
+  .centerbox {
+    box-sizing: border-box;
+    position: relative;
+    background: rgb(255, 255, 255);
+    width: 412px;
+    height: 434px;
+    left: 50%;
+    top: 29.91%;
+    bottom: 29.91%;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .username{
+    box-sizing: border-box;
+    position: absolute;
+    width: 338px;
+    height: 36px;
+    font-size: 15px;
+    left: 9%;
+    top: 55%;
+    background-color: #C4E0F9;
+  }
+  .password{
+    box-sizing: border-box;
+    position: absolute;
+    width: 338px;
+    height: 36px;
+    font-size: 15px;
+    left: 9%;
+    top: 65%;
+    background-color: #C4E0F9;
+    
+  }
+  .centerbox .text{
+    font-size: 15px;
+    color: grey;
+    padding-left: 5%;
+    padding-top: 2%;
+  }
+  .smt-btn{
+    background-color: #17468C;
+    box-sizing: border-box;
+    position: absolute;
+    width: 338px;
+    height: 36px;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    left: 9%;
+    top: 80%;
+    font-size: 15px;
+    color: white;
+  }
