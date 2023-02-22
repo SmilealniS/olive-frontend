@@ -14,6 +14,7 @@ import Login from './login';
 import Student_profile from './student_profile';
 import Teacher_profile from './teacher_profile';
 import Admin_profile from './admin_profile';
+import Class_info_student from './class_info_student';
 
 
 let payload = {
@@ -69,7 +70,12 @@ const router = createBrowserRouter([
   {
     path: '/admin_profile',
     element: <Admin_profile/>
+  },
+  {
+    path: '/class_info_student',
+    element: <Class_info_student/>
   }
+  
 ])
 
 root.render(

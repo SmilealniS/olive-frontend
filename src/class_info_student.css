@@ -1,0 +1,109 @@
+body#class_info_student {
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+*/ * {
+    box-sizing: border-box;
+}
+
+
+
+
+.pic {
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    margin-left: 85%;
+    margin-top: -10px;
+    margin-right: 20px;
+}
+.head-text{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.frame-box {
+    box-sizing: border-box;
+    position: relative;
+    background: #F3F3F3;
+    width: 1440px;
+    height: 680px;
+    cursor: pointer;
+
+}
+
+.header-box {
+    box-sizing: border-box;
+    position: relative;
+    background: #C4E0F9;
+    width: 1440px;
+    height: 70px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+
+}
+
+.mid-frame-box {
+    box-sizing: border-box;
+    position: relative;
+    width: 765px;
+    height: 300px;
+    cursor: pointer;
+    margin-left: 58px;
+    margin-top: 47px;
+}
+
+.bottom-frame-box {
+    box-sizing: border-box;
+    position: relative;
+    background: #ffffff;
+    width: 1320px;
+    height: 454px;
+    cursor: pointer;
+    left: 4%;
+    top: -15%;
+}
+.midr-frame-box {
+    
+    box-sizing: border-box;
+    position: relative;
+    background: #ffffff;
+    width: 300px;
+    height: 70px;
+    cursor: pointer;
+    left: 74.9%;
+    top: -44%;
+}
+.middler-box{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.textpar{
+    font-size: 25px;
+    margin-top: 15px;
+    margin-left: -17px;
+}
+.textattend{
+    font-size: 25px;
+    margin-left: -29px;
+    margin-top: 15px;
+}
+.textNum{
+    font-size: 25px;
+    font-weight: bold;
+
+    margin-top: 15px;
+}
+.class-id{
+    font-size: 60px;
+    font-weight: bold;
+    
+}
+.class-teacher{
+    font-size: 35px;
+    font-weight: bold;
+}
+.class-descrip{
+    font-size: 20px;
+}
