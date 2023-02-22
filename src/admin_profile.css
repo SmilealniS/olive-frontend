@@ -24,9 +24,10 @@ body#admin_profile {
 
     font-size: 15px;
     margin-left: 150px;
+    margin-top: 0px
 }
 
-.pic {
+.adm_pic {
     border-radius: 50%;
     height: 70px;
     width: 70px;
@@ -54,6 +55,7 @@ body#admin_profile {
     font-style: normal;
     margin-left: 3%;
     line-height: 23px;
+    margin-top: 5px
 }
 
 .ctop-box {
@@ -134,13 +136,13 @@ body#admin_profile {
     cursor: pointer;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
-.a-bottom-box {
+.bottom-box {
     box-sizing: border-box;
     position: relative;
     background: #F9F8F9;
     width: 250px;
     height: 60px;
-    top: 49%;
+    top: 56%;
     border-radius: 0.5rem;
     cursor: pointer;
     
@@ -155,12 +157,12 @@ body#admin_profile {
     margin-left: 65px;
     font-size: 12px;
 }
-.pic-2{
+.adm_pic-2{
     border-radius: 50%;
     height: 40px;
     width: 40px;
     margin-left: 7%;
-    margin-top: -2%;
+    margin-top: 125%;
 }
 .l-icon-pic{
     height: 20px;

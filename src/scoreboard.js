@@ -9,14 +9,10 @@ const board = () => {
 
   return (
     <body id='scoreboard'>
-      {/* <nav>
-        <h1 style={{'text-align': 'center', 'font-size': '30px'}}>Navigation bar</h1>
-      </nav> */}
-
       <div class="grid-container">
         <div class="grid-item" id='display'>
-          <h1 style={{ 'text-align': 'center', 'font-size': '50px', 'padding-top': '20px' }}>Leaderboard</h1>
-          <h3 style={{ 'text-align': 'center', 'font-size': '30px', 'padding-top': '20px' }}>Quiz 1</h3>
+          <h1 style={{ 'text-align': 'center', 'font-size': '50px', 'padding-top': '20px' ,'margin-left': '30%'}}>Leaderboard</h1>
+          <h3 style={{ 'text-align': 'center', 'font-size': '30px', 'padding-top': '20px' ,'margin-left': '30%'}}>Quiz 1</h3>
           <div class='grid-item' style={{ 'padding-top': '70px' }}>
             <div class="center">
               <div class="top3">

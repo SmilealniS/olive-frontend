@@ -31,7 +31,7 @@ const board = () => {
                   Basic Information
                 </div>
               </div>
-              <img class='pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
+              <img class='adm_pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
               <div class="textpic-1">Profile Photo</div>
               <div class="textpic-2">This will be diaplayed on your profile.</div>
               <div class="grid">
@@ -174,7 +174,7 @@ const board = () => {
 
               </div>
               <div class="a-bottom-box"><br></br>
-                <img class='pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
+                <img class='adm_pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                 <div class="l-text1">
                   Amie Becca
                 </div>

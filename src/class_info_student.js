@@ -1,6 +1,7 @@
 import './class_info_student.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
+import back from './assets/class_info_student/backicon.png';
 
 const board = () => {
   function chat() {
@@ -14,6 +15,7 @@ const board = () => {
           <div class='grid-item'>
             <div class="frame-box">
               <div class="header-box"><br></br>
+              <img class='pic-left-icon' src={require('./assets/class_info_student/backicon.png')}></img>
                 <div class="head-text">
                 <img class='pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                   Saidski248
@@ -48,8 +50,27 @@ const board = () => {
                 </div>             
               </div>
               <div class="bottom-frame-box">
-                <div class="middle-box"><br></br>
-
+                <div class="bottom-grade-box">
+                  <div class="textGrade">Grade A</div>
+                </div>
+                <button class="join-btn">
+                  Join Meeting
+                </button>
+                <div class="table-info-head">
+                  <div class="textTopic-d">Date</div>
+                  <div class="textTopic-a">Attendance</div>
+                  <div class="textTopic-p">Participation</div>
+                </div>  
+                <div class="table-info">
+                  <div class="textTopic">13/02/2023</div>
+                  <div class="textTopic">Absent</div>
+                  <div class="textTopic">-</div>
+                  <div class="textTopic">20/02/2023</div>
+                  <div class="textTopic">Checked</div>
+                  <div class="textTopic">93%</div>
+                  <div class="textTopic">27/03/2023</div>
+                  <div class="textTopic">Checked</div>
+                  <div class="textTopic">92%</div>
                 </div>             
               </div>
             </div>

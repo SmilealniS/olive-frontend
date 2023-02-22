@@ -2,6 +2,7 @@ body#class_info_student {
     font-family: Arial, Helvetica, sans-serif;
 
 }
+
 */ * {
     box-sizing: border-box;
 }
@@ -14,12 +15,14 @@ body#class_info_student {
     height: 60px;
     width: 60px;
     margin-left: 85%;
-    margin-top: -10px;
+    margin-top: -35px;
     margin-right: 20px;
 }
-.head-text{
+
+.head-text {
     font-size: 20px;
     font-weight: bold;
+    margin-top: -25px;
 }
 
 
@@ -29,8 +32,6 @@ body#class_info_student {
     background: #F3F3F3;
     width: 1440px;
     height: 680px;
-    cursor: pointer;
-
 }
 
 .header-box {
@@ -40,7 +41,6 @@ body#class_info_student {
     width: 1440px;
     height: 70px;
     border-radius: 0.5rem;
-    cursor: pointer;
 
 }
 
@@ -49,7 +49,6 @@ body#class_info_student {
     position: relative;
     width: 765px;
     height: 300px;
-    cursor: pointer;
     margin-left: 58px;
     margin-top: 47px;
 }
@@ -60,50 +59,127 @@ body#class_info_student {
     background: #ffffff;
     width: 1320px;
     height: 454px;
-    cursor: pointer;
     left: 4%;
     top: -15%;
 }
+
 .midr-frame-box {
-    
+
     box-sizing: border-box;
     position: relative;
     background: #ffffff;
     width: 300px;
     height: 70px;
-    cursor: pointer;
     left: 74.9%;
     top: -44%;
 }
-.middler-box{
+
+.middler-box {
     display: grid;
     grid-template-columns: auto auto auto;
 }
-.textpar{
+
+.textpar {
     font-size: 25px;
     margin-top: 15px;
     margin-left: -17px;
 }
-.textattend{
+
+.textattend {
     font-size: 25px;
     margin-left: -29px;
     margin-top: 15px;
 }
-.textNum{
+
+.textNum {
     font-size: 25px;
     font-weight: bold;
 
     margin-top: 15px;
 }
-.class-id{
+
+.class-id {
     font-size: 60px;
     font-weight: bold;
-    
+
 }
-.class-teacher{
+
+.class-teacher {
     font-size: 35px;
     font-weight: bold;
 }
-.class-descrip{
+
+.class-descrip {
     font-size: 20px;
+}
+
+.join-btn {
+    border-radius: 5px;
+    background-color: #6FBCED;
+    position: absolute;
+    width: 220px;
+    height: 50px;
+    left: 81%;
+    top: 6%;
+    font-size: 22px;
+    font-weight: bold;
+    font-family: 'Inter';
+    color: white;
+}
+
+.table-info-head {
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+}
+
+.table-info {
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+}
+
+.textGrade {
+    margin-left: 11%;
+    margin-bottom: 5%;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.textTopic-d {
+    font-size: 28px;
+    margin-left: 38%;
+    font-weight: bold;
+
+}
+.textTopic-a {
+    font-size: 28px;
+    margin-left: 50%;
+    font-weight: bold;
+}
+.textTopic-p {
+    font-size: 28px;
+    margin-left: 40%;
+    font-weight: bold;
+}
+
+.textTopic {
+    font-size: 25px;
+    margin-left: 30%;
+
+
+}
+
+.bottom-grade-box {
+
+    width: 400px;
+    margin-left: 95px;
+    padding-top: 20px;
+}
+
+.pic-left-icon {
+    margin-top: -5px;
+    margin-left: 20px;
+    width: 50px;
+    height: 50px;
 }

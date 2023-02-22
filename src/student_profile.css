@@ -24,9 +24,10 @@ body#student_profile {
 
     font-size: 15px;
     margin-left: 150px;
+    margin-top: 0px
 }
 
-.pic {
+.stp_pic {
     border-radius: 50%;
     height: 70px;
     width: 70px;
@@ -54,6 +55,7 @@ body#student_profile {
     font-style: normal;
     margin-left: 3%;
     line-height: 23px;
+    margin-top: 5px
 }
 
 .ctop-box {
