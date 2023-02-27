@@ -39,6 +39,7 @@ nav {
   justify-content: center;
   align-items: flex-end;
   color: #4b4168;
+  margin-left: -60px;
 }
 
 .top3 .item {
@@ -59,7 +60,7 @@ nav {
 
 .top3 .item .pic {
   position: absolute;
-  top: -1rem;
+  top: -3rem;
   left: -12vh;
   width: 10vh;
   height: 10vh;
@@ -109,7 +110,7 @@ nav {
   width: 46%;
   border-radius: 4rem;
   margin-bottom: 2rem;
-  margin-left: 26%;
+  margin-left: 23%;
   background: #6fbced;
 }
 

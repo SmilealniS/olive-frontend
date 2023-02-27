@@ -87,17 +87,6 @@ const board = () => {
                   </div>
                 </div>
                 <div class="cell">
-                  <div class="head-box">Date Of Birth</div>
-                  <div class="info-box">
-                    <div class="grid">
-                      <img class="icon-pic" src={calandar}></img>
-                      <div class="info-text">
-                        30/03/2001
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="cell">
                   <div class="head-box">Department</div>
                   <div class="info-box">
                     <div class="grid">
@@ -108,8 +97,6 @@ const board = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="grid">
                 <div class="cell">
                   <div class="head-box">
                     Gender
@@ -124,17 +111,8 @@ const board = () => {
                     </div>
                   </div>
                 </div>
-                <div class="cell">
-                  <div class="head-box">Live</div>
-                  <div class="info-box">
-                    <div class="grid">
-                      <img class="icon-pic" src={location}></img>
-                      <div class="info-text">
-                        Bangkok, Thailand
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              </div>
+              <div class="grid">
                 <div class="cell">
                   <div class="head-box">Major</div>
                   <div class="info-box">

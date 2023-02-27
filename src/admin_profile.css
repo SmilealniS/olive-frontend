@@ -18,13 +18,15 @@ body#admin_profile {
     margin-left: 150px;
     margin-top: -60px;
     font-weight: bold;
+    font-family: 'DM Sans';
 }
 
 .textpic-2 {
 
     font-size: 15px;
     margin-left: 150px;
-    margin-top: 0px
+    margin-top: 0px;
+    font-family: 'DM Sans';
 }
 
 .adm_pic {
@@ -55,7 +57,8 @@ body#admin_profile {
     font-style: normal;
     margin-left: 3%;
     line-height: 23px;
-    margin-top: 5px
+    margin-top: 5px;
+    font-family: 'DM Sans';
 }
 
 .ctop-box {
@@ -106,6 +109,7 @@ body#admin_profile {
     margin-top: -17px;
     margin-left: 30px;
     font-size: 14px;
+    font-family: 'DM Sans';
   }
 
   .confirm-btn{
@@ -119,6 +123,7 @@ body#admin_profile {
     top: 88%;
     font-size: 15px;
     color: white;
+    font-family: 'DM Sans';
   }
 
 
@@ -152,10 +157,12 @@ body#admin_profile {
     margin-left: 65px;
     font-size: 14px;
     font-weight: bold;
+    font-family: 'DM Sans';
 }
 .l-text2{
     margin-left: 65px;
     font-size: 12px;
+    font-family: 'DM Sans';
 }
 .adm_pic-2{
     border-radius: 50%;
@@ -181,6 +188,7 @@ body#admin_profile {
     font-size: 24px;
     margin-left: 44px;
     margin-bottom: 20px;
+    font-family: 'DM Sans';
 }
 
 
@@ -195,4 +203,5 @@ body#admin_profile {
     margin-left: 50px;
     font-size: 16px;
     margin-top: -24px;
+    font-family: 'DM Sans';
 }
