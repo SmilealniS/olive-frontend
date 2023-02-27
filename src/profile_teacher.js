@@ -1,4 +1,4 @@
-import './admin_profile.css';
+import './profile_teacher.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import calandar from './assets/Infopage/calendar.png';
@@ -21,7 +21,7 @@ const board = () => {
   }
 
   return (
-    <body id='admin_profile'>
+    <body id='profile_teacher'>
       <div class="grid-container">
         <div class="grid-item" id='display'>
           <div class='grid-item' style={{ 'padding-top': '120px' }}>
@@ -31,7 +31,7 @@ const board = () => {
                   Basic Information
                 </div>
               </div>
-              <img class='adm_pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
+              <img class='teach_pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
               <div class="textpic-1">Profile Photo</div>
               <div class="textpic-2">This will be diaplayed on your profile.</div>
               <div class="grid">
@@ -43,8 +43,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-
-                        Amie Becca
+                        Adele Jackson
                       </div>
                     </div>
                   </div>
@@ -55,7 +54,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={email}></img>
                       <div class="info-text">
-                        amie.bac@mahidol.com
+                        adele.jac@mahidol.com
                       </div>
                     </div>
                   </div>
@@ -81,7 +80,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        Amie Bacca
+                        Adele Jackson
                       </div>
                     </div>
                   </div>
@@ -92,7 +91,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={calandar}></img>
                       <div class="info-text">
-                        21/07/1983
+                        16/08/1988
                       </div>
                     </div>
                   </div>
@@ -103,7 +102,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={department}></img>
                       <div class="info-text">
-                        ICT Staff
+                        Doctor of Philosophy (Ph.D.)
                       </div>
                     </div>
                   </div>
@@ -119,7 +118,7 @@ const board = () => {
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
 
-                        Female
+                        Male
                       </div>
                     </div>
                   </div>
@@ -135,6 +134,17 @@ const board = () => {
                     </div>
                   </div>
                 </div>
+                <div class="cell">
+                  <div class="head-box">Major</div>
+                  <div class="info-box">
+                    <div class="grid">
+                      <img class="icon-pic" src={major}></img>
+                      <div class="info-text">
+                        Computer Science (CS)
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <button class="confirm-btn">
@@ -143,43 +153,37 @@ const board = () => {
             </div>
             <div class="l-box">
               <div class="top-zone">
-                <div class="head-std"><br></br>
-                  OLIVE Admin
+                <div class="head-teac"><br></br>
+                  OLIVE Teacher
                 </div>
 
                 <div class="grid">
                   <img class="l-icon-pic" src={home}></img>
-                  <div class="l-info-text">
+                  <div class="l-info-text-teac">
                     Home
                   </div>
                 </div>
                 <div class="grid">
                   <img class="l-icon-pic" src={leader}></img>
-                  <div class="l-info-text">
+                  <div class="l-info-text-teac">
                     Leaderboard
                   </div>
                 </div>
                 <div class="grid">
                   <img class="l-icon-pic" src={list}></img>
-                  <div class="l-info-text">
+                  <div class="l-info-text-teac">
                     Course
-                  </div>
-                </div>
-                <div class="grid">
-                  <img class="l-icon-pic" src={list}></img>
-                  <div class="l-info-text">
-                    Report Cards
                   </div>
                 </div>
 
               </div>
-              <div class="a-bottom-box"><br></br>
-                <img class='adm_pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
+              <div class="bottom-box"><br></br>
+                <img class='pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                 <div class="l-text1">
-                  Amie Becca
+                  Adele Jackson
                 </div>
                 <div class="l-text2">
-                  amie.bec@mahidol.com
+                  adele.jac@mahidol.com
                 </div>
                 <img class="l-icon-pic-bottom" src={logout}></img>
               </div>

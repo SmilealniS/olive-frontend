@@ -1,4 +1,4 @@
-import './class_info_student.css';
+import './class_info_teacher.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import back from './assets/class_info/backicon.png';
@@ -9,17 +9,13 @@ const board = () => {
   }
 
   return (
-    <body id='class_info_student'>
+    <body id='class_info_teacher'>
       <div class="grid-container">
         <div class="grid-item" id='display'>
           <div class='grid-item'>
             <div class="frame-box">
               <div class="header-box"><br></br>
-                <img class='pic-left-icon' src={require('./assets/olive_logo.png')}></img>
-                <div class="head-text">
-                  <img class='pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
-                  Saidski248
-                </div>
+              <img class='pic-left-icon' src={require('./assets/olive_logo.png')}></img>
               </div>
               <div class="mid-frame-box">
                 <div class="middle-box"><br></br>
@@ -27,11 +23,8 @@ const board = () => {
                     ITCS 888
                   </div>
                   <button class="join-btn">
-                    Join Meeting
+                    Create Meeting
                   </button>
-                  <div class="class-teacher">
-                    Teacher: Adele Jackson
-                  </div>
                   <div class="class-descrip">
                     Computer Science : This class was added to the transcript to get people used to boolean logic.
                     Which we had down in the first two weeks of the class. Unfortunately for us, unsuspecting students,
@@ -42,8 +35,8 @@ const board = () => {
               </div>
               <div class="midr-frame-box">
                 <div class="middler-box"><br></br>
-                  <div class="textattend">Attendance</div>
-                  <div class="textNum">2/3</div>
+                  <div class="textattend">Total Class</div>
+                  <div class="textNum">3/3</div>
                 </div>
               </div>
               <div class="midr-frame-box">
@@ -56,6 +49,7 @@ const board = () => {
 
 
                 <div class="tabs">
+                  {/* Engagement tab */}
                   <div class="tab">
                     <input type="radio" name="css-tabs" id="tab-1" checked class="tab-switch"></input>
                     <label for="tab-1" class="tab-label">Engagement</label>
@@ -80,14 +74,11 @@ const board = () => {
                     </div>
                   </div>
 
-                  
+                  {/* Leaderboard lab */}
                   <div class="tab">
                     <input type="radio" name="css-tabs" id="tab-2" class="tab-switch"></input>
                     <label for="tab-2" class="tab-label">Leaderboard</label>
                     <div class="tab-content">
-
-
-
                       <div class="grid-container">
                         <div class="grid-item" id='display'>
                           <h1 style={{ 'text-align': 'center', 'font-size': '50px', 'padding-top': '20px', 'margin-left': '25%' }}>Leaderboard</h1>
@@ -191,6 +182,15 @@ const board = () => {
 
                     </div>
                   </div>
+
+                  {/* Student score */}
+                  <div class="tab">
+                    <input type="radio" name="css-tabs" id="tab-3" class="tab-switch"></input>
+                    <label for="tab-3" class="tab-label">Student score</label>
+
+
+                  </div>
+
                 </div>
 
 

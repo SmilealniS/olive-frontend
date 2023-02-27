@@ -11,10 +11,11 @@ import Scoreboard from './scoreboard';
 import TeachingUI from './teachingUI';
 import AdminReport from './adminReport';
 import Login from './login';
-import Student_profile from './student_profile';
-import Teacher_profile from './teacher_profile';
-import Admin_profile from './admin_profile';
+import Profile_teacher from './profile_teacher';
+import Profile_student from './profile_student';
+import Profile_admin from './profile_admin';
 import Class_info_student from './class_info_student';
+import Class_info_teacher from './class_info_teacher';
 
 
 let payload = {
@@ -60,20 +61,24 @@ const router = createBrowserRouter([
     element: <Login/>
   },
   {
-    path: '/student_profile',
-    element: <Student_profile/>
+    path: '/profile_student',
+    element: <Profile_student/>
   },
   {
-    path: '/teacher_profile',
-    element: <Teacher_profile/>
+    path: '/profile_teacher',
+    element: <Profile_teacher/>
   },
   {
-    path: '/admin_profile',
-    element: <Admin_profile/>
+    path: '/profile_admin',
+    element: <Profile_admin/>
   },
   {
     path: '/class_info_student',
     element: <Class_info_student/>
+  },
+  {
+    path: '/class_info_teacher',
+    element: <Class_info_teacher/>
   }
   
 ])

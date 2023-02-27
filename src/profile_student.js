@@ -1,4 +1,4 @@
-import './teacher_profile.css';
+import './profile_student.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import calandar from './assets/Infopage/calendar.png';
@@ -21,7 +21,7 @@ const board = () => {
   }
 
   return (
-    <body id='teacher_profile'>
+    <body id='profile_student'>
       <div class="grid-container">
         <div class="grid-item" id='display'>
           <div class='grid-item' style={{ 'padding-top': '120px' }}>
@@ -31,7 +31,7 @@ const board = () => {
                   Basic Information
                 </div>
               </div>
-              <img class='teach_pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
+              <img class='stp_pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
               <div class="textpic-1">Profile Photo</div>
               <div class="textpic-2">This will be diaplayed on your profile.</div>
               <div class="grid">
@@ -43,7 +43,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        Adele Jackson
+
+                        Said Ski
                       </div>
                     </div>
                   </div>
@@ -54,7 +55,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={email}></img>
                       <div class="info-text">
-                        adele.jac@mahidol.com
+                        kasidis.cho@student.mahidol.ac.edu
                       </div>
                     </div>
                   </div>
@@ -80,18 +81,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        Adele Jackson
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="cell">
-                  <div class="head-box">Date Of Birth</div>
-                  <div class="info-box">
-                    <div class="grid">
-                      <img class="icon-pic" src={calandar}></img>
-                      <div class="info-text">
-                        16/08/1988
+                        Kasidis Chokphaiboon
                       </div>
                     </div>
                   </div>
@@ -102,13 +92,11 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={department}></img>
                       <div class="info-text">
-                        Doctor of Philosophy (Ph.D.)
+                        ICT Student
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="grid">
                 <div class="cell">
                   <div class="head-box">
                     Gender
@@ -123,24 +111,15 @@ const board = () => {
                     </div>
                   </div>
                 </div>
-                <div class="cell">
-                  <div class="head-box">Live</div>
-                  <div class="info-box">
-                    <div class="grid">
-                      <img class="icon-pic" src={location}></img>
-                      <div class="info-text">
-                        Nakhon Pathom, Thailand
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              </div>
+              <div class="grid">
                 <div class="cell">
                   <div class="head-box">Major</div>
                   <div class="info-box">
                     <div class="grid">
                       <img class="icon-pic" src={major}></img>
                       <div class="info-text">
-                        Computer Science (CS)
+                        Management Information System (MIS)
                       </div>
                     </div>
                   </div>
@@ -154,24 +133,24 @@ const board = () => {
             <div class="l-box">
               <div class="top-zone">
                 <div class="head-std"><br></br>
-                  OLIVE Teacher
+                  OLIVE Student
                 </div>
 
                 <div class="grid">
                   <img class="l-icon-pic" src={home}></img>
-                  <div class="l-info-text">
+                  <div class="l-info-text-std">
                     Home
                   </div>
                 </div>
                 <div class="grid">
                   <img class="l-icon-pic" src={leader}></img>
-                  <div class="l-info-text">
+                  <div class="l-info-text-std">
                     Leaderboard
                   </div>
                 </div>
                 <div class="grid">
                   <img class="l-icon-pic" src={list}></img>
-                  <div class="l-info-text">
+                  <div class="l-info-text-std">
                     Course
                   </div>
                 </div>
@@ -180,10 +159,10 @@ const board = () => {
               <div class="bottom-box"><br></br>
                 <img class='pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                 <div class="l-text1">
-                  Adele Jackson
+                  Said Ski248
                 </div>
                 <div class="l-text2">
-                  adele.jac@mahidol.com
+                  saidski248@gmail.com
                 </div>
                 <img class="l-icon-pic-bottom" src={logout}></img>
               </div>

@@ -1,5 +1,4 @@
 body#scoreboard {
-  /* background-color: rgb(119, 255, 216); */
   background-color: #1a1a1a1a;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -8,7 +7,7 @@ body#scoreboard {
   box-sizing: border-box;
 }
 
-nav {
+/* nav {
   height: 10vh;
   border: 2px solid rgb(255, 255, 255);
 }
@@ -17,15 +16,6 @@ nav {
   display: grid;
 }
 
-.grid-item {
-  /* display: grid; */
-
-}
-
-
-
-
-/*Start  Test code */
 
 .center {
   position: relative;
@@ -46,8 +36,6 @@ nav {
   box-sizing: border-box;
   position: relative;
   background: white;
-  /* width: 9rem;
-  height: 10rem; */
   width: 20vh;
   height: 20vh;
   text-align: center;
@@ -66,7 +54,6 @@ nav {
   height: 10vh;
   border-radius: 50%;
   margin-right: 1rem;
-  /* border: 2px solid navy; */
   background-color: whitesmoke;
   box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
@@ -79,13 +66,11 @@ nav {
 }
 
 .top3 .item .name {
-  /* font-weight: bold; */
   font-size: 20px;
   margin-bottom: 0.5rem;
 }
 
 .top3 .item .score {
-  /* opacity: 0.5; */
   font-size: 16px;
 }
 
@@ -115,10 +100,7 @@ nav {
 }
 
 .list .item .pos {
-  /* flex-grow: 2; */
-  /* width: 120px; */
   width: 10vh;
-  /* font-weight: 900; */
   font-size: 20px;
   position: relative;
   text-align: center;
@@ -126,30 +108,16 @@ nav {
   left: 20px;
 
 }
-
-/* .list .item .pic {
-  flex-grow: 1;
-  font-weight: 900;
-  position: relative;
-  text-align: center;
-  color: white;
-
-} */
-
 .list .item .name {
   text-align: left;
   flex-grow: 5;
   color: white;
-  /* flex-basis: 10rem; */
   font-size: 20px;
 }
 
 .list .item .score {
-  /* flex-grow: 2; */
-  /* width: 30vh; */
   text-align: right;
   padding-right: 1.5rem;
-  /* opacity: 0.5; */
   font-size: 16px;
   color: white;
 }
@@ -159,4 +127,4 @@ nav {
   content: "Points";
   opacity: 0.5;
   margin-left: 5px
-}
+} */

@@ -1,4 +1,4 @@
-import './student_profile.css';
+import './profile_admin.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import calandar from './assets/Infopage/calendar.png';
@@ -6,7 +6,6 @@ import department from './assets/Infopage/department.png';
 import email from './assets/Infopage/email.png';
 import human from './assets/Infopage/human.png';
 import location from './assets/Infopage/location.png';
-import major from './assets/Infopage/major.png';
 import tel from './assets/Infopage/tel.png';
 import logout from './assets/Infopage/logout.png';
 import home from './assets/Infopage/home.png';
@@ -21,7 +20,7 @@ const board = () => {
   }
 
   return (
-    <body id='student_profile'>
+    <body id='profile_admin'>
       <div class="grid-container">
         <div class="grid-item" id='display'>
           <div class='grid-item' style={{ 'padding-top': '120px' }}>
@@ -31,7 +30,7 @@ const board = () => {
                   Basic Information
                 </div>
               </div>
-              <img class='stp_pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
+              <img class='adm_pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
               <div class="textpic-1">Profile Photo</div>
               <div class="textpic-2">This will be diaplayed on your profile.</div>
               <div class="grid">
@@ -44,7 +43,7 @@ const board = () => {
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
 
-                        Said Ski
+                        Amie Becca
                       </div>
                     </div>
                   </div>
@@ -55,7 +54,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={email}></img>
                       <div class="info-text">
-                        kasidis.cho@student.mahidol.ac.edu
+                        amie.bac@mahidol.com
                       </div>
                     </div>
                   </div>
@@ -81,7 +80,18 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        Kasidis Chokphaiboon
+                        Amie Bacca
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cell">
+                  <div class="head-box">Date Of Birth</div>
+                  <div class="info-box">
+                    <div class="grid">
+                      <img class="icon-pic" src={calandar}></img>
+                      <div class="info-text">
+                        21/07/1983
                       </div>
                     </div>
                   </div>
@@ -92,11 +102,13 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={department}></img>
                       <div class="info-text">
-                        ICT Student
+                        ICT Staff
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="grid">
                 <div class="cell">
                   <div class="head-box">
                     Gender
@@ -106,20 +118,18 @@ const board = () => {
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
 
-                        Male
+                        Female
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="grid">
                 <div class="cell">
-                  <div class="head-box">Major</div>
+                  <div class="head-box">Live</div>
                   <div class="info-box">
                     <div class="grid">
-                      <img class="icon-pic" src={major}></img>
+                      <img class="icon-pic" src={location}></img>
                       <div class="info-text">
-                        Management Information System (MIS)
+                        Nakhon Pathom, Thailand
                       </div>
                     </div>
                   </div>
@@ -133,7 +143,7 @@ const board = () => {
             <div class="l-box">
               <div class="top-zone">
                 <div class="head-std"><br></br>
-                  OLIVE Student
+                  OLIVE Admin
                 </div>
 
                 <div class="grid">
@@ -154,15 +164,21 @@ const board = () => {
                     Course
                   </div>
                 </div>
+                <div class="grid">
+                  <img class="l-icon-pic" src={list}></img>
+                  <div class="l-info-text">
+                    Report Cards
+                  </div>
+                </div>
 
               </div>
-              <div class="bottom-box"><br></br>
-                <img class='pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
+              <div class="a-bottom-box"><br></br>
+                <img class='adm_pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                 <div class="l-text1">
-                  Said Ski248
+                  Amie Becca
                 </div>
                 <div class="l-text2">
-                  saidski248@gmail.com
+                  amie.bec@mahidol.com
                 </div>
                 <img class="l-icon-pic-bottom" src={logout}></img>
               </div>

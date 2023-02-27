@@ -1,4 +1,4 @@
-body#class_info_student {
+body#class_info_teacher {
     font-family: Arial, Helvetica, sans-serif;
 
 }
@@ -15,7 +15,7 @@ body#class_info_student {
     height: 60px;
     width: 60px;
     margin-left: 85%;
-    margin-top: -20px;
+    margin-top: -13px;
     margin-right: 20px;
 }
 
@@ -265,6 +265,11 @@ body#class_info_student {
 }
 
 /* scoreboard */
+nav {
+    height: 10vh;
+    border: 2px solid rgb(255, 255, 255);
+  }
+  
   .grid-container {
     display: grid;
   }
@@ -277,7 +282,6 @@ body#class_info_student {
   }
   
   .top3 {
-    display: flex;
     justify-content: center;
     align-items: flex-end;
     color: #4b4168;
@@ -288,8 +292,6 @@ body#class_info_student {
     box-sizing: border-box;
     position: relative;
     background: white;
-    /* width: 9rem;
-    height: 10rem; */
     width: 20vh;
     height: 20vh;
     text-align: center;
@@ -345,7 +347,6 @@ body#class_info_student {
   
   .list .item {
     position: relative;
-    display: flex;
     align-items: center;
     background: white;
     height: 4rem;
@@ -368,10 +369,9 @@ body#class_info_student {
   
   .list .item .name {
     text-align: left;
-    flex-grow: 5;
     color: white;
-    /* flex-basis: 10rem; */
     font-size: 20px;
+    margin-left: -100%;
   }
   
   .list .item .score {

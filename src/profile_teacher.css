@@ -1,5 +1,5 @@
-body#admin_profile {
-    background-color: #67AAF9;
+body#profile_teacher {
+    background-color: #9BBDF9;
     font-family: Arial, Helvetica, sans-serif;
 
 }
@@ -29,7 +29,7 @@ body#admin_profile {
     font-family: 'DM Sans';
 }
 
-.adm_pic {
+.teach_pic {
     border-radius: 50%;
     height: 70px;
     width: 70px;
@@ -57,8 +57,7 @@ body#admin_profile {
     font-style: normal;
     margin-left: 3%;
     line-height: 23px;
-    margin-top: 5px;
-    font-family: 'DM Sans';
+    margin-top: 5px
 }
 
 .ctop-box {
@@ -164,12 +163,12 @@ body#admin_profile {
     font-size: 12px;
     font-family: 'DM Sans';
 }
-.adm_pic-2{
+.pic-2{
     border-radius: 50%;
     height: 40px;
     width: 40px;
     margin-left: 7%;
-    margin-top: 125%;
+    margin-top: -2%;
 }
 .l-icon-pic{
     height: 20px;
@@ -184,7 +183,7 @@ body#admin_profile {
     margin-left: 85%;
 }
 
-.head-std{
+.head-teac{
     font-size: 24px;
     margin-left: 44px;
     margin-bottom: 20px;
@@ -199,7 +198,7 @@ body#admin_profile {
     margin-top: 20px;
 
 }
-.l-info-text{
+.l-info-text-teac{
     margin-left: 50px;
     font-size: 16px;
     margin-top: -24px;

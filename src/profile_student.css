@@ -1,5 +1,5 @@
-body#teacher_profile {
-    background-color: #9BBDF9;
+body#page_profile_student {
+    background-color: #C4E0F9;
     font-family: Arial, Helvetica, sans-serif;
 
 }
@@ -29,7 +29,7 @@ body#teacher_profile {
     font-family: 'DM Sans';
 }
 
-.teach_pic {
+.stp_pic {
     border-radius: 50%;
     height: 70px;
     width: 70px;
@@ -108,7 +108,6 @@ body#teacher_profile {
     margin-top: -17px;
     margin-left: 30px;
     font-size: 14px;
-    font-family: 'DM Sans';
   }
 
   .confirm-btn{
@@ -198,9 +197,9 @@ body#teacher_profile {
     margin-top: 20px;
 
 }
-.l-info-text{
+.l-info-text-std{
     margin-left: 50px;
     font-size: 16px;
     margin-top: -24px;
-    font-family: 'DM Sans';
+    font-family: 'Poppins';
 }
