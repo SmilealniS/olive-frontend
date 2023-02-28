@@ -10,6 +10,7 @@ import MeetingComponent from './component';
 import Scoreboard from './scoreboard';
 import TeachingUI from './teachingUI';
 import AdminReport from './adminReport';
+import AdminReport_list from './adminReport_list';
 import Login from './login';
 import Profile_teacher from './profile_teacher';
 import Profile_student from './profile_student';
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
   {
     path: '/adminReport',
     element: <AdminReport/>
+  },
+  {
+    path: '/adminReport_list',
+    element: <AdminReport_list/>
   },
   {
     path: '/login',

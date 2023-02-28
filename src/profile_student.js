@@ -54,7 +54,7 @@ const board = () => {
                   <div class="info-box">
                     <div class="grid">
                       <img class="icon-pic" src={email}></img>
-                      <div class="info-text">
+                      <div style={{'display':'none'}} class="info-text">
                         kasidis.cho@student.mahidol.ac.edu
                       </div>
                     </div>
@@ -80,7 +80,7 @@ const board = () => {
                   <div class="info-box">
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
-                      <div class="info-text">
+                      <div style={{'display':'none'}} class="info-text">
                         Kasidis Chokphaiboon
                       </div>
                     </div>

@@ -2,6 +2,7 @@ import './class_info_teacher.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import back from './assets/class_info/backicon.png';
+import { text } from '@fortawesome/fontawesome-svg-core';
 
 const board = () => {
   function chat() {
@@ -15,7 +16,7 @@ const board = () => {
           <div class='grid-item'>
             <div class="frame-box">
               <div class="header-box"><br></br>
-              <img class='pic-left-icon' src={require('./assets/olive_logo.png')}></img>
+                <img class='pic-left-icon' src={require('./assets/olive_logo.png')}></img>
               </div>
               <div class="mid-frame-box">
                 <div class="middle-box"><br></br>
@@ -187,6 +188,46 @@ const board = () => {
                   <div class="tab">
                     <input type="radio" name="css-tabs" id="tab-3" class="tab-switch"></input>
                     <label for="tab-3" class="tab-label">Student score</label>
+
+                    <div class="tab-content">
+                      <table id="table-score">
+                        <tr>
+                          <th>Name</th>
+                          <th>Class-1 (point)</th>
+                          <th>Class-2 (point)</th>
+                          <th>Class-3 (point)</th>
+                        </tr>
+                        <tr>
+                          <td contentEditable='false'>Cloud178</td>
+                          <td type="number" contentEditable='true'></td>
+                          <td contentEditable='true'></td>
+                          <td contentEditable='true'></td>
+                        </tr>
+                        <tr>
+                        <td contentEditable='false'>Saidski248</td>
+                          <td contentEditable='true'></td>
+                          <td contentEditable='true'></td>
+                          <td contentEditable='true'></td>
+                        </tr>
+                        <tr>
+                        <td contentEditable='false'>Scarret738</td>
+                          <td contentEditable='true'></td>
+                          <td contentEditable='true'></td>
+                          <td contentEditable='true'></td>
+                        </tr>
+                        <tr>
+                        <td contentEditable='false'>SxYuki982</td>
+                          <td contentEditable='true'></td>
+                          <td contentEditable='true'></td>
+                          <td contentEditable='true'></td>
+                        </tr>
+                        
+
+                      </table>
+                    </div>
+
+
+
 
 
                   </div>

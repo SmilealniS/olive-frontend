@@ -255,6 +255,7 @@ body#class_info_teacher {
     transition: all 0.35s;
 }
 
+
 .tab-switch:checked+label+.tab-content {
     z-index: 2;
     opacity: 1;
@@ -386,4 +387,31 @@ nav {
     content: "Points";
     opacity: 0.5;
     margin-left: 5px
+  }
+
+
+
+  /* Student score */
+  #table-score {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 75%;
+    margin-left: 15%;
+    margin-top: 4%;
+    font-size: 15px;
+  }
+  
+  #table-score td, #table-score th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    font-size: 15px;
+  }
+  
+  #table-score th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #6FBCED;
+    color: white;
   }

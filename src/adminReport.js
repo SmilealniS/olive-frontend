@@ -12,8 +12,8 @@ const report = () => {
         <body id='adminReport'>
             <div class="wrapper">
                 <div class="left">
-                    <img class="pic-create" src={Createclass}></img>
-                    <img class="pic-calendar" src={schedule}></img>
+                    {/* <img class="pic-create" src={Createclass}></img>
+                    <img class="pic-calendar" src={schedule}></img> */}
                 </div>
                 
                 <div class="right">
