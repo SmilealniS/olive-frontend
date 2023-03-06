@@ -147,9 +147,11 @@ const board = () => {
                 </div>
               </div>
 
-              <button class="confirm-btn">
-                Continue
-              </button>
+              <a href="http://localhost:3000/profile_teacher_edit">
+                <button class="confirm-btn">
+                  Edit
+                </button>
+              </a>
             </div>
             <div class="l-box">
               <div class="top-zone">
@@ -157,24 +159,36 @@ const board = () => {
                   OLIVE Teacher
                 </div>
 
-                <div class="grid">
+                {/* <div class="grid">
                   <img class="l-icon-pic" src={home}></img>
                   <div class="l-info-text-teac">
                     Home
                   </div>
-                </div>
+                </div> */}
                 <div class="grid">
-                  <img class="l-icon-pic" src={leader}></img>
+                <a href="http://localhost:3000/profile_teacher">
+                  <img class="l-icon-pic" src={human}></img>
                   <div class="l-info-text-teac">
-                    Leaderboard
+                    Profile
                   </div>
+                  </a>
                 </div>
                 <div class="grid">
+                <a href="http://localhost:3000/class_info_teacher">
                   <img class="l-icon-pic" src={list}></img>
                   <div class="l-info-text-teac">
                     Course
                   </div>
+                  </a>
                 </div>
+                <div class="grid">
+                  <img class="l-icon-pic" src={list}></img>
+                  <div class="l-info-text-teac">
+                    Report
+                  </div>
+                </div>
+
+
 
               </div>
               <div class="bottom-box"><br></br>
@@ -185,7 +199,9 @@ const board = () => {
                 <div class="l-text2">
                   adele.jac@mahidol.com
                 </div>
+                <a href="http://localhost:3000/login">
                 <img class="l-icon-pic-bottom" src={logout}></img>
+              </a>
               </div>
             </div>
           </div>

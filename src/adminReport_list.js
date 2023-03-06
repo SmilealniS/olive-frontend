@@ -2,6 +2,7 @@ import './adminReport_list.css';
 import React from 'react';
 import Createclass from './assets/studentProfilepic/create.png';
 import schedule from './assets/studentProfilepic/schedule.png';
+import back from './assets/adminpage/backicon.png';
 
 const report = () => {
     function chat() {
@@ -12,10 +13,11 @@ const report = () => {
         <body id='adminReport_list'>
             <div class="wrapper">
                 <div class="left">
-                    {/* <img class="pic-create" src={Createclass}></img>
-                    <img class="pic-calendar" src={schedule}></img> */}
+                    <a href="http://localhost:3000/profile_admin">
+                        <img class="back-icon" src={back} ></img>
+                    </a>
                 </div>
-                
+
                 <div class="right">
                     <div class="info">
                         <div>
@@ -24,37 +26,44 @@ const report = () => {
                     </div>
                     <table id="table-report">
                         <tr>
-                          <th></th>
-                          <th>Requestor</th>
-                          <th>Report To</th>
-                          <th>Date</th>
-                          <th>Status</th>
+
+                            <th></th>
+                            <th>Requestor</th>
+                            <th>Report To</th>
+                            <th>Date</th>
+                            <th>Status</th>
                         </tr>
                         <tr>
-                        <input type="checkbox" id="cbx" ></input>
-                          <td contentEditable='false'>IDxxxxxx</td>
-                          <td contentEditable='false'>IDxxxxxx</td>
-                          <td contentEditable='false'>DD/MM/YY</td>
-                          <td contentEditable='false'>Approve</td>
+                            <a href="http://localhost:3000/adminReport">
+                                <button type="button" id="cbx" >view</button>
+                            </a>
+                            <td contentEditable='false'>IDxxxxxx</td>
+                            <td contentEditable='false'>IDxxxxxx</td>
+                            <td contentEditable='false'>DD/MM/YY</td>
+                            <td contentEditable='false'>Approve</td>
                         </tr>
                         <tr>
-                        <input type="checkbox" id="cbx" ></input>
-                          <td contentEditable='false'>IDxxxxxx</td>
-                          <td contentEditable='false'>IDxxxxxx</td>
-                          <td contentEditable='false'>DD/MM/YY</td>
-                          <td contentEditable='false'>Approve</td>
+                        <a href="http://localhost:3000/adminReport">
+                                <button type="button" id="cbx" >view</button>
+                            </a>
+                            <td contentEditable='false'>IDxxxxxx</td>
+                            <td contentEditable='false'>IDxxxxxx</td>
+                            <td contentEditable='false'>DD/MM/YY</td>
+                            <td contentEditable='false'>Approve</td>
                         </tr>
                         <tr>
-                        <input type="checkbox" id="cbx" ></input>
-                          <td contentEditable='false'>IDxxxxxx</td>
-                          <td contentEditable='false'>IDxxxxxx</td>
-                          <td contentEditable='false'>DD/MM/YY</td>
-                          <td contentEditable='false'>Approve</td>
+                        <a href="http://localhost:3000/adminReport">
+                                <button type="button" id="cbx" >view</button>
+                            </a>
+                            <td contentEditable='false'>IDxxxxxx</td>
+                            <td contentEditable='false'>IDxxxxxx</td>
+                            <td contentEditable='false'>DD/MM/YY</td>
+                            <td contentEditable='false'>Approve</td>
                         </tr>
 
-                        
 
-                      </table>
+
+                    </table>
 
                 </div>
             </div>

@@ -17,15 +17,21 @@ const board = () => {
             <div class="frame-box">
               <div class="header-box"><br></br>
                 <img class='pic-left-icon' src={require('./assets/olive_logo.png')}></img>
+                <a class="profile-name" href="http://localhost:3000/profile_teacher">
+                  Adele Jackson
+              </a>
               </div>
+              
               <div class="mid-frame-box">
                 <div class="middle-box"><br></br>
                   <div class="class-id">
                     ITCS 888
                   </div>
-                  <button class="join-btn">
-                    Create Meeting
-                  </button>
+                  <a href="http://localhost:3000/teachingUI">
+                    <button class="join-btn">
+                      Create Meeting
+                    </button>
+                  </a>
                   <div class="class-descrip">
                     Computer Science : This class was added to the transcript to get people used to boolean logic.
                     Which we had down in the first two weeks of the class. Unfortunately for us, unsuspecting students,
@@ -204,24 +210,24 @@ const board = () => {
                           <td contentEditable='true'></td>
                         </tr>
                         <tr>
-                        <td contentEditable='false'>Saidski248</td>
+                          <td contentEditable='false'>Saidski248</td>
                           <td contentEditable='true'></td>
                           <td contentEditable='true'></td>
                           <td contentEditable='true'></td>
                         </tr>
                         <tr>
-                        <td contentEditable='false'>Scarret738</td>
+                          <td contentEditable='false'>Scarret738</td>
                           <td contentEditable='true'></td>
                           <td contentEditable='true'></td>
                           <td contentEditable='true'></td>
                         </tr>
                         <tr>
-                        <td contentEditable='false'>SxYuki982</td>
+                          <td contentEditable='false'>SxYuki982</td>
                           <td contentEditable='true'></td>
                           <td contentEditable='true'></td>
                           <td contentEditable='true'></td>
                         </tr>
-                        
+
 
                       </table>
                     </div>

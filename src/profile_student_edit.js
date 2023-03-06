@@ -1,4 +1,4 @@
-import './profile_admin.css';
+import './profile_student.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import calandar from './assets/Infopage/calendar.png';
@@ -6,6 +6,7 @@ import department from './assets/Infopage/department.png';
 import email from './assets/Infopage/email.png';
 import human from './assets/Infopage/human.png';
 import location from './assets/Infopage/location.png';
+import major from './assets/Infopage/major.png';
 import tel from './assets/Infopage/tel.png';
 import logout from './assets/Infopage/logout.png';
 import home from './assets/Infopage/home.png';
@@ -20,17 +21,17 @@ const board = () => {
   }
 
   return (
-    <body id='profile_admin'>
+    <body id='profile_student'>
       <div class="grid-container">
         <div class="grid-item" id='display'>
           <div class='grid-item' style={{ 'padding-top': '120px' }}>
             <div class="c-box">
               <div class="ctop-box"><br></br>
                 <div class="head-text">
-                  Basic Information
+                  Edit Basic Information
                 </div>
               </div>
-              <img class='adm_pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
+              <img class='stp_pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
               <div class="textpic-1">Profile Photo</div>
               <div class="textpic-2">This will be diaplayed on your profile.</div>
               <div class="grid">
@@ -40,10 +41,11 @@ const board = () => {
                   </div>
                   <div class="info-box">
                     <div class="grid">
+                      
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
+                        <td class="info-text" contentEditable='true'>Said Ski248</td>
 
-                        Amie Becca
                       </div>
                     </div>
                   </div>
@@ -54,7 +56,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={email}></img>
                       <div class="info-text">
-                        amie.bac@mahidol.com
+                        <td class="info-text" contentEditable='true'>kasidis.cho@student.mahidol.ac.edu</td>
+
                       </div>
                     </div>
                   </div>
@@ -65,7 +68,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={tel}></img>
                       <div class="info-text">
-                        +66959637516
+                        <td class="info-text" contentEditable='true'>+66959637516</td>
+
                       </div>
                     </div>
                   </div>
@@ -80,18 +84,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        Amie Bacca
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="cell">
-                  <div class="head-box">Date Of Birth</div>
-                  <div class="info-box">
-                    <div class="grid">
-                      <img class="icon-pic" src={calandar}></img>
-                      <div class="info-text">
-                        21/07/1983
+                        <td class="info-text" contentEditable='true'> Kasidis Chokphaiboon</td>
+
                       </div>
                     </div>
                   </div>
@@ -102,13 +96,11 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={department}></img>
                       <div class="info-text">
-                        ICT Staff
+                        <td class="info-text" contentEditable='true'>ICT Student</td>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="grid">
                 <div class="cell">
                   <div class="head-box">
                     Gender
@@ -117,19 +109,22 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-
-                        Female
+                        <td class="info-text" contentEditable='true'>Male</td>
                       </div>
+
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="grid">
                 <div class="cell">
-                  <div class="head-box">Live</div>
+                  <div class="head-box">Major</div>
                   <div class="info-box">
                     <div class="grid">
-                      <img class="icon-pic" src={location}></img>
+                      <img class="icon-pic" src={major}></img>
                       <div class="info-text">
-                        Nakhon Pathom, Thailand
+                        <td class="info-text" contentEditable='true'>Management Information System (MIS)</td>
+
                       </div>
                     </div>
                   </div>
@@ -137,60 +132,56 @@ const board = () => {
               </div>
 
 
-              <a href="http://localhost:3000/profile_admin_edit">
+              <a href="http://localhost:3000/profile_student">
                 <button class="confirm-btn">
-                  Edit
+                  Save
                 </button>
               </a>
             </div>
             <div class="l-box">
               <div class="top-zone">
                 <div class="head-std"><br></br>
-                  OLIVE Admin
+                  OLIVE Student
                 </div>
 
+                {/* <div class="grid">
+                  <img class="l-icon-pic" src={home}></img>
+                  <div class="l-info-text-std">
+                    Home
+                  </div>
+                </div> */}
                 <div class="grid">
-                <a href="http://localhost:3000/profile_admin">
+                  <a href="http://localhost:3000/profile_student">
                     <img class="l-icon-pic" src={human}></img>
                     <div class="l-info-text-std">
                       Profile
                     </div>
                   </a>
                 </div>
-                {/* <div class="grid">
-                  <img class="l-icon-pic" src={leader}></img>
-                  <div class="l-info-text">
-                    Leaderboard
-                  </div>
-                </div>
                 <div class="grid">
-                  <img class="l-icon-pic" src={list}></img>
-                  <div class="l-info-text">
-                    Course
-                  </div>
-                </div> */}
-                <div class="grid">
-                  <a href="http://localhost:3000/adminReport_list">
+                  <a href="http://localhost:3000/class_info_student">
                     <img class="l-icon-pic" src={list}></img>
-                    <div class="l-info-text">
-                      Report Cards
+                    <div class="l-info-text-std">
+                      Course
                     </div>
                   </a>
-
                 </div>
 
               </div>
-              <div class="a-bottom-box"><br></br>
-                <img class='adm_pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
+
+              <div class="s-bottom-box"><br></br>
+                <img class='pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                 <div class="l-text1">
-                  Amie Becca
+                  Said Ski248
                 </div>
                 <div class="l-text2">
-                  amie.bec@mahidol.com
+                  saidski248@gmail.com
                 </div>
+                
                 <a href="http://localhost:3000/login">
                 <img class="l-icon-pic-bottom" src={logout}></img>
               </a>
+
               </div>
             </div>
           </div>

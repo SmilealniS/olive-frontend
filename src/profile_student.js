@@ -54,7 +54,7 @@ const board = () => {
                   <div class="info-box">
                     <div class="grid">
                       <img class="icon-pic" src={email}></img>
-                      <div style={{'display':'none'}} class="info-text">
+                      <div class="info-text">
                         kasidis.cho@student.mahidol.ac.edu
                       </div>
                     </div>
@@ -80,7 +80,7 @@ const board = () => {
                   <div class="info-box">
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
-                      <div style={{'display':'none'}} class="info-text">
+                      <div  class="info-text">
                         Kasidis Chokphaiboon
                       </div>
                     </div>
@@ -126,9 +126,11 @@ const board = () => {
                 </div>
               </div>
 
+              <a href="http://localhost:3000/profile_student_edit">
               <button class="confirm-btn">
-                Continue
+                Edit
               </button>
+                    </a>
             </div>
             <div class="l-box">
               <div class="top-zone">
@@ -136,27 +138,31 @@ const board = () => {
                   OLIVE Student
                 </div>
 
-                <div class="grid">
+                {/* <div class="grid">
                   <img class="l-icon-pic" src={home}></img>
                   <div class="l-info-text-std">
                     Home
                   </div>
+                </div> */}
+                <div class="grid">
+                  <a href="http://localhost:3000/profile_student">
+                    <img class="l-icon-pic" src={human}></img>
+                    <div class="l-info-text-std">
+                      Profile
+                    </div>
+                  </a>
                 </div>
                 <div class="grid">
-                  <img class="l-icon-pic" src={leader}></img>
-                  <div class="l-info-text-std">
-                    Leaderboard
-                  </div>
-                </div>
-                <div class="grid">
-                  <img class="l-icon-pic" src={list}></img>
-                  <div class="l-info-text-std">
-                    Course
-                  </div>
+                  <a href="http://localhost:3000/class_info_student">
+                    <img class="l-icon-pic" src={list}></img>
+                    <div class="l-info-text-std">
+                      Course
+                    </div>
+                  </a>
                 </div>
 
               </div>
-              <div class="bottom-box"><br></br>
+              <div class="s-bottom-box"><br></br>
                 <img class='pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                 <div class="l-text1">
                   Said Ski248
@@ -164,7 +170,10 @@ const board = () => {
                 <div class="l-text2">
                   saidski248@gmail.com
                 </div>
+                
+                <a href="http://localhost:3000/login">
                 <img class="l-icon-pic-bottom" src={logout}></img>
+              </a>
               </div>
             </div>
           </div>

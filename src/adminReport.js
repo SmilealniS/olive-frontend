@@ -1,7 +1,7 @@
 import './adminReport.css';
 import React from 'react';
-import Createclass from './assets/studentProfilepic/create.png';
-import schedule from './assets/studentProfilepic/schedule.png';
+import back from './assets/adminpage/backicon.png';
+
 
 const report = () => {
     function chat() {
@@ -12,10 +12,12 @@ const report = () => {
         <body id='adminReport'>
             <div class="wrapper">
                 <div class="left">
-                    {/* <img class="pic-create" src={Createclass}></img>
-                    <img class="pic-calendar" src={schedule}></img> */}
+                    <a href="http://localhost:3000/adminReport_list">
+                        <img class="back-icon" src={back} ></img>
+                    </a>
+
                 </div>
-                
+
                 <div class="right">
                     <div class="info">
                         <div>

@@ -17,6 +17,9 @@ import Profile_student from './profile_student';
 import Profile_admin from './profile_admin';
 import Class_info_student from './class_info_student';
 import Class_info_teacher from './class_info_teacher';
+import Profile_student_edit from './profile_student_edit';
+import Profile_teacher_edit from './profile_teacher_edit';
+import Profile_admin_edit from './profile_admin_edit';
 
 
 let payload = {
@@ -84,8 +87,19 @@ const router = createBrowserRouter([
   {
     path: '/class_info_teacher',
     element: <Class_info_teacher/>
+  },
+  {
+    path: '/profile_student_edit',
+    element: <Profile_student_edit/>
+  },
+  {
+    path: '/profile_teacher_edit',
+    element: <Profile_teacher_edit/>
+  },
+  {
+    path: '/profile_admin_edit',
+    element: <Profile_admin_edit/>
   }
-  
 ])
 
 root.render(

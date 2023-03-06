@@ -17,8 +17,14 @@ const board = () => {
               <div class="header-box"><br></br>
                 <img class='pic-left-icon' src={require('./assets/olive_logo.png')}></img>
                 <div class="head-text">
-                  <img class='pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
+                  
+                <a href="http://localhost:3000/profile_student">
+                <img class='pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                   Saidski248
+              </a>
+
+              
+                  
                 </div>
               </div>
               <div class="mid-frame-box">

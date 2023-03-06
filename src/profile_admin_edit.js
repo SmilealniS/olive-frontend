@@ -27,7 +27,7 @@ const board = () => {
             <div class="c-box">
               <div class="ctop-box"><br></br>
                 <div class="head-text">
-                  Basic Information
+                  Edit Basic Information
                 </div>
               </div>
               <img class='adm_pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
@@ -43,7 +43,8 @@ const board = () => {
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
 
-                        Amie Becca
+                      
+                        <td class="info-text" contentEditable='true'>    Amie Becca </td>
                       </div>
                     </div>
                   </div>
@@ -54,7 +55,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={email}></img>
                       <div class="info-text">
-                        amie.bac@mahidol.com
+                        
+                        <td class="info-text" contentEditable='true'>  amie.bac@mahidol.com </td>
                       </div>
                     </div>
                   </div>
@@ -65,7 +67,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={tel}></img>
                       <div class="info-text">
-                        +66959637516
+                        
+                        <td class="info-text" contentEditable='true'>+66959637516   </td>
                       </div>
                     </div>
                   </div>
@@ -80,7 +83,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        Amie Bacca
+                        
+                        <td class="info-text" contentEditable='true'>  Amie Bacca </td>
                       </div>
                     </div>
                   </div>
@@ -91,7 +95,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={calandar}></img>
                       <div class="info-text">
-                        21/07/1983
+                        
+                        <td class="info-text" contentEditable='true'>21/07/1983   </td>
                       </div>
                     </div>
                   </div>
@@ -102,7 +107,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={department}></img>
                       <div class="info-text">
-                        ICT Staff
+                        
+                        <td class="info-text" contentEditable='true'>ICT Staff   </td>
                       </div>
                     </div>
                   </div>
@@ -117,8 +123,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-
-                        Female
+                      <td class="info-text" contentEditable='true'> Female  </td>
+                        
                       </div>
                     </div>
                   </div>
@@ -129,17 +135,17 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={location}></img>
                       <div class="info-text">
-                        Nakhon Pathom, Thailand
+                      <td class="info-text" contentEditable='true'>Nakhon Pathom, Thailand   </td>
+                        
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-
-              <a href="http://localhost:3000/profile_admin_edit">
+              <a href="http://localhost:3000/profile_admin">
                 <button class="confirm-btn">
-                  Edit
+                  Save
                 </button>
               </a>
             </div>
@@ -170,13 +176,13 @@ const board = () => {
                   </div>
                 </div> */}
                 <div class="grid">
-                  <a href="http://localhost:3000/adminReport_list">
+                <a href="http://localhost:3000/adminReport_list">
                     <img class="l-icon-pic" src={list}></img>
-                    <div class="l-info-text">
-                      Report Cards
-                    </div>
-                  </a>
-
+                  <div class="l-info-text">
+                    Report Cards
+                  </div>    
+                    </a>
+                  
                 </div>
 
               </div>

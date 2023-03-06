@@ -415,3 +415,9 @@ nav {
     background-color: #6FBCED;
     color: white;
   }
+
+
+.profile-name{
+  font-size: 26px;
+    margin-left: 80%;
+}

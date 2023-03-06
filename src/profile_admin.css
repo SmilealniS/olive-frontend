@@ -141,13 +141,13 @@ body#profile_admin {
     cursor: pointer;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
-.bottom-box {
+.a-bottom-box {
     box-sizing: border-box;
     position: relative;
     background: #F9F8F9;
     width: 250px;
     height: 60px;
-    top: 56%;
+    top: 63%;
     border-radius: 0.5rem;
     cursor: pointer;
     
@@ -169,7 +169,7 @@ body#profile_admin {
     height: 40px;
     width: 40px;
     margin-left: 7%;
-    margin-top: 125%;
+    margin-top: -3%;
 }
 .l-icon-pic{
     height: 20px;
