@@ -43,7 +43,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        
+
                         <td class="info-text" contentEditable='true'>Adele Jackson</td>
                       </div>
                     </div>
@@ -55,7 +55,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={email}></img>
                       <div class="info-text">
-                        
+
                         <td class="info-text" contentEditable='true'>adele.jac@mahidol.com</td>
                       </div>
                     </div>
@@ -67,7 +67,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={tel}></img>
                       <div class="info-text">
-                       
+
                         <td class="info-text" contentEditable='true'> +66959637516</td>
                       </div>
                     </div>
@@ -83,7 +83,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        
+
                         <td class="info-text" contentEditable='true'>Adele Jackson</td>
                       </div>
                     </div>
@@ -95,7 +95,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={calandar}></img>
                       <div class="info-text">
-                        
+
                         <td class="info-text" contentEditable='true'>16/08/1988</td>
                       </div>
                     </div>
@@ -107,7 +107,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={department}></img>
                       <div class="info-text">
-                        
+
                         <td class="info-text" contentEditable='true'>Doctor of Philosophy (Ph.D.)</td>
                       </div>
                     </div>
@@ -123,8 +123,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                      <td class="info-text" contentEditable='true'>Male</td>
-                        
+                        <td class="info-text" contentEditable='true'>Male</td>
+
                       </div>
                     </div>
                   </div>
@@ -135,7 +135,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={location}></img>
                       <div class="info-text">
-                        
+
                         <td class="info-text" contentEditable='true'>Nakhon Pathom, Thailand</td>
                       </div>
                     </div>
@@ -147,7 +147,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={major}></img>
                       <div class="info-text">
-                        
+
                         <td class="info-text" contentEditable='true'>Computer Science (CS)</td>
                       </div>
                     </div>
@@ -168,26 +168,28 @@ const board = () => {
                 </div>
 
                 <div class="grid">
-                <a href="http://localhost:3000/profile_teacher">
-                  <img class="l-icon-pic" src={human}></img>
-                  <div class="l-info-text-teac">
-                    Profile
-                  </div>
+                  <a href="http://localhost:3000/profile_teacher">
+                    <img class="l-icon-pic" src={human}></img>
+                    <div class="l-info-text-teac">
+                      Profile
+                    </div>
                   </a>
                 </div>
                 <div class="grid">
-                <a href="http://localhost:3000/class_info_teacher">
-                  <img class="l-icon-pic" src={list}></img>
-                  <div class="l-info-text-teac">
-                    Course
-                  </div>
+                  <a href="http://localhost:3000/class_info_teacher">
+                    <img class="l-icon-pic" src={list}></img>
+                    <div class="l-info-text-teac">
+                      Course
+                    </div>
                   </a>
                 </div>
                 <div class="grid">
+                  <a href="http://localhost:3000/profile_teacher_report">                  
                   <img class="l-icon-pic" src={list}></img>
-                  <div class="l-info-text-teac">
-                    Report
-                  </div>
+                    <div class="l-info-text-teac">
+                      Report
+                    </div></a>
+
                 </div>
 
               </div>
@@ -200,8 +202,8 @@ const board = () => {
                   adele.jac@mahidol.com
                 </div>
                 <a href="http://localhost:3000/login">
-                <img class="l-icon-pic-bottom" src={logout}></img>
-              </a>
+                  <img class="l-icon-pic-bottom" src={logout}></img>
+                </a>
               </div>
             </div>
           </div>

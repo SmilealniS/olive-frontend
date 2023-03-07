@@ -15,7 +15,7 @@ body#class_info_student {
     height: 60px;
     width: 60px;
     margin-left: 85%;
-    margin-top: -20px;
+    margin-top: -21px;
     margin-right: 20px;
 }
 
@@ -386,4 +386,10 @@ body#class_info_student {
     content: "Points";
     opacity: 0.5;
     margin-left: 5px
+  }
+
+  .std-profile-name{
+    margin-top: -3%;
+    font-size: 22px;
+    margin-left: 90%;
   }

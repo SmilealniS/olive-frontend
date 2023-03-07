@@ -145,9 +145,9 @@ const board = () => {
                   </div>
                 </div> */}
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_student">
+                  <a href="http://localhost:3000/profile_student" >
                     <img class="l-icon-pic" src={human}></img>
-                    <div class="l-info-text-std">
+                    <div class="l-info-text-std" >
                       Profile
                     </div>
                   </a>

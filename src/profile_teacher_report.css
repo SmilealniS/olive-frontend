@@ -1,0 +1,220 @@
+body#profile_teacher_report {
+    background-color: #9BBDF9;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+*/ * {
+    box-sizing: border-box;
+}
+
+.icon-pic{
+    height: 13px;
+    width: 13px;
+    margin-top: 10px;
+}
+
+.l-box-report {
+    box-sizing: border-box;
+    position: relative;
+    background: rgb(255, 255, 255);
+    width: 250px;
+    height: 650px;
+    left: 1.5%;
+    margin-top: -53%;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+}
+.bottom-box {
+    box-sizing: border-box;
+    position: relative;
+    background: #F9F8F9;
+    width: 250px;
+    height: 60px;
+    top: 56%;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    
+}
+.l-text1{
+    margin-top: -39px;
+    margin-left: 65px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'DM Sans';
+}
+.l-text2{
+    margin-left: 65px;
+    font-size: 12px;
+    font-family: 'DM Sans';
+}
+.pic-2{
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-left: 7%;
+    margin-top: -2%;
+}
+.l-icon-pic{
+    height: 20px;
+    width: 20px;
+    margin-top: -21%;
+    margin-left: 85%;
+}
+.l-icon-pic-bottom{
+    height: 20px;
+    width: 20px;
+    margin-top: -21%;
+    margin-left: 85%;
+}
+
+.head-teac{
+    font-size: 24px;
+    margin-left: 44px;
+    margin-bottom: 20px;
+    font-family: 'DM Sans';
+}
+
+
+.l-icon-pic{
+    height: 25px;
+    width: 25px;
+    margin-left: 5px;
+    margin-top: 20px;
+
+}
+.l-info-text-teac{
+    margin-left: 50px;
+    font-size: 16px;
+    margin-top: -24px;
+    font-family: 'DM Sans';
+}
+
+
+
+/* Report form */
+
+
+form {
+    width: 800px;
+    height: 450px;
+
+    padding: 10px 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    margin-left: 40%;
+  }
+  
+  h1 {
+    margin: 0 0 30px 0;
+    text-align: center;
+    margin-top: 20px;
+  }
+  input[type="email"],
+  input[type="text"],
+  select {
+    border: none;
+    font-size: 16px;
+    padding: 15px;
+    width: 20%;
+    background-color: #e8eeef;
+    height: 45px;
+    border-radius: 5px;
+    position: absolute;
+    margin-top: -60px;
+}
+
+  textarea,
+  select {
+       border: none;
+       font-size: 16px;
+       padding: 15px;
+       width: 27%;
+       height: 150px;
+       background-color: #e8eeef;
+       margin-bottom: 30px;
+       border-radius: 5px;
+       margin-top: -60px;
+       position: absolute;
+  }
+  
+
+
+  button {
+    color: #FFF;
+    background-color: #036FD3;
+    font-size: 18px;
+    border-radius: 5px;
+    width: 20%;
+    height: 7%;
+    border: 1px solid #036FD3;
+    margin-left: 75%;
+    margin-top: 25%;
+  }
+  
+  fieldset {
+    margin-bottom: 30px;
+    border: none;
+  }
+  
+  .rform {
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+  .lform {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: grid;
+    margin-bottom: 65px;
+    font-size: 15px;
+  }
+  
+  
+  .number {
+    background-color: #036FD3;
+    color: #fff;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 100%;
+  }
+  
+
+  /* cell */
+  .cell-report-l {
+    display: grid;
+    height: 40px;
+    width: 300px;
+    display: inline-block;
+    margin-right: 5%;
+    margin-top: 20px;
+    
+  }
+  .cell-report-r {
+    display: grid;
+    height: 40px;
+    width: 400px;
+    display: inline-block;
+    margin-right: 5%;
+    margin-top: 20px;
+    
+  }
+  .grid-report{
+    margin-left: 20px;
+    display: flex;
+  }
+  .cell:nth-child(3n)::after {
+    display: block;
+  }
+
+
+
+  
+  
+  

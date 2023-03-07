@@ -166,26 +166,28 @@ const board = () => {
                   </div>
                 </div> */}
                 <div class="grid">
-                <a href="http://localhost:3000/profile_teacher">
-                  <img class="l-icon-pic" src={human}></img>
-                  <div class="l-info-text-teac">
-                    Profile
-                  </div>
+                  <a href="http://localhost:3000/profile_teacher">
+                    <img class="l-icon-pic" src={human}></img>
+                    <div class="l-info-text-teac">
+                      Profile
+                    </div>
                   </a>
                 </div>
                 <div class="grid">
-                <a href="http://localhost:3000/class_info_teacher">
-                  <img class="l-icon-pic" src={list}></img>
-                  <div class="l-info-text-teac">
-                    Course
-                  </div>
+                  <a href="http://localhost:3000/class_info_teacher">
+                    <img class="l-icon-pic" src={list}></img>
+                    <div class="l-info-text-teac">
+                      Course
+                    </div>
                   </a>
                 </div>
                 <div class="grid">
-                  <img class="l-icon-pic" src={list}></img>
-                  <div class="l-info-text-teac">
-                    Report
-                  </div>
+                  <a href="http://localhost:3000/profile_teacher_report">
+                    <img class="l-icon-pic" src={list}></img>
+                    <div class="l-info-text-teac">
+                      Report
+                    </div></a>
+
                 </div>
 
 
@@ -200,8 +202,8 @@ const board = () => {
                   adele.jac@mahidol.com
                 </div>
                 <a href="http://localhost:3000/login">
-                <img class="l-icon-pic-bottom" src={logout}></img>
-              </a>
+                  <img class="l-icon-pic-bottom" src={logout}></img>
+                </a>
               </div>
             </div>
           </div>

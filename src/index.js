@@ -19,6 +19,7 @@ import Class_info_student from './class_info_student';
 import Class_info_teacher from './class_info_teacher';
 import Profile_student_edit from './profile_student_edit';
 import Profile_teacher_edit from './profile_teacher_edit';
+import Profile_teacher_report from './profile_teacher_report';
 import Profile_admin_edit from './profile_admin_edit';
 
 
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
   {
     path: '/profile_teacher',
     element: <Profile_teacher/>
+  },
+  {
+    path: '/profile_teacher_report',
+    element: <Profile_teacher_report/>
   },
   {
     path: '/profile_admin',

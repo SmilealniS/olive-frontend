@@ -19,8 +19,12 @@ const board = () => {
                 <div class="head-text">
                   
                 <a href="http://localhost:3000/profile_student">
-                <img class='pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
+                <img class='pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}>
+                </img>
+                <div class="std-profile-name">
                   Saidski248
+                </div>
+                  
               </a>
 
               
