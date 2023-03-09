@@ -315,6 +315,7 @@ body#teachingUI {
 }
 
 .chat-footer .chat-emoji {
+    border: 1px solid red;
     display: inline-flex;
     justify-content: space-between;
     padding: 5px;

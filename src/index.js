@@ -23,15 +23,30 @@ import Profile_teacher_report from './profile_teacher_report';
 import Profile_admin_edit from './profile_admin_edit';
 
 
-let payload = {
+let payload_teacher = {
+  signatureEndpoint: 'http://localhost:4000',
   meetingNumber: '4318372796',
   role: 1,
   sdkKey: '6V8X5gwmS7lhH6EcVpCPXY0bBduD7Vnwx4QV',
   sdkSecret: 'XRSfgcqn75DdVZ0P3Nkf0WXZQdsonas5I6nV',
-  userName: 'NamTest',
+  userName: 'NamTestTeacher',
   userEmail: '',
-  passWord: 'cLZ9c0',
-  leaveUrl: 'https://localhost:3000'
+  passWord: '180HYZ',
+  leaveUrl: 'https://localhost:3000',
+  registrantToken: ''
+}
+
+let payload_student = {
+  signatureEndpoint: 'http://localhost:4000',
+  meetingNumber: '4318372796',
+  role: 0,
+  sdkKey: '6V8X5gwmS7lhH6EcVpCPXY0bBduD7Vnwx4QV',
+  sdkSecret: 'XRSfgcqn75DdVZ0P3Nkf0WXZQdsonas5I6nV',
+  userName: 'NamTestStudent',
+  userEmail: '',
+  passWord: '180HYZ',
+  leaveUrl: 'https://localhost:3000',
+  registrantToken: ''
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -39,76 +54,76 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App/>
+    element: <Login />
   },
   {
     path: '/meeting',
-    element: <Meeting payload = {payload}/>
+    element: <Meeting payload={payload_teacher} />
   },
   {
     path: '/component',
-    element: <MeetingComponent/>
+    element: <MeetingComponent />
   },
   {
     path: '/scoreboard',
-    element: <Scoreboard/>
+    element: <Scoreboard />
   },
   {
     path: '/teachingUI',
-    element: <TeachingUI payload = {payload}/>
+    element: <TeachingUI payload={payload_teacher} />
   },
   {
     path: '/adminReport',
-    element: <AdminReport/>
+    element: <AdminReport />
   },
   {
     path: '/adminReport_list',
-    element: <AdminReport_list/>
+    element: <AdminReport_list />
   },
-  {
-    path: '/login',
-    element: <Login/>
-  },
+  // {
+  //   path: '/login',
+  //   element: <Login/>
+  // },
   {
     path: '/profile_student',
-    element: <Profile_student/>
+    element: <Profile_student />
   },
   {
     path: '/profile_teacher',
-    element: <Profile_teacher/>
+    element: <Profile_teacher />
   },
   {
     path: '/profile_teacher_report',
-    element: <Profile_teacher_report/>
+    element: <Profile_teacher_report />
   },
   {
     path: '/profile_admin',
-    element: <Profile_admin/>
+    element: <Profile_admin />
   },
   {
     path: '/class_info_student',
-    element: <Class_info_student/>
+    element: <Class_info_student />
   },
   {
     path: '/class_info_teacher',
-    element: <Class_info_teacher/>
+    element: <Class_info_teacher />
   },
   {
     path: '/profile_student_edit',
-    element: <Profile_student_edit/>
+    element: <Profile_student_edit />
   },
   {
     path: '/profile_teacher_edit',
-    element: <Profile_teacher_edit/>
+    element: <Profile_teacher_edit />
   },
   {
     path: '/profile_admin_edit',
-    element: <Profile_admin_edit/>
+    element: <Profile_admin_edit />
   }
 ])
 
 root.render(
-  <RouterProvider router = {router}></RouterProvider>
+  <RouterProvider router={router}></RouterProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
