@@ -82,9 +82,9 @@ body#login {
     position: absolute;
     width: 338px;
     height: 36px;
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
-    left: 9%;
-    top: 80%;
+    box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%);
+    left: -66%;
+    top: 60%;
     font-size: 15px;
     color: white;
   }

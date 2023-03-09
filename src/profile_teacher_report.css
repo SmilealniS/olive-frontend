@@ -98,7 +98,6 @@ body#profile_teacher_report {
 form {
     width: 800px;
     height: 450px;
-
     padding: 10px 20px;
     background: #ffffff;
     border-radius: 8px;
@@ -110,8 +109,8 @@ form {
     text-align: center;
     margin-top: 20px;
   }
-  input[type="email"],
-  input[type="text"],
+  input[type="report-to"],
+  input[type="class-id"],
   select {
     border: none;
     font-size: 16px;
@@ -136,6 +135,7 @@ form {
        border-radius: 5px;
        margin-top: -60px;
        position: absolute;
+       max-height: 135px;
   }
   
 

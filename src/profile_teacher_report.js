@@ -39,11 +39,11 @@ const board = () => {
                       <div class="cell-report-l">
                         <legend><span class="number">1</span> Report Info</legend>
 
-                        <label for="name">Class ID:</label>
-                        <input type="text"  ></input>
+                        <label >Class ID:</label>
+                        <input type="class-id"  ></input>
 
-                        <label for="email">Report to:</label>
-                        <input type="email" ></input>
+                        <label >Report to:</label>
+                        <input type="report-to" ></input>
 
 
                       </div>
