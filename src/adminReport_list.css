@@ -1,4 +1,4 @@
-body#adminReport {
+body#adminReport_list {
   background-color: grey;
 }
 
@@ -74,7 +74,7 @@ body {
   margin-bottom: 5px;
   border-bottom: 1px solid #e0e0e0;
   color: #353c4e;
-  letter-spacing: 5px;
+
   margin-top: 2vh;
 }
 
@@ -123,7 +123,33 @@ body {
   font-size: 12px;
 }
 
-.back-icon{
-  width: 25px;
-  height: 25px;
+
+ /* Student score */
+ #table-report {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-left: 0%;
+  margin-top: 4%;
+  font-size: 15px;
+}
+
+#table-report td, #table-score th {
+  border: 0px solid #ddd;
+  padding: 5px;
+  text-align: center;
+  font-size: 10px;
+}
+
+#table-report th {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+  background-color: grey;
+  color: white;
+  font-size: 13px;
+}
+#cbx{
+  margin-top: 10%;
+  margin-left: 30%;
 }

@@ -1,12 +1,11 @@
-import './student_profile.css';
+import './profile_admin.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import calandar from './assets/Infopage/tel.png';
+import calandar from './assets/Infopage/calendar.png';
 import department from './assets/Infopage/department.png';
 import email from './assets/Infopage/email.png';
 import human from './assets/Infopage/human.png';
 import location from './assets/Infopage/location.png';
-import major from './assets/Infopage/major.png';
 import tel from './assets/Infopage/tel.png';
 import logout from './assets/Infopage/logout.png';
 import home from './assets/Infopage/home.png';
@@ -21,7 +20,7 @@ const board = () => {
   }
 
   return (
-    <body id='Student_profile'>
+    <body id='profile_admin'>
       <div class="grid-container">
         <div class="grid-item" id='display'>
           <div class='grid-item' style={{ 'padding-top': '120px' }}>
@@ -31,7 +30,7 @@ const board = () => {
                   Basic Information
                 </div>
               </div>
-              <img class='pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
+              <img class='adm_pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
               <div class="textpic-1">Profile Photo</div>
               <div class="textpic-2">This will be diaplayed on your profile.</div>
               <div class="grid">
@@ -44,7 +43,7 @@ const board = () => {
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
 
-                        Said Ski
+                        Amie Becca
                       </div>
                     </div>
                   </div>
@@ -55,7 +54,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={email}></img>
                       <div class="info-text">
-                        kasidis.cho@student.mahidol.ac.edu
+                        amie.bac@mahidol.com
                       </div>
                     </div>
                   </div>
@@ -81,7 +80,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        Kasidis Chokphaiboon
+                        Amie Bacca
                       </div>
                     </div>
                   </div>
@@ -90,9 +89,9 @@ const board = () => {
                   <div class="head-box">Date Of Birth</div>
                   <div class="info-box">
                     <div class="grid">
-                      <img class="icon-pic" src={email}></img>
+                      <img class="icon-pic" src={calandar}></img>
                       <div class="info-text">
-                        30/03/2001
+                        21/07/1983
                       </div>
                     </div>
                   </div>
@@ -103,7 +102,7 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={department}></img>
                       <div class="info-text">
-                        ICT Student
+                        ICT Staff
                       </div>
                     </div>
                   </div>
@@ -119,7 +118,7 @@ const board = () => {
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
 
-                        Male
+                        Female
                       </div>
                     </div>
                   </div>
@@ -130,41 +129,35 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={location}></img>
                       <div class="info-text">
-                        Bangkok, Thailand
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="cell">
-                  <div class="head-box">Major</div>
-                  <div class="info-box">
-                    <div class="grid">
-                      <img class="icon-pic" src={major}></img>
-                      <div class="info-text">
-                        Management Information System (MIS)
+                        Nakhon Pathom, Thailand
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <button class="confirm-btn">
-                Continue
-              </button>
+
+              <a href="http://localhost:3000/profile_admin_edit">
+                <button class="confirm-btn">
+                  Edit
+                </button>
+              </a>
             </div>
             <div class="l-box">
               <div class="top-zone">
                 <div class="head-std"><br></br>
-                  OLIVE Student
+                  OLIVE Admin
                 </div>
 
                 <div class="grid">
-                  <img class="l-icon-pic" src={home}></img>
-                  <div class="l-info-text">
-                    Home
-                  </div>
+                <a href="http://localhost:3000/profile_admin">
+                    <img class="l-icon-pic" src={human}></img>
+                    <div class="l-info-text-std">
+                      Profile
+                    </div>
+                  </a>
                 </div>
-                <div class="grid">
+                {/* <div class="grid">
                   <img class="l-icon-pic" src={leader}></img>
                   <div class="l-info-text">
                     Leaderboard
@@ -175,18 +168,29 @@ const board = () => {
                   <div class="l-info-text">
                     Course
                   </div>
+                </div> */}
+                <div class="grid">
+                  <a href="http://localhost:3000/adminReport_list">
+                    <img class="l-icon-pic" src={list}></img>
+                    <div class="l-info-text">
+                      Report Cards
+                    </div>
+                  </a>
+
                 </div>
 
               </div>
-              <div class="bottom-box"><br></br>
-                <img class='pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
+              <div class="a-bottom-box"><br></br>
+                <img class='adm_pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                 <div class="l-text1">
-                  Said Ski248
+                  Amie Becca
                 </div>
                 <div class="l-text2">
-                  saidski248@gmail.com
+                  amie.bec@mahidol.com
                 </div>
+                <a href="http://localhost:3000/login">
                 <img class="l-icon-pic-bottom" src={logout}></img>
+              </a>
               </div>
             </div>
           </div>

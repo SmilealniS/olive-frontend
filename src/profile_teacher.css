@@ -1,5 +1,5 @@
-body {
-    background-color: #C4E0F9;
+body#profile_teacher {
+    background-color: #9BBDF9;
     font-family: Arial, Helvetica, sans-serif;
 
 }
@@ -18,15 +18,18 @@ body {
     margin-left: 150px;
     margin-top: -60px;
     font-weight: bold;
+    font-family: 'DM Sans';
 }
 
 .textpic-2 {
 
     font-size: 15px;
     margin-left: 150px;
+    margin-top: 0px;
+    font-family: 'DM Sans';
 }
 
-.pic {
+.teach_pic {
     border-radius: 50%;
     height: 70px;
     width: 70px;
@@ -54,6 +57,7 @@ body {
     font-style: normal;
     margin-left: 3%;
     line-height: 23px;
+    margin-top: 5px
 }
 
 .ctop-box {
@@ -104,6 +108,7 @@ body {
     margin-top: -17px;
     margin-left: 30px;
     font-size: 14px;
+    font-family: 'DM Sans';
   }
 
   .confirm-btn{
@@ -113,10 +118,11 @@ body {
     position: absolute;
     width: 159px;
     height: 36px;
-    left: 78%;
-    top: 88%;
+    left: 3%;
+    top: 30%;
     font-size: 15px;
     color: white;
+    font-family: 'DM Sans';
   }
 
 
@@ -150,10 +156,12 @@ body {
     margin-left: 65px;
     font-size: 14px;
     font-weight: bold;
+    font-family: 'DM Sans';
 }
 .l-text2{
     margin-left: 65px;
     font-size: 12px;
+    font-family: 'DM Sans';
 }
 .pic-2{
     border-radius: 50%;
@@ -175,10 +183,11 @@ body {
     margin-left: 85%;
 }
 
-.head-std{
+.head-teac{
     font-size: 24px;
     margin-left: 44px;
     margin-bottom: 20px;
+    font-family: 'DM Sans';
 }
 
 
@@ -189,8 +198,9 @@ body {
     margin-top: 20px;
 
 }
-.l-info-text{
+.l-info-text-teac{
     margin-left: 50px;
     font-size: 16px;
     margin-top: -24px;
+    font-family: 'DM Sans';
 }

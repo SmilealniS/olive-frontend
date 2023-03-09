@@ -1,0 +1,207 @@
+body#profile_admin {
+    background-color: #67AAF9;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+*/ * {
+    box-sizing: border-box;
+}
+
+.icon-pic{
+    height: 13px;
+    width: 13px;
+    margin-top: 10px;
+}
+.textpic-1 {
+
+    font-size: 15px;
+    margin-left: 150px;
+    margin-top: -60px;
+    font-weight: bold;
+    font-family: 'DM Sans';
+}
+
+.textpic-2 {
+
+    font-size: 15px;
+    margin-left: 150px;
+    margin-top: 0px;
+    font-family: 'DM Sans';
+}
+
+.adm_pic {
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    margin-left: 3%;
+    margin-top: 1%;
+}
+
+.c-box {
+    box-sizing: border-box;
+    position: relative;
+    background: #FFFFFF;
+    width: 1000px;
+    height: 450px;
+    left: 35%;
+
+    border-radius: 0.5rem;
+    cursor: pointer;
+
+}
+
+.ctop-box .head-text {
+    font-size: 18px;
+    font-family: 'DM Sans';
+    font-weight: 500;
+    font-style: normal;
+    margin-left: 3%;
+    line-height: 23px;
+    margin-top: 5px;
+    font-family: 'DM Sans';
+}
+
+.ctop-box {
+    box-sizing: border-box;
+    position: relative;
+    background: #F9F8F9;
+    width: 1000px;
+    height: 60px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+
+}
+
+
+/* Grid CSS */
+.cell {
+    height: 40px;
+    width: 270px;
+    display: inline-block;
+    margin-right: 5%;
+    margin-top: 20px;
+    
+  }
+  .grid{
+    margin-left: 20px;
+  }
+  /* this doesn't work; at least not in safari */
+  .cell:nth-child(3n)::after {
+    display: block;
+  }
+  .head-box{
+    font-size: 14px;
+    font-family: 'DM Sans';
+    margin-top: 10%;
+  }
+  .info-box{
+    font-family: 'DM Sans';
+    box-sizing: border-box;
+    position: absolute;
+    width: 285px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: #F9F8F9;
+    font-size: 15px;
+
+  }
+  .info-text{
+    margin-top: -17px;
+    margin-left: 30px;
+    font-size: 14px;
+    font-family: 'DM Sans';
+  }
+
+  .confirm-btn{
+    border-radius: 5px;
+    background-color: #036FD3;
+    box-sizing: border-box;
+    position: absolute;
+    width: 159px;
+    height: 36px;
+    left: 3%;
+    top: 30%;
+    font-size: 15px;
+    color: white;
+    font-family: 'DM Sans';
+  }
+
+
+
+ 
+.l-box {
+    box-sizing: border-box;
+    position: relative;
+    background: rgb(255, 255, 255);
+    width: 250px;
+    height: 650px;
+    left: 1.5%;
+    margin-top: -53%;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+}
+.a-bottom-box {
+    box-sizing: border-box;
+    position: relative;
+    background: #F9F8F9;
+    width: 250px;
+    height: 60px;
+    top: 63%;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    
+}
+.l-text1{
+    margin-top: -39px;
+    margin-left: 65px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'DM Sans';
+}
+.l-text2{
+    margin-left: 65px;
+    font-size: 12px;
+    font-family: 'DM Sans';
+}
+.adm_pic-2{
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-left: 7%;
+    margin-top: -3%;
+}
+.l-icon-pic{
+    height: 20px;
+    width: 20px;
+    margin-top: -21%;
+    margin-left: 85%;
+}
+.l-icon-pic-bottom{
+    height: 20px;
+    width: 20px;
+    margin-top: -21%;
+    margin-left: 85%;
+}
+
+.head-std{
+    font-size: 24px;
+    margin-left: 44px;
+    margin-bottom: 20px;
+    font-family: 'DM Sans';
+}
+
+
+.l-icon-pic{
+    height: 25px;
+    width: 25px;
+    margin-left: 5px;
+    margin-top: 20px;
+
+}
+.l-info-text{
+    margin-left: 50px;
+    font-size: 16px;
+    margin-top: -24px;
+    font-family: 'DM Sans';
+}

@@ -10,8 +10,17 @@ import MeetingComponent from './component';
 import Scoreboard from './scoreboard';
 import TeachingUI from './teachingUI';
 import AdminReport from './adminReport';
+import AdminReport_list from './adminReport_list';
 import Login from './login';
-import Student_profile from './student_profile';
+import Profile_teacher from './profile_teacher';
+import Profile_student from './profile_student';
+import Profile_admin from './profile_admin';
+import Class_info_student from './class_info_student';
+import Class_info_teacher from './class_info_teacher';
+import Profile_student_edit from './profile_student_edit';
+import Profile_teacher_edit from './profile_teacher_edit';
+import Profile_teacher_report from './profile_teacher_report';
+import Profile_admin_edit from './profile_admin_edit';
 
 
 let payload = {
@@ -53,12 +62,48 @@ const router = createBrowserRouter([
     element: <AdminReport/>
   },
   {
+    path: '/adminReport_list',
+    element: <AdminReport_list/>
+  },
+  {
     path: '/login',
     element: <Login/>
   },
   {
-    path: '/student_profile',
-    element: <Student_profile/>
+    path: '/profile_student',
+    element: <Profile_student/>
+  },
+  {
+    path: '/profile_teacher',
+    element: <Profile_teacher/>
+  },
+  {
+    path: '/profile_teacher_report',
+    element: <Profile_teacher_report/>
+  },
+  {
+    path: '/profile_admin',
+    element: <Profile_admin/>
+  },
+  {
+    path: '/class_info_student',
+    element: <Class_info_student/>
+  },
+  {
+    path: '/class_info_teacher',
+    element: <Class_info_teacher/>
+  },
+  {
+    path: '/profile_student_edit',
+    element: <Profile_student_edit/>
+  },
+  {
+    path: '/profile_teacher_edit',
+    element: <Profile_teacher_edit/>
+  },
+  {
+    path: '/profile_admin_edit',
+    element: <Profile_admin_edit/>
   }
 ])
 

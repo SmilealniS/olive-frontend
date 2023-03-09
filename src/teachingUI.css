@@ -74,6 +74,12 @@ body#teachingUI {
     /* left: 60vh; */
     /* top: 0; */
 }
+.divided-line-2 {
+    margin-top: -2%;
+    border-left: 2px solid black;
+    height: 16vh;
+
+}
 
 .Bar-text {
     padding-top: 1vh;
@@ -96,7 +102,7 @@ body#teachingUI {
 }
 
 .emoji-stack {
-    margin-top: 1%;
+    margin-top: -3%;
     margin-left: 16%;
     color: #6fbced;
     vertical-align: top;

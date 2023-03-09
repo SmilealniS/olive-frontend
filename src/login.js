@@ -23,9 +23,12 @@ const board = () => {
               <input type={'password'}  class="password" placeholder="password">
 
               </input>
-              <button class="smt-btn">
+              <a href="http://localhost:3000/profile_student">
+                <button class="smt-btn">
                 login
               </button>
+              </a>
+              
               
             </div>
           </div>
