@@ -4,7 +4,6 @@ import './teachingUI.css';
 import { BsLightbulbFill } from 'react-icons/bs';
 import { BsLightbulb } from 'react-icons/bs';
 import ZoomMtgEmbedded from '@zoomus/websdk/embedded';
-// import webgazer from 'webgazer';
 
 const TeacherUI = ({ payload }) => {
   useEffect(async () => {
@@ -62,12 +61,6 @@ const TeacherUI = ({ payload }) => {
       })
     }
 
-    // const webgazer = require('webgazer');
-
-    // webgazer.setGazeListener((data, clock) => {
-    //   console.log(data, clock)
-    // }).begin();
-
   }, [])
 
   function sendEmoji() {
@@ -77,6 +70,46 @@ const TeacherUI = ({ payload }) => {
   function toggleMic() {
     // 
   }
+
+  function gazeDetection() {
+    window.saveDataAcrossSessions = false;
+
+    const webgazer = window.webgazer;
+    const lookDelay = 1000 // 1 second
+    let left = window.innerWidth / 4;
+    let right = window.innerWidth - window.innerWidth / 4;
+    let startLookTime;
+    let stop = false;
+    let count = 0;
+
+    webgazer.setGazeListener((data, timestamp) => {
+      if (stop || count > 99) {
+        alert('STOP');
+        webgazer.pause();
+        return;
+      }
+      if(data != null) {
+          if (data.x < left) {
+          console.log('left');
+        } else if (data.x > right) {
+          console.log('right');
+        } else if (data.x > left && data.x < right) {
+          startLookTime = Number.POSITIVE_INFINITY;
+          console.log('middle');
+        }
+
+        if (startLookTime + lookDelay < timestamp) {
+          stop = true;
+        }
+      } else count++;
+      
+
+    }).begin();
+
+    webgazer.showVideoPreview(false).showPredictionPoints(false);
+  }
+
+  setInterval(gazeDetection, 600000);
 
   return (
     <Fragment>
@@ -282,4 +315,3 @@ const TeacherUI = ({ payload }) => {
 }
 
 export default TeacherUI;
-
