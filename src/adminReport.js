@@ -46,8 +46,11 @@ const report = () => {
                             </div>
                         </div><h3></h3>
                     </div>
-                    <button class="btn-1">Approve</button>
-                    <button class="btn-2">Reject</button>
+                    <div class="grid-a-btn-1">
+                        <button class="a-btn-1">Approve</button>
+                        <button class="a-btn-1">Reject</button>
+                    </div>
+                    
                 </div>
             </div>
         </body>

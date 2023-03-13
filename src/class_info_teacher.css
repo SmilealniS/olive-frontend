@@ -261,7 +261,7 @@ body#class_info_teacher {
     opacity: 1;
     transition: all 0.35s;
     width: 1320px;
-    height: 800px;
+    height: 1000px;
     margin-top: 25px;
 }
 
@@ -275,9 +275,9 @@ nav {
     display: grid;
   }
   
-  .center {
+  .t-center {
     position: relative;
-    top: 1%;
+    top: 15%;
     left: 15%;
   
   }

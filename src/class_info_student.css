@@ -54,12 +54,12 @@ body#class_info_student {
     margin-top: 47px;
 }
 
-.bottom-frame-box {
+.s-bottom-frame-box {
     box-sizing: border-box;
     position: relative;
     background: #ffffff;
     width: 1320px;
-    height: 454px;
+    height: 1200px;
     left: 4%;
     top: -15%;
 }
@@ -221,19 +221,23 @@ body#class_info_student {
     display: none;
 }
 
-.tab-label {
+.s-tab-label {
     position: relative;
-    display: block;
-    line-height: 2.75em;
-    height: 3em;
-    padding: 0 1.618em;
+    /* display: block; */
+    line-height: 51px;
+    /* height: 4em; */
+    /* padding: 0px 1.618em; */
     background: #625F63;
-    border-right: 0.125rem solid #625F63;
+    height: 58px;
+    /* border-right: 0.125rem solid #625F63; */
     color: #fff;
-    cursor: pointer;
-    top: 0;
-    transition: all 0.25s;
-    font-size: 19px;
+
+    margin-left: 0px;
+    top: -6px;
+    text-align: center;
+
+    /* align-content: center; */
+    font-size: 30px;
 }
 
 .tab-label:hover {
@@ -269,10 +273,10 @@ body#class_info_student {
     display: grid;
   }
   
-  .center {
+  .s-center {
     position: relative;
-    top: 1%;
-    left: 15%;
+    top: 10%;
+    left: 4%;
   
   }
   
@@ -392,4 +396,28 @@ body#class_info_student {
     margin-top: -3%;
     font-size: 22px;
     margin-left: 90%;
+  }
+
+  .s-lead-text{
+    font-size: 35px;
+    font-family: 'DM Sans';
+    font-weight: bold;
+    margin-left: 40%;
+    margin-bottom: 60px;
+  }
+  .s-attendance-text{
+    font-size: 35px;
+    font-family: 'DM Sans';
+    font-weight: bold;
+    margin-left: 45%;
+    margin-bottom: 10px;
+}
+
+  .s-top-text{
+    font-size: 40px;
+    font-family: 'DM Sans';
+    font-weight: bold;
+    margin-left: 41%;
+    margin-top: 0%;
+    margin-bottom: 60px;
   }

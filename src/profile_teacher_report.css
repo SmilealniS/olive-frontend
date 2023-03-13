@@ -137,7 +137,14 @@ form {
        position: absolute;
        max-height: 135px;
   }
-  
+  .select-std{
+    width: 20%;
+    height: 45px;
+  }
+  .select-class{
+    width: 20%;
+    height: 45px;
+  }
 
 
   button {
