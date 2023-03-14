@@ -40,10 +40,27 @@ const board = () => {
                         <legend><span class="number">1</span> Report Info</legend>
 
                         <label >Class ID:</label>
-                        <input type="class-id"  ></input>
+                        <select class="select-class">
+                          <option value=""></option>
+                          <option value="">ITCS888</option>
+                        </select>
 
                         <label >Report to:</label>
-                        <input type="report-to" ></input>
+                        <select class="select-std">
+                          <option value=""></option>
+                          <option value="">Cloud178</option>
+                          <option value="">Saidski248</option>
+                          <option value="">Scarret738</option>
+                          <option value="">Sutorimu320</option>
+                          <option value="">Sharon117</option>
+                          <option value="">Cheep729</option>
+                          <option value="">Uzumaru227</option>
+                          <option value="">Gimchi553</option>
+                          <option value="">SxYuki982</option>
+                          <option value="">Anagram473</option>
+                        </select>
+
+
 
 
                       </div>
@@ -89,12 +106,12 @@ const board = () => {
                   </a>
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_teacher_report">                 
-                  <img class="l-icon-pic" src={list}></img>
+                  <a href="http://localhost:3000/profile_teacher_report">
+                    <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-teac">
                       Report
                     </div>
-                    </a>
+                  </a>
 
                 </div>
               </div>

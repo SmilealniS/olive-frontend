@@ -17,18 +17,14 @@ const board = () => {
               <div class="header-box"><br></br>
                 <img class='pic-left-icon' src={require('./assets/olive_logo.png')}></img>
                 <div class="head-text">
-                  
-                <a href="http://localhost:3000/profile_student">
-                <img class='pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}>
-                </img>
-                <div class="std-profile-name">
-                  Saidski248
-                </div>
-                  
-              </a>
 
-              
-                  
+                  <a href="http://localhost:3000/profile_student">
+                    <img class='pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}>
+                    </img>
+                    <div class="std-profile-name">
+                      Saidski248
+                    </div>
+                  </a>
                 </div>
               </div>
               <div class="mid-frame-box">
@@ -62,15 +58,19 @@ const board = () => {
                   <div class="textNum">93%</div>
                 </div>
               </div>
-              <div class="bottom-frame-box">
 
 
-                <div class="tabs">
-                  <div class="tab">
-                    <input type="radio" name="css-tabs" id="tab-1" checked class="tab-switch"></input>
-                    <label for="tab-1" class="tab-label">Engagement</label>
 
-                    <div class="tab-content"><br></br>
+
+              <div class="s-bottom-frame-box">
+                {/* <div class="tabs">
+                  <div class="tab"> */}
+                    <div  name="css-tabs" id="tab-1" checked class="tab-switch"></div>
+                    <label for="tab-1" class="s-tab-label">Engagement Info</label>
+
+                    {/* <div class="tab-content"><br></br> */}
+                    {/* <div class="s-top-text">Engagement Info</div> */}
+                    <div class="s-attendance-text">Engagement</div>
                       <div class="table-info-head">
                         <div class="textTopic-d">Date</div>
                         <div class="textTopic-a">Attendance</div>
@@ -87,17 +87,100 @@ const board = () => {
                         <div class="textTopic">Checked</div>
                         <div class="textTopic">92%</div>
                       </div>
-                    </div>
-                  </div>
 
-                  
-                  <div class="tab">
+
+                      {/* Test */}
+                      <div class="s-center">
+                      <div class="s-lead-text">Leaderboard</div>
+                        <div class="top3">
+                          <div class="one item">
+                            <div class="pos">1</div>
+                            <img class='pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
+                            <div class="name">Cloud178</div>
+                            <div class="score">15</div>
+                          </div>
+
+                          <div class="two item">
+                            <div class="pos">2</div>
+                            <img class='pic' src={require('./assets/studentProfilepic/shibainu.jpg')}></img>
+                            <div class="name">Saidski248</div>
+                            <div class="score">10</div>
+                          </div>
+
+                          <div class="three item">
+                            <div class="pos">3</div>
+                            <img class='pic' src={require('./assets/studentProfilepic/normalman.png')}></img>
+                            <div class="name">Scarret738</div>
+                            <div class="score">5</div>
+                          </div>
+                        </div>
+
+                        <div class="list">
+                          <div class="item">
+                            <div class="pos">4</div>
+                            <div class="pic" style={{}}></div>
+                            <div class="name">Sutorimu320</div>
+                            <div class="score">1</div>
+                          </div>
+                        </div>
+                        <div class="list">
+                          <div class="item">
+                            <div class="pos">5</div>
+                            <div class="pic" style={{}}></div>
+                            <div class="name">Sharon117</div>
+                            <div class="score">1</div>
+                          </div>
+                        </div>
+                        <div class="list">
+                          <div class="item">
+                            <div class="pos">6</div>
+                            <div class="pic" style={{}}></div>
+                            <div class="name">Cheep729</div>
+                            <div class="score">1</div>
+                          </div>
+                        </div>
+                        <div class="list">
+                          <div class="item">
+                            <div class="pos">7</div>
+                            <div class="pic" style={{}}></div>
+                            <div class="name">Uzumaru227</div>
+                            <div class="score">1</div>
+                          </div>
+                        </div>
+                        <div class="list">
+                          <div class="item">
+                            <div class="pos">8</div>
+                            <div class="pic" style={{}}></div>
+                            <div class="name">Gimchi553</div>
+                            <div class="score">1</div>
+                          </div>
+                        </div>
+                        <div class="list">
+                          <div class="item">
+                            <div class="pos">9</div>
+                            <div class="pic" style={{}}></div>
+                            <div class="name">SxYuki982</div>
+                            <div class="score">1</div>
+                          </div>
+                        </div>
+                        <div class="list">
+                          <div class="item">
+                            <div class="pos">10</div>
+                            <div class="pic" style={{}}></div>
+                            <div class="name">Anagram473</div>
+                            <div class="score">1</div>
+                          </div>
+                        </div>
+                      {/* </div> */}
+                      {/* Test */}
+                    {/* </div>
+                  </div> */}
+
+
+                  {/* <div class="tab">
                     <input type="radio" name="css-tabs" id="tab-2" class="tab-switch"></input>
                     <label for="tab-2" class="tab-label">Leaderboard</label>
                     <div class="tab-content">
-
-
-
                       <div class="grid-container">
                         <div class="grid-item" id='display'>
                           <h1 style={{ 'text-align': 'center', 'font-size': '50px', 'padding-top': '20px', 'margin-left': '25%' }}>Leaderboard</h1>
@@ -196,14 +279,9 @@ const board = () => {
                           </div>
                         </div>
                       </div>
-
-
-
                     </div>
-                  </div>
+                  </div> */}
                 </div>
-
-
               </div>
             </div>
           </div>

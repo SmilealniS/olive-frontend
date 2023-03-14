@@ -80,10 +80,10 @@ const router = createBrowserRouter([
     path: '/adminReport_list',
     element: <AdminReport_list />
   },
-  // {
-  //   path: '/login',
-  //   element: <Login/>
-  // },
+  {
+    path: '/login',
+    element: <Login/>
+  },
   {
     path: '/profile_student',
     element: <Profile_student />

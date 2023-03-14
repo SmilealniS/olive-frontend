@@ -91,7 +91,7 @@ const board = () => {
                           <h1 style={{ 'text-align': 'center', 'font-size': '50px', 'padding-top': '20px', 'margin-left': '25%' }}>Leaderboard</h1>
                           <h3 style={{ 'text-align': 'center', 'font-size': '30px', 'padding-top': '20px', 'margin-left': '25%' }}>ITCS 888</h3>
                           <div class='grid-item' style={{ 'padding-top': '70px' }}>
-                            <div class="center">
+                            <div class="t-center">
                               <div class="top3">
 
                                 <div class="one item">
