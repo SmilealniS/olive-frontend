@@ -84,7 +84,7 @@ const TeacherUI = ({ payload }) => {
 
     webgazer.setGazeListener((data, timestamp) => {
       if (stop || count > 99) {
-        alert('STOP');
+        // alert('STOP');
         webgazer.pause();
         return;
       }
