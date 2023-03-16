@@ -8,7 +8,6 @@ const report = () => {
     function chat() {
         alert('Hi');
     }
-
     return (
         <body id='adminReport_list'>
             <div class="wrapper">
@@ -17,16 +16,14 @@ const report = () => {
                         <img class="back-icon" src={back} ></img>
                     </a>
                 </div>
-
                 <div class="right">
                     <div class="info">
                         <div>
                             <h3>Report List</h3>
                         </div>
                     </div>
-                    <table id="table-report">
+                    <table id="adm-table-report">
                         <tr>
-
                             <th></th>
                             <th>Requestor</th>
                             <th>Report To</th>
@@ -35,7 +32,7 @@ const report = () => {
                         </tr>
                         <tr>
                             <a href="http://localhost:3000/adminReport">
-                                <button type="button" id="cbx" >view</button>
+                                <button type="button" id="adm-view-btn" >view</button>
                             </a>
                             <td contentEditable='false'>IDxxxxxx</td>
                             <td contentEditable='false'>IDxxxxxx</td>
@@ -43,8 +40,8 @@ const report = () => {
                             <td contentEditable='false'>Approve</td>
                         </tr>
                         <tr>
-                        <a href="http://localhost:3000/adminReport">
-                                <button type="button" id="cbx" >view</button>
+                            <a href="http://localhost:3000/adminReport">
+                                <button type="button" id="adm-view-btn" >view</button>
                             </a>
                             <td contentEditable='false'>IDxxxxxx</td>
                             <td contentEditable='false'>IDxxxxxx</td>
@@ -52,27 +49,20 @@ const report = () => {
                             <td contentEditable='false'>Approve</td>
                         </tr>
                         <tr>
-                        <a href="http://localhost:3000/adminReport">
-                                <button type="button" id="cbx" >view</button>
+                            <a href="http://localhost:3000/adminReport">
+                                <button type="button" id="adm-view-btn" >view</button>
                             </a>
                             <td contentEditable='false'>IDxxxxxx</td>
                             <td contentEditable='false'>IDxxxxxx</td>
                             <td contentEditable='false'>DD/MM/YY</td>
                             <td contentEditable='false'>Approve</td>
                         </tr>
-
-
-
                     </table>
-
                 </div>
             </div>
         </body>
-
     );
 }
-
-
 
 export default (report);
 

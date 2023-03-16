@@ -194,7 +194,6 @@ const board = () => {
                   <div class="tab">
                     <input type="radio" name="css-tabs" id="tab-3" class="tab-switch"></input>
                     <label for="tab-3" class="tab-label">Student score</label>
-
                     <div class="tab-content">
                       <table id="table-score">
                         <tr>
@@ -227,20 +226,10 @@ const board = () => {
                           <td contentEditable='true'></td>
                           <td contentEditable='true'></td>
                         </tr>
-
-
                       </table>
                     </div>
-
-
-
-
-
                   </div>
-
                 </div>
-
-
               </div>
             </div>
           </div>
