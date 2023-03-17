@@ -24,7 +24,7 @@ import Profile_admin_edit from './profile_admin_edit';
 
 
 let payload_teacher = {
-  signatureEndpoint: 'http://localhost:4000',
+  signatureEndpoint: 'http://localhost:4000/zoom',
   meetingNumber: '4318372796',
   role: 1,
   sdkKey: '6V8X5gwmS7lhH6EcVpCPXY0bBduD7Vnwx4QV',
@@ -37,7 +37,7 @@ let payload_teacher = {
 }
 
 let payload_student = {
-  signatureEndpoint: 'http://localhost:4000',
+  signatureEndpoint: 'http://localhost:4000/zoom',
   meetingNumber: '4318372796',
   role: 0,
   sdkKey: '6V8X5gwmS7lhH6EcVpCPXY0bBduD7Vnwx4QV',
@@ -64,10 +64,10 @@ const router = createBrowserRouter([
     path: '/component',
     element: <MeetingComponent />
   },
-  {
-    path: '/scoreboard',
-    element: <Scoreboard />
-  },
+  // {
+  //   path: '/scoreboard',
+  //   element: <Scoreboard />
+  // },
   {
     path: '/teachingUI',
     element: <TeachingUI payload={payload_teacher} />
@@ -80,10 +80,10 @@ const router = createBrowserRouter([
     path: '/adminReport_list',
     element: <AdminReport_list />
   },
-  {
-    path: '/login',
-    element: <Login/>
-  },
+  // {
+  //   path: '/login',
+  //   element: <Login/>
+  // },
   {
     path: '/profile_student',
     element: <Profile_student />

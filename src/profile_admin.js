@@ -1,6 +1,6 @@
 import './profile_admin.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import calandar from './assets/Infopage/calendar.png';
 import department from './assets/Infopage/department.png';
 import email from './assets/Infopage/email.png';
@@ -14,10 +14,23 @@ import list from './assets/Infopage/list.png';
 
 
 
-const board = () => {
-  function chat() {
-    alert('Hi');
-  }
+const Admin_Profile = () => {
+  useEffect(() => {
+    fetch('http://localhost:4000/olive/admin-profile/getbyId?_id=' + localStorage.getItem('admin_id'))
+      .then(response => response.json())
+      .then(response => {
+        console.log('Profile', response);
+        localStorage.setItem('pic', response.url);
+        localStorage.setItem('displayname', response.Display_Name);
+      });
+
+    fetch('http://localhost:4000/olive/identity/getbyId?_id=' + localStorage.getItem('_id'))
+      .then(response => response.json())
+      .then(response => {
+        console.log('Identity', response);
+        localStorage.setItem('username', response.Username);
+      });
+  }, []);
 
   return (
     <body id='profile_admin'>
@@ -42,8 +55,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-
-                        Amie Becca
+                        {/* Saidski248 */}
+                        {localStorage.getItem('username')}
                       </div>
                     </div>
                   </div>
@@ -54,7 +67,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={email}></img>
                       <div class="info-text">
-                        amie.bac@mahidol.com
+                        {/* kasidis.cho@student.mahidol.ac.edu */}
+                        {localStorage.getItem('email')}
                       </div>
                     </div>
                   </div>
@@ -65,7 +79,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={tel}></img>
                       <div class="info-text">
-                        +66959637516
+                        {/* +66959637516 */}
+                        {localStorage.getItem('phone')}
                       </div>
                     </div>
                   </div>
@@ -80,18 +95,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        Amie Bacca
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="cell">
-                  <div class="head-box">Date Of Birth</div>
-                  <div class="info-box">
-                    <div class="grid">
-                      <img class="icon-pic" src={calandar}></img>
-                      <div class="info-text">
-                        21/07/1983
+                        {/* Kasidis Chokphaiboon */}
+                        {localStorage.getItem('name')} {localStorage.getItem('surname')}
                       </div>
                     </div>
                   </div>
@@ -102,14 +107,23 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={department}></img>
                       <div class="info-text">
-                        ICT Staff
+                        ICT Administrator
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="grid">
                 <div class="cell">
+                  <div class="head-box">Display name</div>
+                  <div class="info-box">
+                    <div class="grid">
+                      <img class="icon-pic" src={human}></img>
+                      <div class="info-text">
+                        {localStorage.getItem('displayname')}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* <div class="cell">
                   <div class="head-box">
                     Gender
                   </div>
@@ -118,26 +132,18 @@ const board = () => {
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
 
-                        Female
+                        Male
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="cell">
-                  <div class="head-box">Live</div>
-                  <div class="info-box">
-                    <div class="grid">
-                      <img class="icon-pic" src={location}></img>
-                      <div class="info-text">
-                        Nakhon Pathom, Thailand
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                </div> */}
+
+              </div>
+              <div class="grid">
+
               </div>
 
-
-              <a href="http://localhost:3000/profile_admin_edit">
+              <a href="profile_admin_edit">
                 <button class="confirm-btn">
                   Edit
                 </button>
@@ -150,7 +156,7 @@ const board = () => {
                 </div>
 
                 <div class="grid">
-                <a href="http://localhost:3000/profile_admin">
+                  <a href="http://localhost:3000/profile_admin">
                     <img class="l-icon-pic" src={human}></img>
                     <div class="l-info-text-std">
                       Profile
@@ -183,14 +189,16 @@ const board = () => {
               <div class="a-bottom-box"><br></br>
                 <img class='adm_pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                 <div class="l-text1">
-                  Amie Becca
+                  {/* Amie Becca */}
+                  {localStorage.getItem('username')}
                 </div>
                 <div class="l-text2">
-                  amie.bec@mahidol.com
+                  {/* amie.bec@mahidol.com */}
+                  {localStorage.getItem('email')}
                 </div>
-                <a href="http://localhost:3000/login">
-                <img class="l-icon-pic-bottom" src={logout}></img>
-              </a>
+                <a href="/" onClick='window.localStorage.clear()'>
+                  <img class="l-icon-pic-bottom" src={logout}></img>
+                </a>
               </div>
             </div>
           </div>
@@ -202,6 +210,6 @@ const board = () => {
 
 
 
-export default (board);
+export default (Admin_Profile);
 
 

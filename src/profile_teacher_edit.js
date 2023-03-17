@@ -15,9 +15,50 @@ import list from './assets/Infopage/list.png';
 
 
 
-const board = () => {
-  function chat() {
-    alert('Hi');
+const Teacher_Profile_Edit = () => {
+  function editProfile() {
+    // saveImage();
+    const url1 = 'http://localhost:4000/olive/identity/updatebyId?_id=' + localStorage.getItem('_id');
+    let user1 = {
+      'Username': document.getElementById('username').textContent
+    };
+    fetch(url1, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(user1)
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Success:', data);
+        localStorage.setItem('username', data.Username);
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+
+    const url2 = 'http://localhost:4000/olive/teacher-profile/updatebyId?_id=' + localStorage.getItem('teacher_id');
+    let user2 = {
+      'Display_Name': document.getElementById('displayname').textContent
+    };
+    fetch(url2, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(user2)
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Success:', data);
+        localStorage.setItem('pic', data.url);
+        localStorage.setItem('displayname', data.Display_Name);
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+
+    // console.log('user:', document.getElementById('username').textContent)
+    // console.log('display:', document.getElementById('displayname').textContent)
+
+    window.location.href = '/profile_teacher'
   }
 
   return (
@@ -31,7 +72,9 @@ const board = () => {
                   Edit Basic Information
                 </div>
               </div>
-              <img class='teach_pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
+              <img
+                class='teach_pic' id='profile-pic'
+                src={require('./assets/studentProfilepic/pinkprofile.jpeg')} />
               <div class="textpic-1">Profile Photo</div>
               <div class="textpic-2">This will be diaplayed on your profile.</div>
               <div class="grid">
@@ -44,7 +87,7 @@ const board = () => {
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
 
-                        <td class="info-text" contentEditable='true'>Adele Jackson</td>
+                        <td class="info-text" contentEditable='true' id='username'>{localStorage.getItem('username')}</td>
                       </div>
                     </div>
                   </div>
@@ -56,7 +99,7 @@ const board = () => {
                       <img class="icon-pic" src={email}></img>
                       <div class="info-text">
 
-                        <td class="info-text" contentEditable='true'>adele.jac@mahidol.com</td>
+                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false'>{localStorage.getItem('email')}</td>
                       </div>
                     </div>
                   </div>
@@ -68,7 +111,7 @@ const board = () => {
                       <img class="icon-pic" src={tel}></img>
                       <div class="info-text">
 
-                        <td class="info-text" contentEditable='true'> +66959637516</td>
+                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false'>{localStorage.getItem('phone')}</td>
                       </div>
                     </div>
                   </div>
@@ -84,12 +127,12 @@ const board = () => {
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
 
-                        <td class="info-text" contentEditable='true'>Adele Jackson</td>
+                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false'>Adele Jackson</td>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="cell">
+                {/* <div class="cell">
                   <div class="head-box">Date Of Birth</div>
                   <div class="info-box">
                     <div class="grid">
@@ -100,7 +143,7 @@ const board = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div class="cell">
                   <div class="head-box">Department</div>
                   <div class="info-box">
@@ -108,14 +151,26 @@ const board = () => {
                       <img class="icon-pic" src={department}></img>
                       <div class="info-text">
 
-                        <td class="info-text" contentEditable='true'>Doctor of Philosophy (Ph.D.)</td>
+                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false'>Doctor of Philosophy (Ph.D.)</td>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cell">
+                  <div class="head-box">Major</div>
+                  <div class="info-box">
+                    <div class="grid">
+                      <img class="icon-pic" src={major}></img>
+                      <div class="info-text">
+
+                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false'>{localStorage.getItem('majortrack')}</td>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="grid">
-                <div class="cell">
+                {/* <div class="cell">
                   <div class="head-box">
                     Gender
                   </div>
@@ -128,8 +183,8 @@ const board = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="cell">
+                </div> */}
+                {/* <div class="cell">
                   <div class="head-box">Live</div>
                   <div class="info-box">
                     <div class="grid">
@@ -140,26 +195,27 @@ const board = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
+                
                 <div class="cell">
-                  <div class="head-box">Major</div>
+                  <div class="head-box">Display name</div>
                   <div class="info-box">
                     <div class="grid">
-                      <img class="icon-pic" src={major}></img>
+                      <img class="icon-pic" src={human}></img>
                       <div class="info-text">
 
-                        <td class="info-text" contentEditable='true'>Computer Science (CS)</td>
+                        <td class="info-text" id='displayname' contentEditable='true'>{localStorage.getItem('displayname')}</td>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <a href="http://localhost:3000/profile_teacher">
-                <button class="confirm-btn">
+              {/* <a href="http://localhost:3000/profile_teacher"> */}
+                <button class="confirm-btn" onClick={editProfile}>
                   Save
                 </button>
-              </a>
+              {/* </a> */}
             </div>
             <div class="l-box">
               <div class="top-zone">
@@ -184,8 +240,8 @@ const board = () => {
                   </a>
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_teacher_report">                  
-                  <img class="l-icon-pic" src={list}></img>
+                  <a href="http://localhost:3000/profile_teacher_report">
+                    <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-teac">
                       Report
                     </div></a>
@@ -196,12 +252,14 @@ const board = () => {
               <div class="bottom-box"><br></br>
                 <img class='pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                 <div class="l-text1">
-                  Adele Jackson
+                  {/* Adele Jackson */}
+                  {localStorage.getItem('username')}
                 </div>
                 <div class="l-text2">
-                  adele.jac@mahidol.com
+                  {/* adele.jac@mahidol.com */}
+                  {localStorage.getItem('email')}
                 </div>
-                <a href="http://localhost:3000/login">
+                <a href="/" onClick="localStorage.clear()">
                   <img class="l-icon-pic-bottom" src={logout}></img>
                 </a>
               </div>
@@ -215,6 +273,6 @@ const board = () => {
 
 
 
-export default (board);
+export default (Teacher_Profile_Edit);
 
 

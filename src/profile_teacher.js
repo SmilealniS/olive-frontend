@@ -1,6 +1,6 @@
 import './profile_teacher.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import calandar from './assets/Infopage/calendar.png';
 import department from './assets/Infopage/department.png';
 import email from './assets/Infopage/email.png';
@@ -15,10 +15,23 @@ import list from './assets/Infopage/list.png';
 
 
 
-const board = () => {
-  function chat() {
-    alert('Hi');
-  }
+const Teacher_Profile = () => {
+  useEffect(() => {
+    fetch('http://localhost:4000/olive/teacher-profile/getbyId?_id=' + localStorage.getItem('teacher_id'))
+      .then(response => response.json())
+      .then(response => {
+        console.log('Profile', response);
+        localStorage.setItem('pic', response.url);
+        localStorage.setItem('displayname', response.Display_Name);
+      });
+
+    fetch('http://localhost:4000/olive/identity/getbyId?_id=' + localStorage.getItem('_id'))
+      .then(response => response.json())
+      .then(response => {
+        console.log('Identity', response);
+        localStorage.setItem('username', response.Username);
+      });
+  }, []);
 
   return (
     <body id='profile_teacher'>
@@ -43,7 +56,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        Adele Jackson
+                        {/* Adele Jackson */}
+                        {localStorage.getItem('username')}
                       </div>
                     </div>
                   </div>
@@ -54,7 +68,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={email}></img>
                       <div class="info-text">
-                        adele.jac@mahidol.com
+                        {/* adele.jac@mahidol.com */}
+                        {localStorage.getItem('email')}
                       </div>
                     </div>
                   </div>
@@ -65,7 +80,8 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={tel}></img>
                       <div class="info-text">
-                        +66959637516
+                        {/* +66959637516 */}
+                        {localStorage.getItem('phone')}
                       </div>
                     </div>
                   </div>
@@ -80,12 +96,25 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        Adele Jackson
+                        {/* Adele Jackson */}
+                        {localStorage.getItem('name')} {localStorage.getItem('surname')}
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="cell">
+                  <div class="head-box">Major</div>
+                  <div class="info-box">
+                    <div class="grid">
+                      <img class="icon-pic" src={major}></img>
+                      <div class="info-text">
+                        {/* Computer Science (CS) */}
+                        {localStorage.getItem('majortrack')}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* <div class="cell">
                   <div class="head-box">Date Of Birth</div>
                   <div class="info-box">
                     <div class="grid">
@@ -95,7 +124,7 @@ const board = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div class="cell">
                   <div class="head-box">Department</div>
                   <div class="info-box">
@@ -109,7 +138,7 @@ const board = () => {
                 </div>
               </div>
               <div class="grid">
-                <div class="cell">
+                {/* <div class="cell">
                   <div class="head-box">
                     Gender
                   </div>
@@ -122,8 +151,8 @@ const board = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="cell">
+                </div> */}
+                {/* <div class="cell">
                   <div class="head-box">Live</div>
                   <div class="info-box">
                     <div class="grid">
@@ -133,14 +162,14 @@ const board = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div class="cell">
-                  <div class="head-box">Major</div>
+                  <div class="head-box">Display name</div>
                   <div class="info-box">
                     <div class="grid">
-                      <img class="icon-pic" src={major}></img>
+                      <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        Computer Science (CS)
+                        {localStorage.getItem('displayname')}
                       </div>
                     </div>
                   </div>
@@ -196,12 +225,14 @@ const board = () => {
               <div class="bottom-box"><br></br>
                 <img class='pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                 <div class="l-text1">
-                  Adele Jackson
+                  {/* Adele Jackson */}
+                  {localStorage.getItem('username')}
                 </div>
                 <div class="l-text2">
-                  adele.jac@mahidol.com
+                  {/* adele.jac@mahidol.com */}
+                  {localStorage.getItem('email')}
                 </div>
-                <a href="http://localhost:3000/login">
+                <a href="/" onClick="localStorage.clear()">
                   <img class="l-icon-pic-bottom" src={logout}></img>
                 </a>
               </div>
@@ -215,6 +246,6 @@ const board = () => {
 
 
 
-export default (board);
+export default (Teacher_Profile);
 
 
