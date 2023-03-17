@@ -212,7 +212,7 @@ const Student_Profile = () => {
                 </button>
               </a>
             </div>
-            <div class="l-box">
+            <div class="s-l-box">
               <div class="top-zone">
                 <div class="head-std"><br></br>
                   OLIVE Student

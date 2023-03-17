@@ -6,16 +6,16 @@ import back from './assets/class_info/backicon.png';
 const Classinfo_Student = () => {
   return (
     <body id='class_info_student'>
-      <div class="grid-container">
-        <div class="grid-item" id='display'>
-          <div class='grid-item'>
-            <div class="frame-box">
-              <div class="header-box"><br></br>
-                <img class='pic-left-icon' src={require('./assets/olive_logo.png')}></img>
-                <div class="head-text">
+      <div class="cis-grid-container">
+        <div class="cis-grid-item" id='display'>
+          <div class='cis-grid-item'>
+            <div class="cis-frame-box">
+              <div class="cis-header-box"><br></br>
+                <img class='cis-pic-left-icon' src={require('./assets/olive_logo.png')}></img>
+                <div class="cis-head-text">
 
                   <a href="http://localhost:3000/profile_student">
-                    <img class='pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}>
+                    <img class='cis-pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}>
                     </img>
                     <div class="std-profile-name">
                       {/* Saidski248 */}
@@ -30,7 +30,7 @@ const Classinfo_Student = () => {
                     {/* ITCS 888 */}
                     { JSON.parse(localStorage.getItem('class')).Name }
                   </div>
-                  <button class="join-btn">
+                  <button class="cis-join-btn">
                     Join Meeting
                   </button>
                   <div class="class-teacher">
@@ -52,10 +52,10 @@ const Classinfo_Student = () => {
                   <div class="textNum">{ JSON.parse(localStorage.getItem('attendance')).come }/{ JSON.parse(localStorage.getItem('attendance')).all }</div>
                 </div>
               </div>
-              <div class="midr-frame-box">
-                <div class="middler-box"><br></br>
-                  <div class="textpar">Engagement</div>
-                  <div class="textNum">93%</div>
+              <div class="cis-midr-frame-box">
+                <div class="cis-middler-box"><br></br>
+                  <div class="cis-textpar">Engagement</div>
+                  <div class="cis-textNum">93%</div>
                 </div>
               </div>
 
@@ -103,7 +103,20 @@ const Classinfo_Student = () => {
                       <div class="name">Saidski248</div>
                       <div class="score">10</div>
                     </div>
+                    <div class="two item">
+                      <div class="pos">2</div>
+                      <img class='pic' src={require('./assets/studentProfilepic/shibainu.jpg')}></img>
+                      <div class="name">Saidski248</div>
+                      <div class="score">10</div>
+                    </div>
 
+                    <div class="three item">
+                      <div class="pos">3</div>
+                      <img class='pic' src={require('./assets/studentProfilepic/normalman.png')}></img>
+                      <div class="name">Scarret738</div>
+                      <div class="score">5</div>
+                    </div>
+                  </div>
                     <div class="three item">
                       <div class="pos">3</div>
                       <img class='pic' src={require('./assets/studentProfilepic/normalman.png')}></img>

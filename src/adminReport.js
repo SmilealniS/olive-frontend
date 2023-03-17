@@ -21,7 +21,7 @@ const report = () => {
                 <div class="right">
                     <div class="info">
                         <div>
-                            <h7>Requestor</h7>
+                            <div class="req-text">Requestor</div>
                         </div>
                         <img class='' src={require('.')}></img>
                         <h5> ID : xxxxx</h5>
@@ -31,9 +31,9 @@ const report = () => {
                         <div class="info_data">
                             <div class="data">
                                 <div>
-                                    <h4>Report</h4>
+                                    <h4> Report To</h4>
                                 </div>
-                                <img class='' src={require('.')}></img>
+                                <img class='pic-rpt' src={require('.')}></img>
                                 <h6> ID : xxxxx</h6>
                                 <h6> Name : Name Surname</h6>
                                 <h6> Account : Student</h6>
@@ -41,8 +41,8 @@ const report = () => {
                             <div class="vertical"></div>
 
                             <div class="data">
-                                <div class="descrip" style={{ 'text-align': 'left', 'margin-left': '-100px' }}>Report description</div>
-                                <textarea class="freeform" name="freeform" rows="4" cols="50"></textarea>
+                                <div class="text-rpt">Report description</div>
+                                <textarea class="admR-textarea"  rows="4" cols="50"></textarea>
                             </div>
                         </div><h3></h3>
                     </div>

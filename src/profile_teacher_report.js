@@ -1,16 +1,8 @@
 import './profile_teacher_report.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import calandar from './assets/Infopage/calendar.png';
-import department from './assets/Infopage/department.png';
-import email from './assets/Infopage/email.png';
 import human from './assets/Infopage/human.png';
-import location from './assets/Infopage/location.png';
-import major from './assets/Infopage/major.png';
-import tel from './assets/Infopage/tel.png';
 import logout from './assets/Infopage/logout.png';
-import home from './assets/Infopage/home.png';
-import leader from './assets/Infopage/leader.png';
 import list from './assets/Infopage/list.png';
 
 
@@ -25,16 +17,11 @@ const board = () => {
       <div class="grid-container">
         <div class="grid-item" id='display'>
           <div class='grid-item' style={{ 'padding-top': '120px' }}>
-
-
-
             <div class="row">
               <div class="col-md-12">
                 <form action="index.html" method="post">
                   <h1> Report form </h1>
                   <fieldset>
-
-
                     <div class="grid-report">
                       <div class="cell-report-l">
                         <legend><span class="number">1</span> Report Info</legend>
@@ -44,7 +31,6 @@ const board = () => {
                           <option value=""></option>
                           <option value="">ITCS888</option>
                         </select>
-
                         <label >Report to:</label>
                         <select class="select-std">
                           <option value=""></option>
@@ -59,36 +45,23 @@ const board = () => {
                           <option value="">SxYuki982</option>
                           <option value="">Anagram473</option>
                         </select>
-
-
-
-
                       </div>
                       <div class="cell-report-r">
                         <legend><span class="number">2</span> Report detail</legend>
                         <label>Description:</label>
-                        <textarea ></textarea>
-
+                        <textarea class='txt2'></textarea>
                       </div>
                     </div>
-
-
-
                   </fieldset>
                   <button type="submit">Submit</button>
                 </form>
               </div>
             </div>
-
-
-
             <div class="l-box-report">
               <div class="top-zone">
                 <div class="head-teac"><br></br>
                   OLIVE Teacher
                 </div>
-
-
                 <div class="grid">
                   <a href="http://localhost:3000/profile_teacher">
                     <img class="l-icon-pic" src={human}></img>
@@ -112,7 +85,6 @@ const board = () => {
                       Report
                     </div>
                   </a>
-
                 </div>
               </div>
               <div class="bottom-box"><br></br>
@@ -131,7 +103,6 @@ const board = () => {
           </div>
         </div>
       </div>
-
     </body>
   );
 }

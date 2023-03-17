@@ -10,7 +10,7 @@ body#class_info_student {
 
 
 
-.pic {
+.cis-pic {
     border-radius: 50%;
     height: 60px;
     width: 60px;
@@ -19,7 +19,7 @@ body#class_info_student {
     margin-right: 20px;
 }
 
-.head-text {
+.cis-head-text {
     font-size: 20px;
     font-weight: bold;
     margin-top: -43px;
@@ -27,7 +27,7 @@ body#class_info_student {
 }
 
 
-.frame-box {
+.cis-frame-box {
     box-sizing: border-box;
     position: relative;
     background: #F3F3F3;
@@ -35,7 +35,7 @@ body#class_info_student {
     height: 680px;
 }
 
-.header-box {
+.cis-header-box {
     box-sizing: border-box;
     position: relative;
     background: #C4E0F9;
@@ -45,7 +45,7 @@ body#class_info_student {
 
 }
 
-.mid-frame-box {
+.cis-mid-frame-box {
     box-sizing: border-box;
     position: relative;
     width: 765px;
@@ -54,7 +54,7 @@ body#class_info_student {
     margin-top: 47px;
 }
 
-.s-bottom-frame-box {
+.cis-bottom-frame-box {
     box-sizing: border-box;
     position: relative;
     background: #ffffff;
@@ -64,7 +64,7 @@ body#class_info_student {
     top: -15%;
 }
 
-.midr-frame-box {
+.cis-midr-frame-box {
 
     box-sizing: border-box;
     position: relative;
@@ -75,51 +75,51 @@ body#class_info_student {
     top: -44%;
 }
 
-.middler-box {
+.cis-middler-box {
     display: grid;
     grid-template-columns: auto auto auto;
 }
 
-.textpar {
+.cis-textpar {
     font-size: 25px;
     margin-top: 15px;
     margin-left: -17px;
     font-family: 'DM Sans';
 }
 
-.textattend {
+.cis-textattend {
     font-size: 25px;
     margin-left: -29px;
     margin-top: 15px;
     font-family: 'DM Sans';
 }
 
-.textNum {
+.cis-textNum {
     font-size: 25px;
     font-weight: bold;
     font-family: 'DM Sans';
     margin-top: 15px;
 }
 
-.class-id {
+.cis-class-id {
     font-size: 60px;
     font-weight: bold;
     font-family: 'DM Sans';
 
 }
 
-.class-teacher {
+.cis-class-teacher {
     font-size: 35px;
     font-weight: bold;
     font-family: 'DM Sans';
 }
 
-.class-descrip {
+.cis-class-descrip {
     font-size: 20px;
     font-family: 'DM Sans';
 }
 
-.join-btn {
+.cis-join-btn {
     border-radius: 5px;
     background-color: #6FBCED;
     position: absolute;
@@ -133,13 +133,13 @@ body#class_info_student {
     color: white;
 }
 
-.table-info-head {
+.cis-table-info-head {
     display: grid;
     grid-template-columns: auto auto auto;
 
 }
 
-.table-info {
+.cis-table-info {
     display: grid;
     grid-template-columns: auto auto auto;
 
@@ -153,7 +153,7 @@ body#class_info_student {
     font-family: 'DM Sans';
 }
 
-.textTopic-d {
+.cis-textTopic-d {
     font-size: 28px;
     margin-left: 38%;
     font-weight: bold;
@@ -161,21 +161,21 @@ body#class_info_student {
     margin-bottom: 15px;
 }
 
-.textTopic-a {
+.cis-textTopic-a {
     font-size: 28px;
     margin-left: 50%;
     font-weight: bold;
     font-family: 'DM Sans';
 }
 
-.textTopic-p {
+.cis-textTopic-p {
     font-size: 28px;
     margin-left: 40%;
     font-weight: bold;
     font-family: 'DM Sans';
 }
 
-.textTopic {
+.cis-textTopic {
     font-size: 25px;
     margin-left: 30%;
     font-family: 'DM Sans';
@@ -189,7 +189,7 @@ body#class_info_student {
     padding-top: 20px;
 }
 
-.pic-left-icon {
+.cis-pic-left-icon {
     margin-top: -12px;
     margin-left: 20px;
     width: 65px;
@@ -221,7 +221,7 @@ body#class_info_student {
     display: none;
 }
 
-.s-tab-label {
+.cis-tab-label {
     position: relative;
     /* display: block; */
     line-height: 51px;
@@ -269,18 +269,18 @@ body#class_info_student {
 }
 
 /* scoreboard */
-  .grid-container {
+  .cis-grid-container {
     display: grid;
   }
   
-  .s-center {
+  .cis-center {
     position: relative;
     top: 10%;
     left: 4%;
   
   }
   
-  .top3 {
+  .cis-top3 {
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -288,7 +288,7 @@ body#class_info_student {
     margin-left: -60px;
   }
   
-  .top3 .item {
+  .cis-top3 .item {
     box-sizing: border-box;
     position: relative;
     background: white;
@@ -304,7 +304,7 @@ body#class_info_student {
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
   }
   
-  .top3 .item .pic {
+  .cis-top3 .item .pic {
     position: absolute;
     top: -3rem;
     left: -12vh;
@@ -317,37 +317,37 @@ body#class_info_student {
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
   }
   
-  .top3 .item .pos {
+  .cis-top3 .item .pos {
     font-weight: bold;
     font-size: 25px;
     margin-bottom: 0.5rem;
     margin-top: -5vh;
   }
   
-  .top3 .item .name {
+  .cis-top3 .item .name {
     /* font-weight: bold; */
     font-size: 20px;
     margin-bottom: 0.5rem;
   }
   
-  .top3 .item .score {
+  .cis-top3 .item .score {
     /* opacity: 0.5; */
     font-size: 16px;
   }
   
-  .top3 .item .score:after {
+  .cis-top3 .item .score:after {
     margin-right: 1rem;
     content: "Points";
     opacity: 0.5;
     margin-left: 5px
   }
   
-  .list {
+  .cis-list {
     padding-left: 2rem;
   
   }
   
-  .list .item {
+  .cis-list .item {
     position: relative;
     display: flex;
     align-items: center;
@@ -360,7 +360,7 @@ body#class_info_student {
     background: #6fbced;
   }
   
-  .list .item .pos {
+  .cis-list .item .pos {
     width: 10vh;
     font-size: 20px;
     position: relative;
@@ -370,15 +370,16 @@ body#class_info_student {
   
   }
   
-  .list .item .name {
+  .cis-list .item .name {
     text-align: left;
     flex-grow: 5;
     color: white;
     /* flex-basis: 10rem; */
     font-size: 20px;
+    margin-left: -95%;
   }
   
-  .list .item .score {
+  .cis-list .item .score {
     text-align: right;
     padding-right: 1.5rem;
     font-size: 16px;
@@ -392,20 +393,20 @@ body#class_info_student {
     margin-left: 5px
   }
 
-  .std-profile-name{
+  .cis-profile-name{
     margin-top: -3%;
     font-size: 22px;
     margin-left: 90%;
   }
 
-  .s-lead-text{
+  .cis-lead-text{
     font-size: 35px;
     font-family: 'DM Sans';
     font-weight: bold;
     margin-left: 40%;
     margin-bottom: 60px;
   }
-  .s-attendance-text{
+  .cis-attendance-text{
     font-size: 35px;
     font-family: 'DM Sans';
     font-weight: bold;

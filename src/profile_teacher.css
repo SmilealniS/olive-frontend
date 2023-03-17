@@ -128,14 +128,14 @@ body#profile_teacher {
 
 
  
-.l-box {
+.t-l-box {
     box-sizing: border-box;
     position: relative;
     background: rgb(255, 255, 255);
     width: 250px;
     height: 650px;
     left: 1.5%;
-    margin-top: -53%;
+    margin-top: -55%;
     border-radius: 0.5rem;
     cursor: pointer;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
