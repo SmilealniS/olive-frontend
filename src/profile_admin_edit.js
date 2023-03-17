@@ -149,7 +149,7 @@ const board = () => {
                 </button>
               </a>
             </div>
-            <div class="l-box">
+            <div class="adm-l-box">
               <div class="top-zone">
                 <div class="head-std"><br></br>
                   OLIVE Admin

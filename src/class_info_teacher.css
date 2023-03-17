@@ -283,6 +283,7 @@ nav {
   }
   
   .top3 {
+    display: flex;
     justify-content: center;
     align-items: flex-end;
     color: #4b4168;
@@ -293,6 +294,8 @@ nav {
     box-sizing: border-box;
     position: relative;
     background: white;
+    /* width: 9rem;
+    height: 10rem; */
     width: 20vh;
     height: 20vh;
     text-align: center;
@@ -348,13 +351,15 @@ nav {
   
   .list .item {
     position: relative;
+    display: flex;
     align-items: center;
     background: white;
     height: 4rem;
-    width: 46%;
+    width: 53%;
+    margin-left: -8%;
     border-radius: 4rem;
     margin-bottom: 2rem;
-    margin-left: 23%;
+    margin-left: 19%;
     background: #6fbced;
   }
   
@@ -370,9 +375,11 @@ nav {
   
   .list .item .name {
     text-align: left;
+    flex-grow: 5;
     color: white;
+    /* flex-basis: 10rem; */
     font-size: 20px;
-    margin-left: -100%;
+    margin-left: -95%;
   }
   
   .list .item .score {

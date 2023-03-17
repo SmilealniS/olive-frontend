@@ -13,31 +13,36 @@ body {
   background-color: #f3f3f3;
 }
 
-.wrapper .left .pic-create{
+.wrapper .left .pic-create {
   width: 7vh;
   height: 7vh;
   margin-left: -23px;
 }
-.wrapper .left .pic-calendar{
+
+.wrapper .left .pic-calendar {
   width: 7vh;
   height: 7vh;
   margin-left: -25px;
 }
-.info_data .data .descrip{
-  font-size: 13px;
+
+.text-rpt {
+  margin-top: 2%;
+    font-size: 20px;
+    margin-left: -55%;
 
 }
+
 .data .freeform {
   height: 120px;
   width: 250px;
-  margin-top: 10px;
-  margin-left: -17%;
+  margin-top: 30px;
+  margin-left: -25%;
 }
 
 .vertical {
   border-left: 1px solid grey;
-  height: 150px;
-  margin-right: 27%;
+  height: 350px;
+  margin-left: -50%;
 }
 
 .wrapper {
@@ -59,14 +64,18 @@ body {
   border-bottom-left-radius: 5px;
   text-align: center;
   color: #fff;
+  height: 700px;
+  margin-top: -45px;
 }
 
 .wrapper .right {
-  width: 85%;
+  width: 100%;
   background: #fff;
   padding: 30px 25px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  height: 115%;
+  margin-top: -3%;
 }
 
 
@@ -77,27 +86,28 @@ body {
   color: #353c4e;
   letter-spacing: 5px;
   margin-top: 1vh;
+  font-size: 25px;
 }
 
 .wrapper .right .info_data .data h4,
 .wrapper .right .projects_data .data h4 {
   color: #353c4e;
   margin-bottom: 5px;
-  font-size: 15px;
-  margin-bottom: 90px;
+  font-size: 25px;
+  margin-bottom: 80px;
+  margin-top: 20px;
 }
 
 .wrapper .right .info h5,
 .wrapper .right .projects h5 {
-  font-size: 12px;
+  font-size: 17px;
   margin-left: 110px;
   color: #353c4e;
 }
 
 .wrapper .right .info h6,
 .wrapper .right .projects h6 {
-  font-size: 11px;
-
+  font-size: 18px;
   color: #353c4e;
 }
 
@@ -115,23 +125,47 @@ body {
 
 
 
-.back-icon{
+.back-icon {
   width: 25px;
   height: 25px;
   margin-left: -10px;
 }
-.grid-a-btn-1{
+
+.grid-a-btn-1 {
   display: grid;
   grid-template-columns: auto auto;
   padding: 8%;
   left: 20%;
-  margin-left: 49%;
-  margin-top: -11%;
+  margin-left: 68%;
+  margin-top: -8%;
 }
 
-.a-btn-1{
-  font-size: 15px;
-  height: 25px;
-  width: 70px;
-  margin-left: 20%;
+.a-btn-1 {
+  font-size: 17px;
+  height: 30px;
+  width: 90px;
+  margin-left: 60%;
+}
+
+.req-text {
+  font-size: 30px;
+  margin-top: 2%;
+}
+
+.admR-textarea{
+  border: none;
+  font-size: 16px;
+  padding: 15px;
+  width: 60%;
+  height: 45%;
+  background-color: #e8eeef;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  margin-top: 1%;
+  margin-left: -23%;
+  position: absolute;
+
+}
+.pic-rpt{
+  margin-top: 17%;
 }

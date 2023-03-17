@@ -24,6 +24,7 @@ body#profile_teacher_report {
     border-radius: 0.5rem;
     cursor: pointer;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    margin-top: -55%;
 }
 .bottom-box {
     box-sizing: border-box;
@@ -123,7 +124,7 @@ form {
     margin-top: -60px;
 }
 
-  textarea,
+  .txt2,
   select {
        border: none;
        font-size: 16px;

@@ -376,6 +376,7 @@ body#class_info_student {
     color: white;
     /* flex-basis: 10rem; */
     font-size: 20px;
+    margin-left: -95%;
   }
   
   .cis-list .item .score {

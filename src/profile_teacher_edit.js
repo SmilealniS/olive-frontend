@@ -67,7 +67,6 @@ const board = () => {
                     <div class="grid">
                       <img class="icon-pic" src={tel}></img>
                       <div class="info-text">
-
                         <td class="info-text" contentEditable='true'> +66959637516</td>
                       </div>
                     </div>

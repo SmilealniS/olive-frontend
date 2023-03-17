@@ -153,7 +153,7 @@ const board = () => {
                 </button>
               </a>
             </div>
-            <div class="l-box">
+            <div class="t-l-box">
               <div class="top-zone">
                 <div class="head-teac"><br></br>
                   OLIVE Teacher
