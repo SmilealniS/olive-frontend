@@ -59,50 +59,47 @@ const Classinfo_Student = () => {
                 </div>
               </div>
 
+
+
+
               <div class="s-bottom-frame-box">
                 {/* <div class="tabs">
                   <div class="tab"> */}
-                <div name="css-tabs" id="tab-1" checked class="tab-switch"></div>
-                <label for="tab-1" class="s-tab-label">Engagement Info</label>
+                    <div  name="css-tabs" id="tab-1" checked class="tab-switch"></div>
+                    <label for="tab-1" class="s-tab-label">Engagement Info</label>
 
-                {/* <div class="tab-content"><br></br> */}
-                {/* <div class="s-top-text">Engagement Info</div> */}
-                <div class="s-attendance-text">Engagement</div>
-                <div class="table-info-head">
-                  <div class="textTopic-d">Date</div>
-                  <div class="textTopic-a">Attendance</div>
-                  <div class="textTopic-p">Engagement</div>
-                </div>
-                <div class="table-info">
-                  <div class="textTopic">13/02/2023</div>
-                  <div class="textTopic">Absent</div>
-                  <div class="textTopic">-</div>
-                  <div class="textTopic">20/02/2023</div>
-                  <div class="textTopic">Checked</div>
-                  <div class="textTopic">93%</div>
-                  <div class="textTopic">27/03/2023</div>
-                  <div class="textTopic">Checked</div>
-                  <div class="textTopic">92%</div>
-                </div>
+                    {/* <div class="tab-content"><br></br> */}
+                    {/* <div class="s-top-text">Engagement Info</div> */}
+                    <div class="s-attendance-text">Engagement</div>
+                      <div class="table-info-head">
+                        <div class="textTopic-d">Date</div>
+                        <div class="textTopic-a">Attendance</div>
+                        <div class="textTopic-p">Engagement</div>
+                      </div>
+                      <div class="table-info">
+                        <div class="textTopic">13/02/2023</div>
+                        <div class="textTopic">Absent</div>
+                        <div class="textTopic">-</div>
+                        <div class="textTopic">20/02/2023</div>
+                        <div class="textTopic">Checked</div>
+                        <div class="textTopic">93%</div>
+                        <div class="textTopic">27/03/2023</div>
+                        <div class="textTopic">Checked</div>
+                        <div class="textTopic">92%</div>
+                      </div>
 
 
-                {/* Test */}
-                <div class="s-center">
-                  <div class="s-lead-text">Leaderboard</div>
-                  <div class="top3">
-                    <div class="one item">
-                      <div class="pos">1</div>
-                      <img class='pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
-                      <div class="name">Cloud178</div>
-                      <div class="score">15</div>
-                    </div>
+                      {/* Test */}
+                      <div class="s-center">
+                      <div class="s-lead-text">Leaderboard</div>
+                        <div class="top3">
+                          <div class="one item">
+                            <div class="pos">1</div>
+                            <img class='pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
+                            <div class="name">Cloud178</div>
+                            <div class="score">15</div>
+                          </div>
 
-                    <div class="two item">
-                      <div class="pos">2</div>
-                      <img class='pic' src={require('./assets/studentProfilepic/shibainu.jpg')}></img>
-                      <div class="name">Saidski248</div>
-                      <div class="score">10</div>
-                    </div>
                     <div class="two item">
                       <div class="pos">2</div>
                       <img class='pic' src={require('./assets/studentProfilepic/shibainu.jpg')}></img>
@@ -117,73 +114,66 @@ const Classinfo_Student = () => {
                       <div class="score">5</div>
                     </div>
                   </div>
-                    <div class="three item">
-                      <div class="pos">3</div>
-                      <img class='pic' src={require('./assets/studentProfilepic/normalman.png')}></img>
-                      <div class="name">Scarret738</div>
-                      <div class="score">5</div>
-                    </div>
-                  </div>
 
-                  <div class="list">
-                    <div class="item">
-                      <div class="pos">4</div>
-                      <div class="pic" style={{}}></div>
-                      <div class="name">Sutorimu320</div>
-                      <div class="score">1</div>
-                    </div>
-                  </div>
-                  <div class="list">
-                    <div class="item">
-                      <div class="pos">5</div>
-                      <div class="pic" style={{}}></div>
-                      <div class="name">Sharon117</div>
-                      <div class="score">1</div>
-                    </div>
-                  </div>
-                  <div class="list">
-                    <div class="item">
-                      <div class="pos">6</div>
-                      <div class="pic" style={{}}></div>
-                      <div class="name">Cheep729</div>
-                      <div class="score">1</div>
-                    </div>
-                  </div>
-                  <div class="list">
-                    <div class="item">
-                      <div class="pos">7</div>
-                      <div class="pic" style={{}}></div>
-                      <div class="name">Uzumaru227</div>
-                      <div class="score">1</div>
-                    </div>
-                  </div>
-                  <div class="list">
-                    <div class="item">
-                      <div class="pos">8</div>
-                      <div class="pic" style={{}}></div>
-                      <div class="name">Gimchi553</div>
-                      <div class="score">1</div>
-                    </div>
-                  </div>
-                  <div class="list">
-                    <div class="item">
-                      <div class="pos">9</div>
-                      <div class="pic" style={{}}></div>
-                      <div class="name">SxYuki982</div>
-                      <div class="score">1</div>
-                    </div>
-                  </div>
-                  <div class="list">
-                    <div class="item">
-                      <div class="pos">10</div>
-                      <div class="pic" style={{}}></div>
-                      <div class="name">Anagram473</div>
-                      <div class="score">1</div>
-                    </div>
-                  </div>
-                  {/* </div> */}
-                  {/* Test */}
-                  {/* </div>
+                        <div class="list">
+                          <div class="item">
+                            <div class="pos">4</div>
+                            <div class="pic" style={{}}></div>
+                            <div class="name">Sutorimu320</div>
+                            <div class="score">1</div>
+                          </div>
+                        </div>
+                        <div class="list">
+                          <div class="item">
+                            <div class="pos">5</div>
+                            <div class="pic" style={{}}></div>
+                            <div class="name">Sharon117</div>
+                            <div class="score">1</div>
+                          </div>
+                        </div>
+                        <div class="list">
+                          <div class="item">
+                            <div class="pos">6</div>
+                            <div class="pic" style={{}}></div>
+                            <div class="name">Cheep729</div>
+                            <div class="score">1</div>
+                          </div>
+                        </div>
+                        <div class="list">
+                          <div class="item">
+                            <div class="pos">7</div>
+                            <div class="pic" style={{}}></div>
+                            <div class="name">Uzumaru227</div>
+                            <div class="score">1</div>
+                          </div>
+                        </div>
+                        <div class="list">
+                          <div class="item">
+                            <div class="pos">8</div>
+                            <div class="pic" style={{}}></div>
+                            <div class="name">Gimchi553</div>
+                            <div class="score">1</div>
+                          </div>
+                        </div>
+                        <div class="list">
+                          <div class="item">
+                            <div class="pos">9</div>
+                            <div class="pic" style={{}}></div>
+                            <div class="name">SxYuki982</div>
+                            <div class="score">1</div>
+                          </div>
+                        </div>
+                        <div class="list">
+                          <div class="item">
+                            <div class="pos">10</div>
+                            <div class="pic" style={{}}></div>
+                            <div class="name">Anagram473</div>
+                            <div class="score">1</div>
+                          </div>
+                        </div>
+                      {/* </div> */}
+                      {/* Test */}
+                    {/* </div>
                   </div> */}
 
 
