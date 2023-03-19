@@ -21,10 +21,10 @@ import Profile_student_edit from './profile_student_edit';
 import Profile_teacher_edit from './profile_teacher_edit';
 import Profile_teacher_report from './profile_teacher_report';
 import Profile_admin_edit from './profile_admin_edit';
-
+import StudyingUI from './studyingUI';
 
 let payload_teacher = {
-  signatureEndpoint: 'http://localhost:4000/zoom',
+  signatureEndpoint: 'http://localhost:8000/',
   meetingNumber: '4318372796',
   role: 1,
   sdkKey: '6V8X5gwmS7lhH6EcVpCPXY0bBduD7Vnwx4QV',
@@ -37,7 +37,7 @@ let payload_teacher = {
 }
 
 let payload_student = {
-  signatureEndpoint: 'http://localhost:4000/zoom',
+  signatureEndpoint: 'http://localhost:8000/',
   meetingNumber: '4318372796',
   role: 0,
   sdkKey: '6V8X5gwmS7lhH6EcVpCPXY0bBduD7Vnwx4QV',
@@ -56,18 +56,22 @@ const router = createBrowserRouter([
     path: '/',
     element: <Login />
   },
-  {
-    path: '/meeting',
-    element: <Meeting payload={payload_teacher} />
-  },
-  {
-    path: '/component',
-    element: <MeetingComponent />
-  },
+  // {
+  //   path: '/meeting',
+  //   element: <Meeting payload={payload_teacher} />
+  // },
+  // {
+  //   path: '/component',
+  //   element: <MeetingComponent />
+  // },
   // {
   //   path: '/scoreboard',
   //   element: <Scoreboard />
   // },
+  {
+    path: '/studyingUI',
+    element: <StudyingUI payload={payload_student} />
+  },
   {
     path: '/teachingUI',
     element: <TeachingUI payload={payload_teacher} />

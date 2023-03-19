@@ -4,6 +4,10 @@ import React, { useEffect } from 'react';
 import back from './assets/class_info/backicon.png';
 
 const Classinfo_Student = () => {
+  function joinMeeting() {
+    window.location.href = '/studyingUI'
+  }
+
   return (
     <body id='class_info_student'>
       <div class="cis-grid-container">
@@ -14,10 +18,10 @@ const Classinfo_Student = () => {
                 <img class='cis-pic-left-icon' src={require('./assets/olive_logo.png')}></img>
                 <div class="cis-head-text">
 
-                  <a href="http://localhost:3000/profile_student">
+                  <a style={{textDecoration: 'none'}} href="http://localhost:3000/profile_student">
                     <img class='cis-pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}>
                     </img>
-                    <div class="std-profile-name">
+                    <div class="cis-profile-name">
                       {/* Saidski248 */}
                       {localStorage.getItem('username')}
                     </div>
@@ -30,7 +34,7 @@ const Classinfo_Student = () => {
                     {/* ITCS 888 */}
                     { JSON.parse(localStorage.getItem('class')).Name }
                   </div>
-                  <button class="cis-join-btn">
+                  <button class="cis-join-btn" onClick={joinMeeting}>
                     Join Meeting
                   </button>
                   <div class="class-teacher">
