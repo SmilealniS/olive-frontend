@@ -428,3 +428,10 @@ nav {
   font-size: 22px;
     margin-left: 80%;
 }
+
+.save-btn{
+  width: 80px;
+  height: 30px;
+  margin-left: 158vh;
+  margin-top: 3vh;
+}

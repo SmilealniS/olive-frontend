@@ -26,7 +26,8 @@ body#studyingUI {
 
 .screen {
     background-color: lightgray;
-    height: 82vh;
+    height: 100vh;
+    margin-top: 0;
 }
 
 #meetingSDKElement {
@@ -34,170 +35,23 @@ body#studyingUI {
     left: 10px !important;
     margin-left: 5px;
     margin-right: auto;
+    margin-top: 0;
     width: auto;
-    height: 680px;
-}
-
-.lightbulb {
-    display: flex;
-    padding-top: 10px;
-    padding-left: 30px;
-}
-
-#tools {
-    height: 20vh;
-    flex-direction: column;
-    margin-left: 1vh;
-}
-
-#l-tools {
-    border: 2px solid black;
-    border-radius: 10px;
-    background-color: grey;
-    height: 16vh;
-    width: 99%;
-    display: inline-flex;
-    justify-content: space-between;
-}
-
-.left-zone {
-    flex-grow: 4;
-}
-
-.right-zone {
-    flex-grow: 4;
-}
-
-.divided-line {
-    border-left: 2px solid black;
-    height: 15vh;
-}
-
-.divided-line-2 {
-    margin-top: -2%;
-    border-left: 2px solid black;
-    height: 16vh;
-}
-
-.Bar-text {
-    padding-top: 1vh;
-    display: flex;
-}
-
-.l-text {
-    margin-top: 1%;
-    font-size: 20px;
-    font-style: oblique;
-    margin-left: 5%;
-}
-
-.r-text {
-    margin-top: 0.25%;
-    font-size: 20px;
-    font-style: oblique;
-    margin-left: 5%;
-}
-
-.emoji-stack {
-    margin-top: -3%;
-    margin-left: 16%;
-    color: #6fbced;
-    vertical-align: top;
-    display: flex;
-    gap: 5px;
-}
-
-.emoji-item {
-    font-size: 50px;
-    margin-left: 1vh;
-}
-
-.btn-reset {
-    margin-top: 6%;
-    margin-left: 5%;
-    width: 40px;
-    height: 15px;
-}
-
-.rbtn-reset {
-    margin-top: 2%;
-    margin-left: 5%;
-    width: 40px;
-    height: 15px;
-}
-
-.bar-area {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-}
-
-.bar-multi {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-}
-
-.barRate {
-    color: black;
-    font-size: 15px;
-    margin-left: 4vh;
-    margin-top: 1vh;
-    margin-right: 5px;
-    width: 15vh;
-}
-
-.surv-area {
-    display: flex;
-}
-
-.survpercent {
-    box-sizing: border-box;
-    width: 200px;
-    height: 40px;
-    text-align: center;
-    font-size: 30px;
-    border-radius: 5px;
-    position: relative;
-    padding-top: 1vh;
-}
-
-.survbar {
-    box-sizing: border-box;
-    width: 200px;
-    height: 20px;
-    padding: 5px;
-    background: #ddd;
-    border-radius: 5px;
-    position: relative;
-    margin-top: 1vh;
-}
-
-.bar-1 {
-    width: 100%;
     height: 10px;
-    position: relative;
-    background: #c54;
-    background-image: linear-gradient(to right, red, green);
 }
+
+
+
+
+
+
 
 #tt-tools {
-    grid-template-columns: 99%;
+    /* grid-template-columns: 99%; */
     margin-left: 1vh;
 }
 
-#std-top-tools {
-    border: 2px solid black;
-    border-radius: 10px;
-    background-color: grey;
-    height: 97vh;
-    margin-top: -81vh;
-}
 
-.zone-line {
-    border-left: 2px solid rgb(0, 0, 0);
-    height: 14vh;
-}
 
 /* chat (right side) */
 
@@ -294,7 +148,7 @@ body#studyingUI {
 } */
 
 .std-chat-message {
-    border: 3px cornflowerblue solid;
+    /* border: 3px cornflowerblue solid; */
     display: grid;
     grid-template-columns: auto 80px;
     /* padding: 5px; */
@@ -334,7 +188,7 @@ body#studyingUI {
 } */
 
 .std-chat-message>.send {
-    border: 2px rgb(202, 0, 0) solid;
+    /* border: 2px rgb(202, 0, 0) solid; */
     font-size: 10px;
     width: 70px;
     height: 35px;

@@ -289,7 +289,9 @@ const Classinfo_Teacher = () => {
                           <td contentEditable='true'></td>
                         </tr>
                       </table>
+                      <button class="save-btn">save</button>
                     </div>
+                    
                   </div>
                 </div>
               </div>

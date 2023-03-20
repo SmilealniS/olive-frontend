@@ -86,7 +86,7 @@ const StudentUI = ({ payload }) => {
                   document.getElementById('chatTable').innerHTML +=
                     `<div class="me">
                     <div class="entete">
-                      <b>${sender.Display_Name} &nbsp;</b>
+                      <b>${localStorage.getItem('displayname')} &nbsp;</b>
                       <p>${time} &nbsp;</p>
                     </div>
                     <div class="message">
@@ -223,9 +223,9 @@ const StudentUI = ({ payload }) => {
           {/* display */}
           <div class='' id='display' >
             <div class='screen' id='meetingSDKElement' ></div>
-            <div class='grid-container' id='tt-tools'>
+            {/* <div class='grid-container' id='tt-tools'>
               <div class='grid-item' id='std-top-tools'></div>
-            </div>
+            </div> */}
 
           </div>
 

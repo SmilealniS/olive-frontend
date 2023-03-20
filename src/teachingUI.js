@@ -86,7 +86,7 @@ const TeacherUI = ({ payload }) => {
                   document.getElementById('chatTable').innerHTML +=
                     `<div class="me">
                     <div class="entete">
-                      <b>${sender.Display_Name} &nbsp;</b>
+                      <b>${localStorage.getItem('displayname')} &nbsp;</b>
                       <p>${time} &nbsp;</p>
                     </div>
                     <div class="message">
@@ -113,6 +113,34 @@ const TeacherUI = ({ payload }) => {
 
     updateChat();
     setInterval(updateChat, 60000);
+
+    var _ = require('lodash');
+
+    function groupBy(arr) {
+      // console.log('pass:', arr);
+      return _.mapValues(_.groupBy(arr, 'Id'),
+        clist => clist.map(car => _.omit(car, 'Id')));
+    }
+
+    function updateStack() {
+      fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + JSON.parse(localStorage.getItem('class'))._id)
+        .then(data => data.json())
+        .then(data => {
+          // console.log('stack:', data[0]);
+          let emojis = groupBy(data[0].Emoji);
+          let emoid = ['63f6aa43c64dc707bf25c533', '63f6aa43c64dc707bf25c534', '63f6aa43c64dc707bf25c535', '63f6aa43c64dc707bf25c536', '63f6aa43c64dc707bf25c537'];
+
+          // console.log('emoji:', emojis);
+          for (let i = 0; i < emoid.length; i++) { document.getElementById(emoid[i]).textContent = 0 }
+          for (let i = 0; i < Object.keys(emojis).length-1; i++) {
+            // console.log(emojis[Object.keys(emojis)[i]]);
+            document.getElementById(Object.keys(emojis)[i]).textContent = emojis[Object.keys(emojis)[i]].length;
+          }
+        })
+    }
+
+    updateStack();
+    setInterval(updateStack, 600000);
   }, [])
 
   const sendEmoji = event => {
@@ -136,7 +164,7 @@ const TeacherUI = ({ payload }) => {
   }
 
   function sendMessage() {
-    if(document.getElementById('sendtext').value == '') return;
+    if (document.getElementById('sendtext').value == '') return;
     // alert(document.getElementById('sendtext').value)
     let data = {
       Student: localStorage.getItem('teacher_id'),
@@ -259,10 +287,15 @@ const TeacherUI = ({ payload }) => {
                   <div class='flex-container'>
                     <div class='emoji-stack'>
                       <p class='emoji-item'>&#128513;</p>
+                      <text id='63f6aa43c64dc707bf25c533' class="num-emoji-stack"></text>
                       <p class='emoji-item'>&#128512;</p>
+                      <text id='63f6aa43c64dc707bf25c534' class="num-emoji-stack"></text>
                       <p class='emoji-item'>&#128528;</p>
+                      <text id='63f6aa43c64dc707bf25c535' class="num-emoji-stack"></text>
                       <p class='emoji-item'>&#128533;</p>
+                      <text id='63f6aa43c64dc707bf25c536' class="num-emoji-stack"></text>
                       <p class='emoji-item'>&#128544;</p>
+                      <text id='63f6aa43c64dc707bf25c537' class="num-emoji-stack"></text>
                     </div>
                   </div>
 
