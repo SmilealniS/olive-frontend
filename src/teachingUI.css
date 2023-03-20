@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+BsLightbulbFill, BsLightbulb {
+    size: 5em;
+}
+
 body#teachingUI {
     background-color: #1a1a1a1a;
     font-family: Arial, Helvetica, sans-serif;
@@ -39,6 +43,7 @@ body#teachingUI {
 }
 
 .lightbulb {
+    size: 5em;
     display: flex;
     padding-top: 10px;
     padding-left: 70px;
@@ -101,16 +106,18 @@ body#teachingUI {
 
 .emoji-stack {
     margin-top: -3%;
-    margin-left: 16%;
+    margin-left: 6%;
     color: #6fbced;
     vertical-align: top;
     display: flex;
     gap: 5px;
+
 }
 
 .emoji-item {
     font-size: 45px;
     margin-left: 3vh;
+
 }
 
 .btn-reset {
@@ -386,7 +393,8 @@ body#teachingUI {
 }
 
 .num-emoji-stack{
+    /* border: 3px solid lightpink; */
     font-size: 20px;
     margin-left: -32px;
-    margin-top: 45px;
+    margin-top: 55px;
 }

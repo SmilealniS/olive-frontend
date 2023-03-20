@@ -61,6 +61,9 @@ const TeacherUI = ({ payload }) => {
       })
     }
 
+    let emoid = ['63f6aa43c64dc707bf25c533', '63f6aa43c64dc707bf25c534', '63f6aa43c64dc707bf25c535', '63f6aa43c64dc707bf25c536', '63f6aa43c64dc707bf25c537'];
+    for (let i = 0; i < emoid.length; i++) { document.getElementById(emoid[i]).textContent = 0 }
+
     function updateChat() {
       document.getElementById('chatTable').innerHTML = '';
       fetch('http://localhost:4000/olive/interact/getbyType?type=chat&classid=' + JSON.parse(localStorage.getItem('class'))._id)
@@ -112,35 +115,8 @@ const TeacherUI = ({ payload }) => {
     }
 
     updateChat();
-    setInterval(updateChat, 60000);
+    setInterval(updateChat, 30000);
 
-    var _ = require('lodash');
-
-    function groupBy(arr) {
-      // console.log('pass:', arr);
-      return _.mapValues(_.groupBy(arr, 'Id'),
-        clist => clist.map(car => _.omit(car, 'Id')));
-    }
-
-    function updateStack() {
-      fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + JSON.parse(localStorage.getItem('class'))._id)
-        .then(data => data.json())
-        .then(data => {
-          // console.log('stack:', data[0]);
-          let emojis = groupBy(data[0].Emoji);
-          let emoid = ['63f6aa43c64dc707bf25c533', '63f6aa43c64dc707bf25c534', '63f6aa43c64dc707bf25c535', '63f6aa43c64dc707bf25c536', '63f6aa43c64dc707bf25c537'];
-
-          // console.log('emoji:', emojis);
-          for (let i = 0; i < emoid.length; i++) { document.getElementById(emoid[i]).textContent = 0 }
-          for (let i = 0; i < Object.keys(emojis).length-1; i++) {
-            // console.log(emojis[Object.keys(emojis)[i]]);
-            document.getElementById(Object.keys(emojis)[i]).textContent = emojis[Object.keys(emojis)[i]].length;
-          }
-        })
-    }
-
-    updateStack();
-    setInterval(updateStack, 600000);
   }, [])
 
   const sendEmoji = event => {
@@ -182,6 +158,76 @@ const TeacherUI = ({ payload }) => {
       alert('Cannot send message')
     })
   }
+
+  var _ = require('lodash');
+
+  function groupBy(arr) {
+    // console.log('pass:', arr);
+    return _.mapValues(_.groupBy(arr, 'Id'),
+      clist => clist.map(car => _.omit(car, 'Id')));
+  }
+
+  function updateStack() {
+    // alert('stack');
+    fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + JSON.parse(localStorage.getItem('class'))._id)
+      .then(data => data.json())
+      .then(data => {
+        // console.log('stack:', data[0]);
+        let emojis = groupBy(data[0].Emoji);
+        let emoid = ['63f6aa43c64dc707bf25c533', '63f6aa43c64dc707bf25c534', '63f6aa43c64dc707bf25c535', '63f6aa43c64dc707bf25c536', '63f6aa43c64dc707bf25c537'];
+        for (let i = 0; i < emoid.length; i++) { document.getElementById(emoid[i]).textContent = 0 }
+
+        // console.log('emoji:', emojis);
+        for (let i = 0; i < Object.keys(emojis).length; i++) {
+          // console.log(emojis[Object.keys(emojis)[i]]);
+          document.getElementById(Object.keys(emojis)[i]).textContent = emojis[Object.keys(emojis)[i]].length;
+        }
+      })
+  }
+
+  // updateStack();
+  setInterval(updateStack, 600000);
+
+  function clearStack() {
+    fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + JSON.parse(localStorage.getItem('class'))._id)
+      .then(data => data.json())
+      .then(data => {
+        // console.log('stack:', data[0]);
+        fetch('http://localhost:4000/olive/emojis/clear?_id=' + data[0]._id, {
+          method: 'PUT'
+        })
+      })
+    
+  }
+
+  function updateEngagement() {
+    fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + JSON.parse(localStorage.getItem('class'))._id)
+      .then(data => data.json())
+      .then(data => {
+        // console.log('engegement:');
+        let engage = 0;
+        for (let i = 0; i < data.length; i++) {
+          // console.log(data[i]);
+          engage += data[i].Class.Engagement;
+        }
+        // console.log('en:', engage);
+        document.getElementById('engagementVal').textContent = engage + '%';
+      })
+  }
+
+  function clearEngagement() {
+    document.getElementById('engagementVal').textContent = '100%';
+    fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + JSON.parse(localStorage.getItem('class'))._id)
+      .then(data => data.json())
+      .then(data => {
+        fetch('http://localhost:4000/olive/engagement/clear?_id=' + data[0]._id, {
+          method: 'PUT'
+        })
+      })
+  }
+
+  // updateEngagement();
+  setInterval(updateEngagement, 600000);
 
   // function gazeDetection() {
   //   window.saveDataAcrossSessions = false;
@@ -250,10 +296,10 @@ const TeacherUI = ({ payload }) => {
                       {/* Bar 1 */}
                       <div class='surv-area'>
                         <div class="barRate">Engagement</div>
-                        <button class="btn-reset">Reset</button>
+                        <button class="btn-reset" onClick={clearEngagement}>Reset</button>
                       </div>
                       {/* <div class="survbar"><div class="bar-1"></div></div> */}
-                      <div class='survpercent'>100%</div>
+                      <div class='survpercent' id='engagementVal'>100%</div>
 
                     </div>
                     <div class='divided-line-2'></div>
@@ -261,15 +307,15 @@ const TeacherUI = ({ payload }) => {
                       {/* Bar 2 */}
                       <div class='surv-area'>
                         <div class="barRate">Survival rating</div>
-                        <button class="btn-reset">Reset</button>
+                        <button class="btn-reset" onClick={''}>Reset</button>
                       </div>
                       {/* <div class="survbar"><div class="bar-1"></div></div> */}
                       <div class='lightbulb'>
-                        <BsLightbulbFill size='3em' color='gold' />
-                        <BsLightbulbFill size='3em' color='gold' />
-                        <BsLightbulbFill size='3em' color='gold' />
-                        <BsLightbulbFill size='3em' color='gold' />
-                        <BsLightbulb size='3em' color='gold' />
+                        <BsLightbulbFill size='4em' color='gold' />
+                        <BsLightbulbFill size='4em' color='gold' />
+                        <BsLightbulbFill size='4em' color='gold' />
+                        <BsLightbulbFill size='4em' color='gold' />
+                        <BsLightbulb size='4em' color='gold' />
                       </div>
                     </div>
                   </div>
@@ -281,7 +327,7 @@ const TeacherUI = ({ payload }) => {
                 <div class="right-zone">
                   <div class="Bar-text">
                     <text class="r-text">Class Status</text>
-                    <button class="rbtn-reset">Reset</button>
+                    <button class="rbtn-reset" onClick={clearStack}>Reset</button>
                   </div>
 
                   <div class='flex-container'>
