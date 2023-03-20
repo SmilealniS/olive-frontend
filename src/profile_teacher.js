@@ -31,6 +31,53 @@ const Teacher_Profile = () => {
         console.log('Identity', response);
         localStorage.setItem('username', response.Username);
       });
+
+    fetch('http://localhost:4000/olive/class/getbyTeacher?teacher=' + localStorage.getItem('teacher_id'))
+      .then(response => response.json())
+      .then(response => {
+        console.log('Class', response[0]);
+        localStorage.setItem('class', JSON.stringify(response[0]));
+
+        fetch('http://localhost:4000/olive/attendance/getbyClassId?classid=' + JSON.parse(localStorage.getItem('class'))._id)
+          .then(data => data.json())
+          .then(data => {
+            let classdate = [];
+            let contained;
+            for (let i = 0; i < data.result.length; i++) {
+              contained = true;
+              classdate.forEach(cd => {
+                if (cd == data.result[i].Class.Date) {
+                  // console.log('Date:', cd, data.result[i].Class.Date);
+                  contained = false;
+                }
+              })
+
+              if (contained) {
+                classdate.push(data.result[i].Class.Date);
+              }
+            }
+
+            console.log('totalclass:', classdate.length);
+            console.log('attendance:', data.result);
+            localStorage.setItem('attendance', JSON.stringify(data.result));
+            localStorage.setItem('totalclass', classdate.length);
+          })
+
+        fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + JSON.parse(localStorage.getItem('class'))._id)
+          .then(data => data.json())
+          .then(data => {
+            console.log('engagement:', data)
+            localStorage.setItem('engagement', JSON.stringify(data));
+            
+            let engage = 0;
+            for (let i = 0; i < data.length; i++) {
+              engage += data[i].Class.Engagement;
+            }
+            engage = engage / data.length;
+            console.log('percent:', engage)
+            localStorage.setItem('totalengagement', engage);
+          })
+      })
   }, []);
 
   return (

@@ -1,12 +1,65 @@
 import './class_info_teacher.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import back from './assets/class_info/backicon.png';
 import { text } from '@fortawesome/fontawesome-svg-core';
 
-const board = () => {
-  function chat() {
-    alert('Hi');
+const Classinfo_Teacher = () => {
+  var _ = require('lodash');
+
+  useEffect(() => {
+    function groupByDate(att) {
+      return _.mapValues(_.groupBy(att, 'Class.Date'),
+        clist => clist.map(car => _.omit(car, 'Class.Date')));
+    }
+
+    document.getElementById('engagementTable').innerHTML = '';
+    let engagement = JSON.parse(localStorage.getItem('engagement'));
+    let gengagement = groupByDate(JSON.parse(localStorage.getItem('engagement')));
+    let attendance = groupByDate(JSON.parse(localStorage.getItem('attendance')));
+    // console.log(Object.keys(attendance));
+    // console.log(attendance);
+
+    for (let i = 0; i < Object.keys(attendance).length; i++) {
+      let date = new Date(Object.keys(attendance)[i])
+      let en = 0;
+      // console.log(gengagement)
+      for (let j = 0; j < Object.keys(gengagement).length; j++) {
+        // console.log(Object.keys(gengagement)[j] == Object.keys(attendance)[i], Object.keys(gengagement)[j], Object.keys(attendance)[i])
+        if (Object.keys(gengagement)[j] == Object.keys(attendance)[i]) {
+          for (let k = 0; k < gengagement[Object.keys(gengagement)[j]].length; k++) {
+            // console.log( gengagement[ Object.keys(gengagement)[j] ] )
+            en += gengagement[Object.keys(gengagement)[j]][k].Class.Engagement;
+          }
+          en = en / gengagement[Object.keys(gengagement)[j]].length;
+        }
+      };
+
+      document.getElementById('engagementTable').innerHTML +=
+        `<div class="textTopic">${date.getDate()}/${date.getMonth()}/${date.getFullYear()}</div>
+      <div class="textTopic">${attendance[Object.keys(attendance)[i]].length}</div>
+      <div class="textTopic">${en}%</div>`
+    }
+  });
+
+  function joinMeeting() {
+    fetch('http://localhost:4000/olive/enroll/getbyClassID?classid=' + JSON.parse(localStorage.getItem('class'))._id)
+      .then(data => data.json())
+      .then(data => {
+        for (let i = 0; i < data[0].Student.length; i++) {
+          // console.log(data[0].Student[i])
+          fetch('http://localhost:4000/olive/attendance/create', {
+            method: 'POST',
+            body: {
+              "Student_Id": data[0].Student[i],
+              "Class": {
+                "Id": JSON.parse(localStorage.getItem('class'))._id
+              }
+            }
+          })
+        }
+      })
+    window.location.href = '/teachingUI'
   }
 
   return (
@@ -17,39 +70,48 @@ const board = () => {
             <div class="frame-box">
               <div class="header-box"><br></br>
                 <img class='pic-left-icon' src={require('./assets/olive_logo.png')}></img>
-                <a class="profile-name" href="http://localhost:3000/profile_teacher">
-                  Adele Jackson
-              </a>
+                <a style={{ textDecoration: 'none' }} class="profile-name" href="http://localhost:3000/profile_teacher">
+                  {/* Adele Jackson */}
+                  {localStorage.getItem('username')}
+                </a>
               </div>
-              
+
               <div class="mid-frame-box">
                 <div class="middle-box"><br></br>
                   <div class="class-id">
-                    ITCS 888
+                    {/* ITCS 888 */}
+                    {JSON.parse(localStorage.getItem('class')).Name}
                   </div>
-                  <a href="http://localhost:3000/teachingUI">
-                    <button class="join-btn">
-                      Create Meeting
-                    </button>
-                  </a>
+                  {/* <a href="http://localhost:3000/teachingUI"> */}
+                  <button class="join-btn" onClick={joinMeeting}>
+                    Create Meeting
+                  </button>
+                  {/* </a> */}
                   <div class="class-descrip">
-                    Computer Science : This class was added to the transcript to get people used to boolean logic.
+                    {/* Computer Science : This class was added to the transcript to get people used to boolean logic.
                     Which we had down in the first two weeks of the class. Unfortunately for us, unsuspecting students,
                     it goes pretty far down the rabbit hole. Here are some of the topics it covered: “
-                    logic, set and set operations, methods of proof, recursive definitions, combinatorics, and graph theory”.
+                    logic, set and set operations, methods of proof, recursive definitions, combinatorics, and graph theory”. */}
+                    {JSON.parse(localStorage.getItem('class')).Description}
                   </div>
                 </div>
               </div>
               <div class="midr-frame-box">
                 <div class="middler-box"><br></br>
                   <div class="textattend">Total Class</div>
-                  <div class="textNum">3/3</div>
+                  <div class="textNum">
+                    {/* 3 */}
+                    {localStorage.getItem('totalclass')}
+                  </div>
                 </div>
               </div>
               <div class="midr-frame-box">
                 <div class="middler-box"><br></br>
                   <div class="textpar">Engagement</div>
-                  <div class="textNum">93%</div>
+                  <div class="textNum">
+                    {/* 93% */}
+                    {localStorage.getItem('totalengagement')}%
+                  </div>
                 </div>
               </div>
               <div class="bottom-frame-box">
@@ -67,8 +129,8 @@ const board = () => {
                         <div class="textTopic-a">Attendance</div>
                         <div class="textTopic-p">Engagement</div>
                       </div>
-                      <div class="table-info">
-                        <div class="textTopic">13/02/2023</div>
+                      <div class="table-info" id='engagementTable'>
+                        {/* <div class="textTopic">13/02/2023</div>
                         <div class="textTopic">Absent</div>
                         <div class="textTopic">-</div>
                         <div class="textTopic">20/02/2023</div>
@@ -76,7 +138,7 @@ const board = () => {
                         <div class="textTopic">93%</div>
                         <div class="textTopic">27/03/2023</div>
                         <div class="textTopic">Checked</div>
-                        <div class="textTopic">92%</div>
+                        <div class="textTopic">92%</div> */}
                       </div>
                     </div>
                   </div>
@@ -241,6 +303,6 @@ const board = () => {
 
 
 
-export default (board);
+export default Classinfo_Teacher;
 
 

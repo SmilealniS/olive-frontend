@@ -36,11 +36,11 @@ const Student_Profile = () => {
               .then(response => response.json())
               .then(response => {
                 // console.log(localStorage.getItem('student_id'));
-                // console.log('Class:', response[0].Class);
+                console.log('Class:', response);
                 fetch('http://localhost:4000/olive/class/getbyId?_id=' + response[0].Class)
                   .then(data => data.json())
                   .then(data => {
-                    console.log('Class:', data[0]);
+                    // console.log('Class:', data[0]);
 
                     fetch('http://localhost:4000/olive/teacher-profile/getbyId?_id=' + data[0].Teacher[0])
                       .then(data => data.json())
@@ -51,6 +51,21 @@ const Student_Profile = () => {
 
                     localStorage.setItem('class', JSON.stringify(data[0]));
                     // console.log(JSON.parse(localStorage.getItem('class')));
+
+                    fetch('http://localhost:4000/olive/engagement/getbyStudentID?student=' + localStorage.getItem('student_id') + '&classid=' + data[0]._id)
+                      .then(data => data.json())
+                      .then(data => {
+                        console.log('engagement:', data);
+                        localStorage.setItem('engagement', JSON.stringify(data));
+
+                        let engage = 0;
+                        for(let i = 0; i < data.length; i++) {
+                          engage += data[i].Class.Engagement;
+                        }
+                        engage = engage / data.length;
+                        console.log('percent:', engage)
+                        localStorage.setItem('totalengagement', engage);
+                      })
                   });
               });
           })

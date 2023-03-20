@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './teachingUI.css';
+import './studyingUI.css';
 import { BsLightbulbFill } from 'react-icons/bs';
 import { BsLightbulb } from 'react-icons/bs';
 import ZoomMtgEmbedded from '@zoomus/websdk/embedded';
 
-const TeacherUI = ({ payload }) => {
+const StudentUI = ({ payload }) => {
   useEffect(async () => {
     var client = ZoomMtgEmbedded.createClient();
 
@@ -90,14 +90,16 @@ const TeacherUI = ({ payload }) => {
       }
 
       if (data != null) {
-        //   if (data.x < left) {
-        //   console.log('left');
-        // } else if (data.x > right) {
-        //   console.log('right');
-        // } else if (data.x > left && data.x < right) {
-        startLookTime = Number.POSITIVE_INFINITY;
-        // console.log('middle');
-        // }
+        if (data.x < left) {
+          startLookTime = Number.POSITIVE_INFINITY;
+          // console.log('left');
+        } else if (data.x > right) {
+          startLookTime = Number.POSITIVE_INFINITY;
+          // console.log('right');
+        } else if (data.x > left && data.x < right) {
+          startLookTime = Number.POSITIVE_INFINITY;
+          // console.log('middle');
+        }
 
         if (startLookTime + lookDelay < timestamp) {
           stop = true;
@@ -114,7 +116,7 @@ const TeacherUI = ({ payload }) => {
 
   return (
     <Fragment>
-      <body id='teachingUI'>
+      <body id='studyingUI'>
 
         {/* <button onClick={getSignature}>Join Meeting</button> */}
 
@@ -124,67 +126,6 @@ const TeacherUI = ({ payload }) => {
             <div class='screen' id='meetingSDKElement' ></div>
             <div class='grid-container' id='tt-tools'>
               <div class='grid-item' id='top-tools'></div>
-            </div>
-            <div class='flex-container' id='tools'>
-              <div class='' id='l-tools'>
-                <div class="left-zone">
-                  <div class="Bar-text">
-                    {/* <text class="l-text">Teaching Quality</text> */}
-                  </div>
-
-                  <div class='bar-multi'>
-                    {/* Bar area */}
-                    <div class='bar-area'>
-                      {/* Bar 1 */}
-                      <div class='surv-area'>
-                        <div class="barRate">Engagement</div>
-                        <button class="btn-reset">Reset</button>
-                      </div>
-                      {/* <div class="survbar"><div class="bar-1"></div></div> */}
-                      <div class='survpercent'>100%</div>
-
-                    </div>
-                    <div class='divided-line-2'></div>
-                    <div class='bar-area'>
-                      {/* Bar 2 */}
-                      <div class='surv-area'>
-                        <div class="barRate">Survival rating</div>
-                        <button class="btn-reset">Reset</button>
-                      </div>
-                      {/* <div class="survbar"><div class="bar-1"></div></div> */}
-                      <div class='lightbulb'>
-                        <BsLightbulbFill size='3em' color='gold' />
-                        <BsLightbulbFill size='3em' color='gold' />
-                        <BsLightbulbFill size='3em' color='gold' />
-                        <BsLightbulbFill size='3em' color='gold' />
-                        <BsLightbulb size='3em' color='gold' />
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-                <div class='divided-line'></div>
-
-                <div class="right-zone">
-                  <div class="Bar-text">
-                    <text class="r-text">Class Status</text>
-                    <button class="rbtn-reset">Reset</button>
-                  </div>
-
-                  <div class='flex-container'>
-                    <div class='emoji-stack'>
-                      <p class='emoji-item'>&#128513;</p>
-                      <p class='emoji-item'>&#128512;</p>
-                      <p class='emoji-item'>&#128528;</p>
-                      <p class='emoji-item'>&#128533;</p>
-                      <p class='emoji-item'>&#128544;</p>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
             </div>
 
           </div>
@@ -296,7 +237,7 @@ const TeacherUI = ({ payload }) => {
 
             {/* <div class='chat-footer'> */}
             {/* Send message */}
-            <div class='chat-message'>
+            <div class='std-chat-message'>
               <textarea class="sendtext" id="sendtext" placeholder="Type your message"></textarea>
               <button class="send">Send</button>
             </div>
@@ -318,4 +259,4 @@ const TeacherUI = ({ payload }) => {
 
 }
 
-export default TeacherUI;
+export default StudentUI;

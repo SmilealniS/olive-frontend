@@ -71,46 +71,46 @@ const TeacherUI = ({ payload }) => {
     // 
   }
 
-  function gazeDetection() {
-    window.saveDataAcrossSessions = false;
+  // function gazeDetection() {
+  //   window.saveDataAcrossSessions = false;
 
-    const webgazer = window.webgazer;
-    const lookDelay = 60000 // 60 second = 1 minute
-    let left = window.innerWidth / 4;
-    let right = window.innerWidth - window.innerWidth / 4;
-    let startLookTime;
-    let stop = false;
-    let count = 0;
+  //   const webgazer = window.webgazer;
+  //   const lookDelay = 60000 // 60 second = 1 minute
+  //   let left = window.innerWidth / 4;
+  //   let right = window.innerWidth - window.innerWidth / 4;
+  //   let startLookTime;
+  //   let stop = false;
+  //   let count = 0;
 
-    webgazer.setGazeListener((data, timestamp) => {
-      if (stop || count > 999) {
-        // alert('STOP');
-        webgazer.pause();
-        return;
-      }
+  //   webgazer.setGazeListener((data, timestamp) => {
+  //     if (stop || count > 999) {
+  //       // alert('STOP');
+  //       webgazer.pause();
+  //       return;
+  //     }
 
-      if (data != null) {
-        //   if (data.x < left) {
-        //   console.log('left');
-        // } else if (data.x > right) {
-        //   console.log('right');
-        // } else if (data.x > left && data.x < right) {
-        startLookTime = Number.POSITIVE_INFINITY;
-        // console.log('middle');
-        // }
+  //     if (data != null) {
+  //       //   if (data.x < left) {
+  //       //   console.log('left');
+  //       // } else if (data.x > right) {
+  //       //   console.log('right');
+  //       // } else if (data.x > left && data.x < right) {
+  //       startLookTime = Number.POSITIVE_INFINITY;
+  //       // console.log('middle');
+  //       // }
 
-        if (startLookTime + lookDelay < timestamp) {
-          stop = true;
-        }
-      } else count++;
+  //       if (startLookTime + lookDelay < timestamp) {
+  //         stop = true;
+  //       }
+  //     } else count++;
 
 
-    }).begin();
+  //   }).begin();
 
-    webgazer.showVideoPreview(false).showPredictionPoints(false);
-  }
+  //   webgazer.showVideoPreview(false).showPredictionPoints(false);
+  // }
 
-  setInterval(gazeDetection, 600000);
+  // setInterval(gazeDetection, 600000);
 
   return (
     <Fragment>
