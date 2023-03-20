@@ -40,12 +40,12 @@ const Classinfo_Student = () => {
           .then(response => {
             // console.log('attendance')
             // console.log(response);
+            window.location.href = '/studyingUI'
           })
           .catch(error => {
             alert('Today class not start yet')
           })
       })
-    window.location.href = '/studyingUI'
   }
 
   return (

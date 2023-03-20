@@ -61,14 +61,98 @@ const StudentUI = ({ payload }) => {
       })
     }
 
+    function updateChat() {
+      document.getElementById('chatTable').innerHTML = '';
+      fetch('http://localhost:4000/olive/interact/getbyType?type=chat&classid=' + JSON.parse(localStorage.getItem('class'))._id)
+        .then(data => data.json())
+        .then(data => {
+          // console.log(localStorage.getItem('teacher_id'))
+          // console.log(data)
+          for (let i = 0; i < data.length; i++) {
+            // console.log(data[i])
+            let date = new Date(data[i].Time);
+            let time = ''
+            time += date.getHours() > 9 ? '' : '0'
+            time += (date.getHours() + ':')
+            time += date.getMinutes() > 9 ? '' : '0'
+            time += date.getMinutes()
+
+            // console.log(date.getHours(), date.getMinutes());
+            fetch('http://localhost:4000/olive/student-profile/getbyId?_id=' + data[i].Student)
+              .then(sender => sender.json())
+              .then(sender => {
+                // console.log(sender.Display_Name)
+                if (data[i].Student == localStorage.getItem('student_id')) {
+                  document.getElementById('chatTable').innerHTML +=
+                    `<div class="me">
+                    <div class="entete">
+                      <b>${sender.Display_Name} &nbsp;</b>
+                      <p>${time} &nbsp;</p>
+                    </div>
+                    <div class="message">
+                      ${data[i].Description}
+                    </div>
+                  </div>`
+                } else {
+                  document.getElementById('chatTable').innerHTML +=
+                    `<div class="you">
+                  <div class="entete">
+                    <b>${sender.Display_Name} &nbsp;</b>
+                    <p>${time} &nbsp;</p>
+                  </div>
+                  <div class="message">
+                    ${data[i].Description}
+                  </div>
+                </div>`
+                }
+              });
+
+          }
+        });
+    }
+
+    updateChat();
+    setInterval(updateChat, 60000);
+
   }, [])
 
-  function sendEmoji() {
-    alert('Send emoji');
+  const sendEmoji = event => {
+    // alert(event.currentTarget.id)
+    let data = {
+      Student: localStorage.getItem('student_id'),
+      Class: JSON.parse(localStorage.getItem('class'))._id,
+      Type: "emoji",
+      Emoji: event.currentTarget.id
+    };
+
+    fetch('http://localhost:4000/olive/interact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(resp => resp.json()).then(resp => { console.log(resp) }).catch(error => {
+      console.log(error)
+      alert('Cannot send emoji')
+    })
   }
 
-  function toggleMic() {
-    // 
+  function sendMessage() {
+    if (document.getElementById('sendtext').value == '') return;
+
+    let data = {
+      Student: localStorage.getItem('student_id'),
+      Class: JSON.parse(localStorage.getItem('class'))._id,
+      Type: "chat",
+      Description: document.getElementById('sendtext').value
+    };
+
+    fetch('http://localhost:4000/olive/interact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(resp => resp.json()).then(resp => { console.log(resp) }).catch(error => {
+      console.log(error)
+      alert('Cannot send message')
+    })
   }
 
   function gazeDetection() {
@@ -86,6 +170,20 @@ const StudentUI = ({ payload }) => {
       if (stop || count > 999) {
         // alert('STOP');
         webgazer.pause();
+        let data = {
+          Student: localStorage.getItem('student_id'),
+          Class: JSON.parse(localStorage.getItem('class'))._id,
+          Type: "gaze",
+          Boolean: stop ? true : false
+        };
+
+        fetch('http://localhost:4000/olive/interact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        }).then(resp => resp.json()).then(resp => { console.log(resp) }).catch(error => {
+          console.log(error)
+        })
         return;
       }
 
@@ -112,6 +210,7 @@ const StudentUI = ({ payload }) => {
     webgazer.showVideoPreview(false).showPredictionPoints(false);
   }
 
+  gazeDetection();
   setInterval(gazeDetection, 600000);
 
   return (
@@ -125,7 +224,7 @@ const StudentUI = ({ payload }) => {
           <div class='' id='display' >
             <div class='screen' id='meetingSDKElement' ></div>
             <div class='grid-container' id='tt-tools'>
-              <div class='grid-item' id='top-tools'></div>
+              <div class='grid-item' id='std-top-tools'></div>
             </div>
 
           </div>
@@ -138,9 +237,9 @@ const StudentUI = ({ payload }) => {
 
             <div id="container">
 
-              <div class="chat">
+              <div class="chat" id='chatTable'>
 
-                <div class="you">
+                {/* <div class="you">
                   <div class="entete">
                     <b>Cloud178 &nbsp;</b>
                     <p>09:07AM, Today &nbsp;</p>
@@ -230,7 +329,7 @@ const StudentUI = ({ payload }) => {
                   <div class="message">
                     +1
                   </div>
-                </div>
+                </div> */}
 
               </div>
             </div>
@@ -239,16 +338,16 @@ const StudentUI = ({ payload }) => {
             {/* Send message */}
             <div class='std-chat-message'>
               <textarea class="sendtext" id="sendtext" placeholder="Type your message"></textarea>
-              <button class="send">Send</button>
+              <button class="send" onClick={sendMessage}>Send</button>
             </div>
 
             {/* Emoji */}
             <div class='chat-emoji'>
-              <button class='emoji-button' onClick={sendEmoji}>&#128513;</button>
-              <button class='emoji-button' onClick={sendEmoji}>&#128512;</button>
-              <button class='emoji-button' onClick={sendEmoji}>&#128528;</button>
-              <button class='emoji-button' onClick={sendEmoji}>&#128533;</button>
-              <button class='emoji-button' onClick={sendEmoji}>&#128544;</button>
+              <button class='emoji-button' id='63f6aa43c64dc707bf25c533' onClick={sendEmoji}>&#128513;</button>
+              <button class='emoji-button' id='63f6aa43c64dc707bf25c534' onClick={sendEmoji}>&#128512;</button>
+              <button class='emoji-button' id='63f6aa43c64dc707bf25c535' onClick={sendEmoji}>&#128528;</button>
+              <button class='emoji-button' id='63f6aa43c64dc707bf25c536' onClick={sendEmoji}>&#128533;</button>
+              <button class='emoji-button' id='63f6aa43c64dc707bf25c537' onClick={sendEmoji}>&#128544;</button>
             </div>
             {/* </div> */}
           </div>

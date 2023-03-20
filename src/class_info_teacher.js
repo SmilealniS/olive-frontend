@@ -14,7 +14,6 @@ const Classinfo_Teacher = () => {
     }
 
     document.getElementById('engagementTable').innerHTML = '';
-    let engagement = JSON.parse(localStorage.getItem('engagement'));
     let gengagement = groupByDate(JSON.parse(localStorage.getItem('engagement')));
     let attendance = groupByDate(JSON.parse(localStorage.getItem('attendance')));
     // console.log(Object.keys(attendance));
@@ -23,12 +22,13 @@ const Classinfo_Teacher = () => {
     for (let i = 0; i < Object.keys(attendance).length; i++) {
       let date = new Date(Object.keys(attendance)[i])
       let en = 0;
-      // console.log(gengagement)
+      console.log('engagement group:', gengagement)
       for (let j = 0; j < Object.keys(gengagement).length; j++) {
         // console.log(Object.keys(gengagement)[j] == Object.keys(attendance)[i], Object.keys(gengagement)[j], Object.keys(attendance)[i])
         if (Object.keys(gengagement)[j] == Object.keys(attendance)[i]) {
+          console.log('detail engagement:', gengagement[ Object.keys(gengagement)[j] ] )
           for (let k = 0; k < gengagement[Object.keys(gengagement)[j]].length; k++) {
-            // console.log( gengagement[ Object.keys(gengagement)[j] ] )
+            console.log('gg:', gengagement[Object.keys(gengagement)[j]][k])
             en += gengagement[Object.keys(gengagement)[j]][k].Class.Engagement;
           }
           en = en / gengagement[Object.keys(gengagement)[j]].length;

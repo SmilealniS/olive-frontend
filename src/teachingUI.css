@@ -35,6 +35,7 @@ body#teachingUI {
     margin-left: 5px;
     margin-right: auto;
     width: auto;
+    margin-top: -17vh;
 }
 
 .lightbulb {
@@ -332,7 +333,12 @@ body#teachingUI {
 } */
 
 .chat-message > .send {
-    border: 3px palegreen solid;
+    border: 2px rgb(202, 0, 0) solid;
+    font-size: 10px;
+    width: 70px;
+    height: 35px;
+    margin-top: 0%;
+    margin-left: 5px;
 }
 
 /* .chat-footer .chat-emoji {

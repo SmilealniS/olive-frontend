@@ -186,12 +186,12 @@ body#studyingUI {
     margin-left: 1vh;
 }
 
-#top-tools {
+#std-top-tools {
     border: 2px solid black;
     border-radius: 10px;
     background-color: grey;
-    height: 98vh;
-    margin-top: -99vh;
+    height: 97vh;
+    margin-top: -81vh;
 }
 
 .zone-line {
