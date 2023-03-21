@@ -7,7 +7,7 @@ import { keyboard } from '@testing-library/user-event/dist/keyboard';
 const Login = () => {
   async function login() {
     localStorage.clear();
-    let url = 'http://localhost:4000/login';
+    let url = 'http://localhost:4000/';
     let user = {
       username: document.getElementById('username').value,
       password: document.getElementById('password').value

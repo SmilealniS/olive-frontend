@@ -156,7 +156,7 @@ const Admin_Profile = () => {
                 </div>
 
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_admin">
+                  <a href="http://localhost:3000/profile_admin" style={{ 'text-decoration':'none', 'color':'black' }}>
                     <img class="l-icon-pic" src={human}></img>
                     <div class="l-info-text-std">
                       Profile
@@ -176,7 +176,7 @@ const Admin_Profile = () => {
                   </div>
                 </div> */}
                 <div class="grid">
-                  <a href="http://localhost:3000/adminReport_list">
+                  <a href="http://localhost:3000/adminReport_list" style={{ 'text-decoration':'none', 'color':'black' }}>
                     <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text">
                       Report Cards

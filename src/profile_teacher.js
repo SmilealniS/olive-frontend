@@ -242,7 +242,7 @@ const Teacher_Profile = () => {
                   </div>
                 </div> */}
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_teacher">
+                  <a href="http://localhost:3000/profile_teacher" style={{ 'text-decoration':'none', 'color':'black' }}>
                     <img class="l-icon-pic" src={human}></img>
                     <div class="l-info-text-teac">
                       Profile
@@ -250,7 +250,7 @@ const Teacher_Profile = () => {
                   </a>
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/class_info_teacher">
+                  <a href="http://localhost:3000/class_info_teacher" style={{ 'text-decoration':'none', 'color':'black' }}>
                     <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-teac">
                       Course
@@ -258,7 +258,7 @@ const Teacher_Profile = () => {
                   </a>
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_teacher_report">
+                  <a href="http://localhost:3000/profile_teacher_report" style={{ 'text-decoration':'none', 'color':'black' }}>
                     <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-teac">
                       Report

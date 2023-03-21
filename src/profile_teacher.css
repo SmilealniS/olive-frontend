@@ -140,7 +140,30 @@ body#profile_teacher {
     cursor: pointer;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
 }
+.l-box-edit {
+    box-sizing: border-box;
+    position: relative;
+    background: rgb(255, 255, 255);
+    width: 250px;
+    height: 650px;
+    left: 1.5%;
+    margin-top: -55%;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+}
 .bottom-box {
+    box-sizing: border-box;
+    position: relative;
+    background: #F9F8F9;
+    width: 250px;
+    height: 60px;
+    top: 56%;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    
+}
+.bottom-box-edit {
     box-sizing: border-box;
     position: relative;
     background: #F9F8F9;
@@ -188,6 +211,13 @@ body#profile_teacher {
     margin-left: 44px;
     margin-bottom: 20px;
     font-family: 'DM Sans';
+}
+.head-teac-edit{
+    font-size: 24px;
+    margin-left: 44px;
+    margin-bottom: 20px;
+    font-family: 'DM Sans';
+    margin-top: -55%;
 }
 
 

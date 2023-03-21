@@ -240,7 +240,7 @@ const Student_Profile = () => {
                   </div>
                 </div> */}
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_student" >
+                  <a href="http://localhost:3000/profile_student" style={{ 'text-decoration':'none', 'color':'black' }}>
                     <img class="l-icon-pic" src={human}></img>
                     <div class="l-info-text-std" >
                       Profile
@@ -248,7 +248,7 @@ const Student_Profile = () => {
                   </a>
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/class_info_student">
+                  <a href="http://localhost:3000/class_info_student" style={{ 'text-decoration':'none', 'color':'black' }}>
                     <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-std">
                       Course

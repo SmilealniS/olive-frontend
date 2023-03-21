@@ -217,14 +217,14 @@ const Teacher_Profile_Edit = () => {
                 </button>
               {/* </a> */}
             </div>
-            <div class="l-box">
+            <div class="l-box-edit">
               <div class="top-zone">
-                <div class="head-teac"><br></br>
+                <div class="head-teac-edit"><br></br>
                   OLIVE Teacher
                 </div>
 
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_teacher">
+                  <a href="http://localhost:3000/profile_teacher" style={{ 'text-decoration':'none', 'color':'black' }}>
                     <img class="l-icon-pic" src={human}></img>
                     <div class="l-info-text-teac">
                       Profile
@@ -232,7 +232,7 @@ const Teacher_Profile_Edit = () => {
                   </a>
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/class_info_teacher">
+                  <a href="http://localhost:3000/class_info_teacher" style={{ 'text-decoration':'none', 'color':'black' }}>
                     <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-teac">
                       Course
@@ -240,16 +240,15 @@ const Teacher_Profile_Edit = () => {
                   </a>
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_teacher_report">
+                  <a href="http://localhost:3000/profile_teacher_report" style={{ 'text-decoration':'none', 'color':'black' }}>
                     <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-teac">
                       Report
                     </div></a>
-
                 </div>
 
               </div>
-              <div class="bottom-box"><br></br>
+              <div class="bottom-box-edit"><br></br>
                 <img class='pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                 <div class="l-text1">
                   {/* Adele Jackson */}

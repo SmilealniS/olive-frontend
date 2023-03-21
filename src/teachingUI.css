@@ -60,7 +60,7 @@ body#teachingUI {
     border-radius: 10px;
     background-color: grey;
     height: 16vh;
-    width: 99%;
+    width:102%;
     display: inline-flex;
     justify-content: space-between;
 }
@@ -203,6 +203,7 @@ body#teachingUI {
     border-radius: 10px;
     background-color: grey;
     height: 79vh;
+    width: 148vh;
     margin-bottom: 2vh;
 }
 
@@ -289,6 +290,11 @@ body#teachingUI {
     background-color: #6fbced;
 }
 
+
+.frame-chat{
+    width: 58vh;
+    margin-left: 6vh;
+}
 .chat-footer {
     /* display: inline-flex; */
     /* flex-direction: column; */
@@ -327,7 +333,7 @@ body#teachingUI {
     font-size: 16px;
     margin: 0;
     padding: 8px 16px;
-    width: 25vw;
+    width: 22vw;
     height: 5vh;
     border-radius: 3px;
 }

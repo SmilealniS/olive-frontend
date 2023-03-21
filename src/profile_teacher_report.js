@@ -59,11 +59,11 @@ const board = () => {
             </div>
             <div class="l-box-report">
               <div class="top-zone">
-                <div class="head-teac"><br></br>
+                <div class="head-teac-rpt"><br></br>
                   OLIVE Teacher
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_teacher">
+                  <a href="http://localhost:3000/profile_teacher" style={{ 'text-decoration':'none', 'color':'black' }}>
                     <img class="l-icon-pic" src={human}></img>
                     <div class="l-info-text-teac">
                       Profile
@@ -71,7 +71,7 @@ const board = () => {
                   </a>
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/class_info_teacher">
+                  <a href="http://localhost:3000/class_info_teacher" style={{ 'text-decoration':'none', 'color':'black' }}>
                     <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-teac">
                       Course
@@ -79,7 +79,7 @@ const board = () => {
                   </a>
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_teacher_report">
+                  <a href="http://localhost:3000/profile_teacher_report" style={{ 'text-decoration':'none', 'color':'black' }}>
                     <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-teac">
                       Report
