@@ -59,10 +59,13 @@ body#teachingUI {
     border: 2px solid black;
     border-radius: 10px;
     background-color: grey;
-    height: 16vh;
-    width:102%;
+    height: 15vh;
+    width: 69.5vw;
+    align-items: end;
     display: inline-flex;
     justify-content: space-between;
+    margin-top: 83vh;
+    position: absolute;
 }
 
 .left-zone {
@@ -203,7 +206,7 @@ body#teachingUI {
     border-radius: 10px;
     background-color: grey;
     height: 79vh;
-    width: 148vh;
+    width: 120vh;
     margin-bottom: 2vh;
 }
 
@@ -217,6 +220,7 @@ body#teachingUI {
 #chat {
     background: #eff3f7;
     height: 100vh;
+    width: 30vw;
 }
 
 .chat-top {
@@ -238,6 +242,7 @@ body#teachingUI {
     border-radius: 5px;
     overflow-y: scroll;
     height: 85vh;
+    width: 30vw;
     list-style: none;
 }
 
@@ -246,7 +251,7 @@ body#teachingUI {
     border-top: 2px solid #fff;
     border-bottom: 2px solid #fff;
     border-radius: 2px;
-    width: 100%;
+    width: 150%;
 }
 
 #container > .chat b, #container > .chat p {
@@ -264,19 +269,20 @@ body#teachingUI {
     padding: 20px;
     color: #fff;
     line-height: 10px;
-    max-width: 90%;
     display: inline-block;
     text-align: left;
     border-radius: 7px;
 }
 
 #container > .chat > .you {
+    width: 30vw;
     padding: 10px 30px;
     background-color: white;
     text-align: left;
 }
 
 #container > .chat > .me {
+    width: 30vw;
     padding: 10px 30px;
     background-color: white;
     text-align: right;
@@ -292,8 +298,8 @@ body#teachingUI {
 
 
 .frame-chat{
-    width: 58vh;
-    margin-left: 6vh;
+    width: 61vh;
+    margin-left: 3vh;
 }
 .chat-footer {
     /* display: inline-flex; */
@@ -356,7 +362,7 @@ body#teachingUI {
     width: 70px;
     height: 35px;
     margin-top: 0%;
-    margin-left: 5px;
+    margin-left: -7px;
 }
 
 /* .chat-footer .chat-emoji {

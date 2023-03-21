@@ -281,7 +281,7 @@ const TeacherUI = ({ payload }) => {
           <div class='' id='display' >
             <div class='screen' id='meetingSDKElement' ></div>
             <div class='grid-container' id='tt-tools'>
-              <div class='grid-item' id='top-tools'></div>
+              {/* <div class='grid-item' id='top-tools'></div> */}
             </div>
             <div class='flex-container' id='tools'>
               <div class='' id='l-tools'>

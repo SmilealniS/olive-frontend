@@ -235,7 +235,7 @@ const StudentUI = ({ payload }) => {
           </div>
 
           {/* chat */}
-          <div id='chat'>
+          <div id='chat' class="frame-chat">
             <div class='chat-top'>
               <h2>Chat</h2>
             </div>
