@@ -1,12 +1,47 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './studyingUI.css';
 import { BsLightbulbFill } from 'react-icons/bs';
 import { BsLightbulb } from 'react-icons/bs';
 import ZoomMtgEmbedded from '@zoomus/websdk/embedded';
+import { parse, stringify, toJSON, fromJSON } from 'flatted';
+import { io } from "socket.io-client";
 
 const StudentUI = ({ payload }) => {
-  useEffect(async () => {
+  const [active, setActive] = useState([]);
+
+  // const [chats, setChats] = useState();
+
+  const socket = useRef();
+
+  var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
+  var user = {
+    username: localStorage.getItem('username') == undefined ? '' : localStorage.getItem('username'),
+    name: localStorage.getItem('name') == undefined ? '' : localStorage.getItem('name'),
+    surname: localStorage.getItem('surname') == undefined ? '' : localStorage.getItem('surname'),
+    email: localStorage.getItem('email') == undefined ? '' : localStorage.getItem('email'),
+    phone: localStorage.getItem('phone') == undefined ? '' : localStorage.getItem('phone'),
+    track: localStorage.getItem('majortrack') == undefined ? '' : localStorage.getItem('majortrack'),
+    displayname: localStorage.getItem('displayname') == undefined ? '' : localStorage.getItem('displayname'),
+  };
+  var student_id = localStorage.getItem('student_id') == undefined ? '' : localStorage.getItem('student_id');
+  var teacher = localStorage.getItem('teacher') == undefined ? '' : localStorage.getItem('teacher');
+  var classroom = JSON.parse(localStorage.getItem('class')) == null ? {
+    _id: '',
+    Name: 'ITCS888',
+    Description: 'This is temp class for testing process'
+  } : JSON.parse(localStorage.getItem('class'));
+
+  useEffect(() => {
+    socket.current = io("http://localhost:4000");
+    socket.current.emit('add-user', [student_id, 'student']);
+    socket.current.on('get-user', (user) => {
+      console.log('Active:', user);
+      setActive(user);
+    })
+  }, []);
+
+  const myFunction = async () => {
     var client = ZoomMtgEmbedded.createClient();
 
     fetch(payload.signatureEndpoint, {
@@ -61,13 +96,84 @@ const StudentUI = ({ payload }) => {
       })
     }
 
-    function updateChat() {
-      document.getElementById('chatTable').innerHTML = '';
-      fetch('http://localhost:4000/olive/interact/getbyType?type=chat&classid=' + JSON.parse(localStorage.getItem('class'))._id)
+  };
+
+  useEffect(() => {
+    myFunction();
+    init();
+  }, [])
+
+  const init = () => {
+    document.getElementById('chatTable').innerHTML = '';
+
+    fetch('http://localhost:4000/olive/interact/getbyType?type=chat&classid=' + JSON.parse(localStorage.getItem('class'))._id)
+      .then(data => data.json())
+      .then(data => {
+        // console.log(localStorage.getItem('teacher_id'))
+        console.log('initChat:', data)
+
+        for (let i = 0; i < data.length; i++) {
+          // console.log(data[i])
+          let date = new Date(data[i].Time);
+          let time = ''
+          time += date.getHours() > 9 ? '' : '0'
+          time += (date.getHours() + ':')
+          time += date.getMinutes() > 9 ? '' : '0'
+          time += date.getMinutes()
+
+          // console.log(date.getHours(), date.getMinutes());
+
+          if (data[i].Student == student_id) {
+            console.log(user.displayname)
+            document.getElementById('chatTable').innerHTML +=
+              `<div class="me">
+                  <div class="entete">
+                    <b>${user.displayname} &nbsp;</b>
+                    <p>${time} &nbsp;</p>
+                  </div>
+                  <div class="message">
+                    ${data[i].Description}
+                  </div>
+                </div>`
+          } else {
+            fetch('http://localhost:4000/olive/student-profile/getbyId?_id=' + data[i].Student)
+              .then(sender => sender.json())
+              .then(sender => {
+                console.log('get student profile')
+
+                console.log(sender.Display_Name)
+                document.getElementById('chatTable').innerHTML +=
+                  `<div class="you">
+                    <div class="entete">
+                      <b>${sender.Display_Name == undefined ? teacher : sender.Display_Name} &nbsp;</b>
+                      <p>${time} &nbsp;</p>
+                    </div>
+                    <div class="message">
+                      ${data[i].Description}
+                    </div>
+                  </div>`
+
+              })
+              .catch(error => {
+                console.log('error', error)
+              });
+          }
+
+        }
+      });
+
+  }
+
+  useEffect(() => {
+    socket.current.on('msg-recieve', (chat) => {
+
+      fetch(`http://localhost:4000/olive/interact/getbyType?type=chat&classid=${classroom._id}`)
         .then(data => data.json())
         .then(data => {
-          // console.log(localStorage.getItem('teacher_id'))
-          // console.log(data)
+          document.getElementById('chatTable').innerHTML = '';
+
+          console.log('Chat:', data)
+
           for (let i = 0; i < data.length; i++) {
             // console.log(data[i])
             let date = new Date(data[i].Time);
@@ -78,49 +184,57 @@ const StudentUI = ({ payload }) => {
             time += date.getMinutes()
 
             // console.log(date.getHours(), date.getMinutes());
-            fetch('http://localhost:4000/olive/student-profile/getbyId?_id=' + data[i].Student)
-              .then(sender => sender.json())
-              .then(sender => {
-                // console.log(sender.Display_Name)
-                if (data[i].Student == localStorage.getItem('student_id')) {
-                  document.getElementById('chatTable').innerHTML +=
-                    `<div class="me">
+
+            if (data[i].Student == student_id) {
+              // console.log(user.displayname)
+              document.getElementById('chatTable').innerHTML +=
+                `<div class="me">
                     <div class="entete">
-                      <b>${localStorage.getItem('displayname')} &nbsp;</b>
+                      <b>${user.displayname} &nbsp;</b>
                       <p>${time} &nbsp;</p>
                     </div>
                     <div class="message">
                       ${data[i].Description}
                     </div>
                   </div>`
-                } else {
+            } else {
+              fetch('http://localhost:4000/olive/student-profile/getbyId?_id=' + data[i].Student)
+                .then(sender => sender.json())
+                .then(sender => {
+                  console.log('get student profile')
+
+                  console.log(sender.Display_Name)
                   document.getElementById('chatTable').innerHTML +=
                     `<div class="you">
-                  <div class="entete">
-                    <b>${sender.Display_Name} &nbsp;</b>
-                    <p>${time} &nbsp;</p>
-                  </div>
-                  <div class="message">
-                    ${data[i].Description}
-                  </div>
-                </div>`
-                }
-              });
+                      <div class="entete">
+                        <b>${sender.Display_Name == undefined ? teacher : sender.Display_Name} &nbsp;</b>
+                        <p>${time} &nbsp;</p>
+                      </div>
+                      <div class="message">
+                        ${data[i].Description}
+                      </div>
+                    </div>`
+
+                });
+            }
 
           }
         });
-    }
 
-    updateChat();
-    setInterval(updateChat, 30000);
 
-  }, [])
+    });
+
+  }, []);
+
+  function leaveMeeting() {
+    alert('Leave')
+  }
 
   const sendEmoji = event => {
     // alert(event.currentTarget.id)
     let data = {
-      Student: localStorage.getItem('student_id'),
-      Class: JSON.parse(localStorage.getItem('class'))._id,
+      Student: student_id,
+      Class: classroom._id,
       Type: "emoji",
       Emoji: event.currentTarget.id
     };
@@ -128,19 +242,24 @@ const StudentUI = ({ payload }) => {
     fetch('http://localhost:4000/olive/interact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    }).then(resp => resp.json()).then(resp => { console.log(resp) }).catch(error => {
-      console.log(error)
-      alert('Cannot send emoji')
+      body: stringify(data)
     })
+      .then(resp => resp.json())
+      .then(resp => {
+        // console.log(resp) 
+      })
+      .catch(error => {
+        console.log(error)
+        alert('Cannot send emoji')
+      })
   }
 
   function sendMessage() {
     if (document.getElementById('sendtext').value == '') return;
 
     let data = {
-      Student: localStorage.getItem('student_id'),
-      Class: JSON.parse(localStorage.getItem('class'))._id,
+      Student: student_id,
+      Class: classroom._id,
       Type: "chat",
       Description: document.getElementById('sendtext').value
     };
@@ -149,17 +268,84 @@ const StudentUI = ({ payload }) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
-    }).then(resp => resp.json()).then(resp => { console.log(resp) }).catch(error => {
-      console.log(error)
-      alert('Cannot send message')
+    }).then(resp => resp.json())
+      .then(resp => {
+        // console.log(resp);
+        try {
+          // fetch(`http://localhost:4000/olive/interact/getbyType?type=chat&classid=${classroom._id}`)
+          //   .then(data => data.json())
+          //   .then(data => {
+          //     setChats(data);
+
+          //   });
+
+          let temp = document.getElementById('sendtext');
+          temp.value = '';
+
+          socket.current.emit('send-msg', data)
+
+        } catch (error) {
+          console.log(error)
+        }
+
+      })
+      .catch(error => {
+        console.log(error)
+        alert('Cannot send message')
+      })
+
+  }
+
+  function sendGaze(stop) {
+    let data = {
+      Student: student_id,
+      Class: classroom._id,
+      Type: "gaze",
+      Boolean: stop
+    };
+    // console.log('Gaze:', data)
+
+    fetch('http://localhost:4000/olive/interact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: stringify(data)
     })
+      .then(resp => resp.json())
+      .then(resp => {
+        // console.log(resp)
+        updateEngagement(resp.insertedId)
+      })
+  }
+
+  function updateEngagement(log) {
+    let logs = {
+      Interaction_Log: log
+    };
+    // console.log('Log:', logs);
+
+    try {
+      fetch(`http://localhost:4000/olive/engagement/addLog?student=${student_id}&class=${classroom._id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(logs)
+      })
+        .then(data => data.json())
+        .then(data => {
+          console.log(data)
+        }).catch(error => {
+          console.log(error)
+        })
+    } catch {
+      // 
+    }
+
   }
 
   function gazeDetection() {
     window.saveDataAcrossSessions = false;
 
     const webgazer = window.webgazer;
-    const lookDelay = 60000 // 60 second = 1 minute
+    const lookDelay = 10000 // 10 second 
     let left = window.innerWidth / 4;
     let right = window.innerWidth - window.innerWidth / 4;
     let startLookTime;
@@ -167,46 +353,16 @@ const StudentUI = ({ payload }) => {
     let count = 0;
 
     webgazer.setGazeListener((data, timestamp) => {
-      if (stop || count > 999) {
-        // alert('STOP');
+      if (count > lookDelay) {
         webgazer.pause();
-        let data = {
-          Student: localStorage.getItem('student_id'),
-          Class: JSON.parse(localStorage.getItem('class'))._id,
-          Type: "gaze",
-          Boolean: stop ? true : false
-        };
-
-        fetch('http://localhost:4000/olive/interact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        })
-        .then(resp => resp.json())
-        .then(resp => { 
-          console.log(resp) 
-        })
-        .catch(error => {
-          console.log(error)
-        })
+        sendGaze(false);
         return;
       }
 
       if (data != null) {
-        if (data.x < left) {
-          startLookTime = Number.POSITIVE_INFINITY;
-          // console.log('left');
-        } else if (data.x > right) {
-          startLookTime = Number.POSITIVE_INFINITY;
-          // console.log('right');
-        } else if (data.x > left && data.x < right) {
-          startLookTime = Number.POSITIVE_INFINITY;
-          // console.log('middle');
-        }
-
-        if (startLookTime + lookDelay < timestamp) {
-          stop = true;
-        }
+        webgazer.pause();
+        sendGaze(true);
+        return;
       } else count++;
 
 
@@ -216,21 +372,20 @@ const StudentUI = ({ payload }) => {
   }
 
   gazeDetection();
-  setInterval(gazeDetection, 600000);
+  setInterval(gazeDetection, 60000); //  1 min
+
+  const toggleLight = event => {
+    socket.current.emit('toggle-light', event.currentTarget.id)
+  }
 
   return (
     <Fragment>
       <body id='studyingUI'>
-
-        {/* <button onClick={getSignature}>Join Meeting</button> */}
-
         <div class="wrapup">
           {/* display */}
           <div class='' id='display' >
             <div class='screen' id='meetingSDKElement' ></div>
-            {/* <div class='grid-container' id='tt-tools'>
-              <div class='grid-item' id='std-top-tools'></div>
-            </div> */}
+
 
           </div>
 
@@ -242,104 +397,9 @@ const StudentUI = ({ payload }) => {
 
             <div id="container">
 
-              <div class="chat" id='chatTable'>
-
-                {/* <div class="you">
-                  <div class="entete">
-                    <b>Cloud178 &nbsp;</b>
-                    <p>09:07AM, Today &nbsp;</p>
-                  </div>
-                  <div class="message">
-                    Good morning ka
-                  </div>
-                </div>
-
-                <div class="you">
-                  <div class="entete">
-                    <b>Anagram473 &nbsp;</b>
-                    <p>09:07AM, Today &nbsp;</p>
-                  </div>
-                  <div class="message">
-                    Good morning krub
-                  </div>
-                </div>
-
-                <div class="you">
-                  <div class="entete">
-                    <b>Cloud178 &nbsp;</b>
-                    <p>09:42AM, Today &nbsp;</p>
-                  </div>
-                  <div class="message">
-                    Teacher, can you speak slower?
-                  </div>
-                </div>
-
-                <div class="you">
-                  <div class="entete">
-                    <b>SxYuki982 &nbsp;</b>
-                    <p>09:57AM, Today &nbsp;</p>
-                  </div>
-                  <div class="message">
-                    I miss the last part
-                  </div>
-                </div>
-
-                <div class="you">
-                  <div class="entete">
-                    <b>Cheep729 &nbsp;</b>
-                    <p>10:02AM, Today &nbsp;</p>
-                  </div>
-                  <div class="message">
-                    ...
-                  </div>
-                </div>
-
-                <div class="me">
-                  <div class="entete">
-                    <p>10:07AM, Today</p>
-                    <b>&nbsp; Sharon117</b>
-                    <span class="status blue"></span>
-                  </div>
-                  <div class="message">
-                    I have the same question
-                  </div>
-                </div>
-
-                <div class="you">
-                  <div class="entete">
-                    <b>Scarret738 &nbsp;</b>
-                    <p>10:12AM, Today &nbsp;</p>
-                  </div>
-                  <div class="message">
-                    Could you explain for us?
-                  </div>
-                </div>
-
-                <div class="you">
-                  <div class="entete">
-                    <b>Scarret738 &nbsp;</b>
-                    <p>10:12AM, Today &nbsp;</p>
-                  </div>
-                  <div class="message">
-                    I'm so lost..
-                  </div>
-                </div>
-
-                <div class="me">
-                  <div class="entete">
-                    <p>10:12AM, Today</p>
-                    <b>&nbsp; Sharon117</b>
-                    <span class="status blue"></span>
-                  </div>
-                  <div class="message">
-                    +1
-                  </div>
-                </div> */}
-
-              </div>
+              <div class="chat" id='chatTable'></div>
             </div>
 
-            {/* <div class='chat-footer'> */}
             {/* Send message */}
             <div class='std-chat-message'>
               <textarea class="sendtext" id="sendtext" placeholder="Type your message"></textarea>
@@ -347,13 +407,50 @@ const StudentUI = ({ payload }) => {
             </div>
 
             {/* Emoji */}
-            <div class='chat-emoji'>
-              <button class='emoji-button' id='63f6aa43c64dc707bf25c533' onClick={sendEmoji}>&#128513;</button>
-              <button class='emoji-button' id='63f6aa43c64dc707bf25c534' onClick={sendEmoji}>&#128512;</button>
-              <button class='emoji-button' id='63f6aa43c64dc707bf25c535' onClick={sendEmoji}>&#128528;</button>
-              <button class='emoji-button' id='63f6aa43c64dc707bf25c536' onClick={sendEmoji}>&#128533;</button>
-              <button class='emoji-button' id='63f6aa43c64dc707bf25c537' onClick={sendEmoji}>&#128544;</button>
+            <div class="grid-btn">
+              {/* Emoji */}
+              <div class="pop-emoji">
+                <a class="emo-button" href="#popup1">emoji</a>
+              </div>
+              <div id="popup1" class="overlay">
+                <div class="popup">
+                  {/* <a class="close" href="#">1</a>
+                <a class="close1" href="#">2</a>
+                <a class="close2" href="#">3</a> */}
+                  <div class="text-popup">Emoji</div>
+                  <a class="close-x" href="#">&times;</a>
+                  <div class='chat-emoji-popup'>
+                    <button class='emoji-button-popup' id='63f6aa43c64dc707bf25c533' onClick={sendEmoji}>&#128513;</button>
+                    <button class='emoji-button-popup' id='63f6aa43c64dc707bf25c534' onClick={sendEmoji}>&#128512;</button>
+                    <button class='emoji-button-popup' id='63f6aa43c64dc707bf25c535' onClick={sendEmoji}>&#128528;</button>
+                    <button class='emoji-button-popup' id='63f6aa43c64dc707bf25c536' onClick={sendEmoji}>&#128533;</button>
+                    <button class='emoji-button-popup' id='63f6aa43c64dc707bf25c537' onClick={sendEmoji}>&#128544;</button>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* light bulb */}
+              <div class="pop-emoji">
+                <a class="emo-button" href="#popup2">light-bulb</a>
+              </div>
+              <div id="popup2" class="overlay">
+                <div class="popup">
+                  <div class="text-popup">Lightbulb</div>
+                  <a class="close-x" href="#">&times;</a>
+
+                  <div class="lightbulb-popup">
+                    <BsLightbulbFill id='onLight' onClick={toggleLight} size='4em' color='gold' />
+                    <BsLightbulb id='offLight' onClick={toggleLight} size='4em' color='gold' />
+                  </div>
+                </div>
+              </div>
+
+              <div class="emo-button-leave-std">leave</div>
+
             </div>
+
+
             {/* </div> */}
           </div>
 

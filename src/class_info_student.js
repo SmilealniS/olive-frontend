@@ -4,23 +4,50 @@ import React, { useEffect } from 'react';
 import back from './assets/class_info/backicon.png';
 
 const Classinfo_Student = () => {
+  var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
+  var user = {
+    username: localStorage.getItem('username') == undefined ? '' : localStorage.getItem('username'),
+    name: localStorage.getItem('name') == undefined ? '' : localStorage.getItem('name'),
+    surname: localStorage.getItem('surname') == undefined ? '' : localStorage.getItem('surname'),
+    email: localStorage.getItem('email') == undefined ? '' : localStorage.getItem('email'),
+    phone: localStorage.getItem('phone') == undefined ? '' : localStorage.getItem('phone'),
+    track: localStorage.getItem('majortrack') == undefined ? '' : localStorage.getItem('majortrack'),
+    displayname: localStorage.getItem('displayname') == undefined ? '' : localStorage.getItem('displayname'),
+  };
+  var student_id = localStorage.getItem('student_id') == undefined ? '' : localStorage.getItem('student_id');
+  var teacher = localStorage.getItem('teacher') == undefined ? '' : localStorage.getItem('teacher');
+  var classroom = JSON.parse(localStorage.getItem('class')) == null ? {
+    _id: '',
+    Name: 'ITCS888',
+    Description: 'This is temp class for testing process'
+  } : JSON.parse(localStorage.getItem('class'));
+  var engagement = JSON.parse(localStorage.getItem('engagement')) == null ? [] : JSON.parse(localStorage.getItem('engagement'));
+  var fullattendance = JSON.parse(localStorage.getItem('fullattendance')) == null ? [] : JSON.parse(localStorage.getItem('fullattendance'));
+  var attendance = JSON.parse(localStorage.getItem('attendance')) == null ? {
+    come: 0, all: 0
+  } : JSON.parse(localStorage.getItem('attendance'));
+  var totalengagement = localStorage.getItem('totalengagement') == undefined ? 0 : localStorage.getItem('totalengagement');
+
   useEffect(() => {
     document.getElementById('engagementTable').innerHTML = '';
-    let engagement = JSON.parse(localStorage.getItem('engagement'));
-    let attendance = JSON.parse(localStorage.getItem('fullattendance'));
-    // console.log(attendance);
-    for (let i = 0; i < attendance.length; i++) {
-      let date = new Date(attendance[i].Class.Date)
+    // let engagement = JSON.parse(localStorage.getItem('engagement'));
+    // let attendance = JSON.parse(localStorage.getItem('fullattendance'));
+    console.log('Attendance:', attendance);
+    console.log('Fullatt:', fullattendance);
+    console.log('Engagement:', engagement);
+
+    for (let i = 0; i < fullattendance.length; i++) {
+      let date = new Date(fullattendance[i].Class.Date)
       let en = 0;
-      // console.log(engagement)
+      // console.log('Engagement:', engagement)
       for (let j = 0; j < engagement.length; j++) {
-        if (engagement[j].Class.Date == attendance[i].Class.Date) {
+        if (engagement[j].Class.Date == fullattendance[i].Class.Date) {
           en = engagement[j].Class.Engagement;
         }
       };
       document.getElementById('engagementTable').innerHTML +=
-        `<div class="textTopic">${date.getDate()}/${date.getMonth()}/${date.getFullYear()}</div>
-      <div class="textTopic">${attendance[i].Class.Status?'Present':'Absent'}</div>
+        `<div class="textTopic">${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}</div>
+      <div class="textTopic">${fullattendance[i].Class.Status ? 'Present' : 'Absent'}</div>
       <div class="textTopic">${en}</div>`
     }
   });
@@ -29,10 +56,10 @@ const Classinfo_Student = () => {
     let today = new Date();
     let todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-${today.getDate()}`;
 
-    fetch('http://localhost:4000/olive/attendance/getbyparams?student=' + localStorage.getItem('student_id') + '&classid=' + JSON.parse(localStorage.getItem('class'))._id + '&classdate=' + todaystring)
+    fetch(`http://localhost:4000/olive/attendance/getbyparams?student=${student_id}&classid=${classroom._id}&classdate=${todaystring}`)
       .then(data => data.json())
       .then(data => {
-        // console.log(data.result[0]._id);
+        console.log(data);
         fetch('http://localhost:4000/olive/attendance/updatebyId?_id=' + data.result[0]._id, {
           method: 'PUT'
         })
@@ -43,8 +70,18 @@ const Classinfo_Student = () => {
             window.location.href = '/studyingUI'
           })
           .catch(error => {
-            alert('Today class not start yet')
+            // console.log(error)
           })
+      }).catch(error => {
+        // console.log(error)
+        fetch(`http://localhost:4000/olive/attendance/getbyClassDate?classdate=${todaystring}&classid=${classroom._id}`)
+        .then(response => response.json())
+        .then(response => {
+          console.log(response)
+          alert('Today class not start yet')
+        }).catch(error => {
+          // console.log(error)
+        })
       })
   }
 
@@ -58,50 +95,50 @@ const Classinfo_Student = () => {
                 <img class='cis-pic-left-icon' src={require('./assets/olive_logo.png')}></img>
                 <div class="cis-head-text">
 
-                  <a style={{ textDecoration: 'none' }} href="http://localhost:3000/profile_student">
+                  <a href="/profile_student" style={{ 'text-decoration': 'none', 'color': 'black' }}>
                     <img class='cis-pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}>
                     </img>
                     <div class="cis-profile-name">
                       {/* Saidski248 */}
-                      {localStorage.getItem('username')}
+                      {user.username}
                     </div>
                   </a>
                 </div>
               </div>
-              <div class="mid-frame-box">
-                <div class="middle-box"><br></br>
-                  <div class="class-id">
+              <div class="cis-mid-frame-box">
+                <div class="cis-middle-box"><br></br>
+                  <div class="cis-class-id">
                     {/* ITCS 888 */}
-                    {JSON.parse(localStorage.getItem('class')).Name}
+                    {classroom.Name}
                   </div>
                   <button class="cis-join-btn" onClick={joinMeeting}>
                     Join Meeting
                   </button>
                   <div class="class-teacher">
                     {/* Teacher: Adele Jackson */}
-                    {JSON.parse(localStorage.getItem('teacher'))}
+                    {teacher}
                   </div>
-                  <div class="class-descrip">
+                  <div class="cis-class-descrip">
                     {/* Computer Science : This class was added to the transcript to get people used to boolean logic.
                     Which we had down in the first two weeks of the class. Unfortunately for us, unsuspecting students,
                     it goes pretty far down the rabbit hole. Here are some of the topics it covered: “
                     logic, set and set operations, methods of proof, recursive definitions, combinatorics, and graph theory”. */}
-                    {JSON.parse(localStorage.getItem('class')).Description}
+                    {classroom.Description}
                   </div>
-                </div>
-              </div>
-              <div class="midr-frame-box">
-                <div class="middler-box"><br></br>
-                  <div class="textattend">Attendance</div>
-                  <div class="textNum">{JSON.parse(localStorage.getItem('attendance')).come}/{JSON.parse(localStorage.getItem('attendance')).all}</div>
                 </div>
               </div>
               <div class="cis-midr-frame-box">
                 <div class="cis-middler-box"><br></br>
-                  <div class="cis-textpar">Engagement</div>
-                  <div class="cis-textNum">
+                  <div class="cis-textattend">Attendance</div>
+                  <div class="textNum">{attendance.come}/{attendance.all}</div>
+                </div>
+              </div>
+              <div class="cis-midr-frame-box">
+                <div class="cis-middler-box"><br></br>
+                  <div class="textpar">Engagement</div>
+                  <div class="textNum">
                     {/* 93% */}
-                    {localStorage.getItem('totalengagement')}%
+                    {totalengagement}%
                   </div>
                 </div>
               </div>

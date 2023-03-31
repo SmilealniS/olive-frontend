@@ -42,7 +42,7 @@ const report = () => {
 
                             <div class="data">
                                 <div class="text-rpt">Report description</div>
-                                <textarea class="admR-textarea"  rows="4" cols="50"></textarea>
+                                <textarea class="admR-textarea" rows="4" cols="50"></textarea>
                             </div>
                         </div><h3></h3>
                     </div>
@@ -50,7 +50,7 @@ const report = () => {
                         <button class="a-btn-1">Approve</button>
                         <button class="a-btn-1">Reject</button>
                     </div>
-                    
+
                 </div>
             </div>
         </body>

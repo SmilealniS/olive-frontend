@@ -45,8 +45,9 @@ body#teachingUI {
 .lightbulb {
     size: 5em;
     display: flex;
-    padding-top: 10px;
-    padding-left: 70px;
+    padding-top: 13vh;
+    padding-left: 75px;
+    margin-top: -14vh;
 }
 
 #tools {
@@ -82,14 +83,17 @@ body#teachingUI {
 }
 
 .divided-line-2 {
-    margin-top: -9px;
+    margin-top: 11vh;
     border-left: 2px solid black;
-    height: 16vh;
+    height: 15vh;
 }
 
 .Bar-text {
+    /* padding-top: 1vh;
+    display: flex; */
     padding-top: 1vh;
     display: flex;
+    flex-direction: column;
 }
 
 .l-text {
@@ -108,7 +112,7 @@ body#teachingUI {
 }
 
 .emoji-stack {
-    margin-top: -3%;
+    margin-top: -8%;
     margin-left: 6%;
     color: #6fbced;
     vertical-align: top;
@@ -118,27 +122,38 @@ body#teachingUI {
 }
 
 .emoji-item {
-    font-size: 45px;
+    font-size: 43px;
     margin-left: 3vh;
 
 }
 
-.btn-reset {
-    margin-top: 3%;
-    margin-left: 0%;
-    width: 55px;
+.btn-reset-engage {
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-top: -20%;
+    margin-left: 12vw;
+    width: 20px;
+    height: 20px; 
+    font-size: 13px;
+}
+.btn-reset-light {
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-top: -16%;
+    margin-left: 14vw;
+    width: 20px;
     height: 20px;
     font-size: 13px;
 }
-
-.rbtn-reset {
-    margin-top: 2%;
-    margin-left: 5%;
-    width: 55px;
+.btn-reset-stack {
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-top: -13%;
+    margin-left: 14vw;
+    width: 20px;
     height: 20px;
     font-size: 13px;
 }
-
 
 .bar-area {
     display: flex;
@@ -150,6 +165,7 @@ body#teachingUI {
     display: flex;
     flex-direction: row;
     gap: 20px;
+    height: 26vh;
 }
 
 .barRate {
@@ -157,11 +173,13 @@ body#teachingUI {
     font-size: 20px;
     font-style: oblique;
     margin-left: 20%;
-    width: 25vh;
+    width: 22vh;
 }
 
 .surv-area {
     display: flex;
+    flex-direction: column;
+    margin-top: 85px;
 }
 
 .survpercent {
@@ -172,29 +190,11 @@ body#teachingUI {
     font-size: 30px;
     border-radius: 5px;
     position: relative;
-    padding-top: 1vh;
-    margin-left: 2vh;
+    padding-top: 10vh;
+    margin-left: 1vh;
+    margin-top: -11vh;
 }
 
-.survbar {
-    box-sizing: border-box;
-    width: 200px;
-    height: 20px;
-    padding: 5px;
-    background: #ddd;
-    border-radius: 5px;
-    position: relative;
-    margin-top: 1vh;
-
-}
-
-.bar-1 {
-    width: 100%;
-    height: 10px;
-    position: relative;
-    background: #c54;
-    background-image: linear-gradient(to right, red, green);
-}
 
 #tt-tools {
     grid-template-columns: 99%;
@@ -208,11 +208,6 @@ body#teachingUI {
     height: 79vh;
     width: 120vh;
     margin-bottom: 2vh;
-}
-
-.zone-line{
-    border-left:2px solid rgb(0, 0, 0);
-    height: 14vh;
 }
 
 /* chat (right side) */
@@ -230,9 +225,6 @@ body#teachingUI {
     justify-content: center;
 }
 
-/* .chat-top > h3 {
-
-} */
 
 #container {
     display: flex;
@@ -302,38 +294,18 @@ body#teachingUI {
     margin-left: 3vh;
 }
 .chat-footer {
-    /* display: inline-flex; */
-    /* flex-direction: column; */
     border: 3px paleturquoise solid;
-    /* overflow-y: scroll; */
+
 }
 
-/* .chat-footer > .chat-message {
-    border: 3px cornflowerblue solid;
-    display: grid;
-    grid-template-columns: auto 80px;
-    padding: 5px;
-    overflow-y: scroll;
-} */
 
 .chat-message {
-    /* border: 3px cornflowerblue solid; */
     display: grid;
     grid-template-columns: auto 80px;
     padding: 5px;
     height: 7vh;
     overflow-y: scroll;
 }
-
-/* .chat-footer > .chat-message > textarea {
-    font-size: 16px;
-    margin: 0;
-    padding: 8px 16px;
-    resize: none;
-    width: 25vw;
-    height: 5vh;
-    border-radius: 3px;
-} */
 
 .chat-message > textarea {
     font-size: 16px;
@@ -343,36 +315,16 @@ body#teachingUI {
     height: 5vh;
     border-radius: 3px;
 }
-
-/* .chat-footer > .chat-message > textarea::placeholder {
-    color: #ddd;
-} */
-
 .chat-message > textarea::placeholder {
     color: #ddd;
 }
-
-/* .chat-footer > .chat-message > .send {
-    border: 3px palegreen solid;
-} */
-
 .chat-message > .send {
-    /* border: 2px rgb(202, 0, 0) solid; */
     font-size: 10px;
     width: 70px;
     height: 35px;
     margin-top: 0%;
     margin-left: -7px;
 }
-
-/* .chat-footer .chat-emoji {
-    border: 1px solid red;
-    display: inline-flex;
-    justify-content: space-between;
-    padding: 5px;
-    padding-top: 10px;
-} */
-
 .chat-emoji {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto;
@@ -383,16 +335,6 @@ body#teachingUI {
     background: none;
     border: none;
 }
-
-/* .chat-footer .chat-emoji button {
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: #6fbced;
-    vertical-align: top;
-    font-size: 20px;
-    margin-top: -1vh;
-} */
 
 .chat-emoji button {
     text-decoration: none;
@@ -405,8 +347,26 @@ body#teachingUI {
 }
 
 .num-emoji-stack{
-    /* border: 3px solid lightpink; */
     font-size: 20px;
     margin-left: -32px;
-    margin-top: 55px;
+    margin-top: 47px;
+}
+ 
+.emo-button-leave-teach {
+    /* margin-left: 23.5vw; */
+    margin-left: 0.5vw; 
+    margin-top: -7px;
+    font-size: 18px;
+    transition: all 0.3s ease-out;
+    padding: 1px 10px;
+    border: 1px solid #aaa;
+    background-color: #ff0000;
+    background-image: linear-gradient(top, #fff, #f0f0f0);
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 15%);
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    height: 30px;
+    width: 70px;
 }

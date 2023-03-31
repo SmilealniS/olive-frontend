@@ -3,8 +3,34 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect } from 'react';
 import back from './assets/class_info/backicon.png';
 import { text } from '@fortawesome/fontawesome-svg-core';
+import { Navigate } from 'react-router-dom';
 
 const Classinfo_Teacher = () => {
+  var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
+  var user = {
+    username: localStorage.getItem('username') == undefined ? '' : localStorage.getItem('username'),
+    name: localStorage.getItem('name') == undefined ? '' : localStorage.getItem('name'),
+    surname: localStorage.getItem('surname') == undefined ? '' : localStorage.getItem('surname'),
+    email: localStorage.getItem('email') == undefined ? '' : localStorage.getItem('email'),
+    phone: localStorage.getItem('phone') == undefined ? '' : localStorage.getItem('phone'),
+    track: localStorage.getItem('majortrack') == undefined ? '' : localStorage.getItem('majortrack'),
+    displayname: localStorage.getItem('displayname') == undefined ? '' : localStorage.getItem('displayname'),
+  };
+  var student_id = localStorage.getItem('student_id') == undefined ? '' : localStorage.getItem('student_id');
+  var teacher = localStorage.getItem('teacher') == undefined ? '' : localStorage.getItem('teacher');
+  var classroom = JSON.parse(localStorage.getItem('class')) == null ? {
+    _id: '',
+    Name: 'ITCS888',
+    Description: 'This is temp class for testing process'
+  } : JSON.parse(localStorage.getItem('class'));
+  var engagement = JSON.parse(localStorage.getItem('engagement')) == null ? [] : JSON.parse(localStorage.getItem('engagement'));
+  var fullattendance = JSON.parse(localStorage.getItem('fullattendance')) == null ? [] : JSON.parse(localStorage.getItem('fullattendance'));
+  var attendance = JSON.parse(localStorage.getItem('attendance')) == null ? {
+    come: 0, all: 0
+  } : JSON.parse(localStorage.getItem('attendance'));
+  var totalengagement = localStorage.getItem('totalengagement') == undefined ? 0 : localStorage.getItem('totalengagement');
+  var totalclass = localStorage.getItem('totalclass') == undefined ? 0 : localStorage.getItem('totalclass');
+
   var _ = require('lodash');
 
   useEffect(() => {
@@ -26,7 +52,7 @@ const Classinfo_Teacher = () => {
       for (let j = 0; j < Object.keys(gengagement).length; j++) {
         // console.log(Object.keys(gengagement)[j] == Object.keys(attendance)[i], Object.keys(gengagement)[j], Object.keys(attendance)[i])
         if (Object.keys(gengagement)[j] == Object.keys(attendance)[i]) {
-          console.log('detail engagement:', gengagement[ Object.keys(gengagement)[j] ] )
+          console.log('detail engagement:', gengagement[Object.keys(gengagement)[j]])
           for (let k = 0; k < gengagement[Object.keys(gengagement)[j]].length; k++) {
             console.log('gg:', gengagement[Object.keys(gengagement)[j]][k])
             en += gengagement[Object.keys(gengagement)[j]][k].Class.Engagement;
@@ -36,30 +62,58 @@ const Classinfo_Teacher = () => {
       };
 
       document.getElementById('engagementTable').innerHTML +=
-        `<div class="textTopic">${date.getDate()}/${date.getMonth()}/${date.getFullYear()}</div>
+        `<div class="textTopic">${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}</div>
       <div class="textTopic">${attendance[Object.keys(attendance)[i]].length}</div>
       <div class="textTopic">${en}%</div>`
     }
   });
 
   function joinMeeting() {
-    fetch('http://localhost:4000/olive/enroll/getbyClassID?classid=' + JSON.parse(localStorage.getItem('class'))._id)
+    let today = new Date();
+    let todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-${today.getDate()}`;
+
+    const updatedList = {
+      "Date": new Date(todaystring),
+      "Start_time": today.getTime()
+    };
+
+    fetch(`http://localhost:4000/olive/class/updatebyId?_id=${classroom._id}`, {
+      method: 'PUT',
+      body: JSON.stringify(updatedList)
+    })
+
+    fetch('http://localhost:4000/olive/enroll/getbyClassID?classid=' + classroom._id)
       .then(data => data.json())
       .then(data => {
         for (let i = 0; i < data[0].Student.length; i++) {
-          // console.log(data[0].Student[i])
+          console.log('Student:', data[0].Student[i], classroom._id)
+          let stu = {
+            "Student_Id": data[0].Student[i],
+            "Class": {
+              "Id": classroom._id
+            }
+          };
+
           fetch('http://localhost:4000/olive/attendance/create', {
             method: 'POST',
-            body: {
-              "Student_Id": data[0].Student[i],
-              "Class": {
-                "Id": JSON.parse(localStorage.getItem('class'))._id
-              }
-            }
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(stu)
+          })
+          .then(res => res.json())
+          .then(res => {
+            console.log(res)
+          })
+          .catch(error => {
+            console.log(error)
           })
         }
+        window.location.href = '/teachingUI'
       })
-    window.location.href = '/teachingUI'
+      // .then(window.location.href = '/teachingUI')
+      .catch(error => {
+        console.log(error)
+      })
+
   }
 
   return (
@@ -70,9 +124,9 @@ const Classinfo_Teacher = () => {
             <div class="frame-box">
               <div class="header-box"><br></br>
                 <img class='pic-left-icon' src={require('./assets/olive_logo.png')}></img>
-                <a style={{ textDecoration: 'none' }} class="profile-name" href="http://localhost:3000/profile_teacher">
+                <a style={{ 'text-decoration': 'none', 'color': 'black' }} class="profile-name" href="/profile_teacher">
                   {/* Adele Jackson */}
-                  {localStorage.getItem('username')}
+                  {user.username}
                 </a>
               </div>
 
@@ -80,7 +134,7 @@ const Classinfo_Teacher = () => {
                 <div class="middle-box"><br></br>
                   <div class="class-id">
                     {/* ITCS 888 */}
-                    {JSON.parse(localStorage.getItem('class')).Name}
+                    {classroom.Name}
                   </div>
                   {/* <a href="http://localhost:3000/teachingUI"> */}
                   <button class="join-btn" onClick={joinMeeting}>
@@ -92,7 +146,7 @@ const Classinfo_Teacher = () => {
                     Which we had down in the first two weeks of the class. Unfortunately for us, unsuspecting students,
                     it goes pretty far down the rabbit hole. Here are some of the topics it covered: “
                     logic, set and set operations, methods of proof, recursive definitions, combinatorics, and graph theory”. */}
-                    {JSON.parse(localStorage.getItem('class')).Description}
+                    {classroom.Description}
                   </div>
                 </div>
               </div>
@@ -101,7 +155,7 @@ const Classinfo_Teacher = () => {
                   <div class="textattend">Total Class</div>
                   <div class="textNum">
                     {/* 3 */}
-                    {localStorage.getItem('totalclass')}
+                    {totalclass}
                   </div>
                 </div>
               </div>
@@ -110,7 +164,7 @@ const Classinfo_Teacher = () => {
                   <div class="textpar">Engagement</div>
                   <div class="textNum">
                     {/* 93% */}
-                    {localStorage.getItem('totalengagement')}%
+                    {totalengagement}%
                   </div>
                 </div>
               </div>
@@ -120,7 +174,7 @@ const Classinfo_Teacher = () => {
                 <div class="tabs">
                   {/* Engagement tab */}
                   <div class="tab">
-                    <input type="radio" name="css-tabs" id="tab-1" checked class="tab-switch"></input>
+                    <input type="radio" name="css-tabs" id="tab-1" class="tab-switch"></input>
                     <label for="tab-1" class="tab-label">Engagement</label>
 
                     <div class="tab-content"><br></br>
@@ -291,7 +345,7 @@ const Classinfo_Teacher = () => {
                       </table>
                       <button class="save-btn">save</button>
                     </div>
-                    
+
                   </div>
                 </div>
               </div>

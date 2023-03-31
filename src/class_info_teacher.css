@@ -206,9 +206,13 @@ body#class_info_teacher {
     position: relative;
     margin: 3rem 0;
     background: #625F63;
-    height: 14.75rem;
+    height: 5.75rem;
 }
-
+.tabs::before,
+.tabs::after {
+  content: "";
+  display: table;
+}
 .tabs::after {
     clear: both;
 }
@@ -216,7 +220,6 @@ body#class_info_teacher {
 .tab {
     float: left;
 }
-
 .tab-switch {
     display: none;
 }
@@ -239,6 +242,11 @@ body#class_info_teacher {
 .tab-label:hover {
     top: -0.25rem;
     transition: top 0.25s;
+    background-color: #6FBCED;
+    color: white;
+    /* color: #744cb0;
+    border-bottom: 2px solid #744cb0;
+    border-right: none; */
 }
 
 .tab-content {
@@ -255,15 +263,24 @@ body#class_info_teacher {
     transition: all 0.35s;
 }
 
-
-.tab-switch:checked+label+.tab-content {
-    z-index: 2;
-    opacity: 1;
-    transition: all 0.35s;
-    width: 1320px;
-    height: 1000px;
-    margin-top: 25px;
+.tab-switch:checked + .tab-label {
+  background:#6FBCED;
+  color: #2c3e50;
+  border-bottom: 0.125rem solid #fff;
+  transition: all 0.35s;
+  z-index: 1;
+  top: -0.0625rem;
 }
+.tab-switch:checked + label + .tab-content {
+  z-index: 2;
+  opacity: 1;
+  transition: all 0.35s;
+  width: 1320px;
+  height: 1000px;
+  margin-top: 25px;
+}
+
+
 
 /* scoreboard */
 nav {

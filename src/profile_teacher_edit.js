@@ -16,13 +16,29 @@ import list from './assets/Infopage/list.png';
 
 
 const Teacher_Profile_Edit = () => {
+  var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
+  var user = {
+    username: localStorage.getItem('username') == undefined ? '' : localStorage.getItem('username'),
+    name: localStorage.getItem('name') == undefined ? '' : localStorage.getItem('name'),
+    surname: localStorage.getItem('surname') == undefined ? '' : localStorage.getItem('surname'),
+    email: localStorage.getItem('email') == undefined ? '' : localStorage.getItem('email'),
+    phone: localStorage.getItem('phone') == undefined ? '' : localStorage.getItem('phone'),
+    track: localStorage.getItem('majortrack') == undefined ? '' : localStorage.getItem('majortrack'),
+    displayname: localStorage.getItem('displayname') == undefined ? '' : localStorage.getItem('displayname'),
+  };
+  var teacher_id = localStorage.getItem('teacher_id') == undefined ? '' : localStorage.getItem('teacher_id');
+
   function editProfile() {
     // saveImage();
-    const url1 = 'http://localhost:4000/olive/identity/updatebyId?_id=' + localStorage.getItem('_id');
     let user1 = {
       'Username': document.getElementById('username').textContent
     };
-    fetch(url1, {
+    let user2 = {
+      'Display_Name': document.getElementById('displayname').textContent,
+      'url': ''
+    };
+
+    fetch(`http://localhost:4000/olive/identity/updatebyId?_id=${_id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user1)
@@ -30,35 +46,33 @@ const Teacher_Profile_Edit = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log('Success:', data);
-        localStorage.setItem('username', data.Username);
+        localStorage.setItem('username', user1.Username);
+        console.log(localStorage.getItem('username'));
+      })
+      .then(() => {
+        fetch(`http://localhost:4000/olive/teacher-profile/updatebyId?_id=${teacher_id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(user2)
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Success:', data);
+            localStorage.setItem('pic', user2.url);
+            localStorage.setItem('displayname', user2.Display_Name);
+            console.log(localStorage.getItem('displayname'));
+          })
+          .then(() => { window.location.href = '/profile_teacher' })
+          .catch((error) => {
+            console.log('Error:', error);
+          })
       })
       .catch((error) => {
         console.log('Error:', error);
-      });
-
-    const url2 = 'http://localhost:4000/olive/teacher-profile/updatebyId?_id=' + localStorage.getItem('teacher_id');
-    let user2 = {
-      'Display_Name': document.getElementById('displayname').textContent
-    };
-    fetch(url2, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(user2)
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Success:', data);
-        localStorage.setItem('pic', data.url);
-        localStorage.setItem('displayname', data.Display_Name);
       })
-      .catch((error) => {
-        console.log('Error:', error);
-      });
 
     // console.log('user:', document.getElementById('username').textContent)
     // console.log('display:', document.getElementById('displayname').textContent)
-
-    window.location.href = '/profile_teacher'
   }
 
   return (
@@ -87,7 +101,7 @@ const Teacher_Profile_Edit = () => {
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
 
-                        <td class="info-text" contentEditable='true' id='username'>{localStorage.getItem('username')}</td>
+                        <td class="info-text" contentEditable='true' id='username'>{user.username}</td>
                       </div>
                     </div>
                   </div>
@@ -99,7 +113,7 @@ const Teacher_Profile_Edit = () => {
                       <img class="icon-pic" src={email}></img>
                       <div class="info-text">
 
-                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false'>{localStorage.getItem('email')}</td>
+                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false'>{user.email}</td>
                       </div>
                     </div>
                   </div>
@@ -111,7 +125,7 @@ const Teacher_Profile_Edit = () => {
                       <img class="icon-pic" src={tel}></img>
                       <div class="info-text">
 
-                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false'>{localStorage.getItem('phone')}</td>
+                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false'>{user.phone}</td>
                       </div>
                     </div>
                   </div>
@@ -163,7 +177,7 @@ const Teacher_Profile_Edit = () => {
                       <img class="icon-pic" src={major}></img>
                       <div class="info-text">
 
-                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false'>{localStorage.getItem('majortrack')}</td>
+                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false'>{user.track}</td>
                       </div>
                     </div>
                   </div>
@@ -196,7 +210,7 @@ const Teacher_Profile_Edit = () => {
                     </div>
                   </div>
                 </div> */}
-                
+
                 <div class="cell">
                   <div class="head-box">Display name</div>
                   <div class="info-box">
@@ -204,7 +218,7 @@ const Teacher_Profile_Edit = () => {
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
 
-                        <td class="info-text" id='displayname' contentEditable='true'>{localStorage.getItem('displayname')}</td>
+                        <td class="info-text" id='displayname' contentEditable='true'>{user.displayname}</td>
                       </div>
                     </div>
                   </div>
@@ -212,9 +226,9 @@ const Teacher_Profile_Edit = () => {
               </div>
 
               {/* <a href="http://localhost:3000/profile_teacher"> */}
-                <button class="confirm-btn" onClick={editProfile}>
-                  Save
-                </button>
+              <button class="confirm-btn" onClick={editProfile}>
+                Save
+              </button>
               {/* </a> */}
             </div>
             <div class="l-box-edit">
@@ -224,7 +238,7 @@ const Teacher_Profile_Edit = () => {
                 </div>
 
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_teacher" style={{ 'text-decoration':'none', 'color':'black' }}>
+                  <a href="http://localhost:3000/profile_teacher" style={{ 'text-decoration': 'none', 'color': 'black' }}>
                     <img class="l-icon-pic" src={human}></img>
                     <div class="l-info-text-teac">
                       Profile
@@ -232,7 +246,7 @@ const Teacher_Profile_Edit = () => {
                   </a>
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/class_info_teacher" style={{ 'text-decoration':'none', 'color':'black' }}>
+                  <a href="http://localhost:3000/class_info_teacher" style={{ 'text-decoration': 'none', 'color': 'black' }}>
                     <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-teac">
                       Course
@@ -240,7 +254,7 @@ const Teacher_Profile_Edit = () => {
                   </a>
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_teacher_report" style={{ 'text-decoration':'none', 'color':'black' }}>
+                  <a href="http://localhost:3000/profile_teacher_report" style={{ 'text-decoration': 'none', 'color': 'black' }}>
                     <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-teac">
                       Report
@@ -252,11 +266,11 @@ const Teacher_Profile_Edit = () => {
                 <img class='pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                 <div class="l-text1">
                   {/* Adele Jackson */}
-                  {localStorage.getItem('username')}
+                  {user.username}
                 </div>
                 <div class="l-text2">
                   {/* adele.jac@mahidol.com */}
-                  {localStorage.getItem('email')}
+                  {user.email}
                 </div>
                 <a href="/" onClick="localStorage.clear()">
                   <img class="l-icon-pic-bottom" src={logout}></img>

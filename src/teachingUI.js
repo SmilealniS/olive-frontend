@@ -1,12 +1,57 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './teachingUI.css';
 import { BsLightbulbFill } from 'react-icons/bs';
 import { BsLightbulb } from 'react-icons/bs';
 import ZoomMtgEmbedded from '@zoomus/websdk/embedded';
+import reset from './assets/reset.png';
+import { io } from "socket.io-client";
 
 const TeacherUI = ({ payload }) => {
-  useEffect(async () => {
+  const [active, setActive] = useState([]);
+
+  // const [chats, setChats] = useState();
+  const [emojis, setEmojis] = useState([]);
+  const [lights, setLights] = useState([]);
+  const [engagement, setEngagement] = useState([]);
+
+  const socket = useRef();
+
+  var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
+  var user = {
+    username: localStorage.getItem('username') == undefined ? '' : localStorage.getItem('username'),
+    name: localStorage.getItem('name') == undefined ? '' : localStorage.getItem('name'),
+    surname: localStorage.getItem('surname') == undefined ? '' : localStorage.getItem('surname'),
+    email: localStorage.getItem('email') == undefined ? '' : localStorage.getItem('email'),
+    phone: localStorage.getItem('phone') == undefined ? '' : localStorage.getItem('phone'),
+    track: localStorage.getItem('majortrack') == undefined ? '' : localStorage.getItem('majortrack'),
+    displayname: localStorage.getItem('displayname') == undefined ? '' : localStorage.getItem('displayname'),
+  };
+  var teacher_id = localStorage.getItem('teacher_id') == undefined ? '' : localStorage.getItem('teacher_id');
+  var teacher = localStorage.getItem('teacher') == undefined ? '' : localStorage.getItem('teacher');
+  var classroom = JSON.parse(localStorage.getItem('class')) == null ? {
+    _id: '',
+    Name: 'ITCS888',
+    Description: 'This is temp class for testing process'
+  } : JSON.parse(localStorage.getItem('class'));
+
+  useEffect(() => {
+    socket.current = io("http://localhost:4000");
+    socket.current.emit('add-user', [teacher_id, 'teacher']);
+    socket.current.on('get-user', (user) => {
+      console.log('Active:', user);
+      setActive(user);
+    });
+  }, []);
+
+  useEffect(() => {
+    socket.current.on('light', data => {
+      alert('light')
+      console.log(data)
+    });
+  }, []);
+
+  const myFunction = async () => {
     var client = ZoomMtgEmbedded.createClient();
 
     fetch(payload.signatureEndpoint, {
@@ -61,67 +106,116 @@ const TeacherUI = ({ payload }) => {
       })
     }
 
+  };
+
+  const init = () => {
     let emoid = ['63f6aa43c64dc707bf25c533', '63f6aa43c64dc707bf25c534', '63f6aa43c64dc707bf25c535', '63f6aa43c64dc707bf25c536', '63f6aa43c64dc707bf25c537'];
     for (let i = 0; i < emoid.length; i++) { document.getElementById(emoid[i]).textContent = 0 }
 
-    function updateChat() {
-      document.getElementById('chatTable').innerHTML = '';
-      fetch('http://localhost:4000/olive/interact/getbyType?type=chat&classid=' + JSON.parse(localStorage.getItem('class'))._id)
-        .then(data => data.json())
-        .then(data => {
-          // console.log(localStorage.getItem('teacher_id'))
-          // console.log(data)
-          for (let i = 0; i < data.length; i++) {
-            // console.log(data[i])
-            let date = new Date(data[i].Time);
-            let time = ''
-            time += date.getHours() > 9 ? '' : '0'
-            time += (date.getHours() + ':')
-            time += date.getMinutes() > 9 ? '' : '0'
-            time += date.getMinutes()
+    document.getElementById('chatTable').innerHTML = '';
 
-            // console.log(date.getHours(), date.getMinutes());
-            fetch('http://localhost:4000/olive/student-profile/getbyId?_id=' + data[i].Student)
-              .then(sender => sender.json())
-              .then(sender => {
-                // console.log(sender.Display_Name)
-                if (data[i].Student == localStorage.getItem('teacher_id')) {
-                  document.getElementById('chatTable').innerHTML +=
-                    `<div class="me">
-                    <div class="entete">
-                      <b>${localStorage.getItem('displayname')} &nbsp;</b>
-                      <p>${time} &nbsp;</p>
-                    </div>
-                    <div class="message">
-                      ${data[i].Description}
-                    </div>
-                  </div>`
-                } else {
-                  document.getElementById('chatTable').innerHTML +=
-                    `<div class="you">
+    fetch('http://localhost:4000/olive/interact/getbyType?type=chat&classid=' + JSON.parse(localStorage.getItem('class'))._id)
+      .then(data => data.json())
+      .then(data => {
+        console.log('initChat:', data)
+        for (let i = 0; i < data.length; i++) {
+          let date = new Date(data[i].Time);
+          let time = ''
+          time += date.getHours() > 9 ? '' : '0'
+          time += (date.getHours() + ':')
+          time += date.getMinutes() > 9 ? '' : '0'
+          time += date.getMinutes()
+
+          // console.log(date.getHours(), date.getMinutes());
+          // console.log(data[i].Student == teacher_id)
+
+          if (data[i].Student == teacher_id) {
+            // console.log(user.displayname)
+            document.getElementById('chatTable').innerHTML +=
+              `<div class="me">
                   <div class="entete">
-                    <b>${sender.Display_Name} &nbsp;</b>
+                    <b>${user.displayname} &nbsp;</b>
                     <p>${time} &nbsp;</p>
                   </div>
                   <div class="message">
                     ${data[i].Description}
                   </div>
                 </div>`
-                }
-              });
+          } else {
+            fetch('http://localhost:4000/olive/student-profile/getbyId?_id=' + data[i].Student)
+              .then(sender => sender.json())
+              .then(sender => {
+                document.getElementById('chatTable').innerHTML +=
+                  `<div class="you">
+                    <div class="entete">
+                      <b>${sender.Display_Name} &nbsp;</b>
+                      <p>${time} &nbsp;</p>
+                    </div>
+                    <div class="message">
+                      ${data[i].Description}
+                    </div>
+                  </div>`
 
+              });
           }
-        });
+        }
+      });
+
+  }
+
+  useEffect(() => {
+    myFunction();
+    init();
+    engagementData();
+  }, []);
+
+  const engagementData = () => {
+    function createEngagement() {
+      try {
+        fetch(`http://localhost:4000/olive/engagement/getbyClassID?classid=${classroom._id}`)
+          .then(response => response.json())
+          .then(response => {
+            // console.log(response._id)
+            fetch(`http://localhost:4000/olive/engagement/clear?_id=${response._id}`, {
+              method: 'PUT'
+            })
+          })
+      } finally {
+        fetch('http://localhost:4000/olive/enroll/getbyClassID?classid=' + classroom._id)
+          .then(data => data.json())
+          .then(data => {
+            for (let i = 0; i < data[0].Student.length; i++) {
+              // console.log('Student:', data[0].Student[i], classroom._id)
+              let stu = {
+                Student_Id: data[0].Student[i],
+                Class: {
+                  Id: classroom._id
+                },
+                Interaction_Log: []
+              };
+              // console.log('New stack:', data)
+
+              fetch('http://localhost:4000/olive/engagement', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(stu)
+              })
+                .then(response => response.json())
+                .then(response => {
+                  // console.log(response)
+                })
+            }
+          })
+
+      }
     }
 
-    updateChat();
-    setInterval(updateChat, 30000);
-
-  }, [])
+    createEngagement();
+    setInterval(createEngagement, 600000);   //  10 minutes
+  }
 
   const sendEmoji = event => {
-    // alert(event.currentTarget.id)
-    // console.log(JSON.parse(localStorage.getItem('class'))._id)
+
     let data = {
       Student: localStorage.getItem('teacher_id'),
       Class: JSON.parse(localStorage.getItem('class'))._id,
@@ -143,8 +237,8 @@ const TeacherUI = ({ payload }) => {
     if (document.getElementById('sendtext').value == '') return;
     // alert(document.getElementById('sendtext').value)
     let data = {
-      Student: localStorage.getItem('teacher_id'),
-      Class: JSON.parse(localStorage.getItem('class'))._id,
+      Student: teacher_id,
+      Class: classroom._id,
       Type: "chat",
       Description: document.getElementById('sendtext').value
     };
@@ -153,11 +247,95 @@ const TeacherUI = ({ payload }) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
-    }).then(resp => resp.json()).then(resp => { console.log(resp) }).catch(error => {
-      console.log(error)
-      alert('Cannot send message')
     })
+      .then(resp => resp.json())
+      .then(resp => {
+        try {
+
+          let temp = document.getElementById('sendtext');
+          temp.value = '';
+
+          socket.current.emit('send-msg', data)
+        } catch (error) {
+          console.log(error)
+        }
+
+      })
+      .catch(error => {
+        console.log(error)
+        alert('Cannot send message')
+      })
+
+
+
   }
+
+  useEffect(() => {
+    socket.current.on('light', light => {
+      console.log('Light:', light)
+    });
+  }, []);
+
+  useEffect(() => {
+    socket.current.on('msg-recieve', (chat) => {
+      console.log('Recieve:', chat)
+
+      fetch(`http://localhost:4000/olive/interact/getbyType?type=chat&classid=${classroom._id}`)
+        .then(data => data.json())
+        .then(data => {
+          document.getElementById('chatTable').innerHTML = '';
+
+          console.log('Chat:')
+          for (let i = 0; i < data.length; i++) {
+            console.log(data[i])
+            let date = new Date(data[i].Time);
+            let time = ''
+            time += date.getHours() > 9 ? '' : '0'
+            time += (date.getHours() + ':')
+            time += date.getMinutes() > 9 ? '' : '0'
+            time += date.getMinutes()
+
+
+            if (data[i].Student == teacher_id) {
+              // console.log(user.displayname)
+              document.getElementById('chatTable').innerHTML +=
+                `<div class="me">
+                    <div class="entete">
+                      <b>${user.displayname} &nbsp;</b>
+                      <p>${time} &nbsp;</p>
+                    </div>
+                    <div class="message">
+                      ${data[i].Description}
+                    </div>
+                  </div>`
+            } else {
+              fetch('http://localhost:4000/olive/student-profile/getbyId?_id=' + data[i].Student)
+                .then(sender => sender.json())
+                .then(sender => {
+                  // console.log('get student profile')
+
+                  // console.log(sender.Display_Name)
+                  document.getElementById('chatTable').innerHTML +=
+                    `<div class="you">
+                      <div class="entete">
+                        <b>${sender.Display_Name} &nbsp;</b>
+                        <p>${time} &nbsp;</p>
+                      </div>
+                      <div class="message">
+                        ${data[i].Description}
+                      </div>
+                    </div>`
+
+                });
+            }
+
+          }
+        });
+
+
+    });
+
+  }, []);
 
   var _ = require('lodash');
 
@@ -186,7 +364,7 @@ const TeacherUI = ({ payload }) => {
   }
 
   // updateStack();
-  setInterval(updateStack, 600000);
+  // setInterval(updateStack, 600000);
 
   function clearStack() {
     fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + JSON.parse(localStorage.getItem('class'))._id)
@@ -197,7 +375,7 @@ const TeacherUI = ({ payload }) => {
           method: 'PUT'
         })
       })
-    
+
   }
 
   function updateEngagement() {
@@ -226,55 +404,9 @@ const TeacherUI = ({ payload }) => {
       })
   }
 
-  // updateEngagement();
-  setInterval(updateEngagement, 600000);
-
-  // function gazeDetection() {
-  //   window.saveDataAcrossSessions = false;
-
-  //   const webgazer = window.webgazer;
-  //   const lookDelay = 60000 // 60 second = 1 minute
-  //   let left = window.innerWidth / 4;
-  //   let right = window.innerWidth - window.innerWidth / 4;
-  //   let startLookTime;
-  //   let stop = false;
-  //   let count = 0;
-
-  //   webgazer.setGazeListener((data, timestamp) => {
-  //     if (stop || count > 999) {
-  //       // alert('STOP');
-  //       webgazer.pause();
-  //       return;
-  //     }
-
-  //     if (data != null) {
-  //       //   if (data.x < left) {
-  //       //   console.log('left');
-  //       // } else if (data.x > right) {
-  //       //   console.log('right');
-  //       // } else if (data.x > left && data.x < right) {
-  //       startLookTime = Number.POSITIVE_INFINITY;
-  //       // console.log('middle');
-  //       // }
-
-  //       if (startLookTime + lookDelay < timestamp) {
-  //         stop = true;
-  //       }
-  //     } else count++;
-
-
-  //   }).begin();
-
-  //   webgazer.showVideoPreview(false).showPredictionPoints(false);
-  // }
-
-  // setInterval(gazeDetection, 600000);
-
   return (
     <Fragment>
       <body id='teachingUI'>
-
-        {/* <button onClick={getSignature}>Join Meeting</button> */}
 
         <div class="wrapup">
           {/* display */}
@@ -296,7 +428,11 @@ const TeacherUI = ({ payload }) => {
                       {/* Bar 1 */}
                       <div class='surv-area'>
                         <div class="barRate">Engagement</div>
-                        <button class="btn-reset" onClick={clearEngagement}>Reset</button>
+
+                        {/* reset */}
+                        <button2 onClick={clearEngagement}>
+                          <img class="btn-reset-engage" src={reset}></img>
+                        </button2>
                       </div>
                       {/* <div class="survbar"><div class="bar-1"></div></div> */}
                       <div class='survpercent' id='engagementVal'>100%</div>
@@ -307,7 +443,9 @@ const TeacherUI = ({ payload }) => {
                       {/* Bar 2 */}
                       <div class='surv-area'>
                         <div class="barRate">Survival rating</div>
-                        <button class="btn-reset" onClick={''}>Reset</button>
+                        <button2 onClick="">
+                          <img class="btn-reset-light" src={reset}></img>
+                        </button2>
                       </div>
                       {/* <div class="survbar"><div class="bar-1"></div></div> */}
                       <div class='lightbulb'>
@@ -326,8 +464,10 @@ const TeacherUI = ({ payload }) => {
 
                 <div class="right-zone">
                   <div class="Bar-text">
-                    <text class="r-text">Class Status</text>
-                    <button class="rbtn-reset" onClick={clearStack}>Reset</button>
+                    <text class="barRate">Class Status</text>
+                    <button2 onClick={clearStack}>
+                      <img class="btn-reset-stack" src={reset}></img>
+                    </button2>
                   </div>
 
                   <div class='flex-container'>
@@ -344,12 +484,9 @@ const TeacherUI = ({ payload }) => {
                       <text id='63f6aa43c64dc707bf25c537' class="num-emoji-stack"></text>
                     </div>
                   </div>
-
                 </div>
               </div>
-
             </div>
-
           </div>
 
           {/* chat */}
@@ -360,119 +497,19 @@ const TeacherUI = ({ payload }) => {
 
             <div id="container">
 
-              <div class="chat" id='chatTable'>
-
-                <div class="you">
-                  <div class="entete">
-                    <b>Cloud178 &nbsp;</b>
-                    <p>09:07AM, Today &nbsp;</p>
-                  </div>
-                  <div class="message">
-                    Good morning ka
-                  </div>
-                </div>
-
-                <div class="you">
-                  <div class="entete">
-                    <b>Anagram473 &nbsp;</b>
-                    <p>09:07AM, Today &nbsp;</p>
-                  </div>
-                  <div class="message">
-                    Good morning krub
-                  </div>
-                </div>
-
-                <div class="you">
-                  <div class="entete">
-                    <b>Cloud178 &nbsp;</b>
-                    <p>09:42AM, Today &nbsp;</p>
-                  </div>
-                  <div class="message">
-                    Teacher, can you speak slower?
-                  </div>
-                </div>
-
-                <div class="you">
-                  <div class="entete">
-                    <b>SxYuki982 &nbsp;</b>
-                    <p>09:57AM, Today &nbsp;</p>
-                  </div>
-                  <div class="message">
-                    I miss the last part
-                  </div>
-                </div>
-
-                <div class="you">
-                  <div class="entete">
-                    <b>Cheep729 &nbsp;</b>
-                    <p>10:02AM, Today &nbsp;</p>
-                  </div>
-                  <div class="message">
-                    ...
-                  </div>
-                </div>
-
-                <div class="me">
-                  <div class="entete">
-                    <p>10:07AM, Today</p>
-                    <b>&nbsp; Sharon117</b>
-                    <span class="status blue"></span>
-                  </div>
-                  <div class="message">
-                    I have the same question
-                  </div>
-                </div>
-
-                <div class="you">
-                  <div class="entete">
-                    <b>Scarret738 &nbsp;</b>
-                    <p>10:12AM, Today &nbsp;</p>
-                  </div>
-                  <div class="message">
-                    Could you explain for us?
-                  </div>
-                </div>
-
-                <div class="you">
-                  <div class="entete">
-                    <b>Scarret738 &nbsp;</b>
-                    <p>10:12AM, Today &nbsp;</p>
-                  </div>
-                  <div class="message">
-                    I'm so lost..
-                  </div>
-                </div>
-
-                <div class="me">
-                  <div class="entete">
-                    <p>10:12AM, Today</p>
-                    <b>&nbsp; Sharon117</b>
-                    <span class="status blue"></span>
-                  </div>
-                  <div class="message">
-                    +1
-                  </div>
-                </div>
-
-              </div>
+              <div class="chat" id='chatTable'></div>
             </div>
 
-            {/* <div class='chat-footer'> */}
             {/* Send message */}
-            <div class='chat-message'>
+            <div class='std-chat-message'>
               <textarea class="sendtext" id="sendtext" placeholder="Type your message"></textarea>
               <button class="send" onClick={sendMessage}>Send</button>
             </div>
 
             {/* Emoji */}
-            <div class='chat-emoji'>
-              <button class='emoji-button' id='63f6aa43c64dc707bf25c533' onClick={sendEmoji}>&#128513;</button>
-              <button class='emoji-button' id='63f6aa43c64dc707bf25c534' onClick={sendEmoji}>&#128512;</button>
-              <button class='emoji-button' id='63f6aa43c64dc707bf25c535' onClick={sendEmoji}>&#128528;</button>
-              <button class='emoji-button' id='63f6aa43c64dc707bf25c536' onClick={sendEmoji}>&#128533;</button>
-              <button class='emoji-button' id='63f6aa43c64dc707bf25c537' onClick={sendEmoji}>&#128544;</button>
+            <div class="grid-btn">
+              <div class="emo-button-leave-teach">leave</div>
             </div>
-            {/* </div> */}
           </div>
 
         </div>

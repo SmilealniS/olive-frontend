@@ -1,27 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Meeting from './meeting';
-import MeetingComponent from './component';
-import Scoreboard from './scoreboard';
+
 import TeachingUI from './teachingUI';
-import AdminReport from './adminReport';
-import AdminReport_list from './adminReport_list';
-import Login from './login';
-import Profile_teacher from './profile_teacher';
-import Profile_student from './profile_student';
-import Profile_admin from './profile_admin';
-import Class_info_student from './class_info_student';
 import Class_info_teacher from './class_info_teacher';
-import Profile_student_edit from './profile_student_edit';
+import Profile_teacher from './profile_teacher';
 import Profile_teacher_edit from './profile_teacher_edit';
 import Profile_teacher_report from './profile_teacher_report';
+
+import AdminReport from './adminReport';
+import AdminReport_list from './adminReport_list';
+import Profile_admin from './profile_admin';
 import Profile_admin_edit from './profile_admin_edit';
+
 import StudyingUI from './studyingUI';
+import Class_info_student from './class_info_student';
+import Profile_student from './profile_student';
+import Profile_student_edit from './profile_student_edit';
+
+import Login from './login';
 
 let payload_teacher = {
   signatureEndpoint: 'http://localhost:8000/',

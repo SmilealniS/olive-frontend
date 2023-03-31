@@ -13,25 +13,6 @@ body {
   background-color: #f3f3f3;
 }
 
-.wrapper .left .pic-create {
-  width: 7vh;
-  height: 7vh;
-  margin-left: -23px;
-}
-
-.wrapper .left .pic-calendar {
-  width: 7vh;
-  height: 7vh;
-  margin-left: -25px;
-}
-
-.info_data .data .descrip {
-  font-size: 13px;
-
-}
-
-
-
 .wrapper {
   position: absolute;
 
@@ -54,29 +35,6 @@ body {
 
 
 
-.wrapper .right .info_data,
-.wrapper .right .projects_data {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1vh;
-}
-
-.wrapper .right .info_data .data,
-.wrapper .right .projects_data .data {
-  width: 45%;
-}
-
-
-.wrapper .right .btn-1 {
-  margin-left: 70%;
-  font-size: 12px;
-}
-
-.wrapper .right .btn-2 {
-  margin-left: 2%;
-  font-size: 12px;
-  margin-top: -1%;
-}
 
 
 /* Student score */

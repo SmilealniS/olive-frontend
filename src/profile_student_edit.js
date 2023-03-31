@@ -15,51 +15,63 @@ import list from './assets/Infopage/list.png';
 import Avatar from 'react-avatar-edit';
 
 const Student_Profile_Edit = () => {
+  var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
+  var user = {
+    username: localStorage.getItem('username') == undefined ? '' : localStorage.getItem('username'),
+    name: localStorage.getItem('name') == undefined ? '' : localStorage.getItem('name'),
+    surname: localStorage.getItem('surname') == undefined ? '' : localStorage.getItem('surname'),
+    email: localStorage.getItem('email') == undefined ? '' : localStorage.getItem('email'),
+    phone: localStorage.getItem('phone') == undefined ? '' : localStorage.getItem('phone'),
+    track: localStorage.getItem('majortrack') == undefined ? '' : localStorage.getItem('majortrack'),
+    displayname: localStorage.getItem('displayname') == undefined ? '' : localStorage.getItem('displayname'),
+  };
+  var student_id = localStorage.getItem('student_id') == undefined ? '' : localStorage.getItem('student_id');
+
   function editProfile() {
     // saveImage();
-    const url1 = 'http://localhost:4000/olive/identity/updatebyId?_id=' + localStorage.getItem('_id');
     let user1 = {
       'Username': document.getElementById('username').textContent
     };
-    fetch(url1, {
+    let user2 = {
+      'Display_Name': document.getElementById('displayname').textContent,
+      'url': ''
+    };
+
+    fetch(`http://localhost:4000/olive/identity/updatebyId?_id=${_id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user1)
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Success:', data);
-        localStorage.setItem('username', data.Username);
+        // console.log('Success:', data);
+        localStorage.setItem('username', user1.Username);
+        // console.log(localStorage.getItem('username'));
       })
       .then(() => {
-        const url2 = 'http://localhost:4000/olive/student-profile/updatebyId?_id=' + localStorage.getItem('student_id');
-        let user2 = {
-          'Display_Name': document.getElementById('displayname').textContent
-        };
-        fetch(url2, {
+        fetch(`http://localhost:4000/olive/student-profile/updatebyId?_id=${student_id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(user2)
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log('Success:', data);
-            localStorage.setItem('pic', data.url);
-            localStorage.setItem('displayname', data.Display_Name);
+            // console.log('Success:', data);
+            localStorage.setItem('pic', user2.url);
+            localStorage.setItem('displayname', user2.Display_Name);
+            // console.log(localStorage.getItem('displayname'));
           })
-          .then(() => window.location.href = '/profile_student')
+          .then(() => { window.location.href = '/profile_student' })
           .catch((error) => {
             console.log('Error:', error);
-          });
+          })
       })
       .catch((error) => {
         console.log('Error:', error);
-      });
+      })
 
     // console.log('user:', document.getElementById('username').textContent)
     // console.log('display:', document.getElementById('displayname').textContent)
-
-    // window.location.href = '/profile_student'
   }
 
   const [imgCrop, setimgCrop] = useState(false);
@@ -102,7 +114,7 @@ const Student_Profile_Edit = () => {
 
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        <td class="info-text" contentEditable='true' id='username'>{localStorage.getItem('username')}</td>
+                        <td class="info-text" contentEditable='true' id='username'>{user.username}</td>
 
                       </div>
                     </div>
@@ -114,7 +126,7 @@ const Student_Profile_Edit = () => {
                     <div class="grid">
                       <img class="icon-pic" src={email}></img>
                       <div class="info-text">
-                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false' id='email'>{localStorage.getItem('email')}</td>
+                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false' id='email'>{user.email}</td>
 
                       </div>
                     </div>
@@ -126,7 +138,7 @@ const Student_Profile_Edit = () => {
                     <div class="grid">
                       <img class="icon-pic" src={tel}></img>
                       <div class="info-text">
-                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false' id='phone'>{localStorage.getItem('phone')}</td>
+                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false' id='phone'>{user.phone}</td>
 
                       </div>
                     </div>
@@ -142,26 +154,12 @@ const Student_Profile_Edit = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false' id='name'>{localStorage.getItem('name')} {localStorage.getItem('surname')}</td>
+                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false' id='name'>{user.name} {user.surname}</td>
 
                       </div>
                     </div>
                   </div>
                 </div>
-                {/* <div class="cell">
-                  <div class="head-box">
-                    Surname
-                  </div>
-                  <div class="info-box">
-                    <div class="grid">
-                      <img class="icon-pic" src={human}></img>
-                      <div class="info-text">
-                        <td class="info-text" contentEditable='false' id='surname'>{localStorage.getItem('surname')}</td>
-
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
                 <div class="cell">
                   <div class="head-box">Department</div>
                   <div class="info-box">
@@ -192,7 +190,7 @@ const Student_Profile_Edit = () => {
                     <div class="grid">
                       <img class="icon-pic" src={major}></img>
                       <div class="info-text">
-                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false' id='majortrack'>{localStorage.getItem('majortrack')}</td>
+                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false' id='majortrack'>{user.track}</td>
 
                       </div>
                     </div>
@@ -206,7 +204,7 @@ const Student_Profile_Edit = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        <td class="info-text" contentEditable='true' id='displayname'>{localStorage.getItem('displayname')}</td>
+                        <td class="info-text" contentEditable='true' id='displayname'>{user.displayname}</td>
 
                       </div>
                     </div>
@@ -234,7 +232,7 @@ const Student_Profile_Edit = () => {
                   </div>
                 </div> */}
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_student" style={{ 'text-decoration':'none', 'color':'black' }}>
+                  <a href="http://localhost:3000/profile_student" style={{ 'text-decoration': 'none', 'color': 'black' }}>
                     <img class="l-icon-pic" src={human}></img>
                     <div class="l-info-text-std">
                       Profile
@@ -242,7 +240,7 @@ const Student_Profile_Edit = () => {
                   </a>
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/class_info_student" style={{ 'text-decoration':'none', 'color':'black' }}>
+                  <a href="http://localhost:3000/class_info_student" style={{ 'text-decoration': 'none', 'color': 'black' }}>
                     <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-std">
                       Course
@@ -256,11 +254,11 @@ const Student_Profile_Edit = () => {
                 <img class='pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                 <div class="l-text1">
                   {/* Said Ski248 */}
-                  {localStorage.getItem('username')}
+                  {user.username}
                 </div>
                 <div class="l-text2">
                   {/* saidski248@gmail.com */}
-                  {localStorage.getItem('email')}
+                  {user.email}
                 </div>
 
                 <a href="/" onClick='window.localStorage.clear()'>

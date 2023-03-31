@@ -13,17 +13,6 @@ body {
   background-color: #f3f3f3;
 }
 
-.wrapper .left .pic-create {
-  width: 7vh;
-  height: 7vh;
-  margin-left: -23px;
-}
-
-.wrapper .left .pic-calendar {
-  width: 7vh;
-  height: 7vh;
-  margin-left: -25px;
-}
 
 .text-rpt {
   margin-top: 2%;
@@ -32,12 +21,7 @@ body {
 
 }
 
-.data .freeform {
-  height: 120px;
-  width: 250px;
-  margin-top: 30px;
-  margin-left: -25%;
-}
+
 
 .vertical {
   border-left: 1px solid grey;

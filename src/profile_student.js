@@ -16,77 +16,88 @@ import list from './assets/Infopage/list.png';
 
 
 const Student_Profile = () => {
+  var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
+  var user = {
+    username: localStorage.getItem('username') == undefined ? '' : localStorage.getItem('username'),
+    name: localStorage.getItem('name') == undefined ? '' : localStorage.getItem('name'),
+    surname: localStorage.getItem('surname') == undefined ? '' : localStorage.getItem('surname'),
+    email: localStorage.getItem('email') == undefined ? '' : localStorage.getItem('email'),
+    phone: localStorage.getItem('phone') == undefined ? '' : localStorage.getItem('phone'),
+    track: localStorage.getItem('majortrack') == undefined ? '' : localStorage.getItem('majortrack'),
+    displayname: localStorage.getItem('displayname') == undefined ? '' : localStorage.getItem('displayname'),
+  };
+  var student_id = localStorage.getItem('student_id') == undefined ? '' : localStorage.getItem('student_id');
+
   useEffect(() => {
-    fetch('http://localhost:4000/olive/student-profile/getbyId?_id=' + localStorage.getItem('student_id'))
+    // fetch('http://localhost:4000/olive/student-profile/getbyId?_id=' + student_id)
+    //   .then(response => response.json())
+    //   .then(response => {
+    //     console.log('Profile', response);
+    //     localStorage.setItem('pic', response.url);
+    //     localStorage.setItem('displayname', response.Display_Name);
+    //   })
+    //   .then(() => {
+    //     fetch('http://localhost:4000/olive/identity/getbyId?_id=' + _id)
+    //       .then(response => response.json())
+    //       .then(response => {
+    //         console.log('Identity', response);
+    //         localStorage.setItem('username', response.Username);
+    //       })
+    //       .then(() => {
+    fetch('http://localhost:4000/olive/enroll/getbyStudentID?_id=' + student_id)
       .then(response => response.json())
       .then(response => {
-        console.log('Profile', response);
-        localStorage.setItem('pic', response.url);
-        localStorage.setItem('displayname', response.Display_Name);
-      })
-      .then(() => {
-        fetch('http://localhost:4000/olive/identity/getbyId?_id=' + localStorage.getItem('_id'))
-          .then(response => response.json())
-          .then(response => {
-            console.log('Identity', response);
-            localStorage.setItem('username', response.Username);
-          })
-          .then(() => {
-            fetch('http://localhost:4000/olive/enroll/getbyStudentID?_id=' + localStorage.getItem('student_id'))
-              .then(response => response.json())
-              .then(response => {
-                // console.log(localStorage.getItem('student_id'));
-                console.log('Class:', response);
-                fetch('http://localhost:4000/olive/class/getbyId?_id=' + response[0].Class)
-                  .then(data => data.json())
-                  .then(data => {
-                    // console.log('Class:', data[0]);
+        // console.log('Class:', response);
+        fetch('http://localhost:4000/olive/class/getbyId?_id=' + response[0].Class)
+          .then(data => data.json())
+          .then(data => {
+            // console.log('Class:', data);
 
-                    fetch('http://localhost:4000/olive/teacher-profile/getbyId?_id=' + data[0].Teacher[0])
-                      .then(data => data.json())
-                      .then(data => {
-                        console.log('teacher:', data)
-                        localStorage.setItem('teacher', JSON.stringify(data.Display_Name));
-                      });
-
-                    localStorage.setItem('class', JSON.stringify(data[0]));
-                    // console.log(JSON.parse(localStorage.getItem('class')));
-
-                    fetch('http://localhost:4000/olive/engagement/getbyStudentID?student=' + localStorage.getItem('student_id') + '&classid=' + data[0]._id)
-                      .then(data => data.json())
-                      .then(data => {
-                        console.log('engagement:', data);
-                        localStorage.setItem('engagement', JSON.stringify(data));
-
-                        let engage = 0;
-                        for(let i = 0; i < data.length; i++) {
-                          engage += data[i].Class.Engagement;
-                        }
-                        engage = engage / data.length;
-                        console.log('percent:', engage)
-                        localStorage.setItem('totalengagement', engage);
-                      })
-                  });
+            fetch('http://localhost:4000/olive/teacher-profile/getbyId?_id=' + data.Teacher)
+              .then(data => data.json())
+              .then(data => {
+                // console.log('teacher:', data)
+                localStorage.setItem('teacher', data.Display_Name);
               });
-          })
-          .then(() => {
-            fetch('http://localhost:4000/olive/attendance/getbyStudentId?student=' + localStorage.getItem('student_id'))
-              .then(response => response.json())
-              .then(response => {
-                let tr = 0;
-                let fa = response.result.length;
-                console.log('Attendance:');
-                for (let i = 0; i < response.result.length; i++) {
-                  // console.log(response.result[i].Class.Status);
-                  if (response.result[i].Class.Status) tr++;
+
+            localStorage.setItem('class', JSON.stringify(data));
+            // console.log(JSON.parse(localStorage.getItem('class')));
+
+            fetch(`http://localhost:4000/olive/engagement/getbyStudentID?student=${student_id}&classid=${data._id}`)
+              .then(data => data.json())
+              .then(data => {
+                // console.log('engagement:', data);
+                localStorage.setItem('engagement', JSON.stringify(data));
+
+                let engage = 0;
+                for (let i = 0; i < data.length; i++) {
+                  engage += data[i].Class.Engagement;
                 }
-                localStorage.setItem('attendance', JSON.stringify({ come: tr, all: fa }));
-                // console.log(response.result);
-                localStorage.setItem('fullattendance', JSON.stringify(response.result));
-                console.log(JSON.parse(localStorage.getItem('fullattendance')))
-              });
+                engage = engage / data.length;
+                // console.log('percent:', engage)
+                localStorage.setItem('totalengagement', engage >= 0 ? engage : 0);
+              })
           });
       });
+    // })
+    // .then(() => {
+    fetch(`http://localhost:4000/olive/attendance/getbyStudentId?student=${student_id}`)
+      .then(response => response.json())
+      .then(response => {
+        let tr = 0;
+        let fa = response.result.length;
+        // console.log('Attendance:');
+        for (let i = 0; i < response.result.length; i++) {
+          // console.log(response.result[i].Class.Status);
+          if (response.result[i].Class.Status) tr++;
+        }
+        localStorage.setItem('attendance', JSON.stringify({ come: tr, all: fa }));
+        // console.log(response.result);
+        localStorage.setItem('fullattendance', JSON.stringify(response.result));
+        // console.log(JSON.parse(localStorage.getItem('fullattendance')))
+      });
+    // });
+    // });
   }, []);
 
   return (
@@ -113,7 +124,7 @@ const Student_Profile = () => {
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
                         {/* Saidski248 */}
-                        {localStorage.getItem('username')}
+                        {user.username}
                       </div>
                     </div>
                   </div>
@@ -125,7 +136,7 @@ const Student_Profile = () => {
                       <img class="icon-pic" src={email}></img>
                       <div class="info-text">
                         {/* kasidis.cho@student.mahidol.ac.edu */}
-                        {localStorage.getItem('email')}
+                        {user.email}
                       </div>
                     </div>
                   </div>
@@ -137,7 +148,7 @@ const Student_Profile = () => {
                       <img class="icon-pic" src={tel}></img>
                       <div class="info-text">
                         {/* +66959637516 */}
-                        {localStorage.getItem('phone')}
+                        {user.phone}
                       </div>
                     </div>
                   </div>
@@ -153,7 +164,7 @@ const Student_Profile = () => {
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
                         {/* Kasidis Chokphaiboon */}
-                        {localStorage.getItem('name')} {localStorage.getItem('surname')}
+                        {user.name} {user.surname}
                       </div>
                     </div>
                   </div>
@@ -190,7 +201,7 @@ const Student_Profile = () => {
                       <img class="icon-pic" src={major}></img>
                       <div class="info-text">
                         {/* Management Information System (MIS) */}
-                        {localStorage.getItem('majortrack')}
+                        {user.track}
                       </div>
                     </div>
                   </div>
@@ -214,7 +225,7 @@ const Student_Profile = () => {
                     <div class="grid">
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
-                        {localStorage.getItem('displayname')}
+                        {user.displayname}
                       </div>
                     </div>
                   </div>
@@ -240,7 +251,7 @@ const Student_Profile = () => {
                   </div>
                 </div> */}
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_student" style={{ 'text-decoration':'none', 'color':'black' }}>
+                  <a href="/profile_student" style={{ 'text-decoration': 'none', 'color': 'black' }}>
                     <img class="l-icon-pic" src={human}></img>
                     <div class="l-info-text-std" >
                       Profile
@@ -248,7 +259,7 @@ const Student_Profile = () => {
                   </a>
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/class_info_student" style={{ 'text-decoration':'none', 'color':'black' }}>
+                  <a href="/class_info_student" style={{ 'text-decoration': 'none', 'color': 'black' }}>
                     <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-std">
                       Course
@@ -261,11 +272,11 @@ const Student_Profile = () => {
                 <img class='pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                 <div class="l-text1">
                   {/* Said Ski248 */}
-                  {localStorage.getItem('username')}
+                  {user.username}
                 </div>
                 <div class="l-text2">
                   {/* saidski248@gmail.com */}
-                  {localStorage.getItem('email')}
+                  {user.email}
                 </div>
 
                 <a href="/" onClick="localStorage.clear()">
