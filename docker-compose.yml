@@ -1,0 +1,20 @@
+version: '3'
+services:
+  olive-frontend:
+    restart: always
+    tty: true
+    # entrypoint: ['npm', 'start']
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - /home/anyamaneeama/olive-frontend:/app
+
+    # networks:
+      # - node-webapp-network
+      # mongodb+srv://SmilealniS:<password>@npm-olive.4z8itim.mongodb.net/test
+# networks:
+#   node-webapp-network:
+#     driver: bridge
+#volumes:
+#  mongodb:
