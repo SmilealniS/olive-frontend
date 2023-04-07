@@ -429,6 +429,11 @@ label input:checked ~ span BsLightbulb{
     filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 10px #fff) drop-shadow(0 0 15px #fff);
 
 }
+
+input[type="checkbox"]#lightbulb:checked + span {
+    color: gold;
+}
+
 label span ion-icon{
     font-size: 3em;
     transition: 0.5s;
