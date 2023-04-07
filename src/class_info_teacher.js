@@ -3,7 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect } from 'react';
 import back from './assets/class_info/backicon.png';
 import { text } from '@fortawesome/fontawesome-svg-core';
-import { Navigate } from 'react-router-dom';
+import { Navigate, redirect } from 'react-router-dom';
+import moment from 'moment'
 
 const Classinfo_Teacher = () => {
   var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
@@ -18,7 +19,7 @@ const Classinfo_Teacher = () => {
   };
   var student_id = localStorage.getItem('student_id') == undefined ? '' : localStorage.getItem('student_id');
   var teacher = localStorage.getItem('teacher') == undefined ? '' : localStorage.getItem('teacher');
-  var classroom = JSON.parse(localStorage.getItem('class')) == null ? {
+  var classroom = localStorage.getItem('class') == "undefined" ? {
     _id: '',
     Name: 'ITCS888',
     Description: 'This is temp class for testing process'
@@ -70,7 +71,14 @@ const Classinfo_Teacher = () => {
 
   function joinMeeting() {
     let today = new Date();
-    let todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-${today.getDate()}`;
+    let todaystring;
+    if ((today.getMonth() + 1) > 9) {
+      if (today.getDate() > 9) todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+      else todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+    } else {
+      if (today.getDate() > 9) todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-${today.getDate()}`;
+      else todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-0${today.getDate()}`;
+    }
 
     const updatedList = {
       "Date": new Date(todaystring),
@@ -79,7 +87,7 @@ const Classinfo_Teacher = () => {
 
     fetch(`http://localhost:4000/olive/class/updatebyId?_id=${classroom._id}`, {
       method: 'PUT',
-      body: JSON.stringify(updatedList)
+      // body: JSON.stringify(updatedList)
     })
 
     fetch('http://localhost:4000/olive/enroll/getbyClassID?classid=' + classroom._id)
@@ -90,7 +98,11 @@ const Classinfo_Teacher = () => {
           let stu = {
             "Student_Id": data[0].Student[i],
             "Class": {
-              "Id": classroom._id
+              "Id": classroom._id,
+              "Date": new Date(todaystring),
+              "Status": false,
+              "EnterTime": "",
+              "ExitTime": ""
             }
           };
 
@@ -99,20 +111,34 @@ const Classinfo_Teacher = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(stu)
           })
-          .then(res => res.json())
-          .then(res => {
-            console.log(res)
-          })
-          .catch(error => {
-            console.log(error)
-          })
+            .then(res => res.json())
+            .then(res => {
+              console.log(res)
+            })
+            .catch(error => {
+              console.log(error)
+            })
         }
-        window.location.href = '/teachingUI'
+
+
       })
-      // .then(window.location.href = '/teachingUI')
+      .then(
+        fetch('http://localhost:4000/redirect?rp=' + 'teachingUI', {
+          method: 'POST',
+          redirect: 'follow'
+        })
+          // .then(res => res.json())
+          .then(res => {
+            console.log(res.redirected, res.url)
+            if (res.redirected) {
+              window.location.href = res.url
+            }
+          })
+      )
       .catch(error => {
         console.log(error)
       })
+    // .finally(redirect('/teachingUI'))
 
   }
 
@@ -174,7 +200,7 @@ const Classinfo_Teacher = () => {
                 <div class="tabs">
                   {/* Engagement tab */}
                   <div class="tab">
-                    <input type="radio" name="css-tabs" id="tab-1" class="tab-switch"></input>
+                    <input checked type="radio" name="css-tabs" id="tab-1" class="tab-switch"></input>
                     <label for="tab-1" class="tab-label">Engagement</label>
 
                     <div class="tab-content"><br></br>

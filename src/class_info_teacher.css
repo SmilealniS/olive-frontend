@@ -230,6 +230,7 @@ body#class_info_teacher {
     line-height: 2.75em;
     height: 3em;
     padding: 0 1.618em;
+    margin: 0;
     background: #625F63;
     border-right: 0.125rem solid #625F63;
     color: #fff;
@@ -237,13 +238,17 @@ body#class_info_teacher {
     top: 0;
     transition: all 0.25s;
     font-size: 19px;
+    width: auto;
+    border-radius: 0;
 }
 
 .tab-label:hover {
-    top: -0.25rem;
+    /* top: -0.25rem; */
     transition: top 0.25s;
     background-color: #6FBCED;
+    border-radius: 0;
     color: white;
+    width: auto;
     /* color: #744cb0;
     border-bottom: 2px solid #744cb0;
     border-right: none; */
@@ -261,6 +266,7 @@ body#class_info_teacher {
     border-bottom: 0.25rem solid #bdc3c7;
     opacity: 0;
     transition: all 0.35s;
+    /* width: auto; */
 }
 
 .tab-switch:checked + .tab-label {
@@ -449,6 +455,7 @@ nav {
 .save-btn{
   width: 80px;
   height: 30px;
-  margin-left: 158vh;
+  /* margin-left: 158vh; */
   margin-top: 3vh;
+  /* align-content: end; */
 }

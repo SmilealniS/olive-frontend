@@ -58,6 +58,7 @@ const Teacher_Profile = () => {
           .then(data => {
             let classdate = [];
             let contained;
+            console.log(data)
             for (let i = 0; i < data.result.length; i++) {
               contained = true;
               classdate.forEach(cd => {
@@ -187,13 +188,24 @@ const Teacher_Profile = () => {
                     </div>
                   </div>
                 </div> */}
-                <div class="cell">
+                {/* <div class="cell">
                   <div class="head-box">Department</div>
                   <div class="info-box">
                     <div class="grid">
                       <img class="icon-pic" src={department}></img>
                       <div class="info-text">
                         Doctor of Philosophy (Ph.D.)
+                      </div>
+                    </div>
+                  </div>
+                </div> */}
+                <div class="cell">
+                  <div class="head-box">Display name</div>
+                  <div class="info-box">
+                    <div class="grid">
+                      <img class="icon-pic" src={human}></img>
+                      <div class="info-text">
+                        { user.displayname }
                       </div>
                     </div>
                   </div>
@@ -225,7 +237,7 @@ const Teacher_Profile = () => {
                     </div>
                   </div>
                 </div> */}
-                <div class="cell">
+                {/* <div class="cell">
                   <div class="head-box">Display name</div>
                   <div class="info-box">
                     <div class="grid">
@@ -235,7 +247,7 @@ const Teacher_Profile = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <a href="/profile_teacher_edit">

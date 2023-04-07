@@ -141,7 +141,10 @@ const Teacher_Profile_Edit = () => {
                       <img class="icon-pic" src={human}></img>
                       <div class="info-text">
 
-                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false'>Adele Jackson</td>
+                        <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false'>
+                          {/* Adele Jackson */}
+                          {user.name} {user.surname}
+                          </td>
                       </div>
                     </div>
                   </div>
@@ -158,7 +161,7 @@ const Teacher_Profile_Edit = () => {
                     </div>
                   </div>
                 </div> */}
-                <div class="cell">
+                {/* <div class="cell">
                   <div class="head-box">Department</div>
                   <div class="info-box">
                     <div class="grid">
@@ -169,7 +172,7 @@ const Teacher_Profile_Edit = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div class="cell">
                   <div class="head-box">Major</div>
                   <div class="info-box">
@@ -178,6 +181,18 @@ const Teacher_Profile_Edit = () => {
                       <div class="info-text">
 
                         <td class="info-text" style={{ opacity: 0.3 }} contentEditable='false'>{user.track}</td>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cell">
+                  <div class="head-box">Display name</div>
+                  <div class="info-box">
+                    <div class="grid">
+                      <img class="icon-pic" src={human}></img>
+                      <div class="info-text">
+
+                        <td class="info-text" id='displayname' contentEditable='true'>{user.displayname}</td>
                       </div>
                     </div>
                   </div>
@@ -211,7 +226,7 @@ const Teacher_Profile_Edit = () => {
                   </div>
                 </div> */}
 
-                <div class="cell">
+                {/* <div class="cell">
                   <div class="head-box">Display name</div>
                   <div class="info-box">
                     <div class="grid">
@@ -222,7 +237,7 @@ const Teacher_Profile_Edit = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               {/* <a href="http://localhost:3000/profile_teacher"> */}

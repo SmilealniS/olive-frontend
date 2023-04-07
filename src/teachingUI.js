@@ -29,7 +29,7 @@ const TeacherUI = ({ payload }) => {
   };
   var teacher_id = localStorage.getItem('teacher_id') == undefined ? '' : localStorage.getItem('teacher_id');
   var teacher = localStorage.getItem('teacher') == undefined ? '' : localStorage.getItem('teacher');
-  var classroom = JSON.parse(localStorage.getItem('class')) == null ? {
+  var classroom = localStorage.getItem('class') == "undefined" ? {
     _id: '',
     Name: 'ITCS888',
     Description: 'This is temp class for testing process'
@@ -39,17 +39,52 @@ const TeacherUI = ({ payload }) => {
     socket.current = io("http://localhost:4000");
     socket.current.emit('add-user', [teacher_id, 'teacher']);
     socket.current.on('get-user', (user) => {
-      console.log('Active:', user);
+      // console.log('Active:', user);
       setActive(user);
     });
   }, []);
 
   useEffect(() => {
-    socket.current.on('light', data => {
-      alert('light')
-      console.log(data)
+    socket.current.on('cal-light', data => {
+      // alert('light')
+      console.log('Toggle light:', data)
+
+      fetch(`http://localhost:4000/olive/interact/getbyType?type=light&classid=${classroom._id}`)
+        .then(data => data.json())
+        .then(data => {
+          // console.log(data)
+          let light = 0;
+
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].Boolean) {
+              light++
+            }
+          }
+
+          for (let i = 1; i <= 5; i++) {
+            if (i > light / data.length) {
+              document.getElementById(`lightbulb-${i}`).style('display', 'none');
+              document.getElementById(`lightbulb-0${i}`).style('display', 'block');
+            }
+          }
+
+        });
     });
   }, []);
+
+  function sigmoid(x, w1, k, w2, y, w3, z, w4, i, m, b) {
+    let z1 = -40 * w1 * x / k;
+    let z2 = w2 * y / k;
+    let z3 = w3 * z / k;
+    let z4 = w4 * i / m;
+    let z5 = b;
+
+    if (z1 === 0 && z2 === 0 && z3 === 0 && z4 === 0 && z5 === 0) {
+      z5 = -5; // set b to negative number if all input values are 0
+    }
+
+    return 1 / (1 + Math.exp(z1 + z2 + z3 + z4 + z5));
+  }
 
   const myFunction = async () => {
     var client = ZoomMtgEmbedded.createClient();
@@ -112,9 +147,11 @@ const TeacherUI = ({ payload }) => {
     let emoid = ['63f6aa43c64dc707bf25c533', '63f6aa43c64dc707bf25c534', '63f6aa43c64dc707bf25c535', '63f6aa43c64dc707bf25c536', '63f6aa43c64dc707bf25c537'];
     for (let i = 0; i < emoid.length; i++) { document.getElementById(emoid[i]).textContent = 0 }
 
+    clearStack();
+
     document.getElementById('chatTable').innerHTML = '';
 
-    fetch('http://localhost:4000/olive/interact/getbyType?type=chat&classid=' + JSON.parse(localStorage.getItem('class'))._id)
+    fetch('http://localhost:4000/olive/interact/getbyType?type=chat&classid=' + classroom._id)
       .then(data => data.json())
       .then(data => {
         console.log('initChat:', data)
@@ -214,25 +251,6 @@ const TeacherUI = ({ payload }) => {
     setInterval(createEngagement, 600000);   //  10 minutes
   }
 
-  const sendEmoji = event => {
-
-    let data = {
-      Student: localStorage.getItem('teacher_id'),
-      Class: JSON.parse(localStorage.getItem('class'))._id,
-      Type: "emoji",
-      Emoji: event.currentTarget.id
-    };
-
-    fetch('http://localhost:4000/olive/interact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    }).then(resp => resp.json()).then(resp => { console.log(resp) }).catch(error => {
-      console.log(error)
-      alert('Cannot send emoji')
-    })
-  }
-
   function sendMessage() {
     if (document.getElementById('sendtext').value == '') return;
     // alert(document.getElementById('sendtext').value)
@@ -274,6 +292,13 @@ const TeacherUI = ({ payload }) => {
     socket.current.on('light', light => {
       console.log('Light:', light)
     });
+  }, []);
+
+  useEffect(() => {
+    socket.current.on('emo-recieve', (emo) => {
+      console.log('Recieve:', emo)
+      updateStack()
+    })
   }, []);
 
   useEffect(() => {
@@ -347,7 +372,7 @@ const TeacherUI = ({ payload }) => {
 
   function updateStack() {
     // alert('stack');
-    fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + JSON.parse(localStorage.getItem('class'))._id)
+    fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + classroom._id)
       .then(data => data.json())
       .then(data => {
         // console.log('stack:', data[0]);
@@ -360,26 +385,55 @@ const TeacherUI = ({ payload }) => {
           // console.log(emojis[Object.keys(emojis)[i]]);
           document.getElementById(Object.keys(emojis)[i]).textContent = emojis[Object.keys(emojis)[i]].length;
         }
+
+      })
+      .catch(error => {
+        console.log(error)
       })
   }
 
-  // updateStack();
-  // setInterval(updateStack, 600000);
+  updateStack();
+  setInterval(updateStack, 600000);
 
   function clearStack() {
-    fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + JSON.parse(localStorage.getItem('class'))._id)
+    fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + classroom._id)
       .then(data => data.json())
       .then(data => {
         // console.log('stack:', data[0]);
         fetch('http://localhost:4000/olive/emojis/clear?_id=' + data[0]._id, {
           method: 'PUT'
         })
+
+      })
+      .finally(() => {
+        let today = new Date();
+        let todaystring;
+        if ((today.getMonth() + 1) > 9) {
+          if (today.getDate() > 9) todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+          else todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+        } else {
+          if (today.getDate() > 9) todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-${today.getDate()}`;
+          else todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-0${today.getDate()}`;
+        }
+
+        let stack = {
+          "Class": classroom._id,
+          "Emoji": [],
+          "Clear_stack": false,
+          "Date": new Date(todaystring)
+        }
+
+        fetch(`http://localhost:4000/olive/emojis`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(stack)
+        })
       })
 
   }
 
   function updateEngagement() {
-    fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + JSON.parse(localStorage.getItem('class'))._id)
+    fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
       .then(data => data.json())
       .then(data => {
         // console.log('engegement:');
@@ -395,7 +449,7 @@ const TeacherUI = ({ payload }) => {
 
   function clearEngagement() {
     document.getElementById('engagementVal').textContent = '100%';
-    fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + JSON.parse(localStorage.getItem('class'))._id)
+    fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
       .then(data => data.json())
       .then(data => {
         fetch('http://localhost:4000/olive/engagement/clear?_id=' + data[0]._id, {
@@ -448,12 +502,17 @@ const TeacherUI = ({ payload }) => {
                         </button2>
                       </div>
                       {/* <div class="survbar"><div class="bar-1"></div></div> */}
-                      <div class='lightbulb'>
-                        <BsLightbulbFill size='4em' color='gold' />
-                        <BsLightbulbFill size='4em' color='gold' />
-                        <BsLightbulbFill size='4em' color='gold' />
-                        <BsLightbulbFill size='4em' color='gold' />
-                        <BsLightbulb size='4em' color='gold' />
+                      <div class='lightbulb' >
+                        <span><BsLightbulbFill id='lightbulb-1' size='4em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-01' display='none' size='4em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-2' size='4em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-02' display='none' size='4em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-3' size='4em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-03' display='none' size='4em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-4' size='4em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-04' display='none' size='4em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-5' size='4em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-05' display='none' size='4em' color='gold' /></span>
                       </div>
                     </div>
                   </div>
@@ -507,8 +566,23 @@ const TeacherUI = ({ payload }) => {
             </div>
 
             {/* Emoji */}
-            <div class="grid-btn">
-              <div class="emo-button-leave-teach">leave</div>
+            {/* leave */}
+            {/* <div class="emo-button-leave-std">leave</div> */}
+            <div class="pop-leave">
+              <a class="emo-button-leave-teac" href="#popup3">leave</a>
+            </div>
+            <div id="popup3" class="overlay">
+              <div class="popup-leave">
+                <div class="text-popup-confirm-leave">Do you want to leave?</div>
+                <a class="close-x" href="#">&times;</a>
+
+                <div class="popup-confirm-leave">
+                  <button class="btn-confirm-leave">Yes</button>
+                  <a class="close-x" href="#">
+                    <button class="btn-confirm-leave">No</button>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 

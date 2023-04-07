@@ -7,6 +7,10 @@ import ZoomMtgEmbedded from '@zoomus/websdk/embedded';
 import { parse, stringify, toJSON, fromJSON } from 'flatted';
 import { io } from "socket.io-client";
 
+import { IonIcon } from '@ionic/react';
+// import { }
+
+
 const StudentUI = ({ payload }) => {
   const [active, setActive] = useState([]);
 
@@ -36,7 +40,7 @@ const StudentUI = ({ payload }) => {
     socket.current = io("http://localhost:4000");
     socket.current.emit('add-user', [student_id, 'student']);
     socket.current.on('get-user', (user) => {
-      console.log('Active:', user);
+      // console.log('Active:', user);
       setActive(user);
     })
   }, []);
@@ -106,7 +110,7 @@ const StudentUI = ({ payload }) => {
   const init = () => {
     document.getElementById('chatTable').innerHTML = '';
 
-    fetch('http://localhost:4000/olive/interact/getbyType?type=chat&classid=' + JSON.parse(localStorage.getItem('class'))._id)
+    fetch('http://localhost:4000/olive/interact/getbyType?type=chat&classid=' + classroom._id)
       .then(data => data.json())
       .then(data => {
         // console.log(localStorage.getItem('teacher_id'))
@@ -154,13 +158,38 @@ const StudentUI = ({ payload }) => {
                   </div>`
 
               })
-              .catch(error => {
-                console.log('error', error)
-              });
+              .catch(
+                document.getElementById('chatTable').innerHTML +=
+                `<div class="you">
+                    <div class="entete">
+                      <b>${teacher} &nbsp;</b>
+                      <p>${time} &nbsp;</p>
+                    </div>
+                    <div class="message">
+                      ${data[i].Description}
+                    </div>
+                  </div>`
+              );
           }
 
         }
       });
+
+    // init lightbulb
+    let data = {
+      Student: student_id,
+      Class: classroom._id,
+      Type: "light",
+      Boolean: false
+    };
+
+    fetch('http://localhost:4000/olive/interact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+
+    // socket.current.emit('toggle-light', data)
 
   }
 
@@ -175,7 +204,8 @@ const StudentUI = ({ payload }) => {
           console.log('Chat:', data)
 
           for (let i = 0; i < data.length; i++) {
-            // console.log(data[i])
+            console.log('student recieve:', data[i])
+            // console.log('From:', data[i].Student)
             let date = new Date(data[i].Time);
             let time = ''
             time += date.getHours() > 9 ? '' : '0'
@@ -186,7 +216,7 @@ const StudentUI = ({ payload }) => {
             // console.log(date.getHours(), date.getMinutes());
 
             if (data[i].Student == student_id) {
-              // console.log(user.displayname)
+              console.log(user.displayname)
               document.getElementById('chatTable').innerHTML +=
                 `<div class="me">
                     <div class="entete">
@@ -198,16 +228,16 @@ const StudentUI = ({ payload }) => {
                     </div>
                   </div>`
             } else {
+              // console.log('Not from myself')
               fetch('http://localhost:4000/olive/student-profile/getbyId?_id=' + data[i].Student)
                 .then(sender => sender.json())
                 .then(sender => {
-                  console.log('get student profile')
 
                   console.log(sender.Display_Name)
                   document.getElementById('chatTable').innerHTML +=
                     `<div class="you">
                       <div class="entete">
-                        <b>${sender.Display_Name == undefined ? teacher : sender.Display_Name} &nbsp;</b>
+                        <b>${sender.Display_Name} &nbsp;</b>
                         <p>${time} &nbsp;</p>
                       </div>
                       <div class="message">
@@ -215,7 +245,19 @@ const StudentUI = ({ payload }) => {
                       </div>
                     </div>`
 
-                });
+                })
+                .catch(
+                  document.getElementById('chatTable').innerHTML +=
+                  `<div class="you">
+                      <div class="entete">
+                        <b>${teacher} &nbsp;</b>
+                        <p>${time} &nbsp;</p>
+                      </div>
+                      <div class="message">
+                        ${data[i].Description}
+                      </div>
+                    </div>`
+                );
             }
 
           }
@@ -242,11 +284,48 @@ const StudentUI = ({ payload }) => {
     fetch('http://localhost:4000/olive/interact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: stringify(data)
+      body: JSON.stringify(data)
     })
       .then(resp => resp.json())
       .then(resp => {
-        // console.log(resp) 
+        console.log('Add:', resp)
+        let today = new Date();
+        let todaystring;
+        if ((today.getMonth() + 1) > 9) {
+          if (today.getDate() > 9) todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+          else todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+        } else {
+          if (today.getDate() > 9) todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-${today.getDate()}`;
+          else todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-0${today.getDate()}`;
+        }
+
+        try {
+          fetch(`http://localhost:4000/olive/emojis/getbyClass?classid=${classroom._id}&todaystring=${todaystring}`)
+            .then(stack => stack.json())
+            .then(stack => {
+              console.log('Current:', stack)
+              let addStack = {
+                "Emoji": {
+                  "InteractionId": "63f6b017383649c8e2971eeb",
+                  "Id": "63f6aa43c64dc707bf25c533"
+                }
+              }
+
+              fetch(`http://localhost:4000/olive/emojis/add?${stack._id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(addStack)
+              })
+            })
+            .catch(error => {
+              console.log(error)
+            })
+
+          socket.current.emit('send-emo', data);
+
+        } catch (error) {
+          console.log(error)
+        }
       })
       .catch(error => {
         console.log(error)
@@ -375,7 +454,39 @@ const StudentUI = ({ payload }) => {
   setInterval(gazeDetection, 60000); //  1 min
 
   const toggleLight = event => {
-    socket.current.emit('toggle-light', event.currentTarget.id)
+    // console.log('Light:', event.currentTarget, event.currentTarget.checked)
+    socket.current.emit('toggle-light', event.currentTarget.checked)
+    let today = new Date();
+    let todaystring;
+    if ((today.getMonth() + 1) > 9) {
+      if (today.getDate() > 9) todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+      else todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+    } else {
+      if (today.getDate() > 9) todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-${today.getDate()}`;
+      else todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-0${today.getDate()}`;
+    }
+    console.log('Today:', todaystring)
+
+    fetch(`http://localhost:4000/olive/interact/getStudent?student=${student_id}&classid=${classroom._id}&type=light&date=${todaystring}`)
+      .then(data => data.json())
+      .then(data => {
+        console.log('Lights:', data.Boolean)
+
+        if (data.Boolean) {
+          console.log('Light off')
+          fetch(`http://localhost:4000/olive/interact/updateLight?_id=${data._id}&light=false`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' }
+          })
+        }
+        else {
+          console.log('Light on')
+          fetch(`http://localhost:4000/olive/interact/updateLight?_id=${data._id}&light=true`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' }
+          })
+        }
+      });
   }
 
   return (
@@ -384,8 +495,9 @@ const StudentUI = ({ payload }) => {
         <div class="wrapup">
           {/* display */}
           <div class='' id='display' >
-            <div class='screen' id='meetingSDKElement' ></div>
+            <div class='screen' id='meetingSDKElement' >
 
+            </div>
 
           </div>
 
@@ -410,9 +522,9 @@ const StudentUI = ({ payload }) => {
             <div class="grid-btn">
               {/* Emoji */}
               <div class="pop-emoji">
-                <a class="emo-button" href="#popup1">emoji</a>
+                <a class="emo-button" href="#emoji">emoji</a>
               </div>
-              <div id="popup1" class="overlay">
+              <div id="emoji" class="overlay">
                 <div class="popup">
                   {/* <a class="close" href="#">1</a>
                 <a class="close1" href="#">2</a>
@@ -432,26 +544,58 @@ const StudentUI = ({ payload }) => {
 
               {/* light bulb */}
               <div class="pop-emoji">
-                <a class="emo-button" href="#popup2">light-bulb</a>
+                <a class="emo-button" href="#light-bulb">light-bulb</a>
               </div>
-              <div id="popup2" class="overlay">
+              <div id="light-bulb" class="overlay">
                 <div class="popup">
                   <div class="text-popup">Lightbulb</div>
                   <a class="close-x" href="#">&times;</a>
 
                   <div class="lightbulb-popup">
-                    <BsLightbulbFill id='onLight' onClick={toggleLight} size='4em' color='gold' />
-                    <BsLightbulb id='offLight' onClick={toggleLight} size='4em' color='gold' />
+                    {/* Test code on/off */}
+                    <label >
+                      <input type="checkbox" id='lightbulb' onChange={toggleLight}></input>
+                      {/* <span><ion-icon name="bulb-outline" /></span> */}
+                      <span>
+                        <BsLightbulb size='2.5em' />
+                      </span>
+                    </label>
+                    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+                    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+                    {/* Test code on/off */}
                   </div>
                 </div>
               </div>
 
-              <div class="emo-button-leave-std">leave</div>
+
+              {/* leave */}
+              {/* <div class="emo-button-leave-std">leave</div> */}
+              <div class="pop-leave">
+                <a class="emo-button-leave" href="#leave">leave</a>
+              </div>
+              <div id="leave" class="overlay">
+                <div class="popup-leave">
+                  <div class="text-popup-confirm-leave">Do you want to leave?</div>
+                  <a class="close-x" href="#">&times;</a>
+
+                  <div class="popup-confirm-leave">
+                    <button class="btn-confirm-leave">Yes</button>
+                    <a class="close-x" href="#">
+                      <button class="btn-confirm-leave">No</button>
+                    </a>
+
+                  </div>
+                </div>
+              </div>
 
             </div>
 
 
             {/* </div> */}
+
+
           </div>
 
         </div>

@@ -2,6 +2,7 @@ import './class_info_student.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect } from 'react';
 import back from './assets/class_info/backicon.png';
+import moment from 'moment'
 
 const Classinfo_Student = () => {
   var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
@@ -54,7 +55,14 @@ const Classinfo_Student = () => {
 
   function joinMeeting() {
     let today = new Date();
-    let todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-${today.getDate()}`;
+    let todaystring;
+    if((today.getMonth() + 1) > 9) {
+      if(today.getDate() > 9) todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+      else todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+    } else {
+      if(today.getDate() > 9) todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-${today.getDate()}`;
+      else todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-0${today.getDate()}`;
+    }
 
     fetch(`http://localhost:4000/olive/attendance/getbyparams?student=${student_id}&classid=${classroom._id}&classdate=${todaystring}`)
       .then(data => data.json())
@@ -149,8 +157,8 @@ const Classinfo_Student = () => {
               <div class="cis-bottom-frame-box">
                 {/* <div class="tabs">
                   <div class="tab"> */}
-                <div name="css-tabs" id="tab-1" checked class="tab-switch"></div>
-                <label for="tab-1" class="cis-tab-label">Engagement Info</label>
+                {/* <div name="css-tabs" id="tab-1" checked class="tab-switch"></div> */}
+                {/* <label for="tab-1" class="cis-tab-label">Engagement Info</label> */}
 
                 {/* <div class="tab-content"><br></br> */}
                 {/* <div class="s-top-text">Engagement Info</div> */}
