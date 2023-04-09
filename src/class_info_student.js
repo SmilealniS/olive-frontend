@@ -28,6 +28,11 @@ const Classinfo_Student = () => {
     come: 0, all: 0
   } : JSON.parse(localStorage.getItem('attendance'));
   var totalengagement = localStorage.getItem('totalengagement') == undefined ? 0 : localStorage.getItem('totalengagement');
+  var todayLocal = new Date(
+    new Date().toLocaleString('th-TH', {
+      timeZone: 'Asia/Bangkok',
+    }),
+  );
 
   useEffect(() => {
     document.getElementById('engagementTable').innerHTML = '';
@@ -47,20 +52,21 @@ const Classinfo_Student = () => {
         }
       };
       document.getElementById('engagementTable').innerHTML +=
-        `<div class="textTopic">${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}</div>
+        `<div class="textTopic">${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}</div>
       <div class="textTopic">${fullattendance[i].Class.Status ? 'Present' : 'Absent'}</div>
       <div class="textTopic">${en}</div>`
     }
   });
 
   function joinMeeting() {
-    let today = new Date();
+    // let today = new Date();
+    let today = todayLocal;
     let todaystring;
-    if((today.getMonth() + 1) > 9) {
-      if(today.getDate() > 9) todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+    if ((today.getMonth() + 1) > 9) {
+      if (today.getDate() > 9) todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
       else todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
     } else {
-      if(today.getDate() > 9) todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-${today.getDate()}`;
+      if (today.getDate() > 9) todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-${today.getDate()}`;
       else todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-0${today.getDate()}`;
     }
 
@@ -72,24 +78,37 @@ const Classinfo_Student = () => {
           method: 'PUT'
         })
           .then(response => response.json())
-          .then(response => {
-            // console.log('attendance')
-            // console.log(response);
-            window.location.href = '/studyingUI'
-          })
+          // .then(response => {
+          //   // console.log('attendance')
+          //   // console.log(response);
+          //   window.location.href = '/studyingUI'
+          // })
+          .then(
+            fetch('http://localhost:4000/redirect?rp=' + 'studyingUI', {
+              method: 'POST',
+              redirect: 'follow'
+            })
+              // .then(res => res.json())
+              .then(res => {
+                console.log(res.redirected, res.url)
+                if (res.redirected) {
+                  window.location.href = res.url
+                }
+              })
+          )
           .catch(error => {
             // console.log(error)
           })
       }).catch(error => {
         // console.log(error)
         fetch(`http://localhost:4000/olive/attendance/getbyClassDate?classdate=${todaystring}&classid=${classroom._id}`)
-        .then(response => response.json())
-        .then(response => {
-          console.log(response)
-          alert('Today class not start yet')
-        }).catch(error => {
-          // console.log(error)
-        })
+          .then(response => response.json())
+          .then(response => {
+            console.log(response)
+            alert('Today class not start yet')
+          }).catch(error => {
+            // console.log(error)
+          })
       })
   }
 

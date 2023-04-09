@@ -31,6 +31,11 @@ const Classinfo_Teacher = () => {
   } : JSON.parse(localStorage.getItem('attendance'));
   var totalengagement = localStorage.getItem('totalengagement') == undefined ? 0 : localStorage.getItem('totalengagement');
   var totalclass = localStorage.getItem('totalclass') == undefined ? 0 : localStorage.getItem('totalclass');
+  var todayLocal = new Date(
+    new Date().toLocaleString('th-TH', {
+      timeZone: 'Asia/Bangkok',
+    }),
+  );
 
   var _ = require('lodash');
 
@@ -70,7 +75,8 @@ const Classinfo_Teacher = () => {
   });
 
   function joinMeeting() {
-    let today = new Date();
+    // let today = new Date();
+    let today = todayLocal;
     let todaystring;
     if ((today.getMonth() + 1) > 9) {
       if (today.getDate() > 9) todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
@@ -81,14 +87,15 @@ const Classinfo_Teacher = () => {
     }
 
     const updatedList = {
-      "Date": new Date(todaystring),
+      // "Date": new Date(todaystring),
+      "Date": todaystring,
       "Start_time": today.getTime()
     };
 
-    fetch(`http://localhost:4000/olive/class/updatebyId?_id=${classroom._id}`, {
-      method: 'PUT',
-      // body: JSON.stringify(updatedList)
-    })
+    // fetch(`http://localhost:4000/olive/class/updatebyId?_id=${classroom._id}`, {
+    //   method: 'PUT',
+    //   // body: JSON.stringify(updatedList)
+    // })
 
     fetch('http://localhost:4000/olive/enroll/getbyClassID?classid=' + classroom._id)
       .then(data => data.json())
@@ -99,7 +106,8 @@ const Classinfo_Teacher = () => {
             "Student_Id": data[0].Student[i],
             "Class": {
               "Id": classroom._id,
-              "Date": new Date(todaystring),
+              // "Date": new Date(todaystring),
+              "Date": todaystring,
               "Status": false,
               "EnterTime": "",
               "ExitTime": ""

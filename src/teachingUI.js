@@ -34,6 +34,11 @@ const TeacherUI = ({ payload }) => {
     Name: 'ITCS888',
     Description: 'This is temp class for testing process'
   } : JSON.parse(localStorage.getItem('class'));
+  var todayLocal = new Date(
+    new Date().toLocaleString('th-TH', {
+      timeZone: 'Asia/Bangkok',
+    }),
+  );
 
   useEffect(() => {
     socket.current = io("http://localhost:4000");
@@ -59,14 +64,21 @@ const TeacherUI = ({ payload }) => {
             if (data[i].Boolean) {
               light++
             }
+            let fill = document.getElementById(`lightbulb-${i+1}`);
+            fill.style.display = 'block';
+            let nofill = document.getElementById(`lightbulb-0${i+1}`);
+            nofill.style.display = 'none';
           }
 
           for (let i = 1; i <= 5; i++) {
-            if (i > light / data.length) {
-              document.getElementById(`lightbulb-${i}`).style('display', 'none');
-              document.getElementById(`lightbulb-0${i}`).style('display', 'block');
+            if (i > (light / data.length) * 100 / 20) {
+              let fill = document.getElementById(`lightbulb-${i}`);
+              fill.style.display = 'none';
+              let nofill = document.getElementById(`lightbulb-0${i}`);
+              nofill.style.display = 'block';
             }
           }
+          console.log(light, (light / data.length) * 100 / 20)
 
         });
     });
@@ -375,12 +387,12 @@ const TeacherUI = ({ payload }) => {
     fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + classroom._id)
       .then(data => data.json())
       .then(data => {
-        // console.log('stack:', data[0]);
+        console.log('stack:', data[0]);
         let emojis = groupBy(data[0].Emoji);
         let emoid = ['63f6aa43c64dc707bf25c533', '63f6aa43c64dc707bf25c534', '63f6aa43c64dc707bf25c535', '63f6aa43c64dc707bf25c536', '63f6aa43c64dc707bf25c537'];
         for (let i = 0; i < emoid.length; i++) { document.getElementById(emoid[i]).textContent = 0 }
 
-        // console.log('emoji:', emojis);
+        console.log('emoji:', emojis);
         for (let i = 0; i < Object.keys(emojis).length; i++) {
           // console.log(emojis[Object.keys(emojis)[i]]);
           document.getElementById(Object.keys(emojis)[i]).textContent = emojis[Object.keys(emojis)[i]].length;
@@ -399,14 +411,15 @@ const TeacherUI = ({ payload }) => {
     fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + classroom._id)
       .then(data => data.json())
       .then(data => {
-        // console.log('stack:', data[0]);
+        console.log('clear stack:', data);
         fetch('http://localhost:4000/olive/emojis/clear?_id=' + data[0]._id, {
           method: 'PUT'
         })
 
       })
       .finally(() => {
-        let today = new Date();
+        // let today = new Date();
+        let today = todayLocal;
         let todaystring;
         if ((today.getMonth() + 1) > 9) {
           if (today.getDate() > 9) todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
@@ -420,7 +433,8 @@ const TeacherUI = ({ payload }) => {
           "Class": classroom._id,
           "Emoji": [],
           "Clear_stack": false,
-          "Date": new Date(todaystring)
+          // "Date": new Date(todaystring)
+          "Date": todaystring
         }
 
         fetch(`http://localhost:4000/olive/emojis`, {
@@ -503,16 +517,16 @@ const TeacherUI = ({ payload }) => {
                       </div>
                       {/* <div class="survbar"><div class="bar-1"></div></div> */}
                       <div class='lightbulb' >
-                        <span><BsLightbulbFill id='lightbulb-1' size='4em' color='gold' /></span>
-                        <span><BsLightbulb id='lightbulb-01' display='none' size='4em' color='gold' /></span>
-                        <span><BsLightbulbFill id='lightbulb-2' size='4em' color='gold' /></span>
-                        <span><BsLightbulb id='lightbulb-02' display='none' size='4em' color='gold' /></span>
-                        <span><BsLightbulbFill id='lightbulb-3' size='4em' color='gold' /></span>
-                        <span><BsLightbulb id='lightbulb-03' display='none' size='4em' color='gold' /></span>
-                        <span><BsLightbulbFill id='lightbulb-4' size='4em' color='gold' /></span>
-                        <span><BsLightbulb id='lightbulb-04' display='none' size='4em' color='gold' /></span>
                         <span><BsLightbulbFill id='lightbulb-5' size='4em' color='gold' /></span>
                         <span><BsLightbulb id='lightbulb-05' display='none' size='4em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-4' size='4em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-04' display='none' size='4em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-3' size='4em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-03' display='none' size='4em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-2' size='4em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-02' display='none' size='4em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-1' size='4em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-01' display='none' size='4em' color='gold' /></span>
                       </div>
                     </div>
                   </div>

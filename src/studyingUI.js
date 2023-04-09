@@ -35,6 +35,11 @@ const StudentUI = ({ payload }) => {
     Name: 'ITCS888',
     Description: 'This is temp class for testing process'
   } : JSON.parse(localStorage.getItem('class'));
+  var todayLocal = new Date(
+    new Date().toLocaleString('th-TH', {
+      timeZone: 'Asia/Bangkok',
+    }),
+  );
 
   useEffect(() => {
     socket.current = io("http://localhost:4000");
@@ -289,7 +294,8 @@ const StudentUI = ({ payload }) => {
       .then(resp => resp.json())
       .then(resp => {
         console.log('Add:', resp)
-        let today = new Date();
+        // let today = new Date();
+        let today = todayLocal;
         let todaystring;
         if ((today.getMonth() + 1) > 9) {
           if (today.getDate() > 9) todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
@@ -311,7 +317,7 @@ const StudentUI = ({ payload }) => {
                 }
               }
 
-              fetch(`http://localhost:4000/olive/emojis/add?${stack._id}`, {
+              fetch(`http://localhost:4000/olive/emojis/add?_id=${stack[0]._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(addStack)
@@ -456,7 +462,8 @@ const StudentUI = ({ payload }) => {
   const toggleLight = event => {
     // console.log('Light:', event.currentTarget, event.currentTarget.checked)
     socket.current.emit('toggle-light', event.currentTarget.checked)
-    let today = new Date();
+    // let today = new Date();
+    let today = todayLocal;
     let todaystring;
     if ((today.getMonth() + 1) > 9) {
       if (today.getDate() > 9) todaystring = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
@@ -476,14 +483,14 @@ const StudentUI = ({ payload }) => {
           console.log('Light off')
           fetch(`http://localhost:4000/olive/interact/updateLight?_id=${data._id}&light=false`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' }
+            // headers: { 'Content-Type': 'application/json' }
           })
         }
         else {
           console.log('Light on')
           fetch(`http://localhost:4000/olive/interact/updateLight?_id=${data._id}&light=true`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' }
+            // headers: { 'Content-Type': 'application/json' }
           })
         }
       });
