@@ -10,11 +10,6 @@ import { io } from "socket.io-client";
 const TeacherUI = ({ payload }) => {
   const [active, setActive] = useState([]);
 
-  // const [chats, setChats] = useState();
-  const [emojis, setEmojis] = useState([]);
-  const [lights, setLights] = useState([]);
-  const [engagement, setEngagement] = useState([]);
-
   const socket = useRef();
 
   var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
@@ -44,7 +39,7 @@ const TeacherUI = ({ payload }) => {
     socket.current = io("http://localhost:4000");
     socket.current.emit('add-user', [teacher_id, 'teacher']);
     socket.current.on('get-user', (user) => {
-      // console.log('Active:', user);
+      console.log('Active:', user);
       setActive(user);
     });
   }, []);
@@ -64,9 +59,9 @@ const TeacherUI = ({ payload }) => {
             if (data[i].Boolean) {
               light++
             }
-            let fill = document.getElementById(`lightbulb-${i+1}`);
+            let fill = document.getElementById(`lightbulb-${i + 1}`);
             fill.style.display = 'block';
-            let nofill = document.getElementById(`lightbulb-0${i+1}`);
+            let nofill = document.getElementById(`lightbulb-0${i + 1}`);
             nofill.style.display = 'none';
           }
 
@@ -83,20 +78,6 @@ const TeacherUI = ({ payload }) => {
         });
     });
   }, []);
-
-  function sigmoid(x, w1, k, w2, y, w3, z, w4, i, m, b) {
-    let z1 = -40 * w1 * x / k;
-    let z2 = w2 * y / k;
-    let z3 = w3 * z / k;
-    let z4 = w4 * i / m;
-    let z5 = b;
-
-    if (z1 === 0 && z2 === 0 && z3 === 0 && z4 === 0 && z5 === 0) {
-      z5 = -5; // set b to negative number if all input values are 0
-    }
-
-    return 1 / (1 + Math.exp(z1 + z2 + z3 + z4 + z5));
-  }
 
   const myFunction = async () => {
     var client = ZoomMtgEmbedded.createClient();
@@ -215,53 +196,170 @@ const TeacherUI = ({ payload }) => {
   useEffect(() => {
     myFunction();
     init();
-    engagementData();
+    // engagementData();
   }, []);
 
-  const engagementData = () => {
-    function createEngagement() {
-      try {
-        fetch(`http://localhost:4000/olive/engagement/getbyClassID?classid=${classroom._id}`)
-          .then(response => response.json())
-          .then(response => {
-            // console.log(response._id)
-            fetch(`http://localhost:4000/olive/engagement/clear?_id=${response._id}`, {
-              method: 'PUT'
-            })
-          })
-      } finally {
-        fetch('http://localhost:4000/olive/enroll/getbyClassID?classid=' + classroom._id)
-          .then(data => data.json())
-          .then(data => {
-            for (let i = 0; i < data[0].Student.length; i++) {
-              // console.log('Student:', data[0].Student[i], classroom._id)
-              let stu = {
-                Student_Id: data[0].Student[i],
-                Class: {
-                  Id: classroom._id
-                },
-                Interaction_Log: []
-              };
-              // console.log('New stack:', data)
+  // const engagementData = () => {
+  //   function createEngagement() {
+  //     document.getElementById('engagementVal').textContent = '100%';
 
-              fetch('http://localhost:4000/olive/engagement', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(stu)
-              })
-                .then(response => response.json())
-                .then(response => {
-                  // console.log(response)
-                })
-            }
-          })
+  //     try {
+  //       fetch(`http://localhost:4000/olive/engagement/getbyClassID?classid=${classroom._id}`)
+  //         .then(response => response.json())
+  //         .then(response => {
+  //           // console.log(response._id)
+  //           // fetch(`http://localhost:4000/olive/engagement/clear?_id=${response._id}`, {
+  //           //   method: 'PUT'
+  //           // })
+  //         })
+  //     } finally {
+  //       fetch('http://localhost:4000/olive/enroll/getbyClassID?classid=' + classroom._id)
+  //         .then(data => data.json())
+  //         .then(data => {
+  //           for (let i = 0; i < data[0].Student.length; i++) {
+  //             // console.log('Student:', data[0].Student[i], classroom._id)
+  //             let stu = {
+  //               Student_Id: data[0].Student[i],
+  //               Class: {
+  //                 Id: classroom._id
+  //               },
+  //               Interaction_Log: []
+  //             };
+  //             // console.log('New stack:', data)
 
-      }
-    }
+  //             fetch('http://localhost:4000/olive/engagement', {
+  //               method: 'POST',
+  //               headers: { 'Content-Type': 'application/json' },
+  //               body: JSON.stringify(stu)
+  //             })
+  //               .then(response => response.json())
+  //               .then(response => {
+  //                 // console.log(response)
+  //               })
+  //           }
+  //         })
 
-    createEngagement();
-    setInterval(createEngagement, 600000);   //  10 minutes
-  }
+  //     }
+  //   }
+
+    // createEngagement();
+    // setInterval(createEngagement, 600000);   //  10 minutes
+  // }
+
+  // useEffect(() => {
+
+  //   socket.current.on('get-interact', data => {
+  //     function sigmoid(x, y, z, i, b, k, m) {
+  //       // x =      w1 = 
+  //       // y =      w2 = 
+  //       // z =      w3 = 
+  //       // i =      w4 = 
+  //       // b = 
+
+  //       let w1 = 1;
+  //       let w2 = 1;
+  //       let w3 = 1;
+  //       let w4 = 1;
+
+  //       let z1 = -40 * w1 * x / k;
+  //       let z2 = w2 * y / k;
+  //       let z3 = w3 * z / k;
+  //       let z4 = w4 * i / m;
+  //       let z5 = b;
+
+  //       if (z1 === 0 && z2 === 0 && z3 === 0 && z4 === 0 && z5 === 0) {
+  //         z5 = -5; // set b to negative number if all input values are 0
+  //       }
+
+  //       return 1 / (1 + Math.exp(z1 + z2 + z3 + z4 + z5));
+  //     }
+
+  //     function eachEngagement() {
+  //       fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
+  //         .then(data => data.json())
+  //         .then(data => {
+  //           for (let i = 0; i < data.length; i++) {
+  //             fetch(`http://localhost:4000/olive/engagement/update?_id=${data[i]._id}`, {
+  //               method: 'PUT',
+  //               headers: { 'Content-Type': 'application/json' },
+  //               body: JSON.stringify({
+  //                 "Class.Engagement": sigmoid(0, 0, 0, 0, 0, 10, 10)
+  //               })
+  //             })
+  //           }
+  //         })
+  //         .then(updateEngagement())
+  //     }
+
+  //     function updateEngagement() {
+  //       fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
+  //         .then(data => data.json())
+  //         .then(data => {
+  //           console.log('engegement:', data);
+  //           let engage = 0;
+  //           for (let i = 0; i < data.length; i++) {
+  //             console.log(data[i]);
+  //             engage += data[i].Class.Engagement;
+  //           } 
+  //           // console.log('en:', engage);
+  //           document.getElementById('engagementVal').textContent = engage + '%';
+  //         })
+  //     }
+
+  //     eachEngagement(data);
+  //   });
+
+  // }, []);
+
+  // function clearEngagement() {
+  //   document.getElementById('engagementVal').textContent = '100%';
+  //   // fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
+  //   //   .then(data => data.json())
+  //   //   .then(data => {
+  //   //     fetch('http://localhost:4000/olive/engagement/clear?_id=' + data[0]._id, {
+  //   //       method: 'PUT'
+  //   //     })
+  //   //   })
+
+  //   try {
+  //     fetch(`http://localhost:4000/olive/engagement/getbyClassID?classid=${classroom._id}`)
+  //       .then(response => response.json())
+  //       .then(response => {
+  //         // console.log(response._id)
+  //         // fetch(`http://localhost:4000/olive/engagement/clear?_id=${response._id}`, {
+  //         //   method: 'PUT'
+  //         // })
+  //       })
+  //   } finally {
+  //     fetch('http://localhost:4000/olive/enroll/getbyClassID?classid=' + classroom._id)
+  //       .then(data => data.json())
+  //       .then(data => {
+  //         for (let i = 0; i < data[0].Student.length; i++) {
+  //           // console.log('Student:', data[0].Student[i], classroom._id)
+  //           let stu = {
+  //             Student_Id: data[0].Student[i],
+  //             Class: {
+  //               Id: classroom._id
+  //             },
+  //             Interaction_Log: []
+  //           };
+  //           // console.log('New stack:', data)
+
+  //           fetch('http://localhost:4000/olive/engagement', {
+  //             method: 'POST',
+  //             headers: { 'Content-Type': 'application/json' },
+  //             body: JSON.stringify(stu)
+  //           })
+  //             .then(response => response.json())
+  //             .then(response => {
+  //               // console.log(response)
+  //             })
+  //         }
+  //       })
+
+  //   }
+
+  // }
 
   function sendMessage() {
     if (document.getElementById('sendtext').value == '') return;
@@ -408,6 +506,9 @@ const TeacherUI = ({ payload }) => {
   setInterval(updateStack, 600000);
 
   function clearStack() {
+    let emoid = ['63f6aa43c64dc707bf25c533', '63f6aa43c64dc707bf25c534', '63f6aa43c64dc707bf25c535', '63f6aa43c64dc707bf25c536', '63f6aa43c64dc707bf25c537'];
+    for (let i = 0; i < emoid.length; i++) { document.getElementById(emoid[i]).textContent = 0 }
+
     fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + classroom._id)
       .then(data => data.json())
       .then(data => {
@@ -446,31 +547,20 @@ const TeacherUI = ({ payload }) => {
 
   }
 
-  function updateEngagement() {
-    fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
-      .then(data => data.json())
-      .then(data => {
-        // console.log('engegement:');
-        let engage = 0;
-        for (let i = 0; i < data.length; i++) {
-          // console.log(data[i]);
-          engage += data[i].Class.Engagement;
+  function leaveMeeting() {
+    fetch('http://localhost:4000/redirect?rp=' + 'class_info_teacher', {
+      method: 'POST',
+      redirect: 'follow'
+    })
+      // .then(res => res.json())
+      .then(res => {
+        console.log(res.redirected, res.url)
+        if (res.redirected) {
+          window.location.href = res.url
         }
-        // console.log('en:', engage);
-        document.getElementById('engagementVal').textContent = engage + '%';
       })
   }
 
-  function clearEngagement() {
-    document.getElementById('engagementVal').textContent = '100%';
-    fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
-      .then(data => data.json())
-      .then(data => {
-        fetch('http://localhost:4000/olive/engagement/clear?_id=' + data[0]._id, {
-          method: 'PUT'
-        })
-      })
-  }
 
   return (
     <Fragment>
@@ -498,7 +588,8 @@ const TeacherUI = ({ payload }) => {
                         <div class="barRate">Engagement</div>
 
                         {/* reset */}
-                        <button2 onClick={clearEngagement}>
+                        {/* <button2 onClick={clearEngagement}> */}
+                        <button2 onClick={''}>
                           <img class="btn-reset-engage" src={reset}></img>
                         </button2>
                       </div>
@@ -517,16 +608,16 @@ const TeacherUI = ({ payload }) => {
                       </div>
                       {/* <div class="survbar"><div class="bar-1"></div></div> */}
                       <div class='lightbulb' >
-                        <span><BsLightbulbFill id='lightbulb-5' size='4em' color='gold' /></span>
-                        <span><BsLightbulb id='lightbulb-05' display='none' size='4em' color='gold' /></span>
-                        <span><BsLightbulbFill id='lightbulb-4' size='4em' color='gold' /></span>
-                        <span><BsLightbulb id='lightbulb-04' display='none' size='4em' color='gold' /></span>
-                        <span><BsLightbulbFill id='lightbulb-3' size='4em' color='gold' /></span>
-                        <span><BsLightbulb id='lightbulb-03' display='none' size='4em' color='gold' /></span>
-                        <span><BsLightbulbFill id='lightbulb-2' size='4em' color='gold' /></span>
-                        <span><BsLightbulb id='lightbulb-02' display='none' size='4em' color='gold' /></span>
                         <span><BsLightbulbFill id='lightbulb-1' size='4em' color='gold' /></span>
                         <span><BsLightbulb id='lightbulb-01' display='none' size='4em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-2' size='4em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-02' display='none' size='4em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-3' size='4em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-03' display='none' size='4em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-4' size='4em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-04' display='none' size='4em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-5' size='4em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-05' display='none' size='4em' color='gold' /></span>
                       </div>
                     </div>
                   </div>
@@ -591,7 +682,7 @@ const TeacherUI = ({ payload }) => {
                 <a class="close-x" href="#">&times;</a>
 
                 <div class="popup-confirm-leave">
-                  <button class="btn-confirm-leave">Yes</button>
+                  <button class="btn-confirm-leave" onClick={leaveMeeting}>Yes</button>
                   <a class="close-x" href="#">
                     <button class="btn-confirm-leave">No</button>
                   </a>

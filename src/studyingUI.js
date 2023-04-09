@@ -8,13 +8,9 @@ import { parse, stringify, toJSON, fromJSON } from 'flatted';
 import { io } from "socket.io-client";
 
 import { IonIcon } from '@ionic/react';
-// import { }
-
 
 const StudentUI = ({ payload }) => {
   const [active, setActive] = useState([]);
-
-  // const [chats, setChats] = useState();
 
   const socket = useRef();
 
@@ -45,7 +41,7 @@ const StudentUI = ({ payload }) => {
     socket.current = io("http://localhost:4000");
     socket.current.emit('add-user', [student_id, 'student']);
     socket.current.on('get-user', (user) => {
-      // console.log('Active:', user);
+      console.log('Active:', user);
       setActive(user);
     })
   }, []);
@@ -285,6 +281,7 @@ const StudentUI = ({ payload }) => {
       Type: "emoji",
       Emoji: event.currentTarget.id
     };
+    let emoid = event.currentTarget.id
 
     fetch('http://localhost:4000/olive/interact', {
       method: 'POST',
@@ -293,7 +290,8 @@ const StudentUI = ({ payload }) => {
     })
       .then(resp => resp.json())
       .then(resp => {
-        console.log('Add:', resp)
+        // console.log('Add:', resp)
+        socket.current.emit('send-interact', resp)
         // let today = new Date();
         let today = todayLocal;
         let todaystring;
@@ -310,10 +308,11 @@ const StudentUI = ({ payload }) => {
             .then(stack => stack.json())
             .then(stack => {
               console.log('Current:', stack)
+              console.log('Emo:', emoid)
               let addStack = {
                 "Emoji": {
-                  "InteractionId": "63f6b017383649c8e2971eeb",
-                  "Id": "63f6aa43c64dc707bf25c533"
+                  "InteractionId": resp.insertedId,
+                  "Id": emoid
                 }
               }
 
@@ -322,12 +321,17 @@ const StudentUI = ({ payload }) => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(addStack)
               })
+                .then(() => {
+                  socket.current.emit('send-emo', data);
+                  console.log('emit send-emo')
+                })
             })
             .catch(error => {
               console.log(error)
             })
 
-          socket.current.emit('send-emo', data);
+          // socket.current.emit('send-emo', data);
+          // console.log('emit send-emo')
 
         } catch (error) {
           console.log(error)
