@@ -83,7 +83,7 @@ body#teachingUI {
 }
 
 .divided-line-2 {
-    margin-top: 11.5vh;
+    margin-top: 10.5vh;
     border-left: 2px solid black;
     height: 14.5vh;
 }
@@ -166,7 +166,7 @@ body#teachingUI {
     display: flex;
     flex-direction: row;
     gap: 20px;
-    height: 26vh;
+    height: 25vh;
 }
 
 .barRate {

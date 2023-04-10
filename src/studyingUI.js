@@ -95,7 +95,7 @@ const StudentUI = ({ payload }) => {
         signature: signature,
         meetingNumber: payload.meetingNumber,
         password: payload.passWord,
-        userName: payload.userName,
+        userName: user.displayname,
         userEmail: payload.userEmail,
         tk: payload.registrantToken
       })
@@ -115,7 +115,7 @@ const StudentUI = ({ payload }) => {
       .then(data => data.json())
       .then(data => {
         // console.log(localStorage.getItem('teacher_id'))
-        console.log('initChat:', data)
+        // console.log('initChat:', data)
 
         for (let i = 0; i < data.length; i++) {
           // console.log(data[i])
@@ -202,7 +202,7 @@ const StudentUI = ({ payload }) => {
         .then(data => {
           document.getElementById('chatTable').innerHTML = '';
 
-          console.log('Chat:', data)
+          // console.log('Chat:', data)
 
           for (let i = 0; i < data.length; i++) {
             console.log('student recieve:', data[i])
@@ -291,7 +291,6 @@ const StudentUI = ({ payload }) => {
       .then(resp => resp.json())
       .then(resp => {
         // console.log('Add:', resp)
-        socket.current.emit('send-interact', resp)
         // let today = new Date();
         let today = todayLocal;
         let todaystring;
@@ -307,8 +306,8 @@ const StudentUI = ({ payload }) => {
           fetch(`http://localhost:4000/olive/emojis/getbyClass?classid=${classroom._id}&todaystring=${todaystring}`)
             .then(stack => stack.json())
             .then(stack => {
-              console.log('Current:', stack)
-              console.log('Emo:', emoid)
+              // console.log('Current:', stack)
+              // console.log('Emo:', emoid)
               let addStack = {
                 "Emoji": {
                   "InteractionId": resp.insertedId,
@@ -316,15 +315,20 @@ const StudentUI = ({ payload }) => {
                 }
               }
 
+              updateEngagement(resp.insertedId)
+
               fetch(`http://localhost:4000/olive/emojis/add?_id=${stack[0]._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(addStack)
               })
-                .then(() => {
+                .then(resp => resp.json())
+                .then(resp => {
                   socket.current.emit('send-emo', data);
-                  console.log('emit send-emo')
+
+                  console.log('emit send-emo', resp)
                 })
+
             })
             .catch(error => {
               console.log(error)
@@ -359,23 +363,18 @@ const StudentUI = ({ payload }) => {
       body: JSON.stringify(data)
     }).then(resp => resp.json())
       .then(resp => {
-        // console.log(resp);
-        try {
-          // fetch(`http://localhost:4000/olive/interact/getbyType?type=chat&classid=${classroom._id}`)
-          //   .then(data => data.json())
-          //   .then(data => {
-          //     setChats(data);
+        console.log('Send:', resp);
+        // try {
 
-          //   });
+        let temp = document.getElementById('sendtext');
+        temp.value = '';
 
-          let temp = document.getElementById('sendtext');
-          temp.value = '';
+        socket.current.emit('send-msg', data)
+        updateEngagement(resp.insertedId)
 
-          socket.current.emit('send-msg', data)
-
-        } catch (error) {
-          console.log(error)
-        }
+        // } catch (error) {
+        //   console.log(error)
+        // }
 
       })
       .catch(error => {
@@ -397,7 +396,7 @@ const StudentUI = ({ payload }) => {
     fetch('http://localhost:4000/olive/interact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: stringify(data)
+      body: JSON.stringify(data)
     })
       .then(resp => resp.json())
       .then(resp => {
@@ -410,7 +409,7 @@ const StudentUI = ({ payload }) => {
     let logs = {
       Interaction_Log: log
     };
-    // console.log('Log:', logs);
+    console.log('Log:', logs);
 
     try {
       fetch(`http://localhost:4000/olive/engagement/addLog?student=${student_id}&class=${classroom._id}`, {
@@ -420,7 +419,8 @@ const StudentUI = ({ payload }) => {
       })
         .then(data => data.json())
         .then(data => {
-          console.log(data)
+          socket.current.emit('send-interact', logs)
+          console.log('Update engagement', data)
         }).catch(error => {
           console.log(error)
         })
@@ -554,31 +554,37 @@ const StudentUI = ({ payload }) => {
               </div>
 
               {/* light bulb */}
-              <div class="pop-emoji">
+              <label >
+                <input type="checkbox" id='lightbulb' onChange={toggleLight}></input>
+                <span>
+                  <BsLightbulb size='2em' />
+                </span>
+              </label>
+              <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+              <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+              {/* Test code on/off */}
+
+              {/* <div class="pop-emoji">
                 <a class="emo-button" href="#light-bulb">light-bulb</a>
               </div>
               <div id="light-bulb" class="overlay">
                 <div class="popup">
                   <div class="text-popup">Lightbulb</div>
                   <a class="close-x" href="#">&times;</a>
-
                   <div class="lightbulb-popup">
-                    {/* Test code on/off */}
                     <label >
                       <input type="checkbox" id='lightbulb' onChange={toggleLight}></input>
-                      {/* <span><ion-icon name="bulb-outline" /></span> */}
                       <span>
-                        <BsLightbulb size='2.5em' />
+                        <BsLightbulb size='1.5em' />
                       </span>
                     </label>
                     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
                     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-
-                    {/* Test code on/off */}
                   </div>
                 </div>
-              </div>
+              </div> */}
 
 
               {/* leave */}

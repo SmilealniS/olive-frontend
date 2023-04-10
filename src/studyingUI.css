@@ -220,7 +220,7 @@ body#studyingUI {
 	cursor: pointer;
 }
 .emo-button-leave {
-    margin-left: 175px;
+    margin-left: 19vw;
     margin-top: 4px;
     font-size: 18px;
     transition: all 0.3s ease-out;
@@ -279,11 +279,35 @@ body#studyingUI {
     padding-top: 10px;
     margin-left: -60%;
 }
-.emoji-button-popup {
+.chat-emoji-popup .emoji-button-popup {
     background: none;
     border: none;
     font-size: 27px;
 }
+.chat-emoji-popup .emoji-button-popup:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 1em;
+    left: 10;
+    margin-top: -15%;
+    /* top: 0; */
+    width: 10%;
+    height: 28%;
+    opacity: 0;
+    transition: all 0.5s;
+    box-shadow: 0 0 10px 40px white;
+  }
+  
+  .chat-emoji-popup .emoji-button-popup:active:after {
+    box-shadow: 0 0 0 0 white;
+    position: absolute;
+    border-radius: 1em;
+    left: 0;
+    top:0;
+    opacity: 1;
+    transition: 0s;
+  }
 .popup .close {
     position: absolute;
     top: -15px;
@@ -311,12 +335,12 @@ body#studyingUI {
     color: white;
     margin-top: -15px;
 }
-.lightbulb-popup {
+/* .lightbulb-popup {
     size: 5em;
     display: flex;
     padding-top: 20px;
     margin-left: -7vw;
-}
+} */
 
 /* leave button */
 .pop-leave {
@@ -392,29 +416,28 @@ body#studyingUI {
 
 label{
     position: absolute;
-    margin-left: 2vw;
+    margin-left: 5vw;
     width: 120px;
-    height: 55px;
-    background: #272727;
-    border-radius: 10px;
+    height: 33px;
+    background: #666666;
+    border-radius: 5px;
 }
 label input{
     appearance: none;
 }
 label span{ 
     position: absolute;
-    top: 0;
-    left: 0;
     width: 65px;
-    height: 55px;
-    background: #8e8e8e;
-    border: 6px solid #272727;
-    border-radius: 14px;
+    height: 33px;
+    background: #eee;
+    border: 3px solid #666666;
+    border-radius: 10px;
     cursor: pointer;
     transition: 0.5s;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 0px;
 }
 label input:checked ~ span{
     left: 55px;
