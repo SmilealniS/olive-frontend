@@ -8,7 +8,6 @@ import reset from './assets/reset.png';
 import { io } from "socket.io-client";
 
 const TeacherUI = ({ payload }) => {
-  const [active, setActive] = useState([]);
 
   const socket = useRef(null);
 
@@ -51,7 +50,7 @@ const TeacherUI = ({ payload }) => {
     socket.current.emit('add-user', [teacher_id, 'teacher']);
     socket.current.on('get-user', (user) => {
       console.log('Active:', user);
-      setActive(user);
+
     });
 
     return () => {
@@ -212,7 +211,7 @@ const TeacherUI = ({ payload }) => {
   useEffect(() => {
     myFunction();
     init();
-    engagementData();
+    // engagementData();
   }, []);
 
   const engagementData = () => {
@@ -274,6 +273,12 @@ const TeacherUI = ({ payload }) => {
       console.log('UPDATE', data)
 
       function sigmoid(y, z, i) {
+        console.log('Sigmoid:', y, z, i)
+
+        if (y === 0 && z === 0 && i === 0) {
+          return 0;
+        }
+
         let x = 1       //  light
         // y =          //  chat
         // z =          //  emoji
@@ -298,57 +303,106 @@ const TeacherUI = ({ payload }) => {
           z5 = -5; // set b to negative number if all input values are 0
         }
 
-        return 1 / (1 + Math.exp(-(z1 + z2 + z3 + z4 + z5)));
+        return (1 / (1 + Math.exp(-(z1 + z2 + z3 + z4 + z5)))) * 100;
       }
 
-      function eachEngagement() {
-        fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
-          .then(data => data.json())
-          .then(data => {
-            console.log('Engagement to updates:', data)
-            console.log(data)
-            for (let i = 0; i < data.length; i++) {
-              let logs = data[i]    //  FIX HERE
-              console.log('Engagement to update', logs)
-              let y = 0;  //  chat
-              let z = 0;  //  emoji
-              let i = 0;  //  eye
-              for (let j = 0; j < data[i].Interaction_Log.length; j++) {
-                fetch(`http://localhost:4000/olive/interact/getbyId?_id=${data[i].Interaction_Log[j]}`)
-                  .then(data => data.json())
-                  .then(data => {
-                    if (data.Type == 'chat') y++
-                    else if (data.Type == 'emoji') z++
-                    else if (data.Type == 'gaze') i++
-                  })
-              }
-              fetch(`http://localhost:4000/olive/engagement/update?_id=${data[i]._id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  "Class.Engagement": sigmoid(y, z, i)
-                })
-              })
+      // function eachEngagement() {
+      //   fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
+      //     .then(data => data.json())
+      //     .then(data => {
+      //       // console.log('Engagement to updates:', data)
+      //       // console.log(data)
+      //       for (let i = 0; i < data.length; i++) {
+      //         // let logs = data[i]
+      //         // console.log('Engagement to update', logs)
+      //         let y = 0;  //  chat
+      //         let z = 0;  //  emoji
+      //         let j = 0;  //  eye
 
+      //         for (let k = 0; k < data[i].Interaction_Log.length; k++) {
+      //           fetch(`http://localhost:4000/olive/interact/getbyId?_id=${data[i].Interaction_Log[k]}`)
+      //             .then(data => data.json())
+      //             .then(data => {
+      //               console.log('Data type:', data.Type, data.Type == 'emoji', data.Type == 'gaze')
+      //               if (data.Type == 'chat') y++
+      //               else if (data.Type == 'emoji') z++
+      //               else if (data.Type == 'gaze') j++
+      //             })
+      //         }
+
+      //         let engagescore = {
+      //           "Class": {
+      //             "Engagement": sigmoid(y, z, j)
+      //           }
+      //         }
+
+      //         fetch(`http://localhost:4000/olive/engagement/update?_id=${data[i]._id}`, {
+      //           method: 'PUT',
+      //           headers: { 'Content-Type': 'application/json' },
+      //           body: JSON.stringify(engagescore)
+      //         });
+
+      //       }
+
+      //     })
+      //     .then(updateEngagement())
+      // }
+
+      async function eachEngagement() {
+        const engagementData = await fetch(`http://localhost:4000/olive/engagement/getbyClassID?classid=${classroom._id}`);
+        const engagements = await engagementData.json();
+
+        for (let i = 0; i < engagements.length; i++) {
+          let y = 0;
+          let z = 0;
+          let j = 0;
+
+          for (let k = 0; k < engagements[i].Interaction_Log.length; k++) {
+            const interactData = await fetch(`http://localhost:4000/olive/interact/getbyId?_id=${engagements[i].Interaction_Log[k]}`);
+            const interact = await interactData.json();
+
+            if (interact.Type == 'chat') y++;
+            else if (interact.Type == 'emoji') z++;
+            else if (interact.Type == 'gaze') j++;
+          }
+
+          let engagescore = {
+            "Class": {
+              "Engagement": sigmoid(y, z, j)
             }
-          })
-          .then(updateEngagement())
+          }
+
+          await fetch(`http://localhost:4000/olive/engagement/update?_id=${engagements[i]._id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(engagescore)
+          });
+        }
+
+        updateEngagement();
       }
 
       function updateEngagement() {
-        fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
-          .then(data => data.json())
-          .then(data => {
-            console.log('update engegement:', data);
-            let engage = 0;
-            for (let i = 0; i < data.length; i++) {
-              // console.log(data[i]);
-              engage += data[i].Class.Engagement;
-            }
-            // console.log('en:', engage);
-            document.getElementById('engagementVal').textContent = engage + '%';
-          })
+
+        fetch('http://localhost:4000/active-users')
+          .then(response => response.json())
+          .then(activeUsers => {
+            fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
+              .then(data => data.json())
+              .then(data => {
+                console.log('update engegement:', data);
+                let engage = 0;
+                for (let i = 0; i < data.length; i++) {
+                  engage += data[i].Class.Engagement;
+                }
+                console.log(engage, activeUsers.length, engage / activeUsers.length);
+                engage = Math.floor(engage / activeUsers.length);
+                console.log('final engagement:', engage);
+                document.getElementById('engagementVal').textContent = engage + '%';
+              });
+          });
       }
+
 
       eachEngagement();
     });
