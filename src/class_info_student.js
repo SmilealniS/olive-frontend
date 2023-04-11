@@ -43,7 +43,11 @@ const Classinfo_Student = () => {
     console.log('Engagement:', engagement);
 
     for (let i = 0; i < fullattendance.length; i++) {
-      let date = new Date(fullattendance[i].Class.Date)
+      let dateStr = fullattendance[i].Class.Date;
+      // let date = new Date(Date.parse(dateStr.replace(/-/g, '/')));
+      let date = new Date(dateStr)
+      console.log('Date', date, dateStr)
+
       let en = 0;
       // console.log('Engagement:', engagement)
       for (let j = 0; j < engagement.length; j++) {
