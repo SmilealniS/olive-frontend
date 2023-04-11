@@ -399,6 +399,8 @@ const TeacherUI = ({ payload }) => {
                 engage = Math.floor(engage / activeUsers.length);
                 console.log('final engagement:', engage);
                 document.getElementById('engagementVal').textContent = engage + '%';
+                
+                localStorage.setItem('totalengagement', engage)
               });
           });
       }

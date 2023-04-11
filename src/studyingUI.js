@@ -10,9 +10,8 @@ import { io } from "socket.io-client";
 import { IonIcon } from '@ionic/react';
 
 const StudentUI = ({ payload }) => {
-  const [active, setActive] = useState([]);
 
-  const socket = useRef();
+  const socket = useRef(null);
 
   var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
   var user = {
@@ -38,12 +37,27 @@ const StudentUI = ({ payload }) => {
   );
 
   useEffect(() => {
-    socket.current = io("http://localhost:4000");
+    const newSocket = io("http://localhost:4000", {
+      transports: ['websocket'], // use only WebSocket transport (other transports might not support reconnections)
+      reconnection: true, // enable reconnections
+      reconnectionAttempts: 10, // attempt to reconnect 10 times
+      reconnectionDelay: 1000, // wait 1 second before attempting to reconnect
+      reconnectionDelayMax: 5000, // wait up to 5 seconds before attempting to reconnect
+
+    })
+    socket.current = newSocket;
+
+    // socket.current = io("http://localhost:4000");
+
     socket.current.emit('add-user', [student_id, 'student']);
     socket.current.on('get-user', (user) => {
       console.log('Active:', user);
-      setActive(user);
-    })
+
+    });
+
+    return () => {
+      newSocket.disconnect();
+    };
   }, []);
 
   const myFunction = async () => {
@@ -270,7 +284,33 @@ const StudentUI = ({ payload }) => {
   }, []);
 
   function leaveMeeting() {
-    alert('Leave')
+    // alert('Leave')
+    fetch(`http://localhost:4000/olive/engagement/getbyStudentID?student=${student_id}&classid=${classroom._id}`)
+      .then(data => data.json())
+      .then(data => {
+        // console.log('engagement:', data);
+        localStorage.setItem('engagement', JSON.stringify(data));
+
+        let engage = 0;
+        for (let i = 0; i < data.length; i++) {
+          engage += data[i].Class.Engagement;
+        }
+        engage = engage / data.length;
+        // console.log('percent:', engage)
+        localStorage.setItem('totalengagement', engage >= 0 ? engage : 0);
+
+        fetch('http://localhost:4000/redirect?rp=' + 'class_info_student', {
+          method: 'POST',
+          redirect: 'follow'
+        })
+          // .then(res => res.json())
+          .then(res => {
+            console.log(res.redirected, res.url)
+            if (res.redirected) {
+              window.location.href = res.url
+            }
+          })
+      })
   }
 
   const sendEmoji = event => {
