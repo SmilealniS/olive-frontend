@@ -49,6 +49,7 @@ const Classinfo_Student = () => {
       for (let j = 0; j < engagement.length; j++) {
         if (engagement[j].Class.Date == fullattendance[i].Class.Date) {
           en = engagement[j].Class.Engagement;
+          en = Math.floor(en)
         }
       };
       document.getElementById('engagementTable').innerHTML +=

@@ -297,7 +297,23 @@ const StudentUI = ({ payload }) => {
         }
         engage = engage / data.length;
         // console.log('percent:', engage)
-        localStorage.setItem('totalengagement', engage >= 0 ? engage : 0);
+        localStorage.setItem('totalengagement', engage >= 0 ? Math.floor(engage) : 0);
+
+        fetch(`http://localhost:4000/olive/attendance/getbyStudentId?student=${student_id}`)
+          .then(response => response.json())
+          .then(response => {
+            let tr = 0;
+            let fa = response.result.length;
+            // console.log('Attendance:');
+            for (let i = 0; i < response.result.length; i++) {
+              // console.log(response.result[i].Class.Status);
+              if (response.result[i].Class.Status) tr++;
+            }
+            localStorage.setItem('attendance', JSON.stringify({ come: tr, all: fa }));
+            // console.log(response.result);
+            localStorage.setItem('fullattendance', JSON.stringify(response.result));
+            // console.log(JSON.parse(localStorage.getItem('fullattendance')))
+          });
 
         fetch('http://localhost:4000/redirect?rp=' + 'class_info_student', {
           method: 'POST',
@@ -638,7 +654,7 @@ const StudentUI = ({ payload }) => {
                   <a class="close-x" href="#">&times;</a>
 
                   <div class="popup-confirm-leave">
-                    <button class="btn-confirm-leave">Yes</button>
+                    <button class="btn-confirm-leave" onClick={leaveMeeting}>Yes</button>
                     <a class="close-x" href="#">
                       <button class="btn-confirm-leave">No</button>
                     </a>

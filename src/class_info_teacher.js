@@ -48,13 +48,26 @@ const Classinfo_Teacher = () => {
     document.getElementById('engagementTable').innerHTML = '';
     let gengagement = groupByDate(JSON.parse(localStorage.getItem('engagement')));
     let attendance = groupByDate(JSON.parse(localStorage.getItem('attendance')));
-    // console.log(Object.keys(attendance));
+    // console.log(Object.keys(attendance)[0]);
     // console.log(attendance);
 
     for (let i = 0; i < Object.keys(attendance).length; i++) {
-      let date = new Date(Object.keys(attendance)[i])
+      let dateStr = Object.keys(attendance)[i];
+      let date = new Date(Date.parse(dateStr.replace(/-/g, '/')));
+      console.log('Date', date)
+
       let en = 0;
+      let at = 0;
       console.log('engagement group:', gengagement)
+      console.log('attendance:', attendance)
+      for(let j = 0; j < Object.keys(attendance).length; j++) {
+        // console.log(attendance[Object.keys(attendance)[j]])
+        for(let k = 0; k < attendance[Object.keys(attendance)[j]].length; k++) {
+          // console.log('aa:', attendance[Object.keys(attendance)[j]][k] )
+          if(attendance[Object.keys(attendance)[j]][k].Class.Status) at++
+        } 
+      }
+
       for (let j = 0; j < Object.keys(gengagement).length; j++) {
         // console.log(Object.keys(gengagement)[j] == Object.keys(attendance)[i], Object.keys(gengagement)[j], Object.keys(attendance)[i])
         if (Object.keys(gengagement)[j] == Object.keys(attendance)[i]) {
@@ -64,12 +77,13 @@ const Classinfo_Teacher = () => {
             en += gengagement[Object.keys(gengagement)[j]][k].Class.Engagement;
           }
           en = en / gengagement[Object.keys(gengagement)[j]].length;
+          en = Math.floor(en)
         }
       };
 
       document.getElementById('engagementTable').innerHTML +=
         `<div class="textTopic">${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}</div>
-      <div class="textTopic">${attendance[Object.keys(attendance)[i]].length}</div>
+      <div class="textTopic">${at}</div>
       <div class="textTopic">${en}%</div>`
     }
   });

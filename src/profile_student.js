@@ -75,7 +75,7 @@ const Student_Profile = () => {
                 }
                 engage = engage / data.length;
                 // console.log('percent:', engage)
-                localStorage.setItem('totalengagement', engage >= 0 ? engage : 0);
+                localStorage.setItem('totalengagement', engage >= 0 ? Math.floor(engage) : 0);
               })
           });
       });

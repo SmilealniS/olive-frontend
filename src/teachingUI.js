@@ -399,7 +399,7 @@ const TeacherUI = ({ payload }) => {
                 engage = Math.floor(engage / activeUsers.length);
                 console.log('final engagement:', engage);
                 document.getElementById('engagementVal').textContent = engage + '%';
-                
+
                 localStorage.setItem('totalengagement', engage)
               });
           });
@@ -656,17 +656,47 @@ const TeacherUI = ({ payload }) => {
   }
 
   function leaveMeeting() {
-    fetch('http://localhost:4000/redirect?rp=' + 'class_info_teacher', {
-      method: 'POST',
-      redirect: 'follow'
-    })
-      // .then(res => res.json())
-      .then(res => {
-        console.log(res.redirected, res.url)
-        if (res.redirected) {
-          window.location.href = res.url
+    fetch(`http://localhost:4000/olive/attendance/getbyClassId?classid=${classroom._id}`)
+      .then(data => data.json())
+      .then(data => {
+        let classdate = [];
+        let contained;
+        console.log(data)
+        for (let i = 0; i < data.result.length; i++) {
+          contained = true;
+          classdate.forEach(cd => {
+            if (cd == data.result[i].Class.Date) {
+              // console.log('Date:', cd, data.result[i].Class.Date);
+              contained = false;
+            }
+          })
+
+          if (contained) {
+            classdate.push(data.result[i].Class.Date);
+          }
         }
+
+        console.log('totalclass:', classdate.length);
+        console.log('attendance:', data.result);
+        localStorage.setItem('attendance', JSON.stringify(data.result));
+        localStorage.setItem('totalclass', classdate.length);
+        
       })
+      .then(() => {
+        fetch('http://localhost:4000/redirect?rp=' + 'class_info_teacher', {
+          method: 'POST',
+          redirect: 'follow'
+        })
+          // .then(res => res.json())
+          .then(res => {
+            console.log(res.redirected, res.url)
+            if (res.redirected) {
+              window.location.href = res.url
+            }
+          })
+      })
+
+
   }
 
 
