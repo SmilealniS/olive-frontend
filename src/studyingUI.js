@@ -30,6 +30,7 @@ const StudentUI = ({ payload }) => {
     Name: 'ITCS888',
     Description: 'This is temp class for testing process'
   } : JSON.parse(localStorage.getItem('class'));
+
   var todayLocal = new Date(
     new Date().toLocaleString('th-TH', {
       timeZone: 'Asia/Bangkok',
@@ -56,7 +57,8 @@ const StudentUI = ({ payload }) => {
     });
 
     return () => {
-      newSocket.disconnect();
+      // newSocket.disconnect();
+      socket.current.disconnect();
     };
   }, []);
 

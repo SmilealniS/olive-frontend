@@ -28,6 +28,7 @@ const TeacherUI = ({ payload }) => {
     Name: 'ITCS888',
     Description: 'This is temp class for testing process'
   } : JSON.parse(localStorage.getItem('class'));
+  
   var todayLocal = new Date(
     new Date().toLocaleString('th-TH', {
       timeZone: 'Asia/Bangkok',
@@ -54,7 +55,8 @@ const TeacherUI = ({ payload }) => {
     });
 
     return () => {
-      newSocket.disconnect();
+      // newSocket.disconnect();
+      socket.current.disconnect();
     };
   }, []);
 
@@ -66,13 +68,16 @@ const TeacherUI = ({ payload }) => {
       fetch(`http://localhost:4000/olive/interact/getbyType?type=light&classid=${classroom._id}`)
         .then(data => data.json())
         .then(data => {
-          // console.log(data)
+          console.log(data)
           let light = 0;
 
           for (let i = 0; i < data.length; i++) {
             if (data[i].Boolean) {
               light++
             }
+          }
+
+          for (let i = 0; i < 5; i++) {
             let fill = document.getElementById(`lightbulb-${i + 1}`);
             fill.style.display = 'block';
             let nofill = document.getElementById(`lightbulb-0${i + 1}`);
@@ -80,18 +85,21 @@ const TeacherUI = ({ payload }) => {
           }
 
           for (let i = 1; i <= 5; i++) {
-            if (i > (light / data.length) * 100 / 20) {
+            if (i * 20 > (light / data.length) * 100) {
               let fill = document.getElementById(`lightbulb-${i}`);
               fill.style.display = 'none';
               let nofill = document.getElementById(`lightbulb-0${i}`);
               nofill.style.display = 'block';
             }
+            console.log(i * 20, (light / data.length) * 100)
           }
-          console.log(light, (light / data.length) * 100 / 20)
+          
 
         });
     });
   }, []);
+
+  
 
   const myFunction = async () => {
     var client = ZoomMtgEmbedded.createClient();
@@ -211,7 +219,7 @@ const TeacherUI = ({ payload }) => {
   useEffect(() => {
     myFunction();
     init();
-    // engagementData();
+    engagementData();
   }, []);
 
   const engagementData = () => {
@@ -410,6 +418,17 @@ const TeacherUI = ({ payload }) => {
     });
 
   }, []);
+
+  function clearSurv() {
+    alert('ji')
+    for (let i = 0; i < 5; i++) {
+      
+      let fill = document.getElementById(`lightbulb-${i + 1}`);
+      fill.style.display = 'block';
+      let nofill = document.getElementById(`lightbulb-0${i + 1}`);
+      nofill.style.display = 'none';
+    }
+  }
 
   function clearEngagement() {
     document.getElementById('engagementVal').textContent = '100%';
@@ -740,7 +759,7 @@ const TeacherUI = ({ payload }) => {
                       {/* Bar 2 */}
                       <div class='surv-area'>
                         <div class="barRate">Survival rating</div>
-                        <button2 onClick="">
+                        <button2 onClick={clearSurv}>
                           <img class="btn-reset-light" src={reset}></img>
                         </button2>
                       </div>
