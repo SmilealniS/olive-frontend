@@ -1,6 +1,6 @@
 # Olive Web Application
 
-This is a web application built using the React JavaScript library. The application is designed to [insert purpose of the application here].
+This is a web application built using the React JavaScript library. The application is designed to be Online Learning Platform implementation project.
 
 ## Getting Started
 
@@ -13,7 +13,7 @@ To get started with the application, follow these steps:
 
 ## Usage
 
-To use the application, please run together with Olive backend service. 
+To use the application, please run together with Olive backend service (https://github.com/SmilealniS/olive-backend.git). 
 
 ## Contributing
 
