@@ -1,4 +1,4 @@
-# Olive Web Application
+# OLIVE Web Application
 
 This is a web application built using the React JavaScript library. The application is designed to be Online Learning Platform implementation project.
 
