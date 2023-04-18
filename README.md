@@ -15,21 +15,6 @@ To get started with the application, follow these steps:
 
 To use the application, please run together with Olive backend service. 
 
-## Features
-
-The application includes the following features:
-
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
-
-## Technologies Used
-
-The application was built using the following technologies:
-
-- React
-- [Other technologies used]
-
 ## Contributing
 
 Contributions to the application are welcome. If you find any issues or would like to contribute to the development of the application, please follow the steps below:
