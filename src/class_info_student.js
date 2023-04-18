@@ -28,10 +28,11 @@ const Classinfo_Student = () => {
     come: 0, all: 0
   } : JSON.parse(localStorage.getItem('attendance'));
   var totalengagement = localStorage.getItem('totalengagement') == undefined ? 0 : localStorage.getItem('totalengagement');
+  
   var todayLocal = new Date(
-    new Date().toLocaleString('th-TH', {
-      timeZone: 'Asia/Bangkok',
-    }),
+    // new Date().toLocaleString('th-TH', {
+    //   timeZone: 'Asia/Bangkok',
+    // }),
   );
 
   useEffect(() => {

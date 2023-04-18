@@ -31,10 +31,11 @@ const Classinfo_Teacher = () => {
   } : JSON.parse(localStorage.getItem('attendance'));
   var totalengagement = localStorage.getItem('totalengagement') == undefined ? 0 : localStorage.getItem('totalengagement');
   var totalclass = localStorage.getItem('totalclass') == undefined ? 0 : localStorage.getItem('totalclass');
+  
   var todayLocal = new Date(
-    new Date().toLocaleString('th-TH', {
-      timeZone: 'Asia/Bangkok',
-    }),
+    // new Date().toLocaleString('th-TH', {
+    //   timeZone: 'Asia/Bangkok',
+    // }),
   );
 
   var _ = require('lodash');
@@ -76,7 +77,7 @@ const Classinfo_Teacher = () => {
             console.log('gg:', gengagement[Object.keys(gengagement)[j]][k])
             en += gengagement[Object.keys(gengagement)[j]][k].Class.Engagement;
           }
-          en = en / gengagement[Object.keys(gengagement)[j]].length;
+          en = en / at;
           en = Math.floor(en)
         }
       };
