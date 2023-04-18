@@ -28,11 +28,11 @@ const TeacherUI = ({ payload }) => {
     Name: 'ITCS888',
     Description: 'This is temp class for testing process'
   } : JSON.parse(localStorage.getItem('class'));
-  
+
   var todayLocal = new Date(
-    new Date().toLocaleString('th-TH', {
-      timeZone: 'Asia/Bangkok',
-    }),
+    // new Date().toLocaleString('th-TH', {
+    //   timeZone: 'Asia/Bangkok',
+    // }),
   );
 
   useEffect(() => {
@@ -93,13 +93,13 @@ const TeacherUI = ({ payload }) => {
             }
             console.log(i * 20, (light / data.length) * 100)
           }
-          
+
 
         });
     });
   }, []);
 
-  
+
 
   const myFunction = async () => {
     var client = ZoomMtgEmbedded.createClient();
@@ -274,10 +274,8 @@ const TeacherUI = ({ payload }) => {
   }
 
   useEffect(() => {
-    console.log('UPDATE USEEFFECT', socket.current.connected)
-
-    socket.current.on('get-interact', data => {
-      // alert('WTF')
+    const handleIntReceive = (data) => {
+      // handle received interaction data
       console.log('UPDATE', data)
 
       function sigmoid(y, z, i) {
@@ -313,48 +311,6 @@ const TeacherUI = ({ payload }) => {
 
         return (1 / (1 + Math.exp(-(z1 + z2 + z3 + z4 + z5)))) * 100;
       }
-
-      // function eachEngagement() {
-      //   fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
-      //     .then(data => data.json())
-      //     .then(data => {
-      //       // console.log('Engagement to updates:', data)
-      //       // console.log(data)
-      //       for (let i = 0; i < data.length; i++) {
-      //         // let logs = data[i]
-      //         // console.log('Engagement to update', logs)
-      //         let y = 0;  //  chat
-      //         let z = 0;  //  emoji
-      //         let j = 0;  //  eye
-
-      //         for (let k = 0; k < data[i].Interaction_Log.length; k++) {
-      //           fetch(`http://localhost:4000/olive/interact/getbyId?_id=${data[i].Interaction_Log[k]}`)
-      //             .then(data => data.json())
-      //             .then(data => {
-      //               console.log('Data type:', data.Type, data.Type == 'emoji', data.Type == 'gaze')
-      //               if (data.Type == 'chat') y++
-      //               else if (data.Type == 'emoji') z++
-      //               else if (data.Type == 'gaze') j++
-      //             })
-      //         }
-
-      //         let engagescore = {
-      //           "Class": {
-      //             "Engagement": sigmoid(y, z, j)
-      //           }
-      //         }
-
-      //         fetch(`http://localhost:4000/olive/engagement/update?_id=${data[i]._id}`, {
-      //           method: 'PUT',
-      //           headers: { 'Content-Type': 'application/json' },
-      //           body: JSON.stringify(engagescore)
-      //         });
-
-      //       }
-
-      //     })
-      //     .then(updateEngagement())
-      // }
 
       async function eachEngagement() {
         const engagementData = await fetch(`http://localhost:4000/olive/engagement/getbyClassID?classid=${classroom._id}`);
@@ -395,40 +351,235 @@ const TeacherUI = ({ payload }) => {
         fetch('http://localhost:4000/active-users')
           .then(response => response.json())
           .then(activeUsers => {
-            fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
-              .then(data => data.json())
-              .then(data => {
-                console.log('update engegement:', data);
-                let engage = 0;
-                for (let i = 0; i < data.length; i++) {
-                  engage += data[i].Class.Engagement;
-                }
-                console.log(engage, activeUsers.length, engage / activeUsers.length);
-                engage = Math.floor(engage / activeUsers.length);
-                console.log('final engagement:', engage);
-                document.getElementById('engagementVal').textContent = engage + '%';
+            if (activeUsers.length > 0) {
+              fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
+                .then(data => data.json())
+                .then(data => {
+                  console.log('update engegement:', data);
+                  let engage = 0;
+                  for (let i = 0; i < data.length; i++) {
+                    engage += data[i].Class.Engagement;
+                  }
+                  console.log(engage, activeUsers.length, engage / activeUsers.length);
+                  engage = Math.floor(engage / activeUsers.length);
+                  console.log('final engagement:', engage);
+                  document.getElementById('engagementVal').textContent = engage + '%';
 
-                localStorage.setItem('totalengagement', engage)
-              });
+                  localStorage.setItem('totalengagement', engage)
+                });
+            } else {
+              console.log("Active user count =", activeUsers.length);
+              document.getElementById('engagementVal').textContent = '0%';
+              localStorage.setItem('totalengagement', 0)
+            }
           });
       }
 
 
       eachEngagement();
-    });
 
-  }, []);
+
+    }
+
+    if (socket.current.connected) {
+      socket.current.on('get-interact', handleIntReceive)
+    } else {
+      socket.current.on('connect', () => {
+        socket.current.on('get-interact', handleIntReceive)
+      })
+    }
+
+    return () => {
+      socket.current.off('get-interact', handleIntReceive)
+    }
+  }, [])
+
+  // useEffect(() => {
+  // console.log('UPDATE USEEFFECT', socket.current.connected)
+
+  // socket.current.on('get-interact', data => {
+  //     console.log('UPDATE', data)
+
+  //     function sigmoid(y, z, i) {
+  //       console.log('Sigmoid:', y, z, i)
+
+  //       if (y === 0 && z === 0 && i === 0) {
+  //         return 0;
+  //       }
+
+  //       let x = 1       //  light
+  //       // y =          //  chat
+  //       // z =          //  emoji
+  //       // i =          //  eye
+  //       // b = 
+
+  //       let w1 = 1;     //  light weight
+  //       let w2 = 0.5;   //  chat weight
+  //       let w3 = 2;     //  emoji weight
+  //       let w4 = 1;     //  eye weight
+  //       let k = 10;     //  window size
+  //       let m = 10;     //  eye size
+  //       let b = 5;
+
+  //       let z1 = w1 * x / k;
+  //       let z2 = w2 * y / k;
+  //       let z3 = w3 * z / k;
+  //       let z4 = w4 * i / m;
+  //       let z5 = b;
+
+  //       if (z1 === 0 && z2 === 0 && z3 === 0 && z4 === 0 && z5 === 0) {
+  //         z5 = -5; // set b to negative number if all input values are 0
+  //       }
+
+  //       return (1 / (1 + Math.exp(-(z1 + z2 + z3 + z4 + z5)))) * 100;
+  //     }
+
+  //     // function eachEngagement() {
+  //     //   fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
+  //     //     .then(data => data.json())
+  //     //     .then(data => {
+  //     //       // console.log('Engagement to updates:', data)
+  //     //       // console.log(data)
+  //     //       for (let i = 0; i < data.length; i++) {
+  //     //         // let logs = data[i]
+  //     //         // console.log('Engagement to update', logs)
+  //     //         let y = 0;  //  chat
+  //     //         let z = 0;  //  emoji
+  //     //         let j = 0;  //  eye
+
+  //     //         for (let k = 0; k < data[i].Interaction_Log.length; k++) {
+  //     //           fetch(`http://localhost:4000/olive/interact/getbyId?_id=${data[i].Interaction_Log[k]}`)
+  //     //             .then(data => data.json())
+  //     //             .then(data => {
+  //     //               console.log('Data type:', data.Type, data.Type == 'emoji', data.Type == 'gaze')
+  //     //               if (data.Type == 'chat') y++
+  //     //               else if (data.Type == 'emoji') z++
+  //     //               else if (data.Type == 'gaze') j++
+  //     //             })
+  //     //         }
+
+  //     //         let engagescore = {
+  //     //           "Class": {
+  //     //             "Engagement": sigmoid(y, z, j)
+  //     //           }
+  //     //         }
+
+  //     //         fetch(`http://localhost:4000/olive/engagement/update?_id=${data[i]._id}`, {
+  //     //           method: 'PUT',
+  //     //           headers: { 'Content-Type': 'application/json' },
+  //     //           body: JSON.stringify(engagescore)
+  //     //         });
+
+  //     //       }
+
+  //     //     })
+  //     //     .then(updateEngagement())
+  //     // }
+
+  //     async function eachEngagement() {
+  //       const engagementData = await fetch(`http://localhost:4000/olive/engagement/getbyClassID?classid=${classroom._id}`);
+  //       const engagements = await engagementData.json();
+
+  //       for (let i = 0; i < engagements.length; i++) {
+  //         let y = 0;
+  //         let z = 0;
+  //         let j = 0;
+
+  //         for (let k = 0; k < engagements[i].Interaction_Log.length; k++) {
+  //           const interactData = await fetch(`http://localhost:4000/olive/interact/getbyId?_id=${engagements[i].Interaction_Log[k]}`);
+  //           const interact = await interactData.json();
+
+  //           if (interact.Type == 'chat') y++;
+  //           else if (interact.Type == 'emoji') z++;
+  //           else if (interact.Type == 'gaze') j++;
+  //         }
+
+  //         let engagescore = {
+  //           "Class": {
+  //             "Engagement": sigmoid(y, z, j)
+  //           }
+  //         }
+
+  //         await fetch(`http://localhost:4000/olive/engagement/update?_id=${engagements[i]._id}`, {
+  //           method: 'PUT',
+  //           headers: { 'Content-Type': 'application/json' },
+  //           body: JSON.stringify(engagescore)
+  //         });
+  //       }
+
+  //       updateEngagement();
+  //     }
+
+  //     function updateEngagement() {
+
+  //       fetch('http://localhost:4000/active-users')
+  //         .then(response => response.json())
+  //         .then(activeUsers => {
+  //           fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
+  //             .then(data => data.json())
+  //             .then(data => {
+  //               console.log('update engegement:', data);
+  //               let engage = 0;
+  //               for (let i = 0; i < data.length; i++) {
+  //                 engage += data[i].Class.Engagement;
+  //               }
+  //               console.log(engage, activeUsers.length, engage / activeUsers.length);
+  //               engage = Math.floor(engage / activeUsers.length);
+  //               console.log('final engagement:', engage);
+  //               document.getElementById('engagementVal').textContent = engage + '%';
+
+  //               localStorage.setItem('totalengagement', engage)
+  //             });
+  //         });
+  //     }
+
+
+  //     eachEngagement();
+  //   });
+
+  // }, []);
+
+  // function clearSurv() {
+  //   // alert('ji')
+  //   console.log('clear light')
+
+  //   let nofill1 = document.getElementById("lightbulb-01");
+  //   let nofill2 = document.getElementById("lightbulb-02");
+  //   let nofill3 = document.getElementById("lightbulb-03");
+  //   let nofill4 = document.getElementById("lightbulb-04");
+  //   let nofill5 = document.getElementById("lightbulb-05");
+
+  //   let fill1 = document.getElementById("lightbulb-1");
+  //   let fill2 = document.getElementById("lightbulb-2");
+  //   let fill3 = document.getElementById("lightbulb-3");
+  //   let fill4 = document.getElementById("lightbulb-4");
+  //   let fill5 = document.getElementById("lightbulb-5");
+
+  //   // fill1.style.display = 'block';
+  //   // fill2.style.display = 'block';
+  //   // fill3.style.display = 'block';
+  //   // fill4.style.display = 'block';
+  //   // fill5.style.display = 'block';
+
+  //   // nofill1.style.display = 'none';
+  //   // nofill2.style.display = 'none';
+  //   // nofill3.style.display = 'none';
+  //   // nofill4.style.display = 'none';
+  //   // nofill5.style.display = 'none';
+  // }
 
   function clearSurv() {
-    alert('ji')
-    for (let i = 0; i < 5; i++) {
-      
-      let fill = document.getElementById(`lightbulb-${i + 1}`);
-      fill.style.display = 'block';
-      let nofill = document.getElementById(`lightbulb-0${i + 1}`);
-      nofill.style.display = 'none';
+    let bulbs = document.querySelectorAll('.lightbulb span');
+
+    for (let i = 0; i < bulbs.length; i++) {
+      if (i % 2 == 0) {
+        bulbs[i].style.display = 'block';
+      } else {
+        bulbs[i].style.display = 'none';
+      }
     }
   }
+
 
   function clearEngagement() {
     document.getElementById('engagementVal').textContent = '100%';
@@ -531,11 +682,68 @@ const TeacherUI = ({ payload }) => {
   // }, []);
 
   useEffect(() => {
-    socket.current.on('emo-recieve', (emo) => {
-      console.log('Recieve emoji:', emo)
-      updateStack()
-    })
-  }, []);
+    const handleEmojiReceive = (emo) => {
+      // handle received emoji data
+      console.log('Recieve:', emo)
+      fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + classroom._id)
+        .then(data => data.json())
+        .then(data => {
+          console.log('stack:', data[0]);
+          let emojis = groupBy(data[0].Emoji);
+          let emoid = ['63f6aa43c64dc707bf25c533', '63f6aa43c64dc707bf25c534', '63f6aa43c64dc707bf25c535', '63f6aa43c64dc707bf25c536', '63f6aa43c64dc707bf25c537'];
+          for (let i = 0; i < emoid.length; i++) { document.getElementById(emoid[i]).textContent = 0 }
+
+          console.log('emoji:', emojis);
+          for (let i = 0; i < Object.keys(emojis).length; i++) {
+            // console.log(emojis[Object.keys(emojis)[i]]);
+            document.getElementById(Object.keys(emojis)[i]).textContent = emojis[Object.keys(emojis)[i]].length;
+          }
+
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
+    }
+
+    if (socket.current.connected) {
+      socket.current.on('emo-recieve', handleEmojiReceive)
+    } else {
+      socket.current.on('connect', () => {
+        socket.current.on('emo-recieve', handleEmojiReceive)
+      })
+    }
+
+    return () => {
+      socket.current.off('emo-recieve', handleEmojiReceive)
+    }
+  }, [])
+
+  // useEffect(() => {
+  //   socket.current.on('emo-recieve', (emo) => {
+  //     console.log('Recieve emoji:', emo)
+  //     // updateStack()
+  //     fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + classroom._id)
+  //     .then(data => data.json())
+  //     .then(data => {
+  //       console.log('stack:', data[0]);
+  //       let emojis = groupBy(data[0].Emoji);
+  //       let emoid = ['63f6aa43c64dc707bf25c533', '63f6aa43c64dc707bf25c534', '63f6aa43c64dc707bf25c535', '63f6aa43c64dc707bf25c536', '63f6aa43c64dc707bf25c537'];
+  //       for (let i = 0; i < emoid.length; i++) { document.getElementById(emoid[i]).textContent = 0 }
+
+  //       console.log('emoji:', emojis);
+  //       for (let i = 0; i < Object.keys(emojis).length; i++) {
+  //         // console.log(emojis[Object.keys(emojis)[i]]);
+  //         document.getElementById(Object.keys(emojis)[i]).textContent = emojis[Object.keys(emojis)[i]].length;
+  //       }
+
+  //     })
+  //     .catch(error => {
+  //       console.log(error)
+  //     })
+
+  //   })
+  // }, []);
 
   useEffect(() => {
     socket.current.on('msg-recieve', (chat) => {
@@ -599,6 +807,7 @@ const TeacherUI = ({ payload }) => {
 
   }, []);
 
+
   var _ = require('lodash');
 
   function groupBy(arr) {
@@ -629,7 +838,7 @@ const TeacherUI = ({ payload }) => {
       })
   }
 
-  updateStack();
+  // updateStack();
   // setInterval(updateStack, 600000);
 
   function clearStack() {
@@ -699,7 +908,7 @@ const TeacherUI = ({ payload }) => {
         console.log('attendance:', data.result);
         localStorage.setItem('attendance', JSON.stringify(data.result));
         localStorage.setItem('totalclass', classdate.length);
-        
+
       })
       .then(() => {
         fetch('http://localhost:4000/redirect?rp=' + 'class_info_teacher', {

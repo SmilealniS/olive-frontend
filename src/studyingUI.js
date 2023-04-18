@@ -32,9 +32,9 @@ const StudentUI = ({ payload }) => {
   } : JSON.parse(localStorage.getItem('class'));
 
   var todayLocal = new Date(
-    new Date().toLocaleString('th-TH', {
-      timeZone: 'Asia/Bangkok',
-    }),
+    // new Date().toLocaleString('th-TH', {
+    //   timeZone: 'Asia/Bangkok',
+    // }),
   );
 
   useEffect(() => {
@@ -534,7 +534,7 @@ const StudentUI = ({ payload }) => {
       if (today.getDate() > 9) todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-${today.getDate()}`;
       else todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-0${today.getDate()}`;
     }
-    console.log('Today:', todaystring)
+    console.log('Today:', todaystring, today, todayLocal)
 
     fetch(`http://localhost:4000/olive/interact/getStudent?student=${student_id}&classid=${classroom._id}&type=light&date=${todaystring}`)
       .then(data => data.json())
