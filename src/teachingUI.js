@@ -11,6 +11,16 @@ const TeacherUI = ({ payload }) => {
 
   const socket = useRef(null);
 
+  // const socket = io(url, {
+  //   withCredentials: true,
+  // extraHeaders: {
+  //   "my-custom-header": "abcd"
+  // }
+  // });
+
+  // const url = 'http://olive-api.northanapon.com';
+  const url = 'https://3dddfdaadb14.ngrok.app'
+
   var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
   var user = {
     username: localStorage.getItem('username') == undefined ? '' : localStorage.getItem('username'),
@@ -35,8 +45,10 @@ const TeacherUI = ({ payload }) => {
     // }),
   );
 
+
+
   useEffect(() => {
-    const newSocket = io("http://localhost:4000", {
+    const newSocket = io(url, {
       transports: ['websocket'], // use only WebSocket transport (other transports might not support reconnections)
       reconnection: true, // enable reconnections
       reconnectionAttempts: 10, // attempt to reconnect 10 times
@@ -65,7 +77,7 @@ const TeacherUI = ({ payload }) => {
       // alert('light')
       console.log('Toggle light:', data)
 
-      fetch(`http://localhost:4000/olive/interact/getbyType?type=light&classid=${classroom._id}`)
+      fetch(url + `/olive/interact/getbyType?type=light&classid=${classroom._id}`)
         .then(data => data.json())
         .then(data => {
           console.log(data)
@@ -103,17 +115,23 @@ const TeacherUI = ({ payload }) => {
 
   const myFunction = async () => {
     var client = ZoomMtgEmbedded.createClient();
-    console.log('create client')
+    // console.log('create client')
     fetch(payload.signatureEndpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Cross-Origin-Embedder-Policy': 'credentialless',
+        'Cross-Origin-Opener-Policy': 'same-origin',
+      },
+      mode: 'cors',
       body: JSON.stringify({
         meetingNumber: payload.meetingNumber,
         role: payload.role
       })
-    }).then(res => res.json())
+    })
+      .then(res => res.json())
       .then(response => {
-        console.log('will start meeting', response.signature)
+        // console.log('will start meeting', response.signature)
         startMeeting(response.signature)
       }).catch(error => {
         console.error(error)
@@ -121,40 +139,53 @@ const TeacherUI = ({ payload }) => {
 
     function startMeeting(signature) {
       let meetingSDKElement = document.getElementById('meetingSDKElement');
-      console.log('start meeting', signature)
-      client.init({
-        //   debug: true,
-        zoomAppRoot: meetingSDKElement,
-        language: 'en-US',
-        customize: {
-          video: {
-            isResizable: false,
-            viewSizes: {
-              ribbon: {
-                width: 500,
-                height: 600
-              },
-              default: {
-                width: 1000,
-                height: 600
+      // console.log('start meeting', signature)
+      try {
+        client.init({
+          // debug: true,
+          zoomAppRoot: meetingSDKElement,
+          // screenShare: true,
+          language: 'en-US',
+          customize: {
+            video: {
+              isResizable: true,
+              // viewSizes: {
+              //   ribbon: {
+              //     width: 1050,
+              //     height: 500
+              //   },
+              //   speaker: {
+              //     width: 1050,
+              //     height: 500
+              //   },
+              //   default: {
+              //     width: 1050,
+              //     height: 500
+              //   }
+              // },
+              popper: {
+                disableDraggable: true
               }
-            },
-            popper: {
-              disableDraggable: true
             }
           }
-        }
-      });
+        });
+      } catch {
+        // alert('init error')
+      }
 
-      client.join({
-        sdkKey: payload.sdkKey,
-        signature: signature,
-        meetingNumber: payload.meetingNumber,
-        password: payload.passWord,
-        userName: user.displayname,
-        userEmail: payload.userEmail,
-        tk: payload.registrantToken
-      })
+      try {
+        client.join({
+          sdkKey: payload.sdkKey,
+          signature: signature,
+          meetingNumber: payload.meetingNumber,
+          password: payload.passWord,
+          userName: user.displayname,
+          userEmail: payload.userEmail,
+          tk: payload.registrantToken
+        })
+      } catch {
+        alert('join error')
+      }
     }
 
   };
@@ -167,11 +198,66 @@ const TeacherUI = ({ payload }) => {
 
     document.getElementById('chatTable').innerHTML = '';
 
-    fetch('http://localhost:4000/olive/interact/getbyType?type=chat&classid=' + classroom._id)
-      .then(data => data.json())
-      .then(data => {
-        console.log('initChat:', data)
+    // fetch(url + '/olive/interact/getbyType?type=chat&classid=' + classroom._id)
+    //   .then(data => data.json())
+    //   .then(data => {
+    //     console.log('initChat:', data)
+    //     for (let i = 0; i < data.length; i++) {
+    //       let date = new Date(data[i].Time);
+    //       let time = ''
+    //       time += date.getHours() > 9 ? '' : '0'
+    //       time += (date.getHours() + ':')
+    //       time += date.getMinutes() > 9 ? '' : '0'
+    //       time += date.getMinutes()
+
+    //       // console.log(date.getHours(), date.getMinutes());
+    //       // console.log(data[i].Student == teacher_id)
+
+    //       if (data[i].Student == teacher_id) {
+    //         // console.log(user.displayname)
+    //         document.getElementById('chatTable').innerHTML +=
+    //           `<div class="me">
+    //               <div class="entete">
+    //                 <b>${user.displayname} &nbsp;</b>
+    //                 <p>${time} &nbsp;</p>
+    //               </div>
+    //               <div class="message">
+    //                 ${data[i].Description}
+    //               </div>
+    //             </div>`
+    //       } else {
+    //         fetch(url + '/olive/student-profile/getbyId?_id=' + data[i].Student)
+    //           .then(sender => sender.json())
+    //           .then(sender => {
+    //             document.getElementById('chatTable').innerHTML +=
+    //               `<div class="you">
+    //                 <div class="entete">
+    //                   <b>${sender.Display_Name} &nbsp;</b>
+    //                   <p>${time} &nbsp;</p>
+    //                 </div>
+    //                 <div class="message">
+    //                   ${data[i].Description}
+    //                 </div>
+    //               </div>`
+
+    //           });
+    //       }
+    //     }
+    //   });
+
+    async function getChat() {
+      // fetch(url + `/olive/interact/getbyType?type=chat&classid=${classroom._id}`)
+      //   .then(data => data.json())
+      //   .then(data => {
+      try {
+        const response = await fetch(url + `/olive/interact/getbyType?type=chat&classid=${classroom._id}`);
+        const data = await response.json();
+
+        document.getElementById('chatTable').innerHTML = '';
+
+        console.log('Chat:', data)
         for (let i = 0; i < data.length; i++) {
+          console.log(data[i])
           let date = new Date(data[i].Time);
           let time = ''
           time += date.getHours() > 9 ? '' : '0'
@@ -179,8 +265,6 @@ const TeacherUI = ({ payload }) => {
           time += date.getMinutes() > 9 ? '' : '0'
           time += date.getMinutes()
 
-          // console.log(date.getHours(), date.getMinutes());
-          // console.log(data[i].Student == teacher_id)
 
           if (data[i].Student == teacher_id) {
             // console.log(user.displayname)
@@ -195,24 +279,57 @@ const TeacherUI = ({ payload }) => {
                   </div>
                 </div>`
           } else {
-            fetch('http://localhost:4000/olive/student-profile/getbyId?_id=' + data[i].Student)
-              .then(sender => sender.json())
-              .then(sender => {
-                document.getElementById('chatTable').innerHTML +=
-                  `<div class="you">
-                    <div class="entete">
-                      <b>${sender.Display_Name} &nbsp;</b>
-                      <p>${time} &nbsp;</p>
-                    </div>
-                    <div class="message">
-                      ${data[i].Description}
-                    </div>
-                  </div>`
+            // fetch(url + '/olive/student-profile/getbyId?_id=' + data[i].Student)
+            //   .then(sender => sender.json())
+            //   .then(sender => {
+            //     // console.log('get student profile')
 
-              });
+            //     // console.log(sender.Display_Name)
+            //     document.getElementById('chatTable').innerHTML +=
+            // `<div class="you">
+            //   <div class="entete">
+            //     <b>${sender.Display_Name} &nbsp;</b>
+            //     <p>${time} &nbsp;</p>
+            //   </div>
+            //   <div class="message">
+            //     ${data[i].Description}
+            //   </div>
+            // </div>`
+
+            //   });
+
+            try {
+
+              const senders = await fetch(url + '/olive/student-profile/getbyId?_id=' + data[i].Student)
+              const sender = await senders.json();
+
+              console.log('Not from me, it is', sender)
+
+              document.getElementById('chatTable').innerHTML +=
+                `<div class="you">
+                <div class="entete">
+                  <b>${sender.Display_Name} &nbsp;</b>
+                  <p>${time} &nbsp;</p>
+                </div>
+                <div class="message">
+                  ${data[i].Description}
+                </div>
+              </div>`
+
+            } catch {
+              // 
+            }
+
           }
+
         }
-      });
+        // });
+      } catch {
+        // 
+      }
+    }
+
+    getChat();
 
   }
 
@@ -227,20 +344,20 @@ const TeacherUI = ({ payload }) => {
       document.getElementById('engagementVal').textContent = '100%';
 
       try {
-        fetch(`http://localhost:4000/olive/engagement/getbyClassID?classid=${classroom._id}`)
+        fetch(url + `/olive/engagement/getbyClassID?classid=${classroom._id}`)
           .then(response => response.json())
           .then(response => {
             for (let i = 0; i < response.length; i++) {
               console.log('Engagaement:', response[i])
 
-              fetch(`http://localhost:4000/olive/engagement/clear?_id=${response[i]._id}`, {
+              fetch(url + `/olive/engagement/clear?_id=${response[i]._id}`, {
                 method: 'PUT'
               })
             }
 
           })
       } finally {
-        fetch('http://localhost:4000/olive/enroll/getbyClassID?classid=' + classroom._id)
+        fetch(url + '/olive/enroll/getbyClassID?classid=' + classroom._id)
           .then(data => data.json())
           .then(data => {
             for (let i = 0; i < data[0].Student.length; i++) {
@@ -254,7 +371,7 @@ const TeacherUI = ({ payload }) => {
               };
               // console.log('New stack:', data)
 
-              fetch('http://localhost:4000/olive/engagement', {
+              fetch(url + '/olive/engagement', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(stu)
@@ -278,26 +395,26 @@ const TeacherUI = ({ payload }) => {
       // handle received interaction data
       console.log('UPDATE', data)
 
-      function sigmoid(y, z, i) {
-        console.log('Sigmoid:', y, z, i)
+      function sigmoid(x, y, z, i, m) {
+        console.log('Sigmoid: light', x, 'chat', y, 'emoji', z, 'eye', i, m)
 
-        if (y === 0 && z === 0 && i === 0) {
+        if (x == 0 && y === 0 && z === 0 && i === 0) {
           return 0;
         }
 
-        let x = 1       //  light
+        // x =          //  light
         // y =          //  chat
         // z =          //  emoji
         // i =          //  eye
         // b = 
 
-        let w1 = 1;     //  light weight
-        let w2 = 0.5;   //  chat weight
-        let w3 = 2;     //  emoji weight
-        let w4 = 1;     //  eye weight
-        let k = 10;     //  window size
-        let m = 10;     //  eye size
-        let b = 5;
+        let w1 = 0.00188876;     //  light weight (0.5)
+        let w2 = 0.27436492;     //  chat weight (1)
+        let w3 = 0.46271626;     //  emoji weight (1)
+        let w4 = 1.10253922;     //  eye weight (2)
+        let k = 10;              //  window size
+        // let m = 3;            //  eye size
+        let b = 4.14231768;      //  bias (5)
 
         let z1 = w1 * x / k;
         let z2 = w2 * y / k;
@@ -313,30 +430,40 @@ const TeacherUI = ({ payload }) => {
       }
 
       async function eachEngagement() {
-        const engagementData = await fetch(`http://localhost:4000/olive/engagement/getbyClassID?classid=${classroom._id}`);
+        const engagementData = await fetch(url + `/olive/engagement/getbyClassID?classid=${classroom._id}`);
         const engagements = await engagementData.json();
 
         for (let i = 0; i < engagements.length; i++) {
+          let x = 0;
           let y = 0;
           let z = 0;
           let j = 0;
+          let m = 0;
 
           for (let k = 0; k < engagements[i].Interaction_Log.length; k++) {
-            const interactData = await fetch(`http://localhost:4000/olive/interact/getbyId?_id=${engagements[i].Interaction_Log[k]}`);
+            const interactData = await fetch(url + `/olive/interact/getbyId?_id=${engagements[i].Interaction_Log[k]}`);
             const interact = await interactData.json();
 
-            if (interact.Type == 'chat') y++;
+            // console.log(interact)
+
+            if (interact.Type == 'light') {
+              if (interact.Boolean) x++
+            }
+            else if (interact.Type == 'chat') y++;
             else if (interact.Type == 'emoji') z++;
-            else if (interact.Type == 'gaze') j++;
+            else if (interact.Type == 'gaze') {
+              m++;
+              if (interact.Boolean) j++;
+            }
           }
 
           let engagescore = {
             "Class": {
-              "Engagement": sigmoid(y, z, j)
+              "Engagement": sigmoid(x, y, z, j, m)
             }
           }
 
-          await fetch(`http://localhost:4000/olive/engagement/update?_id=${engagements[i]._id}`, {
+          await fetch(url + `/olive/engagement/update?_id=${engagements[i]._id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(engagescore)
@@ -348,11 +475,11 @@ const TeacherUI = ({ payload }) => {
 
       function updateEngagement() {
 
-        fetch('http://localhost:4000/active-users')
+        fetch(url + '/active-users')
           .then(response => response.json())
           .then(activeUsers => {
             if (activeUsers.length > 0) {
-              fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
+              fetch(url + '/olive/engagement/getbyClassID?classid=' + classroom._id)
                 .then(data => data.json())
                 .then(data => {
                   console.log('update engegement:', data);
@@ -360,7 +487,7 @@ const TeacherUI = ({ payload }) => {
                   for (let i = 0; i < data.length; i++) {
                     engage += data[i].Class.Engagement;
                   }
-                  console.log(engage, activeUsers.length, engage / activeUsers.length);
+                  console.log('my', engage, 'active', activeUsers.length, 'final', engage / activeUsers.length);
                   engage = Math.floor(engage / activeUsers.length);
                   console.log('final engagement:', engage);
                   document.getElementById('engagementVal').textContent = engage + '%';
@@ -435,7 +562,7 @@ const TeacherUI = ({ payload }) => {
   //     }
 
   //     // function eachEngagement() {
-  //     //   fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
+  //     //   fetch(url + '/olive/engagement/getbyClassID?classid=' + classroom._id)
   //     //     .then(data => data.json())
   //     //     .then(data => {
   //     //       // console.log('Engagement to updates:', data)
@@ -448,7 +575,7 @@ const TeacherUI = ({ payload }) => {
   //     //         let j = 0;  //  eye
 
   //     //         for (let k = 0; k < data[i].Interaction_Log.length; k++) {
-  //     //           fetch(`http://localhost:4000/olive/interact/getbyId?_id=${data[i].Interaction_Log[k]}`)
+  //     //           fetch(url + `/olive/interact/getbyId?_id=${data[i].Interaction_Log[k]}`)
   //     //             .then(data => data.json())
   //     //             .then(data => {
   //     //               console.log('Data type:', data.Type, data.Type == 'emoji', data.Type == 'gaze')
@@ -464,7 +591,7 @@ const TeacherUI = ({ payload }) => {
   //     //           }
   //     //         }
 
-  //     //         fetch(`http://localhost:4000/olive/engagement/update?_id=${data[i]._id}`, {
+  //     //         fetch(url + `/olive/engagement/update?_id=${data[i]._id}`, {
   //     //           method: 'PUT',
   //     //           headers: { 'Content-Type': 'application/json' },
   //     //           body: JSON.stringify(engagescore)
@@ -477,7 +604,7 @@ const TeacherUI = ({ payload }) => {
   //     // }
 
   //     async function eachEngagement() {
-  //       const engagementData = await fetch(`http://localhost:4000/olive/engagement/getbyClassID?classid=${classroom._id}`);
+  //       const engagementData = await fetch(url + `/olive/engagement/getbyClassID?classid=${classroom._id}`);
   //       const engagements = await engagementData.json();
 
   //       for (let i = 0; i < engagements.length; i++) {
@@ -486,7 +613,7 @@ const TeacherUI = ({ payload }) => {
   //         let j = 0;
 
   //         for (let k = 0; k < engagements[i].Interaction_Log.length; k++) {
-  //           const interactData = await fetch(`http://localhost:4000/olive/interact/getbyId?_id=${engagements[i].Interaction_Log[k]}`);
+  //           const interactData = await fetch(url + `/olive/interact/getbyId?_id=${engagements[i].Interaction_Log[k]}`);
   //           const interact = await interactData.json();
 
   //           if (interact.Type == 'chat') y++;
@@ -500,7 +627,7 @@ const TeacherUI = ({ payload }) => {
   //           }
   //         }
 
-  //         await fetch(`http://localhost:4000/olive/engagement/update?_id=${engagements[i]._id}`, {
+  //         await fetch(url + `/olive/engagement/update?_id=${engagements[i]._id}`, {
   //           method: 'PUT',
   //           headers: { 'Content-Type': 'application/json' },
   //           body: JSON.stringify(engagescore)
@@ -512,10 +639,10 @@ const TeacherUI = ({ payload }) => {
 
   //     function updateEngagement() {
 
-  //       fetch('http://localhost:4000/active-users')
+  //       fetch(url + '/active-users')
   //         .then(response => response.json())
   //         .then(activeUsers => {
-  //           fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
+  //           fetch(url + '/olive/engagement/getbyClassID?classid=' + classroom._id)
   //             .then(data => data.json())
   //             .then(data => {
   //               console.log('update engegement:', data);
@@ -539,56 +666,59 @@ const TeacherUI = ({ payload }) => {
 
   // }, []);
 
-  // function clearSurv() {
-  //   // alert('ji')
-  //   console.log('clear light')
-
-  //   let nofill1 = document.getElementById("lightbulb-01");
-  //   let nofill2 = document.getElementById("lightbulb-02");
-  //   let nofill3 = document.getElementById("lightbulb-03");
-  //   let nofill4 = document.getElementById("lightbulb-04");
-  //   let nofill5 = document.getElementById("lightbulb-05");
-
-  //   let fill1 = document.getElementById("lightbulb-1");
-  //   let fill2 = document.getElementById("lightbulb-2");
-  //   let fill3 = document.getElementById("lightbulb-3");
-  //   let fill4 = document.getElementById("lightbulb-4");
-  //   let fill5 = document.getElementById("lightbulb-5");
-
-  //   // fill1.style.display = 'block';
-  //   // fill2.style.display = 'block';
-  //   // fill3.style.display = 'block';
-  //   // fill4.style.display = 'block';
-  //   // fill5.style.display = 'block';
-
-  //   // nofill1.style.display = 'none';
-  //   // nofill2.style.display = 'none';
-  //   // nofill3.style.display = 'none';
-  //   // nofill4.style.display = 'none';
-  //   // nofill5.style.display = 'none';
-  // }
-
   function clearSurv() {
-    let bulbs = document.querySelectorAll('.lightbulb span');
+    // alert('ji')
+    console.log('clear light')
 
-    for (let i = 0; i < bulbs.length; i++) {
-      if (i % 2 == 0) {
-        bulbs[i].style.display = 'block';
-      } else {
-        bulbs[i].style.display = 'none';
-      }
-    }
+    let nofill1 = document.getElementById("lightbulb-01");
+    let nofill2 = document.getElementById("lightbulb-02");
+    let nofill3 = document.getElementById("lightbulb-03");
+    let nofill4 = document.getElementById("lightbulb-04");
+    let nofill5 = document.getElementById("lightbulb-05");
+
+    let fill1 = document.getElementById("lightbulb-1");
+    let fill2 = document.getElementById("lightbulb-2");
+    let fill3 = document.getElementById("lightbulb-3");
+    let fill4 = document.getElementById("lightbulb-4");
+    let fill5 = document.getElementById("lightbulb-5");
+
+    fill1.style.display = 'block';
+    fill2.style.display = 'block';
+    fill3.style.display = 'block';
+    fill4.style.display = 'block';
+    fill5.style.display = 'block';
+
+    nofill1.style.display = 'none';
+    nofill2.style.display = 'none';
+    nofill3.style.display = 'none';
+    nofill4.style.display = 'none';
+    nofill5.style.display = 'none';
   }
 
+  // function clearSurv() {
+  //   let bulbs = document.querySelectorAll('.lightbulb span');
+
+  //   for (let i = 0; i < bulbs.length; i++) {
+  //     if (i % 2 == 0) {
+  //       bulbs[i].style.display = 'block';
+  //     } else {
+  //       bulbs[i].style.display = 'none';
+  //     }
+  //   }
+  // }
+
+  // function clearSurv() {
+  //   alert('clear')
+  // }
 
   function clearEngagement() {
     document.getElementById('engagementVal').textContent = '100%';
-    fetch('http://localhost:4000/olive/engagement/getbyClassID?classid=' + classroom._id)
+    fetch(url + '/olive/engagement/getbyClassID?classid=' + classroom._id)
       .then(data => data.json())
       .then(data => {
         for (let i = 0; i < data.length; i++) {
 
-          fetch('http://localhost:4000/olive/engagement/clear?_id=' + data[0]._id, {
+          fetch(url + '/olive/engagement/clear?_id=' + data[0]._id, {
             method: 'PUT'
           })
         }
@@ -596,19 +726,19 @@ const TeacherUI = ({ payload }) => {
       })
 
     try {
-      fetch(`http://localhost:4000/olive/engagement/getbyClassID?classid=${classroom._id}`)
+      fetch(url + `/olive/engagement/getbyClassID?classid=${classroom._id}`)
         .then(response => response.json())
         .then(response => {
           for (let i = 0; i < response.length; i++) {
             console.log('Engagement:', response[i])
-            fetch(`http://localhost:4000/olive/engagement/clear?_id=${response[i]._id}`, {
+            fetch(url + `/olive/engagement/clear?_id=${response[i]._id}`, {
               method: 'PUT'
             })
           }
 
         })
     } finally {
-      fetch('http://localhost:4000/olive/enroll/getbyClassID?classid=' + classroom._id)
+      fetch(url + '/olive/enroll/getbyClassID?classid=' + classroom._id)
         .then(data => data.json())
         .then(data => {
           for (let i = 0; i < data[0].Student.length; i++) {
@@ -622,7 +752,7 @@ const TeacherUI = ({ payload }) => {
             };
             // console.log('New stack:', data)
 
-            fetch('http://localhost:4000/olive/engagement', {
+            fetch(url + '/olive/engagement', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(stu)
@@ -642,13 +772,14 @@ const TeacherUI = ({ payload }) => {
     if (document.getElementById('sendtext').value == '') return;
     // alert(document.getElementById('sendtext').value)
     let data = {
+      sender: user.displayname,
       Student: teacher_id,
       Class: classroom._id,
       Type: "chat",
       Description: document.getElementById('sendtext').value
     };
 
-    fetch('http://localhost:4000/olive/interact', {
+    fetch(url + '/olive/interact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -685,7 +816,7 @@ const TeacherUI = ({ payload }) => {
     const handleEmojiReceive = (emo) => {
       // handle received emoji data
       console.log('Recieve:', emo)
-      fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + classroom._id)
+      fetch(url + '/olive/emojis/getbyClass?classid=' + classroom._id)
         .then(data => data.json())
         .then(data => {
           console.log('stack:', data[0]);
@@ -723,7 +854,7 @@ const TeacherUI = ({ payload }) => {
   //   socket.current.on('emo-recieve', (emo) => {
   //     console.log('Recieve emoji:', emo)
   //     // updateStack()
-  //     fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + classroom._id)
+  //     fetch(url + '/olive/emojis/getbyClass?classid=' + classroom._id)
   //     .then(data => data.json())
   //     .then(data => {
   //       console.log('stack:', data[0]);
@@ -748,15 +879,19 @@ const TeacherUI = ({ payload }) => {
   useEffect(() => {
     socket.current.on('msg-recieve', (chat) => {
       console.log('Recieve:', chat)
+      async function getChat() {
+        // fetch(url + `/olive/interact/getbyType?type=chat&classid=${classroom._id}`)
+        //   .then(data => data.json())
+        //   .then(data => {
+        try {
+          const response = await fetch(url + `/olive/interact/getbyType?type=chat&classid=${classroom._id}`);
+          const data = await response.json();
 
-      fetch(`http://localhost:4000/olive/interact/getbyType?type=chat&classid=${classroom._id}`)
-        .then(data => data.json())
-        .then(data => {
           document.getElementById('chatTable').innerHTML = '';
 
-          console.log('Chat:')
+          console.log('Chat:', data)
           for (let i = 0; i < data.length; i++) {
-            // console.log(data[i])
+            console.log(data[i])
             let date = new Date(data[i].Time);
             let time = ''
             time += date.getHours() > 9 ? '' : '0'
@@ -766,7 +901,7 @@ const TeacherUI = ({ payload }) => {
 
 
             if (data[i].Student == teacher_id) {
-              console.log(user.displayname)
+              // console.log(user.displayname)
               document.getElementById('chatTable').innerHTML +=
                 `<div class="me">
                     <div class="entete">
@@ -778,30 +913,57 @@ const TeacherUI = ({ payload }) => {
                     </div>
                   </div>`
             } else {
-              fetch('http://localhost:4000/olive/student-profile/getbyId?_id=' + data[i].Student)
-                .then(sender => sender.json())
-                .then(sender => {
-                  // console.log('get student profile')
+              // fetch(url + '/olive/student-profile/getbyId?_id=' + data[i].Student)
+              //   .then(sender => sender.json())
+              //   .then(sender => {
+              //     // console.log('get student profile')
 
-                  // console.log(sender.Display_Name)
-                  document.getElementById('chatTable').innerHTML +=
-                    `<div class="you">
-                      <div class="entete">
-                        <b>${sender.Display_Name} &nbsp;</b>
-                        <p>${time} &nbsp;</p>
-                      </div>
-                      <div class="message">
-                        ${data[i].Description}
-                      </div>
-                    </div>`
+              //     // console.log(sender.Display_Name)
+              //     document.getElementById('chatTable').innerHTML +=
+              // `<div class="you">
+              //   <div class="entete">
+              //     <b>${sender.Display_Name} &nbsp;</b>
+              //     <p>${time} &nbsp;</p>
+              //   </div>
+              //   <div class="message">
+              //     ${data[i].Description}
+              //   </div>
+              // </div>`
 
-                });
+              //   });
+
+              try {
+
+                const senders = await fetch(url + '/olive/student-profile/getbyId?_id=' + data[i].Student)
+                const sender = await senders.json();
+
+                console.log('Not from me, it is', sender)
+
+                document.getElementById('chatTable').innerHTML +=
+                  `<div class="you">
+                  <div class="entete">
+                    <b>${sender.Display_Name} &nbsp;</b>
+                    <p>${time} &nbsp;</p>
+                  </div>
+                  <div class="message">
+                    ${data[i].Description}
+                  </div>
+                </div>`
+
+              } catch {
+                // 
+              }
 
             }
 
           }
-        });
+          // });
+        } catch {
+          // 
+        }
+      }
 
+      getChat();
 
     });
 
@@ -818,7 +980,7 @@ const TeacherUI = ({ payload }) => {
 
   function updateStack() {
     // alert('stack');
-    fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + classroom._id)
+    fetch(url + '/olive/emojis/getbyClass?classid=' + classroom._id)
       .then(data => data.json())
       .then(data => {
         console.log('stack:', data[0]);
@@ -845,11 +1007,11 @@ const TeacherUI = ({ payload }) => {
     let emoid = ['63f6aa43c64dc707bf25c533', '63f6aa43c64dc707bf25c534', '63f6aa43c64dc707bf25c535', '63f6aa43c64dc707bf25c536', '63f6aa43c64dc707bf25c537'];
     for (let i = 0; i < emoid.length; i++) { document.getElementById(emoid[i]).textContent = 0 }
 
-    fetch('http://localhost:4000/olive/emojis/getbyClass?classid=' + classroom._id)
+    fetch(url + '/olive/emojis/getbyClass?classid=' + classroom._id)
       .then(data => data.json())
       .then(data => {
         console.log('clear stack:', data);
-        fetch('http://localhost:4000/olive/emojis/clear?_id=' + data[0]._id, {
+        fetch(url + '/olive/emojis/clear?_id=' + data[0]._id, {
           method: 'PUT'
         })
 
@@ -874,7 +1036,7 @@ const TeacherUI = ({ payload }) => {
           "Date": todaystring
         }
 
-        fetch(`http://localhost:4000/olive/emojis`, {
+        fetch(url + `/olive/emojis`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(stack)
@@ -884,7 +1046,7 @@ const TeacherUI = ({ payload }) => {
   }
 
   function leaveMeeting() {
-    fetch(`http://localhost:4000/olive/attendance/getbyClassId?classid=${classroom._id}`)
+    fetch(url + `/olive/attendance/getbyClassId?classid=${classroom._id}`)
       .then(data => data.json())
       .then(data => {
         let classdate = [];
@@ -911,7 +1073,7 @@ const TeacherUI = ({ payload }) => {
 
       })
       .then(() => {
-        fetch('http://localhost:4000/redirect?rp=' + 'class_info_teacher', {
+        fetch(url + '/redirect?rp=' + 'class_info_teacher', {
           method: 'POST',
           redirect: 'follow'
         })
@@ -932,7 +1094,7 @@ const TeacherUI = ({ payload }) => {
     <Fragment>
       <body id='teachingUI'>
 
-        <div class="wrapup">
+        <div class="wrapup-teac">
           {/* display */}
           <div class='' id='display' >
             <div class='screen' id='meetingSDKElement' ></div>
@@ -956,7 +1118,7 @@ const TeacherUI = ({ payload }) => {
                         {/* reset */}
                         <button2 onClick={clearEngagement}>
                           {/* <button2 onClick={''}> */}
-                          <img class="btn-reset-engage" src={reset}></img>
+                          <img class="btn-reset-1" src={reset}></img>
                         </button2>
                       </div>
                       {/* <div class="survbar"><div class="bar-1"></div></div> */}
@@ -964,35 +1126,65 @@ const TeacherUI = ({ payload }) => {
 
                     </div>
                     <div class='divided-line-2'></div>
+
+
+
+                    {/* 222222222 */}
                     <div class='bar-area'>
                       {/* Bar 2 */}
                       <div class='surv-area'>
                         <div class="barRate">Survival rating</div>
                         <button2 onClick={clearSurv}>
-                          <img class="btn-reset-light" src={reset}></img>
+                          <img class="btn-reset-2" src={reset}></img>
                         </button2>
                       </div>
-                      {/* <div class="survbar"><div class="bar-1"></div></div> */}
                       <div class='lightbulb' >
-                        <span><BsLightbulbFill id='lightbulb-1' size='4em' color='gold' /></span>
-                        <span><BsLightbulb id='lightbulb-01' display='none' size='4em' color='gold' /></span>
-                        <span><BsLightbulbFill id='lightbulb-2' size='4em' color='gold' /></span>
-                        <span><BsLightbulb id='lightbulb-02' display='none' size='4em' color='gold' /></span>
-                        <span><BsLightbulbFill id='lightbulb-3' size='4em' color='gold' /></span>
-                        <span><BsLightbulb id='lightbulb-03' display='none' size='4em' color='gold' /></span>
-                        <span><BsLightbulbFill id='lightbulb-4' size='4em' color='gold' /></span>
-                        <span><BsLightbulb id='lightbulb-04' display='none' size='4em' color='gold' /></span>
-                        <span><BsLightbulbFill id='lightbulb-5' size='4em' color='gold' /></span>
-                        <span><BsLightbulb id='lightbulb-05' display='none' size='4em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-1' size='3.5em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-01' display='none' size='3.5em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-2' size='3.5em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-02' display='none' size='3.5em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-3' size='3.5em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-03' display='none' size='3.5em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-4' size='3.5em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-04' display='none' size='3.5em' color='gold' /></span>
+                        <span><BsLightbulbFill id='lightbulb-5' size='3.5em' color='gold' /></span>
+                        <span><BsLightbulb id='lightbulb-05' display='none' size='3.5em' color='gold' /></span>
+                      </div>
+                    </div>
+                    <div class='divided-line'></div>
+
+
+
+                    {/* 333333 */}
+                    <div class='bar-area'>
+                      {/* Bar 2 */}
+                      <div class='surv-area'>
+                        <text class="barRate">Class Status</text>
+                        <button2 onClick={clearStack}>
+                          <img class="btn-reset-3" src={reset}></img>
+                        </button2>
+                      </div>
+
+                      <div class='emoji-stack'>
+                        <p class='emoji-item'>&#128513;</p>
+                        <text id='63f6aa43c64dc707bf25c533' class="num-emoji-stack"></text>
+                        <p class='emoji-item'>&#128512;</p>
+                        <text id='63f6aa43c64dc707bf25c534' class="num-emoji-stack"></text>
+                        <p class='emoji-item'>&#128528;</p>
+                        <text id='63f6aa43c64dc707bf25c535' class="num-emoji-stack"></text>
+                        <p class='emoji-item'>&#128533;</p>
+                        <text id='63f6aa43c64dc707bf25c536' class="num-emoji-stack"></text>
+                        <p class='emoji-item'>&#128544;</p>
+                        <text id='63f6aa43c64dc707bf25c537' class="num-emoji-stack"></text>
                       </div>
                     </div>
                   </div>
 
                 </div>
 
-                <div class='divided-line'></div>
+                {/* <div class='divided-line'></div> */}
 
-                <div class="right-zone">
+                {/* <div class="right-zone">
                   <div class="Bar-text">
                     <text class="barRate">Class Status</text>
                     <button2 onClick={clearStack}>
@@ -1014,13 +1206,13 @@ const TeacherUI = ({ payload }) => {
                       <text id='63f6aa43c64dc707bf25c537' class="num-emoji-stack"></text>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
 
           {/* chat */}
-          <div id='chat' class="frame-chat">
+          <div id='chat-teac' class="frame-chat">
             <div class='chat-top'>
               <h2>Chat</h2>
             </div>
@@ -1031,7 +1223,7 @@ const TeacherUI = ({ payload }) => {
             </div>
 
             {/* Send message */}
-            <div class='std-chat-message'>
+            <div class='chat-message'>
               <textarea class="sendtext" id="sendtext" placeholder="Type your message"></textarea>
               <button class="send" onClick={sendMessage}>Send</button>
             </div>

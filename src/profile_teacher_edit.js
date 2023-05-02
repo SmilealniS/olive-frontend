@@ -16,6 +16,9 @@ import list from './assets/Infopage/list.png';
 
 
 const Teacher_Profile_Edit = () => {
+  // const url = 'http://olive-api.northanapon.com';
+  const url = 'https://3dddfdaadb14.ngrok.app'
+
   var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
   var user = {
     username: localStorage.getItem('username') == undefined ? '' : localStorage.getItem('username'),
@@ -35,10 +38,10 @@ const Teacher_Profile_Edit = () => {
     };
     let user2 = {
       'Display_Name': document.getElementById('displayname').textContent,
-      'url': ''
+      // 'url': ''
     };
 
-    fetch(`http://localhost:4000/olive/identity/updatebyId?_id=${_id}`, {
+    fetch(url + `/olive/identity/updatebyId?_id=${_id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user1)
@@ -50,7 +53,7 @@ const Teacher_Profile_Edit = () => {
         console.log(localStorage.getItem('username'));
       })
       .then(() => {
-        fetch(`http://localhost:4000/olive/teacher-profile/updatebyId?_id=${teacher_id}`, {
+        fetch(url + `/olive/teacher-profile/updatebyId?_id=${teacher_id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(user2)
@@ -253,7 +256,7 @@ const Teacher_Profile_Edit = () => {
                 </div>
 
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_teacher" style={{ 'text-decoration': 'none', 'color': 'black' }}>
+                  <a href="/profile_teacher" style={{ 'text-decoration': 'none', 'color': 'black' }}>
                     <img class="l-icon-pic" src={human}></img>
                     <div class="l-info-text-teac">
                       Profile
@@ -261,7 +264,7 @@ const Teacher_Profile_Edit = () => {
                   </a>
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/class_info_teacher" style={{ 'text-decoration': 'none', 'color': 'black' }}>
+                  <a href="/class_info_teacher" style={{ 'text-decoration': 'none', 'color': 'black' }}>
                     <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-teac">
                       Course
@@ -269,7 +272,7 @@ const Teacher_Profile_Edit = () => {
                   </a>
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_teacher_report" style={{ 'text-decoration': 'none', 'color': 'black' }}>
+                  <a href="/profile_teacher_report" style={{ 'text-decoration': 'none', 'color': 'black' }}>
                     <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-teac">
                       Report

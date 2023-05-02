@@ -15,6 +15,9 @@ import list from './assets/Infopage/list.png';
 import Avatar from 'react-avatar-edit';
 
 const Student_Profile_Edit = () => {
+  // const url = 'http://olive-api.northanapon.com';
+  const url = 'https://3dddfdaadb14.ngrok.app'
+
   var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
   var user = {
     username: localStorage.getItem('username') == undefined ? '' : localStorage.getItem('username'),
@@ -26,6 +29,7 @@ const Student_Profile_Edit = () => {
     displayname: localStorage.getItem('displayname') == undefined ? '' : localStorage.getItem('displayname'),
   };
   var student_id = localStorage.getItem('student_id') == undefined ? '' : localStorage.getItem('student_id');
+  var teacher_id = localStorage.getItem('teacher_id') == undefined ? '' : localStorage.getItem('teacher_id');
 
   function editProfile() {
     // saveImage();
@@ -37,7 +41,7 @@ const Student_Profile_Edit = () => {
       'url': ''
     };
 
-    fetch(`http://localhost:4000/olive/identity/updatebyId?_id=${_id}`, {
+    fetch(url + `/olive/identity/updatebyId?_id=${_id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user1)
@@ -49,7 +53,7 @@ const Student_Profile_Edit = () => {
         // console.log(localStorage.getItem('username'));
       })
       .then(() => {
-        fetch(`http://localhost:4000/olive/student-profile/updatebyId?_id=${student_id}`, {
+        fetch(url + `/olive/student-profile/updatebyId?_id=${student_id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(user2)
@@ -232,7 +236,7 @@ const Student_Profile_Edit = () => {
                   </div>
                 </div> */}
                 <div class="grid">
-                  <a href="http://localhost:3000/profile_student" style={{ 'text-decoration': 'none', 'color': 'black' }}>
+                  <a href="/profile_student" style={{ 'text-decoration': 'none', 'color': 'black' }}>
                     <img class="l-icon-pic" src={human}></img>
                     <div class="l-info-text-std">
                       Profile
@@ -240,7 +244,7 @@ const Student_Profile_Edit = () => {
                   </a>
                 </div>
                 <div class="grid">
-                  <a href="http://localhost:3000/class_info_student" style={{ 'text-decoration': 'none', 'color': 'black' }}>
+                  <a href="/class_info_student" style={{ 'text-decoration': 'none', 'color': 'black' }}>
                     <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-std">
                       Course

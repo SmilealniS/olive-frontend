@@ -7,6 +7,9 @@ import { Navigate, redirect } from 'react-router-dom';
 import moment from 'moment'
 
 const Classinfo_Teacher = () => {
+  // const url = 'http://olive-api.northanapon.com';
+  const url = 'https://3dddfdaadb14.ngrok.app'
+
   var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
   var user = {
     username: localStorage.getItem('username') == undefined ? '' : localStorage.getItem('username'),
@@ -31,7 +34,7 @@ const Classinfo_Teacher = () => {
   } : JSON.parse(localStorage.getItem('attendance'));
   var totalengagement = localStorage.getItem('totalengagement') == undefined ? 0 : localStorage.getItem('totalengagement');
   var totalclass = localStorage.getItem('totalclass') == undefined ? 0 : localStorage.getItem('totalclass');
-  
+
   var todayLocal = new Date(
     // new Date().toLocaleString('th-TH', {
     //   timeZone: 'Asia/Bangkok',
@@ -61,12 +64,12 @@ const Classinfo_Teacher = () => {
       let at = 0;
       console.log('engagement group:', gengagement)
       console.log('attendance:', attendance)
-      for(let j = 0; j < Object.keys(attendance).length; j++) {
+      for (let j = 0; j < Object.keys(attendance).length; j++) {
         // console.log(attendance[Object.keys(attendance)[j]])
-        for(let k = 0; k < attendance[Object.keys(attendance)[j]].length; k++) {
+        for (let k = 0; k < attendance[Object.keys(attendance)[j]].length; k++) {
           // console.log('aa:', attendance[Object.keys(attendance)[j]][k] )
-          if(attendance[Object.keys(attendance)[j]][k].Class.Status) at++
-        } 
+          if (attendance[Object.keys(attendance)[j]][k].Class.Status) at++
+        }
       }
 
       for (let j = 0; j < Object.keys(gengagement).length; j++) {
@@ -107,12 +110,12 @@ const Classinfo_Teacher = () => {
       "Start_time": today.getTime()
     };
 
-    // fetch(`http://localhost:4000/olive/class/updatebyId?_id=${classroom._id}`, {
+    // fetch(url + `/olive/class/updatebyId?_id=${classroom._id}`, {
     //   method: 'PUT',
     //   // body: JSON.stringify(updatedList)
     // })
 
-    fetch('http://localhost:4000/olive/enroll/getbyClassID?classid=' + classroom._id)
+    fetch(url + '/olive/enroll/getbyClassID?classid=' + classroom._id)
       .then(data => data.json())
       .then(data => {
         for (let i = 0; i < data[0].Student.length; i++) {
@@ -129,7 +132,7 @@ const Classinfo_Teacher = () => {
             }
           };
 
-          fetch('http://localhost:4000/olive/attendance/create', {
+          fetch(url + '/olive/attendance/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(stu)
@@ -146,7 +149,7 @@ const Classinfo_Teacher = () => {
 
       })
       .then(
-        fetch('http://localhost:4000/redirect?rp=' + 'teachingUI', {
+        fetch(url + '/redirect?rp=' + 'teachingUI', {
           method: 'POST',
           redirect: 'follow'
         })
@@ -183,12 +186,15 @@ const Classinfo_Teacher = () => {
                 <div class="middle-box"><br></br>
                   <div class="class-id">
                     {/* ITCS 888 */}
-                    {classroom.Name}
+                      {classroom.Name}
+                    
+                    {/* <a href="http://localhost:3000/teachingUI"> */}
+                      <button class="join-btn" onClick={joinMeeting}>
+                      Create Meeting
+                    </button>
+                    
                   </div>
-                  {/* <a href="http://localhost:3000/teachingUI"> */}
-                  <button class="join-btn" onClick={joinMeeting}>
-                    Create Meeting
-                  </button>
+
                   {/* </a> */}
                   <div class="class-descrip">
                     {/* Computer Science : This class was added to the transcript to get people used to boolean logic.

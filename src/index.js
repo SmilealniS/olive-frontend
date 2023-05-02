@@ -23,7 +23,8 @@ import Profile_student_edit from './profile_student_edit';
 import Login from './login';
 
 let payload_teacher = {
-  signatureEndpoint: 'http://localhost:8000/',
+  // signatureEndpoint: 'http://olive-zoom.northanapon.com',
+  signatureEndpoint: 'https://e113342c1f56.ngrok.app',
   meetingNumber: '4318372796',
   role: 1,
   sdkKey: '6V8X5gwmS7lhH6EcVpCPXY0bBduD7Vnwx4QV',
@@ -31,12 +32,14 @@ let payload_teacher = {
   userName: 'NamTestTeacher',
   userEmail: '',
   passWord: '180HYZ',
-  leaveUrl: 'https://localhost:3000',
+  // leaveUrl: 'http://olive.northanapon.com',
+  leaveUrl: 'https://90acce2ace74.ngrok.app/class_info_teacher',
   registrantToken: ''
 }
 
 let payload_student = {
-  signatureEndpoint: 'http://localhost:8000/',
+  // signatureEndpoint: 'http://olive-zoom.northanapon.com',
+  signatureEndpoint: 'https://e113342c1f56.ngrok.app',
   meetingNumber: '4318372796',
   role: 0,
   sdkKey: '6V8X5gwmS7lhH6EcVpCPXY0bBduD7Vnwx4QV',
@@ -44,9 +47,50 @@ let payload_student = {
   userName: 'NamTestStudent',
   userEmail: '',
   passWord: '180HYZ',
-  leaveUrl: 'https://localhost:3000',
+  // leaveUrl: 'http://olive.northanapon.com',
+  leaveUrl: 'https://90acce2ace74.ngrok.app/class_info_student',
   registrantToken: ''
 }
+
+// let payload_teacher = {
+//   signatureEndpoint: 'http://localhost:8000/',
+//   meetingNumber: '4318372796',
+//   role: 1,
+//   sdkKey: '0VSnh05HBd5oLgm5xsMs78o7CfmX2jic09PE',
+//   sdkSecret: 'hS2WsAQaSf6BrcQcWt1ApOsv2iveiOaWwshc',
+//   userName: 'NamTestTeacher',
+//   userEmail: '',
+//   passWord: '180HYZ',
+//   leaveUrl: 'http://localhost:3000',
+//   registrantToken: ''
+// }
+
+// let payload_student = 
+// {
+//   signatureEndpoint: 'http://localhost:8000/',
+//   meetingNumber: '4318372796',
+//   role: 0,
+//   sdkKey: '0VSnh05HBd5oLgm5xsMs78o7CfmX2jic09PE',
+//   sdkSecret: 'hS2WsAQaSf6BrcQcWt1ApOsv2iveiOaWwshc',
+//   userName: 'NamTestStudent',
+//   userEmail: '',
+//   passWord: '180HYZ',
+//   leaveUrl: 'http://localhost:3000',
+//   registrantToken: ''
+  
+// }
+// {
+//   "app_key": '0VSnh05HBd5oLgm5xsMs78o7CfmX2jic09PE',
+//   "tpc": SESSION_NAME,
+//   "version": 1,
+//   "role_type": ROLE,
+//   "user_identity": USER_IDENTITY,
+//   "session_key": SESSION_KEY,
+//   "geo_regions": "US,AU,CA,IN,CN,BR,MX,HK,SG,JP,DE,NL",
+//   "iat": 1646937553,
+//   "exp": 1646944753,
+//   "pwd": 12345
+// }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

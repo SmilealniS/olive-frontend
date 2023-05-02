@@ -7,11 +7,16 @@
 body#studyingUI {
     background-color: #1a1a1a1a;
     font-family: Arial, Helvetica, sans-serif;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    max-width: 100vw;
+    
 }
 
 .wrapup {
     display: grid;
-    grid-template-columns: 1000px auto;
+    grid-template-columns: auto 24vw;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -24,7 +29,7 @@ body#studyingUI {
 }
 
 .screen {
-    background-color: lightgray;
+    /* background-color: lightgray; */
     height: 100vh;
     margin-top: 0;
 }
@@ -35,8 +40,8 @@ body#studyingUI {
     margin-left: 5px;
     margin-right: auto;
     margin-top: 0;
-    width: auto;
-    height: 10px;
+    width: 70vw;
+    height: 80vh;
 }
 
 
@@ -50,7 +55,13 @@ body#studyingUI {
 
 #chat {
     background: #333333;
-    height: 120vh;
+    height: 99.5vh;
+    border-radius: 10px;
+    width: 21.5vw;
+    padding: 2px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 24px;
+    box-sizing: border-box;
+    margin-left: 2.5vw;
 }
 
 .chat-top {
@@ -58,40 +69,45 @@ body#studyingUI {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 
 
-#container {
+#container-std {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     border-radius: 5px;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     height: 85vh;
+    width: 21.5vw;
+    background-color: #242424;
     list-style: none;
 }
 
-#container>.chat {
+#container-std>.chat {
     overflow-y: scroll;
-    border-top: 2px solid #333333;
-    border-bottom: 2px solid grey;
+    /* border-top: 2px solid #333333; */
+    /* border-bottom: 2px solid #1a1a1a1a; */
     border-radius: 2px;
     width: 100%;
 }
 
-#container>.chat b,
-#container>.chat p {
+#container-std>.chat b,
+#container-std>.chat p {
     display: inline-block;
     font-size: 14px;
     font-weight: normal;
+    color: white;
 }
 
-#container>.chat p {
+#container-std>.chat p {
     color: #bbb;
 }
 
-#container>.chat .message {
+#container-std>.chat .message {
     font-size: 12px;
     padding: 20px;
     color: #fff;
@@ -102,23 +118,25 @@ body#studyingUI {
     border-radius: 7px;
 }
 
-#container>.chat>.you {
+#container-std>.chat>.you {
     padding: 10px 30px;
-    background-color: grey;
+    /* background-color: #1a1a1a1a; */
     text-align: left;
+    /* margin-left: -1vw; */
 }
 
-#container>.chat>.me {
+#container-std>.chat>.me {
     padding: 10px 30px;
-    background-color: grey;
+    /* background-color: #1a1a1a1a; */
     text-align: right;
+    /* margin-right: -1vw; */
 }
 
-#container>.chat>.you>.message {
+#container-std>.chat>.you>.message {
     background-color: #6fbced;
 }
 
-#container>.chat>.me>.message {
+#container-std>.chat>.me>.message {
     background-color: #6fbced;
 }
 
@@ -128,19 +146,19 @@ body#studyingUI {
     display: grid;
     grid-template-columns: auto 80px;
     height: 45px;
-    overflow-y: scroll;
-    background-color: #333333;
+    /* overflow-y: scroll; */
+    background-color: #242424;
 }
 
 
 .std-chat-message>textarea {
-    font-size: 16px;
+    font-size: 13px;
     margin: 0;
     padding: 8px 16px;
-    width: 23vw;
+    width: 16.5vw;
     margin-top: 5px;
     margin-left: 5px;
-    height: 4.5vh;
+    max-height: 4vh;
     border-radius: 3px;
 }
 
@@ -154,7 +172,7 @@ body#studyingUI {
     width: 70px;
     height: 35px;
     margin-top: 5%;
-    margin-left: -7px;
+    margin-left: 0vw;
 }
 
 
@@ -202,12 +220,13 @@ body#studyingUI {
     border-radius: 5px;
     background-clip: padding-box;
     text-align: center;
+    margin-left: 0.5vw;
     /* margin-top: -40px; */
 }
 
 .emo-button {
     margin-top: -85px;
-    font-size: 15px;
+    font-size: 13px;
     transition: all 0.3s ease-out;
 	padding: 4px 10px;
 	border: 1px solid #aaa;
@@ -220,9 +239,9 @@ body#studyingUI {
 	cursor: pointer;
 }
 .emo-button-leave {
-    margin-left: 19vw;
+    margin-left: 13.5vw;
     margin-top: 4px;
-    font-size: 18px;
+    font-size: 17px;
     transition: all 0.3s ease-out;
     padding: 3px 10px;
     border: 1px solid #aaa;
@@ -233,7 +252,6 @@ body#studyingUI {
     color: white;
     text-decoration: none;
     cursor: pointer;
-
 }
 
 #leave-button {
@@ -268,9 +286,8 @@ body#studyingUI {
     width: 230px;
     height: 100px;
     position: relative;
-    margin-top: -10%;
-    margin-right: 0px;
-    transition: all 5s ease-in-out;
+    margin-top: -12vh;
+    margin-left: 7vw;
 }
 
 .chat-emoji-popup {
@@ -350,6 +367,8 @@ body#studyingUI {
     background-clip: padding-box;
     text-align: center;
     background-color: #333333;
+    border-bottom-right-radius:  10px;
+    border-bottom-left-radius:  10px;
 }
 .popup-confirm-leave {
     size: 5em;
@@ -379,7 +398,7 @@ body#studyingUI {
     height: 30px;
     top: 20;
     margin-top: 6.5vh;
-    margin-left: -6vw;
+    margin-left: -4vw;
 
 }
 .popup-leave {
@@ -417,18 +436,20 @@ body#studyingUI {
 label{
     position: absolute;
     margin-left: 5vw;
-    width: 120px;
-    height: 33px;
+    width: 100px;
+    height: 30px;
     background: #666666;
     border-radius: 5px;
+    margin-left: 4vw;
 }
 label input{
     appearance: none;
 }
 label span{ 
+    
     position: absolute;
-    width: 65px;
-    height: 33px;
+    width: 55px;
+    height: 30px;
     background: #eee;
     border: 3px solid #666666;
     border-radius: 10px;
@@ -445,7 +466,7 @@ label input:checked ~ span{
 label span BsLightbulb{
     font-size: 3em;
     transition: 0.5s;
-    color: rgba(255, 255, 255, 0.25);
+    /* color: rgba(255, 255, 255, 0.25); */
 }
 label input:checked ~ span BsLightbulb{
     color: rgba(255, 255, 255, 1);
@@ -454,13 +475,15 @@ label input:checked ~ span BsLightbulb{
 }
 
 input[type="checkbox"]#lightbulb:checked + span {
-    color: gold;
+    color: black !important;
 }
 
 label span ion-icon{
     font-size: 3em;
     transition: 0.5s;
     color: rgba(255, 255, 255, 0.25);
+    /* color: gold; */
+    
 }
 label input:checked ~ span ion-icon{
     color: rgba(255, 255, 255, 1);

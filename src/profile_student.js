@@ -16,6 +16,9 @@ import list from './assets/Infopage/list.png';
 
 
 const Student_Profile = () => {
+  // const url = 'http://olive-api.northanapon.com';
+  const url = 'https://3dddfdaadb14.ngrok.app'
+
   var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
   var user = {
     username: localStorage.getItem('username') == undefined ? '' : localStorage.getItem('username'),
@@ -27,9 +30,10 @@ const Student_Profile = () => {
     displayname: localStorage.getItem('displayname') == undefined ? '' : localStorage.getItem('displayname'),
   };
   var student_id = localStorage.getItem('student_id') == undefined ? '' : localStorage.getItem('student_id');
+  var teacher_id = localStorage.getItem('teacher_id') == undefined ? '' : localStorage.getItem('teacher_id');
 
   useEffect(() => {
-    // fetch('http://localhost:4000/olive/student-profile/getbyId?_id=' + student_id)
+    // fetch(url + '/olive/student-profile/getbyId?_id=' + student_id)
     //   .then(response => response.json())
     //   .then(response => {
     //     console.log('Profile', response);
@@ -37,33 +41,34 @@ const Student_Profile = () => {
     //     localStorage.setItem('displayname', response.Display_Name);
     //   })
     //   .then(() => {
-    //     fetch('http://localhost:4000/olive/identity/getbyId?_id=' + _id)
+    //     fetch(url + '/olive/identity/getbyId?_id=' + _id)
     //       .then(response => response.json())
     //       .then(response => {
     //         console.log('Identity', response);
     //         localStorage.setItem('username', response.Username);
     //       })
     //       .then(() => {
-    fetch('http://localhost:4000/olive/enroll/getbyStudentID?_id=' + student_id)
+    fetch(url + '/olive/enroll/getbyStudentID?_id=' + student_id)
       .then(response => response.json())
       .then(response => {
         // console.log('Class:', response);
-        fetch('http://localhost:4000/olive/class/getbyId?_id=' + response[0].Class)
+        fetch(url + '/olive/class/getbyId?_id=' + response[0].Class)
           .then(data => data.json())
           .then(data => {
             // console.log('Class:', data);
 
-            fetch('http://localhost:4000/olive/teacher-profile/getbyId?_id=' + data.Teacher)
+            fetch(url + '/olive/teacher-profile/getbyId?_id=' + data.Teacher)
               .then(data => data.json())
               .then(data => {
                 // console.log('teacher:', data)
                 localStorage.setItem('teacher', data.Display_Name);
+                localStorage.setItem('teacher_id', data._id);
               });
 
             localStorage.setItem('class', JSON.stringify(data));
             // console.log(JSON.parse(localStorage.getItem('class')));
 
-            fetch(`http://localhost:4000/olive/engagement/getbyStudentID?student=${student_id}&classid=${data._id}`)
+            fetch(url + `/olive/engagement/getbyStudentID?student=${student_id}&classid=${data._id}`)
               .then(data => data.json())
               .then(data => {
                 // console.log('engagement:', data);
@@ -81,7 +86,7 @@ const Student_Profile = () => {
       });
     // })
     // .then(() => {
-    fetch(`http://localhost:4000/olive/attendance/getbyStudentId?student=${student_id}`)
+    fetch(url + `/olive/attendance/getbyStudentId?student=${student_id}`)
       .then(response => response.json())
       .then(response => {
         let tr = 0;
@@ -272,12 +277,13 @@ const Student_Profile = () => {
                 <img class='pic-2' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
                 <div class="l-text1">
                   {/* Said Ski248 */}
-                  {user.username}
-                </div>
-                <div class="l-text2">
+                  {user.username}                
+                  <div class="l-text2">
                   {/* saidski248@gmail.com */}
                   {user.email}
                 </div>
+                </div>
+
 
                 <a href="/" onClick="localStorage.clear()">
                   <img class="l-icon-pic-bottom" src={logout}></img>

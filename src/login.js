@@ -6,16 +6,19 @@ import { keyboard } from '@testing-library/user-event/dist/keyboard';
 
 const Login = () => {
   localStorage.clear();
-  
+
   async function login() {
-    let url = 'http://localhost:4000/';
+    // let url = 'http://olive-api.northanapon.com';
+    let url = 'https://3dddfdaadb14.ngrok.app'
+
     let user = {
       username: document.getElementById('username').value,
       password: document.getElementById('password').value
     }
 
-    await fetch(url, {
+    await fetch(url + '/', {
       method: 'POST',
+      mode: 'cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user)
     })
@@ -37,7 +40,7 @@ const Login = () => {
           localStorage.setItem('majortrack', data.Major);
           if (data.role === 'student') {
             localStorage.setItem('student_id', data.Student_Profile);
-            fetch('http://localhost:4000/olive/student-profile/getbyId?_id=' + localStorage.getItem('student_id'))
+            fetch(url + '/olive/student-profile/getbyId?_id=' + localStorage.getItem('student_id'))
               .then(response => response.json())
               .then(response => {
                 // console.log('Profile', response);
@@ -45,11 +48,11 @@ const Login = () => {
                 localStorage.setItem('displayname', response.Display_Name);
                 window.location.href = '/profile_student';
               });
-            
+
           }
           else if (data.role === 'teacher') {
             localStorage.setItem('teacher_id', data.Teacher_Profile);
-            fetch('http://localhost:4000/olive/teacher-profile/getbyId?_id=' + localStorage.getItem('teacher_id'))
+            fetch(url + '/olive/teacher-profile/getbyId?_id=' + localStorage.getItem('teacher_id'))
               .then(response => response.json())
               .then(response => {
                 // console.log('Profile', response);
@@ -59,18 +62,18 @@ const Login = () => {
 
               });
           }
-          else if (data.role === 'admin') {
-            localStorage.setItem('admin_id', data.Admin_Profile);
-            fetch('http://localhost:4000/olive/admin-profile/getbyId?_id=' + localStorage.getItem('admin_id'))
-              .then(response => response.json())
-              .then(response => {
-                // console.log('Profile', response);
-                localStorage.setItem('pic', response.url);
-                localStorage.setItem('displayname', response.Display_Name);
-                window.location.href = '/profile_admin';
-              });
-            
-          }
+          // else if (data.role === 'admin') {
+          //   localStorage.setItem('admin_id', data.Admin_Profile);
+          //   fetch(url + '/olive/admin-profile/getbyId?_id=' + localStorage.getItem('admin_id'))
+          //     .then(response => response.json())
+          //     .then(response => {
+          //       // console.log('Profile', response);
+          //       localStorage.setItem('pic', response.url);
+          //       localStorage.setItem('displayname', response.Display_Name);
+          //       window.location.href = '/profile_admin';
+          //     });
+
+          // }
         }
       })
       .catch((error) => {

@@ -5,6 +5,9 @@ import back from './assets/class_info/backicon.png';
 import moment from 'moment'
 
 const Classinfo_Student = () => {
+  // const url = 'http://olive-api.northanapon.com';
+  const url = 'https://3dddfdaadb14.ngrok.app'
+
   var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
   var user = {
     username: localStorage.getItem('username') == undefined ? '' : localStorage.getItem('username'),
@@ -16,6 +19,7 @@ const Classinfo_Student = () => {
     displayname: localStorage.getItem('displayname') == undefined ? '' : localStorage.getItem('displayname'),
   };
   var student_id = localStorage.getItem('student_id') == undefined ? '' : localStorage.getItem('student_id');
+  var teacher_id = localStorage.getItem('teacher_id') == undefined ? '' : localStorage.getItem('teacher_id');
   var teacher = localStorage.getItem('teacher') == undefined ? '' : localStorage.getItem('teacher');
   var classroom = JSON.parse(localStorage.getItem('class')) == null ? {
     _id: '',
@@ -28,7 +32,7 @@ const Classinfo_Student = () => {
     come: 0, all: 0
   } : JSON.parse(localStorage.getItem('attendance'));
   var totalengagement = localStorage.getItem('totalengagement') == undefined ? 0 : localStorage.getItem('totalengagement');
-  
+
   var todayLocal = new Date(
     // new Date().toLocaleString('th-TH', {
     //   timeZone: 'Asia/Bangkok',
@@ -56,6 +60,7 @@ const Classinfo_Student = () => {
           en = engagement[j].Class.Engagement;
           en = Math.floor(en)
         }
+        console.log(engagement[j].Class.Date, fullattendance[i].Class.Date, engagement[j].Class.Engagement)
       };
       document.getElementById('engagementTable').innerHTML +=
         `<div class="textTopic">${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}</div>
@@ -76,11 +81,11 @@ const Classinfo_Student = () => {
       else todaystring = `${today.getFullYear()}-0${today.getMonth() + 1}-0${today.getDate()}`;
     }
 
-    fetch(`http://localhost:4000/olive/attendance/getbyparams?student=${student_id}&classid=${classroom._id}&classdate=${todaystring}`)
+    fetch(url + `/olive/attendance/getbyparams?student=${student_id}&classid=${classroom._id}&classdate=${todaystring}`)
       .then(data => data.json())
       .then(data => {
         console.log(data);
-        fetch('http://localhost:4000/olive/attendance/updatebyId?_id=' + data.result[0]._id, {
+        fetch(url + '/olive/attendance/updatebyId?_id=' + data.result[0]._id, {
           method: 'PUT'
         })
           .then(response => response.json())
@@ -90,7 +95,7 @@ const Classinfo_Student = () => {
           //   window.location.href = '/studyingUI'
           // })
           .then(
-            fetch('http://localhost:4000/redirect?rp=' + 'studyingUI', {
+            fetch(url + '/redirect?rp=' + 'studyingUI', {
               method: 'POST',
               redirect: 'follow'
             })
@@ -107,7 +112,7 @@ const Classinfo_Student = () => {
           })
       }).catch(error => {
         // console.log(error)
-        fetch(`http://localhost:4000/olive/attendance/getbyClassDate?classdate=${todaystring}&classid=${classroom._id}`)
+        fetch(url + `/olive/attendance/getbyClassDate?classdate=${todaystring}&classid=${classroom._id}`)
           .then(response => response.json())
           .then(response => {
             console.log(response)
@@ -142,11 +147,15 @@ const Classinfo_Student = () => {
                 <div class="cis-middle-box"><br></br>
                   <div class="cis-class-id">
                     {/* ITCS 888 */}
-                    {classroom.Name}
+                      {classroom.Name}
+                    <div>
+                      <button class="cis-join-btn" onClick={joinMeeting}>
+                        Join Meeting
+                      </button>
+                    </div>
+
                   </div>
-                  <button class="cis-join-btn" onClick={joinMeeting}>
-                    Join Meeting
-                  </button>
+
                   <div class="class-teacher">
                     {/* Teacher: Adele Jackson */}
                     {teacher}
@@ -207,7 +216,7 @@ const Classinfo_Student = () => {
 
 
                 {/* Test */}
-                <div class="cis-center">
+                {/* <div class="cis-center">
                   <div class="cis-lead-text">Leaderboard</div>
                   <div class="top3">
                     <div class="one item">
@@ -288,117 +297,8 @@ const Classinfo_Student = () => {
                       <div class="score">1</div>
                     </div>
                   </div>
-                  {/* </div> */}
-                  {/* Test */}
-                  {/* </div>
-                  </div> */}
-
-
-                  {/* <div class="tab">
-                    <input type="radio" name="css-tabs" id="tab-2" class="tab-switch"></input>
-                    <label for="tab-2" class="tab-label">Leaderboard</label>
-                    <div class="tab-content">
-                      <div class="grid-container">
-                        <div class="grid-item" id='display'>
-                          <h1 style={{ 'text-align': 'center', 'font-size': '50px', 'padding-top': '20px', 'margin-left': '25%' }}>Leaderboard</h1>
-                          <h3 style={{ 'text-align': 'center', 'font-size': '30px', 'padding-top': '20px', 'margin-left': '25%' }}>ITCS 888</h3>
-                          <div class='grid-item' style={{ 'padding-top': '70px' }}>
-                            <div class="center">
-                              <div class="top3">
-
-                                <div class="one item">
-                                  <div class="pos">1</div>
-                                  <img class='pic' src={require('./assets/studentProfilepic/pinkprofile.jpeg')}></img>
-                                  <div class="name">Cloud178</div>
-                                  <div class="score">15</div>
-                                </div>
-
-                                <div class="two item">
-                                  <div class="pos">2</div>
-                                  <img class='pic' src={require('./assets/studentProfilepic/shibainu.jpg')}></img>
-                                  <div class="name">Saidski248</div>
-                                  <div class="score">10</div>
-                                </div>
-
-                                <div class="three item">
-                                  <div class="pos">3</div>
-                                  <img class='pic' src={require('./assets/studentProfilepic/normalman.png')}></img>
-                                  <div class="name">Scarret738</div>
-                                  <div class="score">5</div>
-                                </div>
-                              </div>
-
-                              <div class="list">
-                                <div class="item">
-                                  <div class="pos">4</div>
-                                  <div class="pic" style={{}}></div>
-                                  <div class="name">Sutorimu320</div>
-                                  <div class="score">1</div>
-                                </div>
-                              </div>
-
-                              <div class="list">
-                                <div class="item">
-                                  <div class="pos">5</div>
-                                  <div class="pic" style={{}}></div>
-                                  <div class="name">Sharon117</div>
-                                  <div class="score">1</div>
-                                </div>
-                              </div>
-
-                              <div class="list">
-                                <div class="item">
-                                  <div class="pos">6</div>
-                                  <div class="pic" style={{}}></div>
-                                  <div class="name">Cheep729</div>
-                                  <div class="score">1</div>
-                                </div>
-                              </div>
-
-                              <div class="list">
-                                <div class="item">
-                                  <div class="pos">7</div>
-                                  <div class="pic" style={{}}></div>
-                                  <div class="name">Uzumaru227</div>
-                                  <div class="score">1</div>
-                                </div>
-                              </div>
-
-                              <div class="list">
-                                <div class="item">
-                                  <div class="pos">8</div>
-                                  <div class="pic" style={{}}></div>
-                                  <div class="name">Gimchi553</div>
-                                  <div class="score">1</div>
-                                </div>
-                              </div>
-
-                              <div class="list">
-                                <div class="item">
-                                  <div class="pos">9</div>
-                                  <div class="pic" style={{}}></div>
-                                  <div class="name">SxYuki982</div>
-                                  <div class="score">1</div>
-                                </div>
-                              </div>
-
-                              <div class="list">
-                                <div class="item">
-                                  <div class="pos">10</div>
-                                  <div class="pic" style={{}}></div>
-                                  <div class="name">Anagram473</div>
-                                  <div class="score">1</div>
-                                </div>
-                              </div>
-
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
-                </div>
+          
+                </div> */}
               </div>
             </div>
           </div>

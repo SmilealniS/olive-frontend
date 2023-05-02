@@ -1,7 +1,7 @@
 body#login {
     font-family: Arial, Helvetica, sans-serif;
     background-image: url("./assets/LoginPic/bg-login.avif");
-    background-size: 1500px 700px;
+    background-size: 100vw 100vh;
   }
   
 
@@ -11,8 +11,8 @@ body#login {
 
   .text-sign{
     font-weight: bold;
-    margin-top: -27%;
-    margin-left: 10%;
+    margin-top: -22vh;
+    margin-left: 2.5vw;
     font-size: 28px;
   }
   .textl2{
@@ -26,20 +26,21 @@ body#login {
     height: 30px;
   }
   .logo-pic{
-    width: 444px;
-    height: 310px;
-    margin-top: -17%;
-    margin-left: -5%;
-    margin-bottom: 5%;
+    width: 28vw;
+    height: 33vh;
+    margin-top: -6vh;
+    margin-left: 0vw;
+    margin-bottom: 4vh;
   }
   .centerbox {
+    display: grid;
     box-sizing: border-box;
     position: relative;
     background: rgb(255, 255, 255);
-    width: 412px;
-    height: 400px;
-    left: 50%;
-    top: 29.91%;
+    width: 28.5vw;
+    height: 55vh;
+    left: 36vw;
+    top: 2vh;
     bottom: 29.91%;
     border-radius: 0.5rem;
     cursor: pointer;
@@ -49,21 +50,21 @@ body#login {
   .username{
     box-sizing: border-box;
     position: absolute;
-    width: 338px;
-    height: 36px;
+    width: 23.5vw;
+    height: 5vh;
     font-size: 15px;
-    left: 9%;
-    top: 50%;
+    left: 2.5vw;
+    top: 27vh;
     background-color: #C4E0F9;
   }
   .password{
     box-sizing: border-box;
     position: absolute;
-    width: 338px;
-    height: 36px;
+    width: 23.5vw;
+    height: 5vh;
     font-size: 15px;
-    left: 9%;
-    top: 60%;
+    left: 2.5vw;
+    top: 33vh;
     background-color: #C4E0F9;
     
   }
@@ -77,11 +78,11 @@ body#login {
     background-color: #17468C;
     box-sizing: border-box;
     position: absolute;
-    width: 338px;
-    height: 36px;
+    width: 23.5vw;
+    height: 5vh;
     box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%);
-    left: -66%;
-    top: 55%;
+    left: -19vw;
+    top: 30vh;
     font-size: 15px;
     color: white;
   }

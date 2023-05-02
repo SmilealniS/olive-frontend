@@ -39,8 +39,8 @@ body#class_info_teacher {
     box-sizing: border-box;
     position: relative;
     background: #C4E0F9;
-    width: 1440px;
-    height: 70px;
+    width: 100vw;
+    height: 9vh;
     border-radius: 0.5rem;
 
 }
@@ -71,7 +71,7 @@ body#class_info_teacher {
     background: #ffffff;
     width: 300px;
     height: 70px;
-    left: 74.9%;
+    left: 74.9vw;
     top: -44%;
 }
 
@@ -102,9 +102,12 @@ body#class_info_teacher {
 }
 
 .class-id {
-    font-size: 60px;
-    font-weight: bold;
-    font-family: 'DM Sans';
+  display: flex;
+  flex-grow: 20%;
+  /* grid-template-columns: auto auto; */
+  font-size: 60px;
+  font-weight: bold;
+  font-family: 'DM Sans';
 
 }
 
@@ -120,17 +123,17 @@ body#class_info_teacher {
 }
 
 .join-btn {
-    border-radius: 5px;
-    background-color: #6FBCED;
-    position: absolute;
-    width: 220px;
-    height: 50px;
-    left: -40%;
-    top: -52%;
-    font-size: 22px;
-    font-weight: bold;
-    font-family: 'Poppins';
-    color: white;
+  border-radius: 5px;
+  background-color: #6FBCED;
+  /* position: absolute; */
+  width: 220px;
+  height: 50px;
+  margin-top: 2.5vh;
+  margin-left: 2vw;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: 'Poppins';
+  color: white;
 }
 
 .table-info-head {
@@ -203,10 +206,11 @@ body#class_info_teacher {
 /* Switch tab */
 
 .tabs {
-    position: relative;
-    margin: 3rem 0;
-    background: #625F63;
-    height: 5.75rem;
+  position: relative;
+  margin: 3rem 0;
+  background: #625F63;
+  height: 5.75rem;
+  width: 91vw;
 }
 .tabs::before,
 .tabs::after {
@@ -281,7 +285,7 @@ body#class_info_teacher {
   z-index: 2;
   opacity: 1;
   transition: all 0.35s;
-  width: 1320px;
+  width: 90vw;
   height: 1000px;
   margin-top: 25px;
 }
@@ -449,7 +453,7 @@ nav {
 
 .profile-name{
   font-size: 22px;
-    margin-left: 80%;
+    margin-left: 85vw;
 }
 
 .save-btn{

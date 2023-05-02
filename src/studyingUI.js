@@ -8,10 +8,14 @@ import { parse, stringify, toJSON, fromJSON } from 'flatted';
 import { io } from "socket.io-client";
 
 import { IonIcon } from '@ionic/react';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 
 const StudentUI = ({ payload }) => {
 
   const socket = useRef(null);
+
+  // const url = 'http://olive-api.northanapon.com';
+  const url = 'https://3dddfdaadb14.ngrok.app'
 
   var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
   var user = {
@@ -24,6 +28,7 @@ const StudentUI = ({ payload }) => {
     displayname: localStorage.getItem('displayname') == undefined ? '' : localStorage.getItem('displayname'),
   };
   var student_id = localStorage.getItem('student_id') == undefined ? '' : localStorage.getItem('student_id');
+  var teacher_id = localStorage.getItem('teacher_id') == undefined ? '' : localStorage.getItem('teacher_id');
   var teacher = localStorage.getItem('teacher') == undefined ? '' : localStorage.getItem('teacher');
   var classroom = JSON.parse(localStorage.getItem('class')) == null ? {
     _id: '',
@@ -37,8 +42,14 @@ const StudentUI = ({ payload }) => {
     // }),
   );
 
+  console.log('Protocol', window.location.protocol)
+  // if (window.location.protocol === "http:") {
+  //   window.location.protocol = "https:";
+  // }
+
+
   useEffect(() => {
-    const newSocket = io("http://localhost:4000", {
+    const newSocket = io(url, {
       transports: ['websocket'], // use only WebSocket transport (other transports might not support reconnections)
       reconnection: true, // enable reconnections
       reconnectionAttempts: 10, // attempt to reconnect 10 times
@@ -67,7 +78,12 @@ const StudentUI = ({ payload }) => {
 
     fetch(payload.signatureEndpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Cross-Origin-Embedder-Policy': 'credentialless',
+        'Cross-Origin-Opener-Policy': 'same-origin'
+      },
+      mode: 'cors',
       body: JSON.stringify({
         meetingNumber: payload.meetingNumber,
         role: payload.role
@@ -85,22 +101,27 @@ const StudentUI = ({ payload }) => {
       client.init({
         //   debug: true,
         zoomAppRoot: meetingSDKElement,
+
         language: 'en-US',
         customize: {
           video: {
-            isResizable: false,
-            viewSizes: {
-              ribbon: {
-                width: 500,
-                height: 600
-              },
-              default: {
-                width: 1000,
-                height: 600
-              }
-            },
+            isResizable: true,
+            // viewSizes: {
+            //   ribbon: {
+            //     width: 1000,
+            //     height: 600
+            //   },
+            //   speaker: {
+            //     width: 1000,
+            //     height: 600
+            //   },
+            //   default: {
+            //     width: 1000,
+            //     height: 600
+            //   }
+            // },
             popper: {
-              disableDraggable: true
+              disableDraggable: false
             }
           }
         }
@@ -127,14 +148,84 @@ const StudentUI = ({ payload }) => {
   const init = () => {
     document.getElementById('chatTable').innerHTML = '';
 
-    fetch('http://localhost:4000/olive/interact/getbyType?type=chat&classid=' + classroom._id)
-      .then(data => data.json())
-      .then(data => {
-        // console.log(localStorage.getItem('teacher_id'))
-        // console.log('initChat:', data)
+    // fetch(url + '/olive/interact/getbyType?type=chat&classid=' + classroom._id)
+    //   .then(data => data.json())
+    //   .then(data => {
+    //     // console.log(localStorage.getItem('teacher_id'))
+    //     // console.log('initChat:', data)
+
+    //     for (let i = 0; i < data.length; i++) {
+    //       // console.log(data[i])
+    //       let date = new Date(data[i].Time);
+    //       let time = ''
+    //       time += date.getHours() > 9 ? '' : '0'
+    //       time += (date.getHours() + ':')
+    //       time += date.getMinutes() > 9 ? '' : '0'
+    //       time += date.getMinutes()
+
+    //       // console.log(date.getHours(), date.getMinutes());
+
+    //       if (data[i].Student == student_id) {
+    //         console.log(user.displayname)
+    //         document.getElementById('chatTable').innerHTML +=
+    //           `<div class="me">
+    //               <div class="entete">
+    //                 <b>${user.displayname} &nbsp;</b>
+    //                 <p>${time} &nbsp;</p>
+    //               </div>
+    //               <div class="message">
+    //                 ${data[i].Description}
+    //               </div>
+    //             </div>`
+    //       } else {
+    //         fetch(url + '/olive/student-profile/getbyId?_id=' + data[i].Student)
+    //           .then(sender => sender.json())
+    //           .then(sender => {
+    //             console.log('get student profile')
+
+    //             console.log(sender.Display_Name)
+    //             if (sender.Display_Name != undefined) {
+    //               document.getElementById('chatTable').innerHTML +=
+    //                 `<div class="you">
+    //                 <div class="entete">
+    //                   <b>${sender.Display_Name} &nbsp;</b>
+    //                   <p>${time} &nbsp;</p>
+    //                 </div>
+    //                 <div class="message">
+    //                   ${data[i].Description}
+    //                 </div>
+    //               </div>`
+    //             }
+    //           })
+    //           .catch(
+    //             document.getElementById('chatTable').innerHTML +=
+    //             `<div class="you">
+    //                 <div class="entete">
+    //                   <b>${teacher} &nbsp;</b>
+    //                   <p>${time} &nbsp;</p>
+    //                 </div>
+    //                 <div class="message">
+    //                   ${data[i].Description}
+    //                 </div>
+    //               </div>`
+    //           );
+    //       }
+
+    //     }
+    //   });
+
+    async function getChat() {
+      try {
+        const response = await fetch(url + `/olive/interact/getbyType?type=chat&classid=${classroom._id}`)
+        const data = await response.json()
+
+        document.getElementById('chatTable').innerHTML = '';
+
+        console.log('Chat:', data)
 
         for (let i = 0; i < data.length; i++) {
-          // console.log(data[i])
+          console.log('student recieve:', data[i])
+          // console.log('From:', data[i].Student)
           let date = new Date(data[i].Time);
           let time = ''
           time += date.getHours() > 9 ? '' : '0'
@@ -142,10 +233,8 @@ const StudentUI = ({ payload }) => {
           time += date.getMinutes() > 9 ? '' : '0'
           time += date.getMinutes()
 
-          // console.log(date.getHours(), date.getMinutes());
-
           if (data[i].Student == student_id) {
-            console.log(user.displayname)
+            console.log('from me', data[i])
             document.getElementById('chatTable').innerHTML +=
               `<div class="me">
                   <div class="entete">
@@ -157,40 +246,48 @@ const StudentUI = ({ payload }) => {
                   </div>
                 </div>`
           } else {
-            fetch('http://localhost:4000/olive/student-profile/getbyId?_id=' + data[i].Student)
-              .then(sender => sender.json())
-              .then(sender => {
-                console.log('get student profile')
-
-                console.log(sender.Display_Name)
+            try {
+              console.log(data[i].Student, teacher_id)
+              if (data[i].Student == teacher_id) {
                 document.getElementById('chatTable').innerHTML +=
                   `<div class="you">
-                    <div class="entete">
-                      <b>${sender.Display_Name == undefined ? teacher : sender.Display_Name} &nbsp;</b>
-                      <p>${time} &nbsp;</p>
-                    </div>
-                    <div class="message">
-                      ${data[i].Description}
-                    </div>
-                  </div>`
+                  <div class="entete">
+                    <b>${teacher} &nbsp;</b>
+                    <p>${time} &nbsp;</p>
+                  </div>
+                  <div class="message">
+                    ${data[i].Description}
+                  </div>
+                </div>`
+              } else {
+                const senders = await fetch(url + '/olive/student-profile/getbyId?_id=' + data[i].Student)
+                const sender = await senders.json()
 
-              })
-              .catch(
+                console.log('Not from me, it is', sender)
+
                 document.getElementById('chatTable').innerHTML +=
-                `<div class="you">
-                    <div class="entete">
-                      <b>${teacher} &nbsp;</b>
-                      <p>${time} &nbsp;</p>
-                    </div>
-                    <div class="message">
-                      ${data[i].Description}
-                    </div>
-                  </div>`
-              );
+                  `<div class="you">
+                  <div class="entete">
+                    <b>${sender.Display_Name} &nbsp;</b>
+                    <p>${time} &nbsp;</p>
+                  </div>
+                  <div class="message">
+                    ${data[i].Description}
+                  </div>
+                </div>`
+              }
+            } catch {
+              // 
+            }
           }
 
         }
-      });
+      } catch {
+        // 
+      }
+    }
+
+    getChat()
 
     // init lightbulb
     let data = {
@@ -200,7 +297,7 @@ const StudentUI = ({ payload }) => {
       Boolean: false
     };
 
-    fetch('http://localhost:4000/olive/interact', {
+    fetch(url + '/olive/interact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -212,13 +309,82 @@ const StudentUI = ({ payload }) => {
 
   useEffect(() => {
     socket.current.on('msg-recieve', (chat) => {
+      console.log('Recieve:', chat)
+      // fetch(url + `/olive/interact/getbyType?type=chat&classid=${classroom._id}`)
+      //   .then(data => data.json())
+      //   .then(data => {
+      //     document.getElementById('chatTable').innerHTML = '';
 
-      fetch(`http://localhost:4000/olive/interact/getbyType?type=chat&classid=${classroom._id}`)
-        .then(data => data.json())
-        .then(data => {
+      //     // console.log('Chat:', data)
+
+      // for (let i = 0; i < data.length; i++) {
+      //   console.log('student recieve:', data[i])
+      //   // console.log('From:', data[i].Student)
+      //   let date = new Date(data[i].Time);
+      //   let time = ''
+      //   time += date.getHours() > 9 ? '' : '0'
+      //   time += (date.getHours() + ':')
+      //   time += date.getMinutes() > 9 ? '' : '0'
+      //   time += date.getMinutes()
+
+      //       // console.log(date.getHours(), date.getMinutes());
+
+      //       if (data[i].Student == student_id) {
+      // console.log(user.displayname)
+      // document.getElementById('chatTable').innerHTML +=
+      //   `<div class="me">
+      //       <div class="entete">
+      //         <b>${user.displayname} &nbsp;</b>
+      //         <p>${time} &nbsp;</p>
+      //       </div>
+      //       <div class="message">
+      //         ${data[i].Description}
+      //       </div>
+      //     </div>`
+      //       } else {
+      //         console.log('Not from myself', data)
+      // fetch(url + '/olive/student-profile/getbyId?_id=' + data[i].Student)
+      //           .then(sender => sender.json())
+      //           .then(sender => {
+
+      //             console.log(sender.Display_Name)
+      //             document.getElementById('chatTable').innerHTML +=
+      //               `<div class="you">
+      //                 <div class="entete">
+      //                   <b>${sender.Display_Name} &nbsp;</b>
+      //                   <p>${time} &nbsp;</p>
+      //                 </div>
+      //                 <div class="message">
+      //                   ${data[i].Description}
+      //                 </div>
+      //               </div>`
+
+      //           })
+      //           .catch(
+      //             document.getElementById('chatTable').innerHTML +=
+      //             `<div class="you">
+      //                 <div class="entete">
+      //                   <b>${teacher} &nbsp;</b>
+      //                   <p>${time} &nbsp;</p>
+      //                 </div>
+      //                 <div class="message">
+      //                   ${data[i].Description}
+      //                 </div>
+      //               </div>`
+      //           );
+      //       }
+
+      //     }
+      //   });
+
+      async function getChat() {
+        try {
+          const response = await fetch(url + `/olive/interact/getbyType?type=chat&classid=${classroom._id}`)
+          const data = await response.json()
+
           document.getElementById('chatTable').innerHTML = '';
 
-          // console.log('Chat:', data)
+          console.log('Chat:', data)
 
           for (let i = 0; i < data.length; i++) {
             console.log('student recieve:', data[i])
@@ -230,10 +396,8 @@ const StudentUI = ({ payload }) => {
             time += date.getMinutes() > 9 ? '' : '0'
             time += date.getMinutes()
 
-            // console.log(date.getHours(), date.getMinutes());
-
             if (data[i].Student == student_id) {
-              console.log(user.displayname)
+              console.log('from me', data[i])
               document.getElementById('chatTable').innerHTML +=
                 `<div class="me">
                     <div class="entete">
@@ -245,40 +409,48 @@ const StudentUI = ({ payload }) => {
                     </div>
                   </div>`
             } else {
-              // console.log('Not from myself')
-              fetch('http://localhost:4000/olive/student-profile/getbyId?_id=' + data[i].Student)
-                .then(sender => sender.json())
-                .then(sender => {
-
-                  console.log(sender.Display_Name)
+              try {
+                console.log(data[i].Student, teacher_id)
+                if (data[i].Student == teacher_id) {
                   document.getElementById('chatTable').innerHTML +=
                     `<div class="you">
-                      <div class="entete">
-                        <b>${sender.Display_Name} &nbsp;</b>
-                        <p>${time} &nbsp;</p>
-                      </div>
-                      <div class="message">
-                        ${data[i].Description}
-                      </div>
-                    </div>`
+                    <div class="entete">
+                      <b>${teacher} &nbsp;</b>
+                      <p>${time} &nbsp;</p>
+                    </div>
+                    <div class="message">
+                      ${data[i].Description}
+                    </div>
+                  </div>`
+                } else {
+                  const senders = await fetch(url + '/olive/student-profile/getbyId?_id=' + data[i].Student)
+                  const sender = await senders.json()
 
-                })
-                .catch(
+                  console.log('Not from me, it is', sender)
+
                   document.getElementById('chatTable').innerHTML +=
-                  `<div class="you">
-                      <div class="entete">
-                        <b>${teacher} &nbsp;</b>
-                        <p>${time} &nbsp;</p>
-                      </div>
-                      <div class="message">
-                        ${data[i].Description}
-                      </div>
-                    </div>`
-                );
+                    `<div class="you">
+                    <div class="entete">
+                      <b>${sender.Display_Name} &nbsp;</b>
+                      <p>${time} &nbsp;</p>
+                    </div>
+                    <div class="message">
+                      ${data[i].Description}
+                    </div>
+                  </div>`
+                }
+              } catch {
+                // 
+              }
             }
 
           }
-        });
+        } catch {
+          // 
+        }
+      }
+
+      getChat()
 
 
     });
@@ -287,7 +459,7 @@ const StudentUI = ({ payload }) => {
 
   function leaveMeeting() {
     // alert('Leave')
-    fetch(`http://localhost:4000/olive/engagement/getbyStudentID?student=${student_id}&classid=${classroom._id}`)
+    fetch(url + `/olive/engagement/getbyStudentID?student=${student_id}&classid=${classroom._id}`)
       .then(data => data.json())
       .then(data => {
         // console.log('engagement:', data);
@@ -301,7 +473,7 @@ const StudentUI = ({ payload }) => {
         // console.log('percent:', engage)
         localStorage.setItem('totalengagement', engage >= 0 ? Math.floor(engage) : 0);
 
-        fetch(`http://localhost:4000/olive/attendance/getbyStudentId?student=${student_id}`)
+        fetch(url + `/olive/attendance/getbyStudentId?student=${student_id}`)
           .then(response => response.json())
           .then(response => {
             let tr = 0;
@@ -317,7 +489,7 @@ const StudentUI = ({ payload }) => {
             // console.log(JSON.parse(localStorage.getItem('fullattendance')))
           });
 
-        fetch('http://localhost:4000/redirect?rp=' + 'class_info_student', {
+        fetch(url + '/redirect?rp=' + 'class_info_student', {
           method: 'POST',
           redirect: 'follow'
         })
@@ -341,7 +513,7 @@ const StudentUI = ({ payload }) => {
     };
     let emoid = event.currentTarget.id
 
-    fetch('http://localhost:4000/olive/interact', {
+    fetch(url + '/olive/interact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -361,7 +533,7 @@ const StudentUI = ({ payload }) => {
         }
 
         try {
-          fetch(`http://localhost:4000/olive/emojis/getbyClass?classid=${classroom._id}&todaystring=${todaystring}`)
+          fetch(url + `/olive/emojis/getbyClass?classid=${classroom._id}&todaystring=${todaystring}`)
             .then(stack => stack.json())
             .then(stack => {
               // console.log('Current:', stack)
@@ -375,7 +547,7 @@ const StudentUI = ({ payload }) => {
 
               updateEngagement(resp.insertedId)
 
-              fetch(`http://localhost:4000/olive/emojis/add?_id=${stack[0]._id}`, {
+              fetch(url + `/olive/emojis/add?_id=${stack[0]._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(addStack)
@@ -409,13 +581,14 @@ const StudentUI = ({ payload }) => {
     if (document.getElementById('sendtext').value == '') return;
 
     let data = {
+      sender: user.displayname,
       Student: student_id,
       Class: classroom._id,
       Type: "chat",
       Description: document.getElementById('sendtext').value
     };
 
-    fetch('http://localhost:4000/olive/interact', {
+    fetch(url + '/olive/interact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -449,9 +622,9 @@ const StudentUI = ({ payload }) => {
       Type: "gaze",
       Boolean: stop
     };
-    // console.log('Gaze:', data)
+    console.log('Gaze:', data)
 
-    fetch('http://localhost:4000/olive/interact', {
+    fetch(url + '/olive/interact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -470,7 +643,7 @@ const StudentUI = ({ payload }) => {
     console.log('Log:', logs);
 
     try {
-      fetch(`http://localhost:4000/olive/engagement/addLog?student=${student_id}&class=${classroom._id}`, {
+      fetch(url + `/olive/engagement/addLog?student=${student_id}&class=${classroom._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(logs)
@@ -492,34 +665,54 @@ const StudentUI = ({ payload }) => {
     window.saveDataAcrossSessions = false;
 
     const webgazer = window.webgazer;
+
+    webgazer.setTracker("TFFacemesh");
+    webgazer.setRegression("ridge");
+
     const lookDelay = 10000 // 10 second 
-    let left = window.innerWidth / 4;
-    let right = window.innerWidth - window.innerWidth / 4;
     let startLookTime;
     let stop = false;
     let count = 0;
 
     webgazer.setGazeListener((data, timestamp) => {
-      if (count > lookDelay) {
+      console.log('Send gaze', data, startLookTime + lookDelay, timestamp)
+
+      if (count == 0) {
+        startLookTime = timestamp
+      }
+
+      if (startLookTime + lookDelay < timestamp) {
+        // webgazer.pause();
+        // sendGaze(false);
+        // console.log('not have gaze')
+        // return;
+        sendGaze(false)
         webgazer.pause();
-        sendGaze(false);
-        return;
+
       }
 
       if (data != null) {
+        // webgazer.pause();
+        // sendGaze(true);
+        stop = true;
+        // console.log('have gaze')
+        // return;
+        sendGaze(true)
         webgazer.pause();
-        sendGaze(true);
-        return;
-      } else count++;
 
+      } else count++;
 
     }).begin();
 
-    webgazer.showVideoPreview(false).showPredictionPoints(false);
+    // console.log('gaze return')
+    // sendGaze(stop)
+    // webgazer.pause();
+
+    webgazer.showVideoPreview(false).showPredictionPoints(false).applyKalmanFilter(true);
   }
 
   gazeDetection();
-  setInterval(gazeDetection, 60000); //  1 min
+  setInterval(gazeDetection, 20000); //  20 sec 
 
   const toggleLight = event => {
     // console.log('Light:', event.currentTarget, event.currentTarget.checked)
@@ -536,21 +729,21 @@ const StudentUI = ({ payload }) => {
     }
     console.log('Today:', todaystring, today, todayLocal)
 
-    fetch(`http://localhost:4000/olive/interact/getStudent?student=${student_id}&classid=${classroom._id}&type=light&date=${todaystring}`)
+    fetch(url + `/olive/interact/getStudent?student=${student_id}&classid=${classroom._id}&type=light&date=${todaystring}`)
       .then(data => data.json())
       .then(data => {
         console.log('Lights:', data.Boolean)
 
         if (data.Boolean) {
           console.log('Light off')
-          fetch(`http://localhost:4000/olive/interact/updateLight?_id=${data._id}&light=false`, {
+          fetch(url + `/olive/interact/updateLight?_id=${data._id}&light=false`, {
             method: 'PUT',
             // headers: { 'Content-Type': 'application/json' }
           })
         }
         else {
           console.log('Light on')
-          fetch(`http://localhost:4000/olive/interact/updateLight?_id=${data._id}&light=true`, {
+          fetch(url + `/olive/interact/updateLight?_id=${data._id}&light=true`, {
             method: 'PUT',
             // headers: { 'Content-Type': 'application/json' }
           })
@@ -576,7 +769,7 @@ const StudentUI = ({ payload }) => {
               <h2>Chat</h2>
             </div>
 
-            <div id="container">
+            <div id="container-std">
 
               <div class="chat" id='chatTable'></div>
             </div>
@@ -613,8 +806,8 @@ const StudentUI = ({ payload }) => {
 
               {/* light bulb */}
               <label >
-                <input type="checkbox" id='lightbulb' onChange={toggleLight}></input>
-                <span>
+                <input type="checkbox" id='lightbulb' onChange={toggleLight} ></input>
+                <span style={{ 'color': 'gold' }}>
                   <BsLightbulb size='2em' />
                 </span>
               </label>

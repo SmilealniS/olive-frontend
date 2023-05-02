@@ -16,6 +16,9 @@ import list from './assets/Infopage/list.png';
 
 
 const Teacher_Profile = () => {
+  // const url = 'http://olive-api.northanapon.com';
+  const url = 'https://3dddfdaadb14.ngrok.app'
+
   var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
   var user = {
     username: localStorage.getItem('username') == undefined ? '' : localStorage.getItem('username'),
@@ -30,7 +33,7 @@ const Teacher_Profile = () => {
   var classroom;
 
   useEffect(() => {
-    // fetch('http://localhost:4000/olive/teacher-profile/getbyId?_id=' + localStorage.getItem('teacher_id'))
+    // fetch(url + '/olive/teacher-profile/getbyId?_id=' + localStorage.getItem('teacher_id'))
     //   .then(response => response.json())
     //   .then(response => {
     //     console.log('Profile', response);
@@ -38,14 +41,14 @@ const Teacher_Profile = () => {
     //     localStorage.setItem('displayname', response.Display_Name);
     //   });
 
-    // fetch('http://localhost:4000/olive/identity/getbyId?_id=' + localStorage.getItem('_id'))
+    // fetch(url + '/olive/identity/getbyId?_id=' + localStorage.getItem('_id'))
     //   .then(response => response.json())
     //   .then(response => {
     //     console.log('Identity', response);
     //     localStorage.setItem('username', response.Username);
     //   });
 
-    fetch(`http://localhost:4000/olive/class/getbyTeacher?teacher=${teacher_id}`)
+    fetch(url + `/olive/class/getbyTeacher?teacher=${teacher_id}`)
       .then(response => response.json())
       .then(response => {
         // console.log('Class', response[0]);
@@ -53,7 +56,7 @@ const Teacher_Profile = () => {
         classroom = JSON.parse(localStorage.getItem('class'))
         console.log('Class:', classroom)
 
-        fetch(`http://localhost:4000/olive/attendance/getbyClassId?classid=${classroom._id}`)
+        fetch(url + `/olive/attendance/getbyClassId?classid=${classroom._id}`)
           .then(data => data.json())
           .then(data => {
             let classdate = [];
@@ -79,7 +82,7 @@ const Teacher_Profile = () => {
             localStorage.setItem('totalclass', classdate.length);
           })
 
-        fetch(`http://localhost:4000/olive/engagement/getbyClassID?classid=${classroom._id}`)
+        fetch(url + `/olive/engagement/getbyClassID?classid=${classroom._id}`)
           .then(data => data.json())
           .then(data => {
             console.log('engagement:', data)
@@ -284,14 +287,14 @@ const Teacher_Profile = () => {
                     </div>
                   </a>
                 </div>
-                <div class="grid">
+                {/* <div class="grid">
                   <a href="/profile_teacher_report" style={{ 'text-decoration':'none', 'color':'black' }}>
                     <img class="l-icon-pic" src={list}></img>
                     <div class="l-info-text-teac">
                       Report
                     </div></a>
 
-                </div>
+                </div> */}
 
 
 
@@ -301,11 +304,12 @@ const Teacher_Profile = () => {
                 <div class="l-text1">
                   {/* Adele Jackson */}
                   { user.username }
-                </div>
-                <div class="l-text2">
+                  <div class="l-text2">
                   {/* adele.jac@mahidol.com */}
                   { user.email }
                 </div>
+                </div>
+                
                 <a href="/" onClick="localStorage.clear()">
                   <img class="l-icon-pic-bottom" src={logout}></img>
                 </a>

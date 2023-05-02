@@ -130,12 +130,12 @@ body#profile_teacher {
  
 .t-l-box {
     box-sizing: border-box;
-    position: relative;
+    position: absolute;
     background: rgb(255, 255, 255);
-    width: 250px;
-    height: 650px;
+    width: 16vw;
+    height: 90vh;
     left: 1.5%;
-    margin-top: -55%;
+    margin-top: -68vh;
     border-radius: 0.5rem;
     cursor: pointer;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
@@ -156,9 +156,9 @@ body#profile_teacher {
     box-sizing: border-box;
     position: relative;
     background: #F9F8F9;
-    width: 250px;
+    width: 15vw;
     height: 60px;
-    top: 56%;
+    top: 60vh;
     border-radius: 0.5rem;
     cursor: pointer;
     
@@ -190,8 +190,8 @@ body#profile_teacher {
     border-radius: 50%;
     height: 40px;
     width: 40px;
-    margin-left: 7%;
-    margin-top: -2%;
+    margin-left: -14.5vw;
+    margin-top: 1.5vh;
 }
 .l-icon-pic{
     height: 20px;
@@ -208,8 +208,8 @@ body#profile_teacher {
 
 .head-teac{
     font-size: 24px;
-    margin-left: 44px;
-    margin-bottom: 20px;
+    margin-left: 3vw;
+    margin-bottom: 2vh;
     font-family: 'DM Sans';
 }
 .head-teac-edit{

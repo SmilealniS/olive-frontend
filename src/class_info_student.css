@@ -11,12 +11,11 @@ body#class_info_student {
 
 
 .cis-pic {
-    border-radius: 50%;
-    height: 60px;
-    width: 60px;
-    margin-left: 85%;
-    margin-top: -21px;
-    margin-right: 20px;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  margin-left: 80vw;
+  margin-top: -3vh;
 }
 
 .cis-head-text {
@@ -36,12 +35,12 @@ body#class_info_student {
 }
 
 .cis-header-box {
-    box-sizing: border-box;
-    position: relative;
-    background: #C4E0F9;
-    width: 1440px;
-    height: 70px;
-    border-radius: 0.5rem;
+  box-sizing: border-box;
+  position: relative;
+  background: #C4E0F9;
+  width: 100vw;
+  height: 9vh;
+  border-radius: 0.5rem;
 
 }
 
@@ -58,7 +57,7 @@ body#class_info_student {
     box-sizing: border-box;
     position: relative;
     background: #ffffff;
-    width: 1320px;
+    width: 90vw;
     height: 1200px;
     left: 4%;
     top: -5%;
@@ -66,13 +65,13 @@ body#class_info_student {
 
 .cis-midr-frame-box {
 
-    box-sizing: border-box;
-    position: relative;
-    background: #ffffff;
-    width: 300px;
-    height: 70px;
-    left: 74.9%;
-    top: -44%;
+  box-sizing: border-box;
+  position: relative;
+  background: #ffffff;
+  width: 300px;
+  height: 70px;
+  left: 74.9vw;
+  top: -44%;
 }
 
 .cis-middler-box {
@@ -102,9 +101,12 @@ body#class_info_student {
 }
 
 .cis-class-id {
-    font-size: 60px;
-    font-weight: bold;
-    font-family: 'DM Sans';
+  display: flex;
+  flex-grow: 20%;
+  /* grid-template-columns: auto auto; */
+  font-size: 60px;
+  font-weight: bold;
+  font-family: 'DM Sans';
 
 }
 
@@ -120,17 +122,17 @@ body#class_info_student {
 }
 
 .cis-join-btn {
-    border-radius: 5px;
-    background-color: #6FBCED;
-    position: absolute;
-    width: 220px;
-    height: 50px;
-    left: -40%;
-    top: -52%;
-    font-size: 22px;
-    font-weight: bold;
-    font-family: 'Poppins';
-    color: white;
+  border-radius: 5px;
+  background-color: #6FBCED;
+  /* position: absolute; */
+  width: 220px;
+  height: 50px;
+  margin-top: 2.5vh;
+  margin-left: 2vw;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: 'Poppins';
+  color: white;
 }
 
 .cis-table-info-head {
@@ -305,7 +307,7 @@ body#class_info_student {
   .cis-profile-name{
     margin-top: -3%;
     font-size: 22px;
-    margin-left: 90%;
+    margin-left: 86vw;
   }
 
   .cis-lead-text{
