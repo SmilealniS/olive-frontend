@@ -6,7 +6,7 @@ import moment from 'moment'
 
 const Classinfo_Student = () => {
   // const url = 'http://olive-api.northanapon.com';
-  const url = 'https://3dddfdaadb14.ngrok.app'
+  const url = 'https://f44045450915.ngrok.app'
 
   var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
   var user = {

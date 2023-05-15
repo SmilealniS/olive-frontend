@@ -24,31 +24,31 @@ import Login from './login';
 
 let payload_teacher = {
   // signatureEndpoint: 'http://olive-zoom.northanapon.com',
-  signatureEndpoint: 'https://e113342c1f56.ngrok.app',
+  signatureEndpoint: 'https://9e2a62b42c94.ngrok.app',
   meetingNumber: '4318372796',
   role: 1,
   sdkKey: '6V8X5gwmS7lhH6EcVpCPXY0bBduD7Vnwx4QV',
   sdkSecret: 'XRSfgcqn75DdVZ0P3Nkf0WXZQdsonas5I6nV',
-  userName: 'NamTestTeacher',
+  userName: 'TestTeacher',
   userEmail: '',
   passWord: '180HYZ',
   // leaveUrl: 'http://olive.northanapon.com',
-  leaveUrl: 'https://90acce2ace74.ngrok.app/class_info_teacher',
+  leaveUrl: 'https://0fe210e661e9.ngrok.app/class_info_teacher',
   registrantToken: ''
 }
 
 let payload_student = {
   // signatureEndpoint: 'http://olive-zoom.northanapon.com',
-  signatureEndpoint: 'https://e113342c1f56.ngrok.app',
+  signatureEndpoint: 'https://9e2a62b42c94.ngrok.app',
   meetingNumber: '4318372796',
   role: 0,
   sdkKey: '6V8X5gwmS7lhH6EcVpCPXY0bBduD7Vnwx4QV',
   sdkSecret: 'XRSfgcqn75DdVZ0P3Nkf0WXZQdsonas5I6nV',
-  userName: 'NamTestStudent',
+  userName: 'TestStudent',
   userEmail: '',
   passWord: '180HYZ',
   // leaveUrl: 'http://olive.northanapon.com',
-  leaveUrl: 'https://90acce2ace74.ngrok.app/class_info_student',
+  leaveUrl: 'https://0fe210e661e9.ngrok.app/class_info_student',
   registrantToken: ''
 }
 

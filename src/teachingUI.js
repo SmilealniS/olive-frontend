@@ -11,15 +11,7 @@ const TeacherUI = ({ payload }) => {
 
   const socket = useRef(null);
 
-  // const socket = io(url, {
-  //   withCredentials: true,
-  // extraHeaders: {
-  //   "my-custom-header": "abcd"
-  // }
-  // });
-
-  // const url = 'http://olive-api.northanapon.com';
-  const url = 'https://3dddfdaadb14.ngrok.app'
+  const url = 'https://f44045450915.ngrok.app'
 
   var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
   var user = {
@@ -408,13 +400,13 @@ const TeacherUI = ({ payload }) => {
         // i =          //  eye
         // b = 
 
-        let w1 = 0.00188876;     //  light weight (0.5)
-        let w2 = 0.27436492;     //  chat weight (1)
-        let w3 = 0.46271626;     //  emoji weight (1)
-        let w4 = 1.10253922;     //  eye weight (2)
-        let k = 10;              //  window size
-        // let m = 3;            //  eye size
-        let b = 4.14231768;      //  bias (5)
+        let w1 = 0.2344727;         //  light weight (0.5)
+        let w2 = 3.05789775;        //  chat weight (1)
+        let w3 = 5.12008384;        //  emoji weight (1)
+        let w4 = 14.63571013;       //  eye weight (2)
+        let k = 10;                 //  window size
+        // let m = 3;               //  eye size
+        let b = -5.431570436114255; //  bias (5)
 
         let z1 = w1 * x / k;
         let z2 = w2 * y / k;

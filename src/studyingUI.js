@@ -14,8 +14,7 @@ const StudentUI = ({ payload }) => {
 
   const socket = useRef(null);
 
-  // const url = 'http://olive-api.northanapon.com';
-  const url = 'https://3dddfdaadb14.ngrok.app'
+  const url = 'https://f44045450915.ngrok.app'
 
   var _id = localStorage.getItem('_id') == undefined ? '' : localStorage.getItem('_id');
   var user = {
@@ -41,12 +40,6 @@ const StudentUI = ({ payload }) => {
     //   timeZone: 'Asia/Bangkok',
     // }),
   );
-
-  console.log('Protocol', window.location.protocol)
-  // if (window.location.protocol === "http:") {
-  //   window.location.protocol = "https:";
-  // }
-
 
   useEffect(() => {
     const newSocket = io(url, {

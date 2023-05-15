@@ -9,7 +9,7 @@ const Login = () => {
 
   async function login() {
     // let url = 'http://olive-api.northanapon.com';
-    let url = 'https://3dddfdaadb14.ngrok.app'
+    let url = 'https://f44045450915.ngrok.app'
 
     let user = {
       username: document.getElementById('username').value,
